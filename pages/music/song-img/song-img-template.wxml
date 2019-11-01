@@ -1,0 +1,9 @@
+<template name="songImgTemplate">
+  <view class="song-img">
+    <image src="{{picUrl}}"></image>
+    <view class="song-playcount" wx:if="{{playCount}}">
+      <view class="iconfont icon-bofang_"></view>
+      <text>{{playCount}}</text>
+    </view>
+  </view>
+</template>

@@ -1,0 +1,12 @@
+.loading {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100rpx;
+}
+.loading-img {
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 20rpx;
+}

@@ -1,0 +1,100 @@
+@keyframes turn {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 
+.player-bg {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.player-bg image {
+  width: 100%;
+  height: 100%;
+  filter: blur(100px);
+}
+.song-stick {
+  width: 100%;
+  position: relative;
+  transform: rotate(-25deg);
+  transition: transform 1s;
+  z-index: 2;
+}
+.song-stick image {
+  position: absolute;
+  top: -40rpx;
+  left: 50%;
+  width: 230rpx;
+  height: 340rpx;
+  margin-left: -40rpx;
+}
+.song-stick-turn {
+  transform: rotate(0deg);
+}
+.player-song {
+  position: absolute;
+  top: 130rpx;
+  left: 0;
+  right: 0;
+  width: 600rpx;
+  height: 600rpx;
+  margin: 0 auto;
+  z-index: 1;
+}
+.song-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+.song-light {
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+}
+
+.song-img {
+  position: absolute;
+  top: 18%;
+  left: 18%;
+  width: 64%;
+  height: 64%;
+  border-radius: 50%;
+  z-index: 1;
+}
+.song-trun-run {
+  animation: turn linear infinite running 10s;
+  transform-origin: center;
+}
+.song-turn-stop {
+  animation: turn linear infinite paused 10s;
+}
+
+.player-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+  position: absolute;
+  bottom: 100rpx;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.player-btn {
+  width: 80rpx;
+  height: 80rpx;
+}
+.player-play-btn {
+  width: 150rpx;
+  height: 150rpx;
+}

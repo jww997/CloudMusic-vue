@@ -1,0 +1,64 @@
+<import src="../music/song-img/song-img-template.wxml" />
+<import src="../../template/loading/loading-template.wxml" />
+
+<view class="detail-bg">
+  <image style="background: url({{playlist.coverImgUrl}})"></image>
+</view>
+<view class="detail">
+  <view class="detail-head">
+    <view class="detail-head-img">
+      <template is="songImgTemplate" data="{{picUrl: playlist.coverImgUrl, playCount: playlist.playCount}}" />
+    </view>
+    <view class="detail-head-msg">
+      <text class="detail-head-name">{{playlist.name}}</text>
+      <view class="detail-creator">
+        <image src="{{playlist.creator.avatarUrl}}" />
+        <text class="detail-creator-name">{{playlist.creator.nickname}} ></text>
+      </view>
+      <text class="detail-description">{{playlist.description}}</text>
+    </view>
+    <view class="detail-menu">
+      <view>
+        <view class="iconfont icon-pinglunpt"></view>
+        <text>{{playlist.commentCount||'评论'}}</text>
+      </view>
+      <view>
+        <view class="iconfont icon-fenxiangpt"></view>
+        <text>{{playlist.shareCount||'分享'}}</text>
+      </view>
+      <view>
+        <view class="iconfont icon-xiazaipt"></view>
+        <text>下载</text>
+      </view>
+      <view>
+        <view class="iconfont icon-duoxuanpt"></view>
+        <text>多选</text>
+      </view>
+    </view>
+  </view>
+  <view class="detail-playall">
+    <view class="iconfont icon-weibiaoti--"></view>
+    <view class="detail-playall-title">
+      <text>播放全部</text>
+      <text class="detail-playall-total">(共{{playlist.tracks.length||0}}首)</text>
+    </view>
+    <view class="detail-collect">
+      <text>+ 收藏({{playlist.subscribedCount||0}})</text>
+    </view>
+  </view>
+  <view class="detail-playlist">
+    <template is="loading" wx:if="{{!playlist.tracks}}"></template>
+    <view wx:for="{{playlist.tracks}}" wx:key="{{item.id}}">
+      <view class="detail-play" hover-class="detail-play-hover" catch:tap="openPlayerPage" data-songid="{{item.id}}">
+        <view class="detail-song-index">
+          <text>{{index+1}}</text>
+        </view>
+        <view class="detail-song">
+          <text class="detail-song-name">{{item.name}}</text>
+          <text class="detail-song-other">{{item.ar[0].name}} - {{item.al.name}}</text>
+        </view>
+        <view class="iconfont icon--ellipsis"></view>
+      </view>
+    </view>
+  </view>
+</view>

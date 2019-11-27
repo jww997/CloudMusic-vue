@@ -1,4 +1,4 @@
-@import "song-list/song-list-template.wxss";
+@import "/template/song-list/song-list-template.wxss";
 
 /* 轮播图 */
 .slides-wrap {

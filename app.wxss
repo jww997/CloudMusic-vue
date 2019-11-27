@@ -1,0 +1,6 @@
+@import "/fonts/iconfont.wxss";
+
+text {
+  font-family: MicroSoft Yahei;
+  font-size: 25rpx;
+}

@@ -1,4 +1,4 @@
-<import src="song-list/song-list-template.wxml" />
+<import src="/template/song-list/song-list-template.wxml" />
 <view>
   <!-- 轮播图 -->
   <view class="slides-wrap">
@@ -30,7 +30,7 @@
       </view>
       <text>排行榜</text>
     </view>
-    <view class="menu-item">
+    <view class="menu-item" catch:tap="openSonglistMore">
       <view class="menu_icon">
         <view class="iconfont icon-gedan"></view>
       </view>

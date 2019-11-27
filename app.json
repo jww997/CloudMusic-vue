@@ -1,10 +1,10 @@
 {
   "pages": [
     "pages/music/music",
-    "pages/music-detail/music-detail",
+    "pages/songlist-detail/songlist-detail",
+    "pages/songlist-more/songlist-more",
     "pages/player/player",
-    "pages/me/me",
-    "pages/music-list/music-list"
+    "pages/me/me"
   ],
   "window": {
     "navigationBarBackgroundColor": "#f00",
@@ -31,6 +31,6 @@
   },
   "sitemapLocation": "sitemap65.json",
   "requiredBackgroundModes": [
-    "音乐播放"
+    "audio"
   ]
 }

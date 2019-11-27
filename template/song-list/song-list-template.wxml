@@ -1,0 +1,18 @@
+<import src="../song/song-template.wxml" />
+<import src="../../../template/loading/loading-template.wxml" />
+<template name="songListTemplate">
+  <view>
+    <view class="song-list-head">
+      <text class="song-list-title">{{title}}</text>
+      <view class="song-list-more" catch:tap="openSonglistMore">
+        <text>{{more}}</text>
+      </view>
+    </view>
+    <template is="loadingTemplate" wx:if="{{!songs}}"></template>
+    <view class="song-list" wx:else>
+      <block wx:for="{{songs}}" wx:for-item="song" wx:key="{{index}}">
+        <template is="songTemplate" data="{{...song}}" wx:if="{{index<6}}"/>
+      </block>
+    </view>
+  </view>
+</template>

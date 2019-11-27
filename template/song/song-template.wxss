@@ -1,0 +1,27 @@
+@import "../song-img/song-img-template.wxss";
+
+.song {
+  display: flex;
+  flex-direction: column;
+  width: 200rpx;
+  margin-top: 30rpx;
+}
+.song-name,
+.song-author {
+  display: -webkit-box;
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+}
+
+.song-name {
+  margin-top: 10rpx;
+  font-size: 26rpx;
+  -webkit-line-clamp: 2;
+}
+.song-author {
+  font-size: 22rpx;
+  color: #666;
+  -webkit-line-clamp: 1;
+}

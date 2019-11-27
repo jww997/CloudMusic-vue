@@ -4,12 +4,16 @@ var util = require("../../utils/util.js");
 Page({
 
   // 跳转歌单详情页
-  openSongDetailPage: function(event) {
-    var id = event.currentTarget.dataset.id;
+  openSongDetailPage: util.openSongDetailPage,
+
+  // 跳转歌单广场
+  openSonglistMore: function(event) {
     wx.navigateTo({
-      url: '../music-detail/music-detail?id=' + id,
+      url: '../songlist-more/songlist-more',
     });
   },
+
+  
 
   /**
    * 获取轮播图
@@ -49,10 +53,10 @@ Page({
           playCounts.forEach((item) => {
             item.playCount = util.dealPlayCount(item.playCount);
           });
-        }
-        that.setData({
-          recommends: res.data.result
-        });
+          that.setData({
+            recommends: res.data.result
+          });
+        };
       }
     });
   },

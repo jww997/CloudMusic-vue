@@ -1,10 +1,10 @@
 {
   "pages": [
-    "pages/music/music",
-    "pages/songlist-detail/songlist-detail",
-    "pages/songlist-more/songlist-more",
+    "pages/discover/discover",
+    "pages/songList/songList",
+    "pages/songListSquare/songListSquare",
     "pages/player/player",
-    "pages/me/me"
+    "pages/mine/mine"
   ],
   "window": {
     "navigationBarBackgroundColor": "#f00",
@@ -16,16 +16,16 @@
     "selectedColor": "#f00",
     "list": [
       {
-        "pagePath": "pages/music/music",
+        "pagePath": "pages/discover/discover",
         "text": "发现",
-        "iconPath": "/images/music.png",
-        "selectedIconPath": "/images/selected-music.png"
+        "iconPath": "/images/discover.png",
+        "selectedIconPath": "/images/selected-discover.png"
       },
       {
-        "pagePath": "pages/me/me",
+        "pagePath": "pages/mine/mine",
         "text": "我的",
-        "iconPath": "/images/me.png",
-        "selectedIconPath": "/images/selected-me.png"
+        "iconPath": "/images/mine.png",
+        "selectedIconPath": "/images/selected-mine.png"
       }
     ]
   },

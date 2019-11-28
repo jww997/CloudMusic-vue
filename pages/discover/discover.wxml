@@ -1,0 +1,60 @@
+<import src="/template/song-list/song-list-template.wxml" />
+<view>
+  <!-- 轮播图 -->
+  <view class="slides-wrap padding-top">
+    <view class="slides">
+      <swiper autoplay="{{true}}" indicator-dots="{{true}}" circular="{{true}}" indicator-active-color="#f00">
+        <swiper-item wx:for="{{banners}}" wx:key="index">
+          <image mode="scaleToFill" src="{{item.imageUrl}}" />
+        </swiper-item>
+      </swiper>
+    </view>
+  </view>
+  <!-- 菜单栏 -->
+  <view class="menu-wrap padding-top">
+    <view class="menu-item">
+      <view class="menu_icon">
+        <view class="iconfont icon-sirenfm"></view>
+      </view>
+      <text>私人FM</text>
+    </view>
+    <view class="menu-item">
+      <view class="menu_icon">
+        <view class="iconfont icon-diantai"></view>
+      </view>
+      <text>电台</text>
+    </view>
+    <view class="menu-item">
+      <view class="menu_icon">
+        <view class="iconfont icon-paihangbang"></view>
+      </view>
+      <text>排行榜</text>
+    </view>
+    <view class="menu-item" catch:tap="openSonglistMore">
+      <view class="menu_icon">
+        <view class="iconfont icon-gedan"></view>
+      </view>
+      <text>歌单</text>
+    </view>
+    <view class="menu-item">
+      <view class="menu_icon">
+        <view class="iconfont icon-meirituijian"></view>
+      </view>
+      <text>每日推荐</text>
+    </view>
+  </view>
+  <!-- 分割线 -->
+  <view class="hr margin-top"></view>
+  <!-- 推荐歌单 -->
+  <view class="recommendsong wrap">
+    <template is="songListTemplate" data="{{songs: recommends, title: '推荐歌单', more: '歌单广场'}}" />
+  </view>
+  <!-- 新碟 -->
+  <view class="newdisc wrap">
+    <template is="songListTemplate" data="{{songs: newDiscs, title: '新碟', more: '更多新碟'}}" />
+  </view>
+  <!-- 新歌 -->
+  <view class="newsong wrap">
+    <template is="songListTemplate" data="{{songs: newSongs, title: '新歌', more: '新歌推荐'}}" />
+  </view>
+</view>

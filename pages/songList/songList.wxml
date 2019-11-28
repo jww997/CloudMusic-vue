@@ -1,5 +1,5 @@
-<import src="/template/song-img/song-img-template.wxml" />
-<import src="/template/loading/loading-template.wxml" />
+<import src="../music/song-img/song-img-template.wxml" />
+<import src="../../template/loading/loading-template.wxml" />
 
 <view class="detail-bg">
   <image style="background: url({{playlist.coverImgUrl}})"></image>
@@ -47,7 +47,7 @@
     </view>
   </view>
   <view class="detail-playlist">
-    <template is="loadingTemplate" wx:if="{{!playlist.tracks}}"></template>
+    <template is="loading" wx:if="{{!playlist.tracks}}"></template>
     <view wx:for="{{playlist.tracks}}" wx:key="{{item.id}}">
       <view class="detail-play" hover-class="detail-play-hover" catch:tap="openPlayerPage" data-songid="{{item.id}}">
         <view class="detail-song-index">

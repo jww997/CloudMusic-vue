@@ -1,6 +1,22 @@
-@import "/fonts/iconfont.wxss";
+@import "/utils/fonts/iconfont.wxss";
+
+@import "/template/loading/loading-template.wxss";
+@import "/template/song/song-template.wxss";
+@import "/template/song-img/song-img-template.wxss";
+@import "/template/song-list/song-list-template.wxss";
+
+
 
 text {
   font-family: MicroSoft Yahei;
   font-size: 25rpx;
+}
+
+
+
+.padding-top {
+  padding-top: 30rpx;
+}
+.margin-top {
+  margin-top: 30rpx;
 }

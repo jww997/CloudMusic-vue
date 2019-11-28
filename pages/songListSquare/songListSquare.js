@@ -3,49 +3,43 @@ var util = require("../../utils/util.js");
 
 Page({
 
-  // 跳转播放页
-  openPlayerPage: function(event) {
-    var songid = event.currentTarget.dataset.songid;
-    wx.navigateTo({
-      url: '../player/player?songid=' + songid,
+  // 跳转歌单详情页
+  openSongDetailPage: util.openSongDetailPage,
+
+  // 获取歌单广场信息
+  getSonglistMessage: function() {
+    var that = this;
+    wx.request({
+      url: baseUrl + 'top/playlist',
+      // url: baseUrl + 'playlist/catlist',
+      // url: baseUrl + 'playlist/hot',
+      success: function(res) {
+        if (res.statusCode === 200) {
+          console.log(res.data.playlists);
+          var playlists = res.data.playlists;
+          playlists.forEach((value) => {
+            value.playCount = util.dealPlayCount(value.playCount);
+          });
+          that.setData({
+            playlists: res.data.playlists
+          });
+        }
+      }
     })
   },
 
   /**
-   * 获取详情页
-   */
-  getDetailPage: function(options) {
-    var that = this;
-    wx.request({
-      url: baseUrl + 'playlist/detail?id=' + options.id,
-      success: function (res) {
-        if (res.statusCode === 200) {
-          // console.log(res);
-          var playCount = res.data.playlist.playCount;
-          res.data.playlist.playCount = util.dealPlayCount(playCount);
-          that.setData({
-            playlist: res.data.playlist
-          });
-        }
-      }
-    });
-  },
-
-
-  /**
    * 页面的初始数据
-   * 
    */
   data: {
-    playlist: {}
+    playlists: [] // 歌单列表
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // 详情页
-    this.getDetailPage(options);
+    this.getSonglistMessage();
   },
 
   /**

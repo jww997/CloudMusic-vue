@@ -1,62 +1,86 @@
-.slides-wrap {
+.banner {
   display: flex;
   justify-content: center;
   height: 0;
   padding-bottom: 150rpx;
   margin-bottom: 100rpx;
-  background-color: #f00;
+  background: #f00;
 }
-.slides {
+
+.banner swiper {
   width: 100%;
-}
-.slides swiper {
   height: 250rpx;
-}  
-.slides swiper-item {
+}
+
+.banner swiper-item {
   box-sizing: border-box;
   padding: 0 5%;
 }
-.slides image {
+
+.banner image {
   width: 100%;
   height: 100%;
   border-radius: 12rpx;
 }
 
-.menu-wrap {
+.menu-items {
   display: flex;
-  flex-direction: row;
   justify-content: space-around;
 }
+
 .menu-item {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.menu-item .menu_icon {
-  width: 70rpx;
-  height: 70rpx;
-  background-color: #f00;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.menu-item .iconfont {
-  font-size: 55rpx;
-  color: #fff;
-}
+
 .menu-item text {
   font-size: 20rpx;
   margin-top: 10rpx;
 }
 
-.hr {
-  width: 100%;
-  height: 1px;
-  background-color: #efefef;
+.menu_icon {
+  width: 70rpx;
+  height: 70rpx;
+  background: #f00;
+  border-radius: 50%;
+  font-size: 55rpx;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.wrap {
-  width: 90%;
-  margin: 0 auto;
+.recommend {
+  /* border: 1px solid #f00; */
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.recommend-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 15rpx;
+  width: 100%;
+}
+
+.recommend-title {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.recommend-more {
+  border: 1px solid #999;
+  border-radius: 30px;
+  font-size: 20rpx;
+  padding: 0 15rpx;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.recommend-songListBox {
+  padding: 0 15rpx;
 }

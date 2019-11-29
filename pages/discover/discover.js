@@ -36,9 +36,7 @@ Page({
     });
   },
 
-  /**
-   * 获取推荐歌单
-   */
+  // 获取推荐歌单
   getRecommendSong: function(num) {
     var that = this;
     wx.request({
@@ -116,6 +114,29 @@ Page({
     newDiscs: [],
     // 新歌
     newSongs: [],
+
+    // 菜单按钮列表
+    menuBtnList: [{
+      menuBtnIcon: 'icon-sirenfm',
+      menuBtnText: '私人FM'
+    },
+    {
+      menuBtnIcon: 'icon-diantai',
+      menuBtnText: '电台'
+    },
+    {
+      menuBtnIcon: 'icon-paihangbang',
+      menuBtnText: '排行榜'
+    },
+    {
+      menuBtnIcon: 'icon-gedan',
+      menuBtnText: '歌单'
+    },
+    {
+      menuBtnIcon: 'icon-meirituijian',
+      menuBtnText: '每日推荐'
+    }],
+
   },
 
   /**

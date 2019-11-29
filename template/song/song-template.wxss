@@ -1,4 +1,4 @@
-@import "../song-img/song-img-template.wxss";
+/* @import "../song-img/song-img-template.wxss"; */
 
 .song {
   display: flex;

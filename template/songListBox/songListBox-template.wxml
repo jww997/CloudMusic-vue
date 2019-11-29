@@ -1,0 +1,18 @@
+<template name="songListBoxTemplate">
+
+  <view class="songListBox" catch:tap="openSongDetailPage" data-id="{{id}}">
+    <view class="songListBox-img">
+      <image src="{{picUrl}}"></image>
+      <text>{{playCount}}</text>
+
+      <!-- <view class="song-playcount" wx:if="{{playCount}}">
+        <view class="iconfont icon-bofang_"></view>
+        <text>{{playCount}}</text>
+      </view> -->
+    </view>
+    <text class="songListBox-name">{{name}}</text>
+    <text class="songListBox-author">{{artist.name||song.artists[0].name}}</text>
+  </view>
+
+</template>
+

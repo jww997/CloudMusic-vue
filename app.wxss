@@ -1,14 +1,15 @@
 @import "/utils/fonts/iconfont.wxss";
 
 @import "/template/loading/loading-template.wxss";
-@import "/template/song/song-template.wxss";
-@import "/template/song-img/song-img-template.wxss";
-@import "/template/song-list/song-list-template.wxss";
+@import "/template/songListBox/songListBox-template.wxss";
+
+/* @import "/template/song-img/song-img-template.wxss"; */
+/* @import "/template/song-list/song-list-template.wxss"; */
 
 
 
 text {
-  font-family: MicroSoft Yahei;
+  font-family: PingFang SC;
   font-size: 25rpx;
 }
 
@@ -19,4 +20,13 @@ text {
 }
 .margin-top {
   margin-top: 30rpx;
+}
+.hr {
+  width: 100%;
+  height: 1px;
+  background: #efefef;
+}
+.wrap {
+  width: 690rpx;
+  margin: 0 auto;
 }

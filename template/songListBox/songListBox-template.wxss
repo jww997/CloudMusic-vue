@@ -1,0 +1,43 @@
+.songListBox {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20rpx;
+  width: 200rpx;
+}
+.songListBox-img {
+  width: 200rpx;
+  height: 200rpx;
+  position: relative;
+  color: #fff;
+}
+.songListBox-img image {
+  width: 100%;
+  height: 100%;
+  background: #999;
+  border-radius: 5px;
+}
+.songListBox-img text {
+  position: absolute;
+  right: 10rpx;
+  top: 5rpx;
+}
+
+.songListBox-name,
+.songListBox-author {
+  display: -webkit-box;
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+}
+
+.songListBox-name {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  -webkit-line-clamp: 2;
+}
+.songListBox-author {
+  font-size: 22rpx;
+  color: #666;
+  -webkit-line-clamp: 1;
+}

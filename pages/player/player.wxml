@@ -1,24 +1,20 @@
-
-  <view class="player-bg">
-    <image src="{{coverImgUrl}}" mode="aspectFill"></image>
+<!-- 唱片机 -->
+<view class="player-phonograph" style="background-image: url({{curPlayPicUrl||''}});">
+  <image class="player-stick {{isPlayState?'player-stick-turn':''}}" src="../../images/stick.png" />
+  <view class="player-disc {{isPlayState?'player-disc-running':''}}" catch:longpress="onFullPic" data-imgurl="{{curPlayPicUrl}}">
+    <image class="player-img" src="{{curPlayPicUrl}}" />
+    <image class="player-light" src="../../images/light.png" />
+    <image class="player-cover" src="../../images/cover.png" />
   </view>
-  <!-- 播放器 -->
-  <view class="song-stick {{isPlayingMusic?'song-stick-turn':''}}">
-    <image src="../../images/stick.png"></image>
-  </view>
-  <view class="player-song {{isPlayingMusic?'song-trun-run':'song-turn-stop'}}"  catch:longpress="onFullScreen" data-imgurl="{{coverImgUrl}}">
-    <image class="song-light" src="../../images/disc_light-ip6.png"></image>
-    <image class="song-img" src="{{coverImgUrl}}"></image>
-    <image class="song-cover" src="../../images/disc.png"></image>
-  </view>
-  <!-- 菜单栏 -->
   <view class="player-bar">
-    <image class="player-btn" src="../../images/cm2_icn_loop@2x.png" wx:if="{{true}}"/>
-    <image class="player-btn" src="../../images/cm2_icn_one@2x.png" wx:elif="{{false}}"/>
-    <image class="player-btn" src="../../images/cm2_icn_shuffle@2x.png" wx:else/>
-    <image class="player-btn" src="../../images/cm2_play_btn_prev@2x.png" />
-    <image class="player-play-btn" src="../../images/cm2_fm_btn_pause@2x.png" wx:if="{{isPlayingMusic}}" catch:tap="onplayTab"/>
-    <image class="player-play-btn" src="../../images/cm2_fm_btn_play@2x.png" wx:else catch:tap="onplayTab"/>
-    <image class="player-btn" src="../../images/cm2_fm_btn_next@2x.png" />
-    <image class="player-btn" src="../../images/cm2_icn_list@2x.png" />
+    <!-- <image class="player-btn" src="../../images/cm2_icn_loop@2x.png" wx:if="{{true}}" />
+    <image class="player-btn" src="../../images/cm2_icn_one@2x.png" wx:elif="{{false}}" />
+    <image class="player-btn" src="../../images/cm2_icn_shuffle@2x.png" wx:else/> -->
+
+    <view class="iconfont icon-orderPlay"></view>
+    <view class="iconfont icon-last"></view>
+    <view class="iconfont {{isPlayState?'icon-play':'icon-pause'}}" catch:tap="onToggleState"></view>
+    <view class="iconfont icon-next"></view>
+    <view class="iconfont icon-menu"></view>
   </view>
+</view>

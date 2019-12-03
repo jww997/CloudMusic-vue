@@ -1,28 +1,13 @@
-.songlist-wrap {
-  padding: 0 5%;
+.wrap {
+  width: 690rpx;
+  margin: 0 auto;
 }
+
 .songlist {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   flex-wrap: wrap;
-
 }
 
 .songlist-item {
-  display: flex;
-  flex-direction: column;
-
-  width: 30%;
-  margin-top: 30rpx;
-}
-
-.songlist-item .songlist-name {
-  margin-top: 10rpx;
-  overflow: hidden;
-  white-space: normal;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  margin: 0 15rpx;
 }

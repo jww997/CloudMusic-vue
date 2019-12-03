@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   height: 100rpx;
+  margin: 0 auto;
 }
 .loading-img {
   width: 30rpx;

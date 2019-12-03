@@ -1,18 +1,13 @@
 <import src="/template/loading/loading-template.wxml" />
-<import src="/template/song-img/song-img-template.wxml" />
-<view class="songlist-wrap">
-  <!-- <view class="category-name">
-    <view></view>
-  </view> -->
-  <view>
-    <template is="loadingTemplate" wx:if="{{!playlists.length}}" />
-    <view class="songlist" wx:else>
-      <view class="songlist-item" wx:for="{{playlists}}" wx:key="{{item.id}}">
-        <view catch:tap="openSongDetailPage" data-id="{{item.id}}">
-          <template is="songImgTemplate" data="{{picUrl: item.coverImgUrl, playCount: item.playCount}}" />
-          <text class="songlist-name">{{item.name}}</text>
-        </view>
+<import src="/template/songListBox/songListBox-template.wxml" />
+
+<view class="wrap">
+  <template is="loadingTemplate" wx:if="{{!playlists.length}}" />
+  <view class="songlist" wx:else>
+    <block wx:for="{{playlists}}" wx:key="{{item.id}}">
+      <view class="songlist-item margin-top" catch:tap="toPages" data-to="songListDetail" data-id="{{item.id}}">
+        <template is="songListBoxTemplate" data="{{picUrl: item.coverImgUrl, playCount: item.playCount, name: item.name}}" />
       </view>
-    </view>
+    </block>
   </view>
 </view>

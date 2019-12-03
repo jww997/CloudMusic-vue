@@ -3,14 +3,6 @@ var util = require("../../utils/util.js");
 
 Page({
 
-  // 跳转播放页
-  openPlayerPage: function(event) {
-    var songid = event.currentTarget.dataset.songid;
-    wx.navigateTo({
-      url: '../player/player?songid=' + songid,
-    })
-  },
-
   /**
    * 获取详情页
    */
@@ -18,7 +10,7 @@ Page({
     var that = this;
     wx.request({
       url: baseUrl + 'playlist/detail?id=' + options.id,
-      success: function(res) {
+      success: function (res) {
         if (res.statusCode === 200) {
           // console.log(res);
           var playCount = res.data.playlist.playCount;
@@ -32,12 +24,32 @@ Page({
   },
 
 
+
+  // 跳转公共方法
+  toPages: function (event) {
+    let to = event.currentTarget.dataset.to;
+    let id = event.currentTarget.dataset.id;
+    switch (to) {
+      case 'songListSquare': // 歌单广场页
+        util.navigateTo('../songListSquare/songListSquare');
+        break;
+      case 'songListDetail': // 歌单详情页
+        util.navigateTo('../songListDetail/songListDetail?id=' + id);
+        break;
+      case 'player': // 音乐播放页
+        util.navigateTo('../player/player?id=' + id);
+        break;
+    };
+  },
+
+
   /**
    * 页面的初始数据
-   * 
    */
   data: {
-    playlist: {}
+
+    playlist: {}, //  
+    
   },
 
   /**
@@ -45,23 +57,12 @@ Page({
    */
   onLoad: function(options) {
 
-    // --------------获取数据---------------
-      var that = this;
-      // 歌单详情页
-      util.getdata('playlist/detail?id=' + options.id, function(res) {
 
-        
 
-        var playCount = res.data.playlist.playCount;
-        res.data.playlist.playCount = util.dealPlayCount(playCount);
-        that.setData({
-          playlist: res.data.playlist
-        });
-      });
+
 
     // 详情页
-    // this.getDetailPage(options);
-
+    this.getDetailPage(options);
   },
 
   /**

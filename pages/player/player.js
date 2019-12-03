@@ -1,119 +1,107 @@
-var baseUrl = require("../../utils/api.js");
+var util = require("../../utils/util.js");
 var app = getApp();
+
 Page({
-
-  /**
-   * 获取歌曲详情信息
-   */
-  getSongMessage: function(options) {
-    var that = this;
-    wx.request({
-      url: baseUrl + "song/url?id=" + options.songid,
-      success: function(res) {
-        if (res.statusCode === 200) {
-          // console.log(res);
-          that.setData({
-            dataUrl: res.data.data[0].url
-          });
-
-          wx.request({
-            url: baseUrl + 'song/detail?ids=' + options.songid,
-            success: function(res) {
-              if (res.statusCode === 200) {
-                // console.log(res);
-                that.setData({
-                  coverImgUrl: res.data.songs[0].al.picUrl,
-                  title: res.data.songs[0].al.name + ' - ' + res.data.songs[0].ar[0].name
-                });
-                that.onplayTab();
-
-                wx.setNavigationBarTitle({
-                  title: that.data.title
-                });
-              };
-            }
-          });
-        };
-      }
-    });
-  },
-
-  // 监听播放暂停事件
-  onplayTab: function() {
-    var isPlayingMusic = this.data.isPlayingMusic;
-    if (isPlayingMusic) {
-      wx.pauseBackgroundAudio();
-      this.setData({
-        isPlayingMusic: false
-      });
-    } else {
-      wx.playBackgroundAudio({
-        dataUrl: this.data.dataUrl,
-        title: this.data.title,
-        coverImgUrl: this.data.coverImgUrl
-      });
-      this.setData({
-        isPlayingMusic: true
-      });
-    };
-  },
-
-  // 监听长按，全屏图片
-  onFullScreen: function(event) {
-    // console.log(event);
-    var src = event.currentTarget.dataset.imgurl;
-    wx.previewImage({
-      current: src,
-      urls: [src]
-    });
-  },
-
-  // 监听页面变化
-  setSongMonitor: function() {
-    var that = this;
-    wx.onBackgroundAudioPlay(function() {
-      that.setData({
-        isPlayingMusic: true
-      });
-    });
-    wx.onBackgroundAudioPause(function() {
-      that.setData({
-        isPlayingMusic: false
-      });
-    });
-    wx.onBackgroundAudioStop(function() {
-      that.setData({
-        isPlayingMusic: false
-      });
-    });
-  },
-
-  
 
   /**
    * 页面的初始数据
    */
   data: {
-    // curPlayingImg: "", // 歌曲图片
-    // curPlayingName: "", // 歌曲名字
-    // curPlayingAuthor: "", // 歌手名字
-    isPlayingMusic: false, // 是否正在播放
-    dataUrl: null, // 音乐URL地址
-    coverImgUrl: null, // 图片URL地址
-    title: "", // 歌名-歌手
+    isPlayState: false, // 播放状态
+
+    
+    curPlayId: null,     // 歌曲ID,保存方便跳转
+    curPlayUrl: null,    // 音乐URL
+    curPlayPicUrl: null, // 图片URL
+    curPlaySong: null,   // 歌名
+    curPlayAuthor: null  // 歌手
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // 获取歌曲信息
-    this.getSongMessage(options);
-    // 页面变化
-    this.setSongMonitor();
+
+    // --------------获取数据---------------
+    var that = this;
+    console.log(that);
+    var id = options.id || app.globalData.curPlayId;
+    // 播放数据
+    util.getdata("song/url?id=" + id, function(res) {
+      // console.log(res.data);
+      let curPlayUrl = res.data.data[0].url;
+
+      util.getdata('song/detail?ids=' + id, function(res) {
+        // console.log(res.data);
+
+        let curPlaySong = res.data.songs[0].al.name;
+        let curPlayPicUrl = res.data.songs[0].al.picUrl;
+        let curPlayAuthor = res.data.songs[0].ar[0].name;
+
+        // 传递给局部
+        that.setData({
+          isPlayState: true,
+
+          curPlayUrl: curPlayUrl,
+          curPlaySong: curPlaySong,
+          curPlayPicUrl: curPlayPicUrl,
+          curPlayAuthor: curPlayAuthor
+        });
+
+        // 调用小程序API,播放音乐
+        util.playMusic(curPlayUrl, curPlayPicUrl, curPlaySong, curPlayAuthor, id);
+
+        // 监听后台音乐状态
+        wx.onBackgroundAudioPlay(function() {
+          that.setData({
+            isPlayState: true
+          });
+        });
+        wx.onBackgroundAudioPause(function() {
+          that.setData({
+            isPlayState: false
+          });
+        });
+        wx.onBackgroundAudioStop(function() {
+          that.setData({
+            isPlayState: false
+          });
+        });
+
+      });
+    });
 
 
 
+
+
+  },
+
+  // 监听事件
+  onFullPic: function(event) {
+    let current = event.currentTarget.dataset.imgurl;
+    wx.previewImage({
+      current: current,
+      urls: [current]
+    });
+  },
+  onToggleState: function() {
+
+    let isPlayState = this.data.isPlayState;
+    let curPlayUrl = this.data.curPlayUrl;
+    let curPlayPicUrl = this.data.curPlayPicUrl;
+    let curPlaySong = this.data.curPlaySong;
+    let curPlayAuthor = this.data.curPlayAuthor;
+
+    if (!isPlayState) {
+      util.playMusic(curPlayUrl, curPlayPicUrl, curPlaySong, curPlayAuthor);
+    } else {
+      util.playMusic();
+    };
+
+    this.setData({
+      isPlayState: !isPlayState
+    });
 
   },
 

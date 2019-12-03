@@ -1,45 +1,58 @@
-var baseUrl = require("../../utils/api.js");
 var util = require("../../utils/util.js");
 
 Page({
 
-  // 跳转歌单详情页
-  openSongDetailPage: util.openSongDetailPage,
 
-  // 获取歌单广场信息
-  getSonglistMessage: function() {
-    var that = this;
-    wx.request({
-      url: baseUrl + 'top/playlist',
-      // url: baseUrl + 'playlist/catlist',
-      // url: baseUrl + 'playlist/hot',
-      success: function(res) {
-        if (res.statusCode === 200) {
-          console.log(res.data.playlists);
-          var playlists = res.data.playlists;
-          playlists.forEach((value) => {
-            value.playCount = util.dealPlayCount(value.playCount);
-          });
-          that.setData({
-            playlists: res.data.playlists
-          });
-        }
-      }
-    })
+  // 跳转公共方法
+  toPages: function (event) {
+    let to = event.currentTarget.dataset.to;
+    let id = event.currentTarget.dataset.id; console.log(id);
+    switch (to) {
+      case 'songListSquare': // 歌单广场页
+        util.navigateTo('../songListSquare/songListSquare');
+        break;
+      case 'songListDetail': // 歌单详情页
+        util.navigateTo('../songListDetail/songListDetail?id=' + id);
+        break;
+    };
   },
 
   /**
    * 页面的初始数据
    */
   data: {
-    playlists: [] // 歌单列表
+
+    playlists: [], // 歌单列表
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.getSonglistMessage();
+
+    // --------------获取数据---------------
+      var that = this;
+      // 歌单列表
+      util.getdata('top/playlist', function (res) {
+        that.setData({
+          playlists: res.data.playlists
+        });
+        let playlists = that.data.playlists,
+          playCounts = new Array();
+        playlists.forEach(value => {
+          playCounts.push(value.playCount);
+        });
+        playCounts = util.dealPlayCount(playCounts);
+        playlists.forEach(value => {
+          value.playCount = playCounts.shift();
+        });
+        that.setData({
+          playlists: playlists
+        });
+      });
+
+
   },
 
   /**

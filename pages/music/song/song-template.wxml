@@ -1,8 +1,0 @@
-<import src="../song-img/song-img-template.wxml" />
-<template name="songTemplate">
-  <view class="song" catch:tap="openSongDetailPage" data-id="{{id}}">
-    <template is="songImgTemplate" data="{{picUrl: picUrl||song.album.picUrl, playCount}}" />
-    <text class="song-name">{{name}}</text>
-    <text class="song-author">{{artist.name||song.artists[0].name}}</text>
-  </view>
-</template>

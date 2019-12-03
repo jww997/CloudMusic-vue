@@ -1,0 +1,13 @@
+.wrap {
+  width: 690rpx;
+  margin: 0 auto;
+}
+
+.songlist {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.songlist-item {
+  margin: 0 15rpx;
+}

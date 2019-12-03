@@ -1,0 +1,13 @@
+<import src="/template/loading/loading-template.wxml" />
+<import src="/template/songListBox/songListBox-template.wxml" />
+
+<view class="wrap">
+  <template is="loadingTemplate" wx:if="{{!playlists.length}}" />
+  <view class="songlist" wx:else>
+    <block wx:for="{{playlists}}" wx:key="{{item.id}}">
+      <view class="songlist-item margin-top" catch:tap="toPages" data-to="songListDetail" data-id="{{item.id}}">
+        <template is="songListBoxTemplate" data="{{picUrl: item.coverImgUrl, playCount: item.playCount, name: item.name}}" />
+      </view>
+    </block>
+  </view>
+</view>

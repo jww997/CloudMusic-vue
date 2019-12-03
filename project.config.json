@@ -22,7 +22,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.9.0",
+	"libVersion": "2.9.4",
 	"appid": "wxa129f6d1b3b03912",
 	"projectname": "CloudMusic",
 	"debugOptions": {
@@ -40,13 +40,50 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
-		"miniprogram": {
+		"gamePlugin": {
 			"current": -1,
 			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": -1,
+					"name": "pages/songListSquare/songListSquare",
+					"pathName": "pages/songListSquare/songListSquare",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/songListDetail/songListDetail",
+					"pathName": "pages/songListDetail/songListDetail",
+					"query": "id= 2409342460",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/player/player",
+					"pathName": "pages/player/player",
+					"query": "id=1406003612",
+					"scene": null
+				}
+			]
 		}
 	}
 }

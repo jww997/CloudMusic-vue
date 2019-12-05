@@ -60,7 +60,7 @@ Page {
   height: 600rpx;
   margin-top: 150rpx;
   transform-origin: center;
-  animation-duration: 10s;
+  animation-duration: 15s;
   animation-name: discTurn;
   animation-timing-function: linear;
   animation-iteration-count: infinite;

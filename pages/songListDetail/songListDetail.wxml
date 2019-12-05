@@ -1,20 +1,26 @@
 <import src="/template/loading/loading-template.wxml" />
 <import src="/template/songListBox/songListBox-template.wxml" />
+<import src="/template/playbar/playbar-template.wxml" />
 
-<view class="detail padding-top clear" style="background-image: url({{playlist.coverImgUrl}});">
+
+
+<!-- 主体部分 -->
+<view class="detail padding-top clear" style="background-image: url({{playlistBgUrl||''}});">
+  <!-- 底部播放栏 -->
+  <template is="playbarTemplate" data="{{isShowPlayBar,isPlayState,curPlayId,curPlayPicUrl,curPlaySong,curPlayAuthor}}"/>
   <!-- 歌单头部信息 -->
   <view class="detail-header wrap">
-    <template is="songListBoxTemplate" data="{{picUrl: playlist.coverImgUrl, playCount: playlist.playCount}}" />
+    <template is="songListBoxTemplate" data="{{picUrl: playlistPicUrl, playCount: playlistCount}}" />
     <view class="detail-info">
-      <text class="detail-name">{{playlist.name}}</text>
+      <text class="detail-name">{{playlistName}}</text>
       <view class="detail-creator">
-        <image src="{{playlist.creator.avatarUrl}}" />
+        <image src="{{playlistAvatarPicUrl}}" />
         <view class="detail-nickname">
-          <text>{{playlist.creator.nickname}}</text>
+          <text>{{playlistAvatarName}}</text>
         </view>
       </view>
       <view class="detail-description">
-        <text>{{playlist.description}}</text>
+        <text>{{playlistDescription}}</text>
       </view>
     </view>
   </view>
@@ -22,11 +28,11 @@
   <view class="detail-menu padding-top">
     <view class="detail-menu-item">
       <view class="iconfont icon-comment"></view>
-      <text>{{playlist.commentCount||'评论'}}</text>
+      <text>{{playlistCommentCount||'评论'}}</text>
     </view>
     <view class="detail-menu-item">
       <view class="iconfont icon-share"></view>
-      <text>{{playlist.shareCount||'分享'}}</text>
+      <text>{{playlistShareCount||'分享'}}</text>
     </view>
     <view class="detail-menu-item">
       <view class="iconfont icon-download"></view>
@@ -38,22 +44,22 @@
     </view>
   </view>
   <!-- 歌单列表 -->
-  <view class="detail-list">
+  <view class="detail-list" style="{{isShowPlayBar?'padding-bottom: 80rpx;':''}}">
     <view class="detail-playall">
       <view class="iconfont icon-playall"></view>
       <view class="detail-playall-title">
         <text>播放全部</text>
-        <text class="detail-playall-total">{{playlist.tracks.length||0}}</text>
+        <text class="detail-playall-total">{{playlistList.length||0}}</text>
       </view>
       <view class="detail-collect">
-        <text>{{playlist.subscribedCount||0}}</text>
+        <text>{{playlistSubscribedCount||0}}</text>
       </view>
     </view>
     <view class="detail-playlist">
-      <template is="loadingTemplate" wx:if="{{!playlist.tracks}}"></template>
-      <block wx:for="{{playlist.tracks}}" wx:key="{{item.id}}">
-        <view class="detail-play" hover-class="detail-play-hover" catch:tap="toPages" data-to="player" data-id="{{item.id}}">
-          <text>{{index+1}}</text>
+      <template is="loadingTemplate" wx:if="{{!playlistList.length}}"></template>
+      <block wx:for="{{playlistList}}" wx:key="{{item.id}}">
+        <view class="detail-play" hover-class="detail-play-hover" catch:tap="onPlayList" data-id="{{item.id}}">
+          <text class="{{curPlayId==item.id?'iconfont icon-trumpet':''}}">{{curPlayId==item.id?'':index+1}}</text>
           <view class="detail-song">
             <text>{{item.name}}</text>
             <text>{{item.ar[0].name}} - {{item.al.name}}</text>
@@ -63,4 +69,5 @@
       </block>
     </view>
   </view>
+
 </view>

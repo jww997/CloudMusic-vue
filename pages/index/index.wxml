@@ -1,6 +1,6 @@
 <import src="/template/loading/loading-template.wxml" />
 <import src="/template/songListBox/songListBox-template.wxml" />
-<import src="/template/player/player-template.wxml" />
+<import src="/template/playbar/playbar-template.wxml" />
 
 <!-- 顶部工具栏 -->
 <view class="toolbar">
@@ -14,20 +14,8 @@
 
 </view>
 <!-- 底部播放栏 -->
-<view class="playbar" catch:tap="toPages" data-to="player">
-  <view class="playbar-image {{isPlayState?'playbar-image-rotate':''}}" style="background-image: url({{curPlayPicUrl||''}});"></view>
-  <view class="playbar-text">
-    <text>{{curPlaySong}}</text>
-    <text>{{curPlayAuthor}}</text>
-  </view>
-  <view class="iconfont icon-play"></view>
-  <view class="iconfont icon-menu"></view>
-</view>
+<template is="playbarTemplate" data="{{isShowPlayBar,isPlayState,curPlayId,curPlayPicUrl,curPlaySong,curPlayAuthor}}" />
 
-<!-- 播放页 -->
-<view class="player">
-  <template is="playerTemplate"></template>
-</view>
 
 <!-- 主体内容 -->
 <swiper class="container" current="{{curBigSwiperItem}}" catch:change="toggleCurBigSwiperItem">
@@ -95,7 +83,7 @@
         <view class="flex-wrap" hidden="{{!isNewDiscs}}">
           <template is="loadingTemplate" wx:if="{{!newDiscs.length}}" />
           <block wx:else>
-            <view class="wrap-box" wx:for="{{newDiscs}}" wx:key="{{item.id}}" wx:if="{{index<9}}">
+            <view class="wrap-box" wx:for="{{newDiscs}}" wx:key="{{item.id}}" wx:if="{{index<9}}" catch:tap="toPages" data-to="songListDetail" data-type="newDiscs" data-id="{{item.id}}">
               <template is="songListBoxTemplate" data="{{name: item.name, picUrl: item.picUrl, playCount: item.playCount, artist: item.artist.name}}" />
             </view>
           </block>
@@ -103,7 +91,7 @@
         <view class="flex-wrap" hidden="{{isNewDiscs}}">
           <template is="loadingTemplate" wx:if="{{!newSongs.length}}" />
           <block wx:else>
-            <view class="wrap-box" wx:for="{{newSongs}}" wx:key="{{item.id}}" wx:if="{{index<9}}">
+            <view class="wrap-box" wx:for="{{newSongs}}" wx:key="{{item.id}}" wx:if="{{index<9}}" catch:tap="toPages" data-to="player" data-id="{{item.id}}">
               <template is="songListBoxTemplate" data="{{name: item.name, picUrl: item.album.blurPicUrl, artist: item.artists[0].name + (item.artists[1].name?'/'+item.artists[1].name:''), isPlayBtnShow: !!newSongs.length}}" />
             </view>
           </block>

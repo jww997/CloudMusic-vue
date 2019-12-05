@@ -1,18 +1,23 @@
 var util = require("../../utils/util.js");
+var app = getApp();
 
 Page({
 
-
   // 跳转公共方法
   toPages: function (event) {
+    // console.log(event);
     let to = event.currentTarget.dataset.to;
-    let id = event.currentTarget.dataset.id; console.log(id);
+    let id = event.currentTarget.dataset.id;
+    let type = event.currentTarget.dataset.type || 'recommends';
     switch (to) {
       case 'songListSquare': // 歌单广场页
-        util.navigateTo('../songListSquare/songListSquare');
+        util.navigateTo('/pages/songListSquare/songListSquare');
         break;
       case 'songListDetail': // 歌单详情页
-        util.navigateTo('../songListDetail/songListDetail?id=' + id);
+        util.navigateTo('/pages/songListDetail/songListDetail?type=' + type + '&id=' + id);
+        break;
+      case 'player': // 音乐播放页
+        util.navigateTo('/pages/player/player');
         break;
     };
   },
@@ -66,6 +71,26 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+
+    // --------------全局数据更新局部---------------
+    let that = this;
+    let isPlayState = app.globalData.isPlayState;
+    let isShowPlayBar = app.globalData.isShowPlayBar;
+    let curPlayUrl = app.globalData.curPlayUrl;
+    let curPlayPicUrl = app.globalData.curPlayPicUrl;
+    let curPlaySong = app.globalData.curPlaySong;
+    let curPlayAuthor = app.globalData.curPlayAuthor;
+
+    that.setData({
+      isPlayState: isPlayState,
+      isShowPlayBar: isShowPlayBar,
+
+      curPlayUrl: curPlayUrl,
+      curPlayPicUrl: curPlayPicUrl,
+      curPlaySong: curPlaySong,
+      curPlayAuthor: curPlayAuthor
+
+    });
 
   },
 

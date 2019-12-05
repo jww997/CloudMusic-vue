@@ -7,10 +7,6 @@
     <image class="player-cover" src="../../images/cover.png" />
   </view>
   <view class="player-bar">
-    <!-- <image class="player-btn" src="../../images/cm2_icn_loop@2x.png" wx:if="{{true}}" />
-    <image class="player-btn" src="../../images/cm2_icn_one@2x.png" wx:elif="{{false}}" />
-    <image class="player-btn" src="../../images/cm2_icn_shuffle@2x.png" wx:else/> -->
-
     <view class="iconfont icon-orderPlay"></view>
     <view class="iconfont icon-last"></view>
     <view class="iconfont {{isPlayState?'icon-play':'icon-pause'}}" catch:tap="onToggleState"></view>

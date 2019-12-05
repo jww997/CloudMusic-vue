@@ -9,69 +9,93 @@ Page({
   data: {
     isPlayState: false, // 播放状态
 
-    
-    curPlayId: null,     // 歌曲ID,保存方便跳转
-    curPlayUrl: null,    // 音乐URL
+    curPlayId: null, // 歌曲ID,保存方便跳转
+    curPlayUrl: null, // 音乐URL
     curPlayPicUrl: null, // 图片URL
-    curPlaySong: null,   // 歌名
-    curPlayAuthor: null  // 歌手
+    curPlaySong: null, // 歌名
+    curPlayAuthor: null // 歌手
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
+    // console.log(options.id);
 
-    // --------------获取数据---------------
-    var that = this;
-    console.log(that);
-    var id = options.id || app.globalData.curPlayId;
-    // 播放数据
-    util.getdata("song/url?id=" + id, function(res) {
-      // console.log(res.data);
-      let curPlayUrl = res.data.data[0].url;
+    let that = this;
+    let id = options.id;
+    let isPlayState = app.globalData.isPlayState; // 播放状态
 
-      util.getdata('song/detail?ids=' + id, function(res) {
-        // console.log(res.data);
+    let curPlayId = app.globalData.curPlayId || options.id; // 歌曲ID,保存方便跳转
+    let curPlayUrl = app.globalData.curPlayUrl; // 音乐URL
+    let curPlayPicUrl = app.globalData.curPlayPicUrl; // 图片URL
+    let curPlaySong = app.globalData.curPlaySong; // 歌名
+    let curPlayAuthor = app.globalData.curPlayAuthor; // 歌手
 
-        let curPlaySong = res.data.songs[0].al.name;
-        let curPlayPicUrl = res.data.songs[0].al.picUrl;
-        let curPlayAuthor = res.data.songs[0].ar[0].name;
+    if (id) {
 
-        // 传递给局部
-        that.setData({
-          isPlayState: true,
+      util.getdata("song/url?id=" + id, res => {
 
-          curPlayUrl: curPlayUrl,
-          curPlaySong: curPlaySong,
-          curPlayPicUrl: curPlayPicUrl,
-          curPlayAuthor: curPlayAuthor
-        });
+        curPlayId = id; // 歌曲ID,保存方便跳转
+        curPlayUrl = res.data.data[0].url; // 音乐URL
 
-        // 调用小程序API,播放音乐
-        util.playMusic(curPlayUrl, curPlayPicUrl, curPlaySong, curPlayAuthor, id);
+        util.getdata('song/detail?ids=' + id, res => {
+          // console.log(res.data);
 
-        // 监听后台音乐状态
-        wx.onBackgroundAudioPlay(function() {
+          curPlayPicUrl = res.data.songs[0].al.picUrl;
+          curPlaySong = res.data.songs[0].al.name;
+          curPlayAuthor = res.data.songs[0].ar[0].name;
+
+          // 传递给全局
+          app.globalData.isShowPlayBar = true;
+          util.play(curPlayUrl, curPlayPicUrl, curPlaySong, curPlayAuthor, curPlayId);
+
           that.setData({
-            isPlayState: true
+            isPlayState: isPlayState,
+            curPlayId: curPlayId,
+            curPlayUrl: curPlayUrl,
+            curPlayPicUrl: curPlayPicUrl,
+            curPlaySong: curPlaySong,
+            curPlayAuthor: curPlayAuthor,
           });
-        });
-        wx.onBackgroundAudioPause(function() {
-          that.setData({
-            isPlayState: false
-          });
-        });
-        wx.onBackgroundAudioStop(function() {
-          that.setData({
-            isPlayState: false
-          });
-        });
 
+          
+        });
       });
+
+
+      
+    };
+
+
+    that.setData({
+      isPlayState: isPlayState,
+      curPlayId: curPlayId,
+      curPlayUrl: curPlayUrl,
+      curPlayPicUrl: curPlayPicUrl,
+      curPlaySong: curPlaySong,
+      curPlayAuthor: curPlayAuthor,
     });
 
-
+    // 监听后台音乐状态
+    wx.onBackgroundAudioPlay(function () {
+      that.setData({
+        isPlayState: true
+      });
+    });
+    wx.onBackgroundAudioPause(function () {
+      that.setData({
+        isPlayState: false
+      });
+    });
+    wx.onBackgroundAudioStop(function () {
+      that.setData({
+        isPlayState: false
+      });
+    });
+    wx.setNavigationBarTitle({
+      title: curPlaySong + "-" + curPlayAuthor
+    });
 
 
 
@@ -86,22 +110,30 @@ Page({
     });
   },
   onToggleState: function() {
+    let that = this;
 
-    let isPlayState = this.data.isPlayState;
-    let curPlayUrl = this.data.curPlayUrl;
-    let curPlayPicUrl = this.data.curPlayPicUrl;
-    let curPlaySong = this.data.curPlaySong;
-    let curPlayAuthor = this.data.curPlayAuthor;
+    let isPlayState = app.globalData.isPlayState // 播放状态
+    let curPlayId = app.globalData.curPlayId // 歌曲ID,保存方便跳转
+    let curPlayUrl = app.globalData.curPlayUrl // 音乐URL
+    let curPlayPicUrl = app.globalData.curPlayPicUrl // 图片URL
+    let curPlaySong = app.globalData.curPlaySong // 歌名
+    let curPlayAuthor = app.globalData.curPlayAuthor // 歌手
+
+    util.init();
 
     if (!isPlayState) {
-      util.playMusic(curPlayUrl, curPlayPicUrl, curPlaySong, curPlayAuthor);
+      util.play(curPlayUrl, curPlayPicUrl, curPlaySong, curPlayAuthor);
     } else {
-      util.playMusic();
+      util.pause();
     };
 
     this.setData({
       isPlayState: !isPlayState
     });
+    app.globalData.isPlayState = !isPlayState;
+
+
+    
 
   },
 

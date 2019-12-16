@@ -1,0 +1,19 @@
+<import src="/template/loading/loading-template.wxml" />
+<import src="/template/songListBox/songListBox-template.wxml" />
+<import src="/template/playbar/playbar-template.wxml" />
+
+<!-- 底部播放栏 -->
+<template is="playbarTemplate" data="{{isShowPlayBar,isPlayState,curPlayId,curPlayPicUrl,curPlaySong,curPlayAuthor}}" />
+<!-- 排行榜 -->
+<view class="list">
+
+  <text>官方榜</text>
+  <block wx:for="{{list}}" wx:key="{{item.id}}">
+    <view class="list-row">
+      <view class="list-row-img" style="background-image: url('{{item.coverImgUrl}}')">
+        <text>{{item.updateFrequency}}</text>
+      </view>
+    </view>
+  </block>
+</view>
+

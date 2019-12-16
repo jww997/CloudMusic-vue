@@ -2,12 +2,10 @@
 <import src="/template/songListBox/songListBox-template.wxml" />
 <import src="/template/playbar/playbar-template.wxml" />
 
-
-
 <!-- 主体部分 -->
 <view class="detail padding-top clear" style="background-image: url({{playlistBgUrl||''}});">
   <!-- 底部播放栏 -->
-  <template is="playbarTemplate" data="{{isShowPlayBar,isPlayState,curPlayId,curPlayPicUrl,curPlaySong,curPlayAuthor}}"/>
+  <template is="playbarTemplate" data="{{isShowPlayBar,isPlayState,curPlayId,curPlayPicUrl,curPlaySong,curPlayAuthor}}" />
   <!-- 歌单头部信息 -->
   <view class="detail-header wrap">
     <template is="songListBoxTemplate" data="{{picUrl: playlistPicUrl, playCount: playlistCount}}" />
@@ -69,5 +67,4 @@
       </block>
     </view>
   </view>
-
 </view>

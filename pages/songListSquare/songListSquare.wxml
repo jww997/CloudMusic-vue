@@ -4,7 +4,7 @@
 
 <!-- 底部播放栏 -->
 <template is="playbarTemplate" data="{{isShowPlayBar,isPlayState,curPlayId,curPlayPicUrl,curPlaySong,curPlayAuthor}}" />
-<view class="wrap">
+<view class="wrap" style="{{isShowPlayBar?'padding-bottom:80rpx;':''}}">
   <template is="loadingTemplate" wx:if="{{!playlists.length}}" />
   <view class="songlist" wx:else>
     <block wx:for="{{playlists}}" wx:key="{{item.id}}">

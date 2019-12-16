@@ -4,13 +4,13 @@
 
 <!-- 顶部工具栏 -->
 <view class="toolbar">
-  <text class="{{curBigSwiperItem==0?'toolbar-active':''}}" catch:tap="toggleCurBigSwiperItem" data-index="0">我的</text>
-  <text class="{{curBigSwiperItem==1?'toolbar-active':''}}" catch:tap="toggleCurBigSwiperItem" data-index="1">发现</text>
-  <text class="{{curBigSwiperItem==2?'toolbar-active':''}}" catch:tap="toggleCurBigSwiperItem" data-index="2">云村</text>
-  <text class="{{curBigSwiperItem==3?'toolbar-active':''}}" catch:tap="toggleCurBigSwiperItem" data-index="3">视频</text>
+  <text class="{{curHomeIndex==0?'toolbar-active':''}}" catch:tap="onToggleHomeIndex" data-index="0">我的</text>
+  <text class="{{curHomeIndex==1?'toolbar-active':''}}" catch:tap="onToggleHomeIndex" data-index="1">发现</text>
+  <text class="{{curHomeIndex==2?'toolbar-active':''}}" catch:tap="onToggleHomeIndex" data-index="2">云村</text>
+  <text class="{{curHomeIndex==3?'toolbar-active':''}}" catch:tap="onToggleHomeIndex" data-index="3">视频</text>
 
   <view class="iconfont icon-more"></view>
-  <view class="iconfont icon-search"></view>
+  <view class="iconfont icon-search" catch:tap="toPages" data-to="search"></view>
 
 </view>
 <!-- 底部播放栏 -->
@@ -18,7 +18,7 @@
 
 
 <!-- 主体内容 -->
-<swiper class="container" current="{{curBigSwiperItem}}" catch:change="toggleCurBigSwiperItem">
+<swiper class="container" current="{{curHomeIndex}}" catch:change="onToggleHomeIndex">
   <swiper-item>我的(待开发)</swiper-item>
   <swiper-item class="discover">
 
@@ -37,17 +37,17 @@
           <view class="menu_icon iconfont icon-sirenfm"></view>
           <text>私人FM</text>
         </view>
-        <view class="menu-item">
-          <view class="menu_icon iconfont icon-diantai"></view>
-          <text>电台</text>
-        </view>
-        <view class="menu-item">
-          <view class="menu_icon iconfont icon-paihangbang"></view>
-          <text>排行榜</text>
-        </view>
         <view class="menu-item" catch:tap="toPages" data-to="songListSquare">
           <view class="menu_icon iconfont icon-gedan"></view>
           <text>歌单</text>
+        </view>
+        <view class="menu-item" catch:tap="toPages" data-to="rankingList">
+          <view class="menu_icon iconfont icon-paihangbang"></view>
+          <text>排行榜</text>
+        </view>
+        <view class="menu-item">
+          <view class="menu_icon iconfont icon-diantai"></view>
+          <text>电台</text>
         </view>
         <view class="menu-item">
           <view class="menu_icon iconfont icon-meirituijian"></view>
@@ -70,12 +70,12 @@
         </block>
       </view>
       <!-- 新碟&新歌 -->
-      <view class="new wrap padding-top flex-wrap">
+      <view class="new wrap padding-top flex-wrap" style="{{isShowPlayBar?'padding-bottom:80rpx;':''}}">
         <view class="wrap-header">
           <view class="wrap-title">
-            <text class="{{isNewDiscs?'wrap-title-checked':''}}" catch:tap="toggleNewList" data-isnewDiscs="true">新碟</text>
+            <text class="{{isNewDiscs?'wrap-title-checked':''}}" catch:tap="onToggleNewList" data-isnewDiscs="true">新碟</text>
             <view class="wrap-titleLine"></view>
-            <text class="{{isNewDiscs?'':'wrap-title-checked'}}" catch:tap="toggleNewList">新歌</text>
+            <text class="{{isNewDiscs?'':'wrap-title-checked'}}" catch:tap="onToggleNewList">新歌</text>
           </view>
           <buttom class="wrap-more" wx:if="{{isNewDiscs}}">更多新碟</buttom>
           <buttom class="wrap-more" wx:else>新歌推荐</buttom>

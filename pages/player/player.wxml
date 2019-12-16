@@ -1,16 +1,57 @@
-<!-- 唱片机 -->
-<view class="player-phonograph" style="background-image: url({{curPlayPicUrl||''}});">
-  <image class="player-stick {{isPlayState?'player-stick-turn':''}}" src="../../images/stick.png" />
-  <view class="player-disc {{isPlayState?'player-disc-running':''}}" catch:longpress="onFullPic" data-imgurl="{{curPlayPicUrl}}">
-    <image class="player-img" src="{{curPlayPicUrl}}" />
-    <image class="player-light" src="../../images/light.png" />
-    <image class="player-cover" src="../../images/cover.png" />
+<view class="player-phonograph" style="background-image: url({{playing.curPlayPicUrl||''}});">
+  <view>
+    <!-- 唱片机 -->
+    <image class="player-stick {{isPlayState?'player-stick-turn':''}}" src="../../images/stick.png" />
+    <view class="player-disc {{isPlayState?'player-disc-running':''}}" catch:longpress="onFullPic" data-imgurl="{{playing.curPlayPicUrl}}">
+      <image class="player-img" src="{{playing.curPlayPicUrl}}" />
+      <image class="player-light" src="../../images/light.png" />
+      <image class="player-cover" src="../../images/cover.png" />
+    </view>
+    <!-- 更多 -->
   </view>
-  <view class="player-bar">
-    <view class="iconfont icon-orderPlay"></view>
-    <view class="iconfont icon-last"></view>
-    <view class="iconfont {{isPlayState?'icon-play':'icon-pause'}}" catch:tap="onToggleState"></view>
-    <view class="iconfont icon-next"></view>
-    <view class="iconfont icon-menu"></view>
+
+
+  <!-- 工具区 -->
+  <view class="player-toolbar">
+    <!-- 进度条 -->
+    <view class="player-progress">
+      <text>{{currentTime}}</text>
+      <slider backgroundColor="#ccc" activeColor="#fff" block-size="12" value="{{sliderValue}}" max="{{sliderMax}}" bind:change="onChangeProgress"></slider>
+      <text>{{duration}}</text>
+    </view>
+    <!-- 控制条 -->
+    <view class="player-bar">
+      <view class="iconfont icon-orderPlay"></view>
+      <view class="iconfont icon-last"></view>
+      <view class="iconfont {{isPlayState?'icon-play':'icon-pause'}}" catch:tap="onToggleState"></view>
+      <view class="iconfont icon-next"></view>
+      <view class="iconfont icon-list" catch:tap="onTogglePlaylist"></view>
+    </view>
+  </view>
+  <!-- 播放列表 -->
+  <view class="player-playlist {{!isShowPlaylist? 'player-playlist-hidden':''}}">
+    <view class="player-playlist-topbar">
+      <view>
+        <view class="iconfont icon-orderPlay"></view>
+        <text>列表循环（{{playlist.length}}）</text>
+      </view>
+      <view>
+        <view class="iconfont icon-collectAll"></view>
+        <text>收藏全部</text>
+        <view class="iconfont icon-empty"></view>
+      </view>
+    </view>
+    <view class="player-playlist-list">
+      <block wx:for="{{playlist}}" wx:key="{{item.curPlayId}}">
+        <view class="player-playlist-list-item" hover-class="player-playlist-list-item-hover">
+          <view>
+            <text>{{item.curPlaySong}}</text>
+            <text> - {{item.curPlayAuthor}}</text>
+          </view>
+          <view class="iconfont icon-delete"></view>
+        </view>
+      </block>
+    </view>
+    <view class="player-playlist-close" catch:tap="onTogglePlaylist">关闭</view>
   </view>
 </view>

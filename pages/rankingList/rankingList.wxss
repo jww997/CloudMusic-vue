@@ -1,0 +1,27 @@
+.list {
+  width: 690rpx;
+  margin: 0 auto;
+}
+
+.list-row {
+  display: flex;
+  margin-top: 20rpx;
+}
+
+.list-row-img {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 5px;
+  position: relative;
+  background-color: #eee;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.list-row-img text {
+  font-size: 22rpx;
+  position: absolute;
+  bottom: 10rpx;
+  left: 10rpx;
+  color: #fff;
+}

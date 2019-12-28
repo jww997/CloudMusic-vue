@@ -1,7 +1,19 @@
 @import "/utils/fonts/iconfont.wxss";
 @import "/template/loading/loading-template.wxss";
 @import "/template/songListBox/songListBox-template.wxss";
-@import "/template/player/player-template.wxss";
+@import "/template/playbar/playbar-template.wxss";
+@import "/template/playlist/playlist-template.wxss";
+
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
 text {
   font-family: PingFang SC;

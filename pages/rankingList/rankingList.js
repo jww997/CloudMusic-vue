@@ -8,8 +8,53 @@ Page({
    */
   data: {
 
+    officialList: [], // 官方榜
+    recommendList: [], // 推荐榜
+    globalList: [], // 全球榜
+    moreList: [], // 更多榜单
+    
+
     list: null, // 排行榜列表
 
+  },
+
+  // 跳转公共方法
+  toPages: function (event) {
+    // console.log(event);
+    let to = event.currentTarget.dataset.to;
+    console.log('to=' + to);
+    let id = event.currentTarget.dataset.id;
+    console.log('id=' + id);
+    let type = event.currentTarget.dataset.type || 'recommends';
+    switch (to) {
+      case 'songListSquare': // 歌单广场页
+        util.navigateTo('/pages/songListSquare/songListSquare');
+        break;
+      case 'songListDetail': // 歌单详情页
+        util.navigateTo('/pages/songListDetail/songListDetail?type=' + type + '&id=' + id);
+        break;
+      case 'search': // 搜索页
+        util.navigateTo('/pages/search/search');
+        break;
+      case 'rankingList': // 排行榜
+        util.navigateTo('/pages/rankingList/rankingList');
+        break;
+      case 'player': // 音乐播放页
+        util.getdata("check/music?id=" + id, res => {
+          if (res.data.success) {
+            let that = this;
+
+            util.navigateTo('/pages/player/player');
+
+          };
+        }, res => {
+          wx.showToast({
+            title: '暂无版权',
+            icon: 'none',
+          });
+        });
+        break;
+    };
   },
 
   /**
@@ -19,10 +64,10 @@ Page({
 
     // --------------获取数据---------------
     var that = this;
-    util.getdata('toplist', res => {
+    util.getdata('toplist/detail', res => {
       console.log(res.data);
       that.setData({
-        list: res.data.list // 排行榜列表
+        officialList: res.data.list // 官方榜
       });
 
     });
@@ -42,44 +87,16 @@ Page({
   onShow: function() {
 
     let that = this;
-    let isPlayState = app.globalData.isPlayState;
-    let isShowPlayBar = app.globalData.isShowPlayBar;
-    let curPlayUrl = app.globalData.curPlayUrl;
-    let curPlayPicUrl = app.globalData.curPlayPicUrl;
-    let curPlaySong = app.globalData.curPlaySong;
-    let curPlayAuthor = app.globalData.curPlayAuthor;
-    let curPlayId = app.globalData.curPlayId;
-
+    let {
+      playing, // 当前播放的歌曲
+      isPlayState, // 播放&暂停
+      isShowPlayBar, // 显示&隐藏 底部栏
+    } = app.globalData;
+    // 更新局部
     that.setData({
-      isPlayState: isPlayState,
-      isShowPlayBar: isShowPlayBar,
-
-      curPlayUrl: curPlayUrl,
-      curPlayPicUrl: curPlayPicUrl,
-      curPlaySong: curPlaySong,
-      curPlayAuthor: curPlayAuthor,
-      curPlayId: curPlayId
-
-    });
-
-    // 监听后台音乐状态
-    wx.onBackgroundAudioPlay(function (event) {
-      // console.log('onBackgroundAudioPlay');
-      that.setData({
-        isPlayState: true
-      });
-    });
-    wx.onBackgroundAudioPause(function (event) {
-      // console.log('onBackgroundAudioPause');
-      that.setData({
-        isPlayState: false
-      });
-    });
-    wx.onBackgroundAudioStop(function (event) {
-      // console.log('onBackgroundAudioStop');
-      that.setData({
-        isPlayState: false
-      });
+      playing, // 当前播放的歌曲
+      isPlayState, // 播放&暂停
+      isShowPlayBar, // 显示&隐藏 底部栏
     });
 
   },

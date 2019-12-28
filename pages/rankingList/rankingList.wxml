@@ -3,17 +3,46 @@
 <import src="/template/playbar/playbar-template.wxml" />
 
 <!-- 底部播放栏 -->
-<template is="playbarTemplate" data="{{isShowPlayBar,isPlayState,curPlayId,curPlayPicUrl,curPlaySong,curPlayAuthor}}" />
+<template is="playbarTemplate" data="{{isShowPlayBar, isPlayState, playing}}" />
 <!-- 排行榜 -->
 <view class="list">
 
-  <text>官方榜</text>
-  <block wx:for="{{list}}" wx:key="{{item.id}}">
+  <!-- 官方榜 -->
+  <view class="officialList">
+    <view>官方榜</view>
+    <view class="officialList-row" hover-class="officialList-row-active" wx:for="{{officialList}}" wx:key="index">
+      <view>
+        <image src="{{item.coverImgUrl}}"></image>
+        <text>{{item.updateFrequency}}</text>
+      </view>
+      <view class="officialList-row-list">
+        <text wx:for="{{item.tracks}}" wx:key="index" wx:for-item="item1">{{index+1}}.{{item1.first}} - {{item1.second}}</text>
+      </view>
+    </view>
+
+
+
+  </view>
+  <!-- 推荐榜 -->
+  <view>
+
+  </view>
+  <!-- 全球榜 -->
+  <view>
+
+  </view>
+  <!-- 更多榜单 -->
+  <view>
+
+  </view>
+
+
+  <!-- <text>官方榜</text>
+  <block wx:for="{{list}}" wx:key="index">
     <view class="list-row">
       <view class="list-row-img" style="background-image: url('{{item.coverImgUrl}}')">
         <text>{{item.updateFrequency}}</text>
       </view>
     </view>
-  </block>
+  </block> -->
 </view>
-

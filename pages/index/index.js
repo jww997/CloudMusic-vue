@@ -1,37 +1,85 @@
 var util = require("../../utils/util.js");
 var app = getApp();
 
+const BackgroundAudioManager = app.globalData.BackgroundAudioManager;
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    curPlayId: null, // 歌曲ID
-    curPlayUrl: null, // 歌曲URL
-    curPlayPicUrl: null, // 图片URL
-    curPlaySong: null, // 歌名
-    curPlayAuthor: null, // 歌手
+    playing: {
+      id: null, // 歌曲ID
+      url: null, // 音乐地址
+      image: null, // 图片地址
+      title: null, // 歌名
+      singer: null, // 歌手
+      album: null // 专辑
+    }, // 当前播放的歌曲
+    playlist: [], // 播放列表
+    playIndex: -1, // 当前歌曲在播放列表中的index
 
-    isPlayState: false, // 播放状态
-    isShowPlayBar: false, // 播放栏显示
-    isNewDiscs: true, // 新碟新歌切换
-    curHomeIndex: 1, // 顶部导航下标
+    isPlayState: false, // 播放&暂停
+    isShowPlayBar: false, // 显示&隐藏 底部栏
+    isShowPlaylist: false, // 显示&隐藏 播放列表
+    showNewList: 1, // 1新碟2新歌
+    showHomeIndex: 1, // 导航下标
+
+    songlist: {
+
+      image: null, // 图片地址
+      title: null, //歌单名
+      writer: null, // 歌单主人
+      writerImage: null, // 主人头像
+      description: null, // 简单的介绍文本
+
+      playCount: null, // 播放量
+      commentCount: null, // 评论量
+      shareCount: null, // 分享量
+      collectCount: null, // 收藏量
+
+    }, // 选择的歌单
 
     banners: [], // 轮播图
     recommends: [], // 推荐歌单
     newDiscs: [], // 新碟
     newSongs: [], // 新歌
+
   },
 
   // 跳转公共方法
   toPages: function(event) {
     // console.log(event);
+    let that = this;
     let to = event.currentTarget.dataset.to;
-    console.log('to=' + to);
     let id = event.currentTarget.dataset.id;
-    console.log('id=' + id);
+    let index = event.currentTarget.dataset.index;
     let type = event.currentTarget.dataset.type || 'recommends';
+
+    console.log('-------------------event------------------------');
+    console.log('to=' + to);
+    console.log('id=' + id);
+    console.log('index=' + index);
+    console.log('type=' + type);
+
+    let {
+      playing,
+      playlist,
+      playIndex,
+      isPlayState,
+      isShowPlayBar,
+    } = app.globalData;
+
+    console.log('-------------------app.globalData------------------------');
+    console.log('playing=');
+    console.log(playing);
+    console.log('playlist=');
+    console.log(playlist);
+    console.log('playIndex=' + playIndex);
+    console.log('isPlayState=' + isPlayState);
+    console.log('isShowPlayBar=' + isShowPlayBar);
+
     switch (to) {
       case 'songListSquare': // 歌单广场页
         util.navigateTo('/pages/songListSquare/songListSquare');
@@ -48,36 +96,73 @@ Page({
       case 'player': // 音乐播放页
         util.getdata("check/music?id=" + id, res => {
           if (res.data.success) {
-            let that = this;
-            util.getdata("song/url?id=" + id, res => {
-              let curPlayId = id; // 歌曲ID,保存方便跳转
-              let curPlayUrl = res.data.data[0].url; // 音乐URL
-              util.getdata('song/detail?ids=' + id, res => {
-                // console.log(res.data);
-                let curPlaySong = res.data.songs[0].name;
-                let curPlayPicUrl = res.data.songs[0].al.picUrl;
-                let curPlayAuthor = res.data.songs[0].ar[0].name;
-                // 传递给全局
-                app.globalData.isShowPlayBar = true;
-                app.globalData.isPlayState = true; // 播放状态
-                app.globalData.curPlayId = curPlayId; // 歌曲ID,保存方便跳转
-                app.globalData.curPlayUrl = curPlayUrl; // 音乐URL
-                app.globalData.curPlayPicUrl = curPlayPicUrl; // 图片URL
-                app.globalData.curPlaySong = curPlaySong; // 歌名
-                app.globalData.curPlayAuthor = curPlayAuthor; // 歌手
+
+            let newSongs = that.data.newSongs;
+            if (!playlist.length) {
+
+              // console.log('11111111111111111111111111111111111111111111');
+              // 包装数组 播放列表
+              let ids = '';
+              newSongs.map(value => {
+                ids += value.id + ',';
+              });
+              util.getdata("song/url?id=" + ids.substring(',', ids.length - 1), res => {
+                for (var i = 0; i < newSongs.length; i++) {
+                  for (var j = 0; j < res.data.data.length; j++) {
+                    if (newSongs[i].id == res.data.data[j].id) {
+                      newSongs[i].url = res.data.data[j].url;
+                      break;
+                    };
+                  };
+                };
+                playing = newSongs[index];
+
+                // console.log(index);
+
+                // console.log(playing.url);
+                if (playing.url) {
+                  //更新局部
+                  that.setData({
+                    isPlayState: true,
+                    isShowPlayBar: true,
+                    playing: playing, // 当前播放的歌曲
+                    playlist: newSongs, // 歌单列表
+                  });
+                  // 更新全局
+                  app.globalData.playing = playing;
+                  app.globalData.playlist = newSongs;
+                  app.globalData.isShowPlayBar = true;
+                  app.globalData.isPlayState = true;
+                  app.globalData.playIndex = index;
+
+                  util.navigateTo('/pages/player/player');
+                };
+
+              });
+            } else {
+              // console.log('2222222222222222222222222222222222222222222');
+              index = !index ? playIndex : index;
+              playing = newSongs[index];
+
+              // console.log(index);
+
+              if (playing.url) {
+                //更新局部
                 that.setData({
                   isPlayState: true,
-                  curPlayId: curPlayId,
-                  curPlayUrl: curPlayUrl,
-                  curPlayPicUrl: curPlayPicUrl,
-                  curPlaySong: curPlaySong,
-                  curPlayAuthor: curPlayAuthor,
+                  isShowPlayBar: true,
+                  playing: playing, // 当前播放的歌曲
                 });
-                util.play(curPlayUrl, curPlayPicUrl, curPlaySong, curPlayAuthor, curPlayId);
-                util.navigateTo('/pages/player/player');
-              });
+                // 更新全局
+                app.globalData.playing = playing;
+                app.globalData.isShowPlayBar = true;
+                app.globalData.isPlayState = true;
+                app.globalData.playIndex = index;
 
-            });
+                util.navigateTo('/pages/player/player');
+              };
+
+            };
           };
         }, res => {
           wx.showToast({
@@ -85,6 +170,9 @@ Page({
             icon: 'none',
           });
         });
+        break;
+      case 'mv': // 视频页
+        util.navigateTo('/pages/mv/mv');
         break;
     };
   },
@@ -94,112 +182,189 @@ Page({
    */
   onLoad: function(options) {
 
+    let that = this;
+    let {
+      banners,
+      recommends,
+      newDiscs,
+      newSongs,
+    } = that.data;
+
     // --------------获取数据---------------
-    var that = this;
     // 轮播图
     util.getdata('banner', function(res) {
+      let result = res.data.banners;
+      result.forEach((value, index) => {
+        let {
+          imageUrl
+        } = value;
+        banners.push({
+          image: imageUrl
+        });
+      });
       that.setData({
-        banners: res.data.banners
+        banners
       });
     });
     // 推荐歌单
     util.getdata('personalized?limit=' + 6, function(res) {
+      let result = res.data.result;
+      result.forEach((value, index) => {
+        let {
+          id,
+          name,
+          picUrl,
+          playCount
+        } = value;
+        recommends.push({
+          id: id,
+          title: name,
+          image: picUrl,
+          playCount: util.dealPlayCount(playCount)
+        });
+      });
       that.setData({
-        recommends: res.data.result
-      });
-      let recommends = that.data.recommends,
-        playCounts = new Array();
-      recommends.forEach(value => {
-        playCounts.push(value.playCount);
-      });
-      playCounts = util.dealPlayCount(playCounts);
-      recommends.forEach(value => {
-        value.playCount = playCounts.shift();
-      });
-      that.setData({
-        recommends: recommends
+        recommends
       });
     });
     // 新碟
     util.getdata('album/newest', function(res) {
-      // console.log(res.data.albums);
+      let result = res.data.albums;
+      result.forEach((value, index) => {
+        let {
+          id,
+          name,
+          artists,
+          picUrl,
+          playCount,
+        } = value;
+        let singers = '';
+        artists.forEach((value, index) => {
+          if (index > 0) {
+            singers += '/' + value.name;
+          } else {
+            singers = value.name;
+          };
+        });
+        newDiscs.push({
+          id,
+          title: name,
+          singer: singers,
+          image: picUrl,
+          playCount
+        });
+      });
       that.setData({
-        newDiscs: res.data.albums
+        newDiscs
       });
     });
     // 新歌
     util.getdata('top/song?type=0', function(res) {
-      // console.log(res);
+      let result = res.data.data;
+      result.forEach((value, index) => {
+        let {
+          id,
+          name,
+          album,
+          artists,
+        } = value;
+        let singers = '';
+        artists.forEach((value, index) => {
+          if (index > 0) {
+            singers += '/' + value.name;
+          } else {
+            singers = value.name;
+          };
+        });
+        newSongs.push({
+          id: id,
+          title: name,
+          singer: singers,
+          image: album.blurPicUrl,
+        });
+      });
       that.setData({
-        newSongs: res.data.data
+        newSongs
       });
     });
 
     // 监听后台音乐状态
-    wx.onBackgroundAudioPlay(function(event) {
-      // console.log('onBackgroundAudioPlay');
-      that.setData({
-        isPlayState: true
-      });
+    BackgroundAudioManager.onPlay(() => {
+      that.setData({ isPlayState: true });
+      app.globalData.isPlayState = true;
     });
-    wx.onBackgroundAudioPause(function(event) {
-      // console.log('onBackgroundAudioPause');
-      that.setData({
-        isPlayState: false
-      });
+    BackgroundAudioManager.onPause(() => {
+      that.setData({ isPlayState: false });
+      app.globalData.isPlayState = false;
     });
-    wx.onBackgroundAudioStop(function(event) {
-      // console.log('onBackgroundAudioStop');
+    BackgroundAudioManager.onEnded(() => {
+      // this.onChangePlaying();
+
+      let that = this;
+      let {
+        playIndex,
+        playlist,
+        playing,
+        isPlayState
+      } = app.globalData;
+
+      playIndex++;
+      playing = playlist[playIndex];
+      BackgroundAudioManager.src = playing.url;
+      BackgroundAudioManager.title = playing.title;
+      BackgroundAudioManager.coverImgUrl = playing.image;
+      BackgroundAudioManager.singer = playing.singer;
       that.setData({
-        isPlayState: false
+        isPlayState: true,
+        playing: playing
       });
+      app.globalData.isPlayState = true;
+      app.globalData.playIndex = playIndex;
     });
 
   },
 
   // 监听事件
-  onTogglePlayState: function() { // 播放状态切换
-    let that = this;
-    let isPlayState = app.globalData.isPlayState;
-    let curPlayId = app.globalData.curPlayId;
-    let curPlayUrl = app.globalData.curPlayUrl;
-    let curPlayPicUrl = app.globalData.curPlayPicUrl;
-    let curPlaySong = app.globalData.curPlaySong;
-    let curPlayAuthor = app.globalData.curPlayAuthor;
-
-    util.toggle(curPlayUrl, curPlayPicUrl, curPlaySong, curPlayAuthor, curPlayId);
-
-    that.setData({
-      isPlayState: !isPlayState,
-    });
-  },
-  onToggleNewList: function(event) { // 新碟新歌切换
-    // console.log(event);
-    let isnewdiscs = Boolean(event.currentTarget.dataset.isnewdiscs) || false;
-    let curIsnewdiscs = this.data.isNewDiscs;
-    if (curIsnewdiscs !== isnewdiscs) {
-      this.setData({
-        isNewDiscs: isnewdiscs
-      });
-    };
-  },
-  onToggleHomeIndex: function(event) { // 首页导航切换
-    // console.log(event);
+  onToggleHomeIndex: function(event) { // 导航切换
     let that = this;
     if (typeof event.detail.current === 'number') { // 拖拽
       let current = event.detail.current;
       that.setData({
-        curHomeIndex: current
+        showHomeIndex: current
       });
     } else { // 点击
-      let curIndex = event.currentTarget.dataset.index;
-      let curHomeIndex = that.data.curHomeIndex;
-      if (curIndex != curHomeIndex) {
+      let index = event.currentTarget.dataset.index;
+      let showHomeIndex = that.data.homeIndex;
+      if (showHomeIndex != index) {
         that.setData({
-          curHomeIndex: curIndex
+          showHomeIndex: index
         });
       };
     };
+  },
+  onToggleNewList: function(event) { // 新碟&新歌
+    let that = this;
+    let id = event.currentTarget.dataset.id;
+    let showNewList = this.data.showNewList;
+    if (showNewList !== id) {
+      that.setData({
+        showNewList: id
+      });
+    };
+  },
+  onTogglePlayState: function(event) { // 播放状态切换
+    let that = this;
+    let {
+      isPlayState
+    } = app.globalData;
+    if (!isPlayState) {
+      BackgroundAudioManager.play();
+    } else {
+      BackgroundAudioManager.pause();
+    };
+    that.setData({
+      isPlayState: !isPlayState
+    });
   },
 
 
@@ -216,44 +381,16 @@ Page({
   onShow: function() {
 
     let that = this;
-    let isPlayState = app.globalData.isPlayState;
-    let isShowPlayBar = app.globalData.isShowPlayBar;
-    let curPlayUrl = app.globalData.curPlayUrl;
-    let curPlayPicUrl = app.globalData.curPlayPicUrl;
-    let curPlaySong = app.globalData.curPlaySong;
-    let curPlayAuthor = app.globalData.curPlayAuthor;
-    let curPlayId = app.globalData.curPlayId;
-
+    let {
+      playing, // 当前播放的歌曲
+      isPlayState, // 播放&暂停
+      isShowPlayBar, // 显示&隐藏 底部栏
+    } = app.globalData;
+    // 更新局部
     that.setData({
-      isPlayState: isPlayState,
-      isShowPlayBar: isShowPlayBar,
-
-      curPlayUrl: curPlayUrl,
-      curPlayPicUrl: curPlayPicUrl,
-      curPlaySong: curPlaySong,
-      curPlayAuthor: curPlayAuthor,
-      curPlayId: curPlayId
-
-    });
-
-    // 监听后台音乐状态
-    wx.onBackgroundAudioPlay(function(event) {
-      // console.log('onBackgroundAudioPlay');
-      that.setData({
-        isPlayState: true
-      });
-    });
-    wx.onBackgroundAudioPause(function(event) {
-      // console.log('onBackgroundAudioPause');
-      that.setData({
-        isPlayState: false
-      });
-    });
-    wx.onBackgroundAudioStop(function(event) {
-      // console.log('onBackgroundAudioStop');
-      that.setData({
-        isPlayState: false
-      });
+      playing, // 当前播放的歌曲
+      isPlayState, // 播放&暂停
+      isShowPlayBar, // 显示&隐藏 底部栏
     });
 
   },

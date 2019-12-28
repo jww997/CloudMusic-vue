@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"enhance": false,
 		"postcss": true,
@@ -70,17 +70,38 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 2,
 					"name": "pages/songListDetail/songListDetail",
 					"pathName": "pages/songListDetail/songListDetail",
-					"query": "id= 2409342460",
+					"query": "id= 240934246",
+					"scene": null
+				},
+				{
+					"id": 3,
+					"name": "pages/player/player",
+					"pathName": "pages/player/player",
+					"query": "id=1406003612",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "pages/player/player",
-					"pathName": "pages/player/player",
-					"query": "id=1406003612",
+					"name": "pages/search/search",
+					"pathName": "pages/search/search",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/rankingList/rankingList",
+					"pathName": "pages/rankingList/rankingList",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 6,
+					"name": "pages/mv/mv",
+					"pathName": "pages/mv/mv",
+					"query": "id=10848831",
 					"scene": null
 				}
 			]

@@ -3,8 +3,14 @@ import "api.js";
 var baseUrl = require("./api.js");
 var app = getApp();
 
+// 保留当前页面，跳转到应用内的某个页面
+function navigateTo(url) {
+  wx.navigateTo({
+    url: url,
+  });
+}
 
-// 调用API接口，获取数据
+// 调用网易云音乐API接口，获取数据
 function getdata(parameter, fn, fn2) {
   wx.request({
     url: baseUrl + parameter,
@@ -22,19 +28,34 @@ function getdata(parameter, fn, fn2) {
   });
 }
 
-// 保留当前页面，跳转到应用内的某个页面
-function navigateTo(url) {
-  wx.navigateTo({
-    url: url,
-  });
+// 格式化时间 传入毫秒，输出分秒格式
+function formatTime(time) {
+  time = new Date(time);
+  function _formatNumber(number) {
+    // 方法一：数值处理
+    return number / 10 < 1 ? "0" + number : number;
+    // 方法二：字符串处理
+    // number = number.toString();
+    // return number[1] ? number : '0' + number;
+  }
+  return `${_formatNumber(time.getMinutes())}:${_formatNumber(time.getSeconds())}`;
 }
+
+
+
+
+
+
+
+
+
 
 // 处理歌单被播放所有次数单位
 function dealPlayCount(countArr) {
   let newCountArr = new Array();
   if (countArr instanceof Array) {
     countArr.forEach(count => {
-      if (count > 300000000) {
+      if (count >= 1000000000) {
         newCountArr.push(`${(count / 100000000).toFixed(0)}亿`);
       } else if (count >= 100000000) {
         newCountArr.push(`${(count / 100000000).toFixed(1)}亿`);
@@ -132,9 +153,6 @@ function init() {
 
 function play(playUrl, playImgUrl, playTitle, playAuthor, playId) {
   getdata("check/music?id=" + playId, res => {
-    // console.log(res);
-    // console.log('res.data.success=' + res.data.success);
-
     if (res.data.success) {
       wx.playBackgroundAudio({
         dataUrl: playUrl,
@@ -165,18 +183,8 @@ function pause() {
   app.globalData.isPlayState = false;
 }
 
-// 格式化时间
-function formatTime(time) {
-  time = new Date(time);
-  return `${formatNumber(time.getMinutes())}:${formatNumber(time.getSeconds())}`;
-}
-function formatNumber(number) {
-  // 方法一：数值处理
-  return number / 10 < 1 ? "0" + number : number;
-  // 方法二：字符串处理
-  // number = number.toString();
-  // return number[1] ? number : '0' + number;
-}
+
+
 
 // 跳转公共方法
 function toPages(event) {
@@ -215,18 +223,23 @@ function toPages(event) {
   };
 }
 
+
 module.exports = {
-  getdata: getdata,
+
+  getdata: getdata, // 获取数据
+  formatTime: formatTime, // 格式化分秒
+
+
+
+
   toPages: toPages,
   navigateTo: navigateTo,
   dealPlayCount: dealPlayCount,
   listenbackgroundState: listenbackgroundState,
   playList: playList,
-
-  formatTime: formatTime, // 格式化时间
-
   toggle: toggle,
   pause: pause,
   play: play,
   init: init,
+
 }

@@ -1,31 +1,34 @@
-<view class="player-phonograph" style="background-image: url({{playing.curPlayPicUrl||''}});">
-  <view>
-    <!-- 唱片机 -->
-    <image class="player-stick {{isPlayState?'player-stick-turn':''}}" src="../../images/stick.png" />
-    <view class="player-disc {{isPlayState?'player-disc-running':''}}" catch:longpress="onFullPic" data-imgurl="{{playing.curPlayPicUrl}}">
-      <image class="player-img" src="{{playing.curPlayPicUrl}}" />
-      <image class="player-light" src="../../images/light.png" />
-      <image class="player-cover" src="../../images/cover.png" />
+<view class="player-phonograph" style="background-image: url({{playing.image||''}});">
+  <!-- 播放器 -->
+  <view class="{{isShowPlaylist? 'player-playlist-bg':''}}" catch:tap="onHidePlaylist">
+    <view>
+      <!-- 唱片机 -->
+      <image class="player-stick {{isPlayState?'player-stick-turn':''}}" src="../../images/stick.png" />
+      <view class="player-disc {{isPlayState?'player-disc-running':''}}" catch:longpress="onFullPic" data-imgurl="{{playing.image||''}}">
+        <image class="player-img" mode="aspectFill" src="{{playing.image||'/images/chassis.png'}}" />
+        <image class="player-light" src="../../images/light.png" />
+        <image class="player-cover" src="../../images/cover.png" />
+      </view>
+      <!-- 更多 -->
     </view>
-    <!-- 更多 -->
-  </view>
 
 
-  <!-- 工具区 -->
-  <view class="player-toolbar">
-    <!-- 进度条 -->
-    <view class="player-progress">
-      <text>{{currentTime}}</text>
-      <slider backgroundColor="#ccc" activeColor="#fff" block-size="12" value="{{sliderValue}}" max="{{sliderMax}}" bind:change="onChangeProgress"></slider>
-      <text>{{duration}}</text>
-    </view>
-    <!-- 控制条 -->
-    <view class="player-bar">
-      <view class="iconfont icon-orderPlay"></view>
-      <view class="iconfont icon-last"></view>
-      <view class="iconfont {{isPlayState?'icon-play':'icon-pause'}}" catch:tap="onToggleState"></view>
-      <view class="iconfont icon-next"></view>
-      <view class="iconfont icon-list" catch:tap="onTogglePlaylist"></view>
+    <!-- 工具区 -->
+    <view class="player-toolbar">
+      <!-- 进度条 -->
+      <view class="player-progress">
+        <text>{{currentTime}}</text>
+        <slider backgroundColor="#ccc" activeColor="#f00" block-size="12" value="{{sliderValue}}" max="{{sliderMax}}" bind:change="onChangeProgress"></slider>
+        <text>{{duration}}</text>
+      </view>
+      <!-- 控制条 -->
+      <view class="player-bar">
+        <view class="iconfont icon-orderPlay"></view>
+        <view class="iconfont icon-last" catch:tap="onChangePlaying" data-id="-1" data-type="last"></view>
+        <view class="iconfont {{isPlayState?'icon-play':'icon-pause'}}" catch:tap="onTogglePlayState"></view>
+        <view class="iconfont icon-next" catch:tap="onChangePlaying" data-id="1" data-type="next"></view>
+        <view class="iconfont icon-list" catch:tap="onShowPlaylist"></view>
+      </view>
     </view>
   </view>
   <!-- 播放列表 -->
@@ -42,16 +45,17 @@
       </view>
     </view>
     <view class="player-playlist-list">
-      <block wx:for="{{playlist}}" wx:key="{{item.curPlayId}}">
-        <view class="player-playlist-list-item" hover-class="player-playlist-list-item-hover">
+      <block wx:for="{{playlist}}" wx:key="index">
+        <view class="player-playlist-list-item {{playing.id==item.id?'player-playlist-list-item-active':''}}" hover-class="player-playlist-list-item-hover" catch:tap="onChangePlaying" data-id="{{index}}">
+          <view class="{{playing.id==item.id?'iconfont icon-trumpet':''}}"></view>
           <view>
-            <text>{{item.curPlaySong}}</text>
-            <text> - {{item.curPlayAuthor}}</text>
+            <text>{{item.title}}</text>
+            <text> - {{item.singer}}</text>
           </view>
           <view class="iconfont icon-delete"></view>
         </view>
       </block>
     </view>
-    <view class="player-playlist-close" catch:tap="onTogglePlaylist">关闭</view>
+    <!-- <view class="player-playlist-close" catch:tap="onHidePlaylist">关闭</view> -->
   </view>
 </view>

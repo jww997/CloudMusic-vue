@@ -4,21 +4,19 @@
 
 <!-- 顶部工具栏 -->
 <view class="toolbar">
-  <text class="{{curHomeIndex==0?'toolbar-active':''}}" catch:tap="onToggleHomeIndex" data-index="0">我的</text>
-  <text class="{{curHomeIndex==1?'toolbar-active':''}}" catch:tap="onToggleHomeIndex" data-index="1">发现</text>
-  <text class="{{curHomeIndex==2?'toolbar-active':''}}" catch:tap="onToggleHomeIndex" data-index="2">云村</text>
-  <text class="{{curHomeIndex==3?'toolbar-active':''}}" catch:tap="onToggleHomeIndex" data-index="3">视频</text>
+  <text class="{{showHomeIndex==0?'toolbar-active':''}}" catch:tap="onToggleHomeIndex" data-index="0">我的</text>
+  <text class="{{showHomeIndex==1?'toolbar-active':''}}" catch:tap="onToggleHomeIndex" data-index="1">发现</text>
+  <text class="{{showHomeIndex==2?'toolbar-active':''}}" catch:tap="onToggleHomeIndex" data-index="2">云村</text>
+  <text class="{{showHomeIndex==3?'toolbar-active':''}}" catch:tap="onToggleHomeIndex" data-index="3">视频</text>
 
   <view class="iconfont icon-more"></view>
   <view class="iconfont icon-search" catch:tap="toPages" data-to="search"></view>
 
 </view>
 <!-- 底部播放栏 -->
-<template is="playbarTemplate" data="{{isShowPlayBar,isPlayState,curPlayId,curPlayPicUrl,curPlaySong,curPlayAuthor}}" />
-
-
+<template is="playbarTemplate" data="{{isShowPlayBar, isPlayState, playing}}" />
 <!-- 主体内容 -->
-<swiper class="container" current="{{curHomeIndex}}" catch:change="onToggleHomeIndex">
+<swiper class="container" current="{{showHomeIndex}}" catch:change="onToggleHomeIndex">
   <swiper-item>我的(待开发)</swiper-item>
   <swiper-item class="discover">
 
@@ -27,7 +25,7 @@
       <view class="banner">
         <swiper autoplay="{{true}}" indicator-dots="{{true}}" circular="{{true}}" indicator-active-color="#f00">
           <swiper-item wx:for="{{banners}}" wx:key="index">
-            <image mode="scaleToFill" src="{{item.imageUrl}}" />
+            <image mode="scaleToFill" src="{{item.image}}" />
           </swiper-item>
         </swiper>
       </view>
@@ -64,8 +62,8 @@
         </view>
         <template is="loadingTemplate" wx:if="{{!recommends.length}}" />
         <block wx:else>
-          <view class="wrap-box" wx:for="{{recommends}}" wx:key="{{item.id}}" catch:tap="toPages" data-to="songListDetail" data-id="{{item.id}}">
-            <template is="songListBoxTemplate" data="{{name: item.name, picUrl: item.picUrl, playCount: item.playCount}}" />
+          <view class="wrap-box" wx:for="{{recommends}}" wx:key="index" catch:tap="toPages" data-to="songListDetail" data-id="{{item.id}}">
+            <template is="songListBoxTemplate" data="{{name: item.title, picUrl: item.image, playCount: item.playCount}}" />
           </view>
         </block>
       </view>
@@ -73,32 +71,31 @@
       <view class="new wrap padding-top flex-wrap" style="{{isShowPlayBar?'padding-bottom:80rpx;':''}}">
         <view class="wrap-header">
           <view class="wrap-title">
-            <text class="{{isNewDiscs?'wrap-title-checked':''}}" catch:tap="onToggleNewList" data-isnewDiscs="true">新碟</text>
+            <text class="{{showNewList == 1?'wrap-title-checked':''}}" catch:tap="onToggleNewList" data-id="1">新碟</text>
             <view class="wrap-titleLine"></view>
-            <text class="{{isNewDiscs?'':'wrap-title-checked'}}" catch:tap="onToggleNewList">新歌</text>
+            <text class="{{showNewList == 2?'wrap-title-checked':''}}" catch:tap="onToggleNewList" data-id="2">新歌</text>
           </view>
-          <buttom class="wrap-more" wx:if="{{isNewDiscs}}">更多新碟</buttom>
-          <buttom class="wrap-more" wx:else>新歌推荐</buttom>
+          <buttom class="wrap-more" wx:if="{{showNewList == 1}}">更多新碟</buttom>
+          <buttom class="wrap-more" wx:elif="{{showNewList == 2}}">新歌推荐</buttom>
         </view>
-        <view class="flex-wrap" hidden="{{!isNewDiscs}}">
+        <!-- 新碟 -->
+        <view class="flex-wrap" hidden="{{!(showNewList == 1)}}">
           <template is="loadingTemplate" wx:if="{{!newDiscs.length}}" />
           <block wx:else>
-            <view class="wrap-box" wx:for="{{newDiscs}}" wx:key="{{item.id}}" wx:if="{{index<9}}" catch:tap="toPages" data-to="songListDetail" data-type="newDiscs" data-id="{{item.id}}">
-              <template is="songListBoxTemplate" data="{{name: item.name, picUrl: item.picUrl, playCount: item.playCount, artist: item.artist.name}}" />
+            <view class="wrap-box" wx:for="{{newDiscs}}" wx:key="index" wx:if="{{index<12}}" catch:tap="toPages" data-to="songListDetail" data-type="newDiscs" data-id="{{item.id}}">
+              <template is="songListBoxTemplate" data="{{name: item.title, picUrl: item.image, playCount: item.playCount, artist: item.singer}}" />
             </view>
           </block>
         </view>
-        <view class="flex-wrap" hidden="{{isNewDiscs}}">
+        <!-- 新歌 -->
+        <view class="flex-wrap" hidden="{{!(showNewList == 2)}}">
           <template is="loadingTemplate" wx:if="{{!newSongs.length}}" />
           <block wx:else>
-            <view class="wrap-box" wx:for="{{newSongs}}" wx:key="{{item.id}}" wx:if="{{index<9}}" catch:tap="toPages" data-to="player" data-id="{{item.id}}">
-              <template is="songListBoxTemplate" data="{{name: item.name, picUrl: item.album.blurPicUrl, artist: item.artists[0].name + (item.artists[1].name?'/'+item.artists[1].name:''), isPlayBtnShow: !!newSongs.length}}" />
+            <view class="wrap-box" wx:for="{{newSongs}}" wx:key="index" wx:if="{{index<12}}" catch:tap="toPages" data-to="player" data-id="{{item.id}}" data-index="{{index}}">
+              <template is="songListBoxTemplate" data="{{name: item.title, picUrl: item.image, artist: item.singer, isPlayBtnShow: !!newSongs.length}}" />
             </view>
           </block>
         </view>
-
-
-
       </view>
     </scroll-view>
 

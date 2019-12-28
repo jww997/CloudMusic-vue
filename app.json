@@ -3,7 +3,10 @@
     "pages/index/index",
     "pages/songListDetail/songListDetail",
     "pages/songListSquare/songListSquare",
-    "pages/player/player"
+    "pages/rankingList/rankingList",
+    "pages/player/player",
+    "pages/search/search",
+    "pages/mv/mv"
   ],
   "window": {
     "navigationBarBackgroundColor": "#f00",

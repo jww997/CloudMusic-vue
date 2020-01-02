@@ -10,6 +10,7 @@ App({
       image: null, // 图片地址
       title: null, // 歌名
       singer: null, // 歌手
+      lyric: null, // 歌词
     }, // 当前播放的歌曲
     playlist: [], // 播放列表
     playIndex: -1, // 当前歌曲在播放列表中的index

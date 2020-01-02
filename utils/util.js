@@ -28,9 +28,10 @@ function getdata(parameter, fn, fn2) {
   });
 }
 
-// 格式化时间 传入毫秒，输出分秒格式
+// 格式化时间 传入毫秒，输出分秒
 function formatTime(time) {
   time = new Date(time);
+
   function _formatNumber(number) {
     // 方法一：数值处理
     return number / 10 < 1 ? "0" + number : number;
@@ -41,8 +42,34 @@ function formatTime(time) {
   return `${_formatNumber(time.getMinutes())}:${_formatNumber(time.getSeconds())}`;
 }
 
+// 格式化时间 传入毫秒，输出年月日
+function formatDate(time) {
+  let date = new Date(time);
+  return `${date.getFullYear()}年${date.getMonth()+1}月${date.getDate()}日`;
+}
 
-
+// 格式化歌词 输入字符串，输出数组
+function parseLyric(content) {
+  let newArr = new Array();
+  let rowArr = content.split('\n');
+  for (var row of rowArr) {
+    if (row.indexOf(']') == "-1" && row) {
+      row && newArr.push({
+        lrc: row
+      });
+    } else if (row.indexOf(']') != "-1") {
+      let time = row.split(']').shift().substr(1, 8);
+      if (row.split(']').pop()) {
+        row && newArr.push({
+          lrc: row.split(']').pop(),
+          sec: parseInt(time.split(':')[0] * 60 + time.split(':')[1] * 1)
+        });
+      }
+    };
+  }
+  console.log(newArr);
+  return newArr;
+}
 
 
 
@@ -228,8 +255,8 @@ module.exports = {
 
   getdata: getdata, // 获取数据
   formatTime: formatTime, // 格式化分秒
-
-
+  formatDate: formatDate, // 格式化年月日
+  parseLyric: parseLyric, // 歌词转化
 
 
   toPages: toPages,

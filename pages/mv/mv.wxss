@@ -30,17 +30,15 @@ Page {
 .mv-title {
   font-size: 30rpx;
   font-weight: bold;
-  margin-top: 10rpx;
   width: 690rpx;
-  margin: 0 auto;
+  margin: 20rpx auto 0;
 }
 
 .mv-playCount {
   font-size: 22rpx;
-  margin-top: 20rpx;
   color: #999;
   width: 690rpx;
-  margin: 0 auto;
+  margin: 20rpx auto 0;
 }
 
 .mv-more {
@@ -53,6 +51,7 @@ Page {
 
 .mv-more > view {
   margin-top: 10rpx;
+  line-height: 40rpx;
 }
 
 .mv-menu {
@@ -113,7 +112,7 @@ Page {
 
 .mv-relatedMusic > view:first-child,
 .mv-relatedVideo > view:first-child,
-.mv-comment > view:first-child {
+.mv-comment-title {
   font-size: 30rpx;
   font-weight: bold;
   margin: 20rpx 0;
@@ -162,7 +161,8 @@ Page {
 .mv-comment-row {
   display: flex;
   justify-content: space-between;
-
+  position: relative;
+  margin-top: 20rpx;
 }
 
 .mv-comment-row image {
@@ -177,4 +177,30 @@ Page {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  margin-left: 20rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1px solid #eee;
+}
+
+.mv-comment-row-info text:first-child {
+  font-size: 24rpx;
+  color: #333;
+}
+
+.mv-comment-row-info text:nth-child(2) {
+  font-size: 22rpx;
+  color: #666;
+  margin-top: 5rpx;
+}
+
+.mv-comment-row-info text:last-child {
+  font-size: 26rpx;
+  margin-top: 10rpx;
+}
+
+.mv-comment-row-likedCount {
+  position: absolute;
+  right: 5rpx;
+  top: 5rpx;
+  color: #666;
 }

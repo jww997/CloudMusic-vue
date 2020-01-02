@@ -5,7 +5,7 @@
 .detail:after {
   content: "";
   width: 100%;
-  height: 350rpx;
+  height: 400rpx;
   background-size: 110%;
   background-position: center;
   background-color: #666;
@@ -19,7 +19,7 @@
 .detail::before {
   content: "";
   width: 100%;
-  height: 350rpx;
+  height: 400rpx;
   background-color: #000;
   z-index: -1;
   position: absolute;
@@ -202,6 +202,7 @@
 .icon-songMore,
 .icon-mv {
   color: #888;
+  
 }
 
 .detail-play>text {
@@ -275,8 +276,6 @@
   height: 24rpx;
   display: inline-block;
 }
-
-
 
 
 

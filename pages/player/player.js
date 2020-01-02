@@ -16,6 +16,7 @@ Page({
       image: null, // 图片地址
       title: null, // 歌名
       singer: null, // 歌手
+      lyric: null, // 歌词
     }, // 当前播放的歌曲
     playlist: [], // 播放列表
     playIndex: 0, // 当前歌曲在播放列表中的index
@@ -23,11 +24,13 @@ Page({
     isPlayState: false, // 播放&暂停
     isShowPlayBar: false, // 显示&隐藏 底部栏
     isShowPlaylist: false, // 显示&隐藏 播放列表
+    isShowlyric: true, // 显示&隐藏 歌词
 
     currentTime: '00:00', // 进度时长
     duration: '00:00', // 总时长
     sliderValue: 0, // 当前滑块值
     sliderMax: 0, // 滑块最大值
+    curLrcIndex: 0, // m
 
   },
 
@@ -36,79 +39,6 @@ Page({
    */
   onLoad: function(options) {
 
-    // let that = this;
-    // let {
-    //   playing, // 当前播放的歌曲
-    //   playlist, // 播放列表
-    //   playIndex, // 当前歌曲在播放列表中的index
-    //   isPlayState, // 播放&暂停
-    //   isShowPlayBar, // 显示&隐藏 底部栏
-    //   isShowPlaylist, // 显示&隐藏 播放列表
-    // } = app.globalData;
-
-    // that.setData({
-    //   playing: playing, // 当前播放的歌曲
-    //   playIndex: playIndex, // 当前歌曲在播放列表中的index
-    // });
-
-    // 时刻更新
-    // BackgroundAudioManager.onTimeUpdate(function() {
-
-    //   that.setData({
-
-    //     currentTime: util.formatTime(BackgroundAudioManager.currentTime * 1000), // 进度时长
-    //     duration: util.formatTime(BackgroundAudioManager.duration * 1000), // 总时长
-    //     sliderValue: BackgroundAudioManager.currentTime, // 当前滑块值
-    //     sliderMax: BackgroundAudioManager.duration, // 滑块最大值
-
-    //     playlist: playlist, // 播放列表
-    //     isPlayState: isPlayState, // 播放状态
-
-    //   });
-    // });
-
-    // // 监听后台音乐状态
-    // BackgroundAudioManager.onPlay(() => {
-    //   that.setData({
-    //     isPlayState: true
-    //   });
-    //   app.globalData.isPlayState = true;
-    // });
-    // BackgroundAudioManager.onPause(() => {
-    //   that.setData({
-    //     isPlayState: false
-    //   });
-    //   app.globalData.isPlayState = false;
-    // });
-    // BackgroundAudioManager.onEnded(() => {
-    //   // this.onChangePlaying();
-
-    //   let that = this;
-    //   let {
-    //     playIndex,
-    //     playlist,
-    //     playing,
-    //     isPlayState
-    //   } = app.globalData;
-
-    //   playIndex++;
-    //   playing = playlist[playIndex];
-    //   console.log(playing);
-    //   BackgroundAudioManager.src = playing.url;
-    //   BackgroundAudioManager.title = playing.title;
-    //   BackgroundAudioManager.coverImgUrl = playing.image;
-    //   BackgroundAudioManager.singer = playing.singer;
-    //   that.setData({
-    //     isPlayState: true,
-    //     playing: playing
-    //   });
-    //   app.globalData.isPlayState = true;
-    //   app.globalData.playIndex = playIndex;
-    // });
-    // // 设置标题
-    // wx.setNavigationBarTitle({
-    //   title: `${playing.title}-${playing.singer}`
-    // });
   },
 
   // 监听事件
@@ -122,9 +52,6 @@ Page({
     });
   },
   onChangePlaying: function(event) { // 上一首&下一首
-
-    // let id = Number(event.currentTarget.dataset.id) || 1;
-    // let type = event.currentTarget.dataset.type;
 
     let that = this;
 
@@ -153,6 +80,19 @@ Page({
     playing = playlist[playIndex];
     console.log(playing);
 
+    // 获取歌词
+    util.getdata('lyric?id=' + playing.id, function(res) {
+      // 更新局部
+      that.setData({
+        playing: {
+          ...playing,
+          lyric: res.data.lrc.lyric, // 歌词
+        }, // 当前播放的歌曲
+      });
+      // 更新全局
+      app.globalData.playing.lyric = res.data.lrc.lyric;
+    });
+
     if (playing.url) {
 
       BackgroundAudioManager.src = playing.url;
@@ -167,7 +107,7 @@ Page({
 
       app.globalData.playing = playing;
       app.globalData.playIndex = playIndex;
-  
+
 
       // 设置标题
       wx.setNavigationBarTitle({
@@ -187,7 +127,7 @@ Page({
   onChangeOrder: function(event) { // 顺序&随机&单曲
 
   },
-  onTogglePlayState: function (event) { // 播放&暂停
+  onTogglePlayState: function(event) { // 播放&暂停
 
     let that = this;
     let {
@@ -210,6 +150,12 @@ Page({
     // 更新全局
     app.globalData.isPlayState = isPlayState;
 
+  },
+  onToggleShowlyric: function(event) { // 显示&隐藏 歌词
+    let isShowlyric = this.data.isShowlyric;
+    this.setData({
+      isShowlyric: !isShowlyric
+    });
   },
   onShowPlaylist: function(event) { // 列表显示
     this.setData({
@@ -250,21 +196,38 @@ Page({
       isPlayState, // 播放&暂停
       isShowPlayBar, // 显示&隐藏 底部栏
       isShowPlaylist, // 显示&隐藏 播放列表
+      isShowlyric, // 显示&隐藏 歌词
     } = app.globalData;
+    let {
+      curLrcIndex
+    } = that.data;
 
     console.log(playing);
     console.log(isPlayState);
     console.log(playIndex);
 
-    // 更新局部
-    that.setData({
-      playing: playing, // 当前播放的歌曲
-      // playIndex: playIndex, // 当前歌曲在播放列表中的index
-      isPlayState: isPlayState, // 播放状态
+    let secArr = new Array();
+    // 获取歌词
+    util.getdata('lyric?id=' + playing.id, function(res) {
+      let lyric = util.parseLyric(res.data.lrc.lyric);
+      lyric.forEach((value, index) => {
+        secArr.push(value.sec);
+      });
+
+      // 更新局部
+      that.setData({
+        playing: {
+          ...playing,
+          lyric: lyric, // 歌词
+        }, // 当前播放的歌曲
+        isPlayState: isPlayState, // 播放状态
+      });
+      // 更新全局
+      app.globalData.isShowPlayBar = true;
+      app.globalData.playing.lyric = lyric;
 
     });
-    // 更新全局
-    app.globalData.isShowPlayBar = true;
+
 
     if (playing.url) {
       BackgroundAudioManager.src = playing.url;
@@ -273,9 +236,29 @@ Page({
       BackgroundAudioManager.singer = playing.singer;
     };
 
+    // 歌词位置更新
+    if (!isPlayState) {
+      clearTimeout(lrcUpdate);
+    } else {
+      lrcUpdate;
+    }
+    let lrcUpdate = setInterval(function() {
+      for (let i in that.data.playing.lyric) {
+        const item = that.data.playing.lyric[i];
+        if (item.sec <= BackgroundAudioManager.currentTime) {
+          curLrcIndex = i;
+        };
+      };
+      that.setData({
+        curLrcIndex, // 当前秒数
+      });
+    }, 2000);
+
+
     // 时刻更新
     BackgroundAudioManager.onTimeUpdate(function() {
-      // console.log(app.globalData);
+
+
       that.setData({
 
         currentTime: util.formatTime(BackgroundAudioManager.currentTime * 1000), // 进度时长
@@ -290,12 +273,9 @@ Page({
         playIndex: playIndex, // 当前歌曲在播放列表中的index
 
       });
-
-      
-
     });
 
-    
+
 
     // 监听后台音乐状态
     BackgroundAudioManager.onPlay(() => {

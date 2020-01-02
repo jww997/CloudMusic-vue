@@ -1,15 +1,34 @@
-<view class="player-phonograph" style="background-image: url({{playing.image||''}});">
+<view class="player-wrap" style="background-image: url({{playing.image||''}});">
   <!-- 播放器 -->
-  <view class="{{isShowPlaylist? 'player-playlist-bg':''}}" catch:tap="onHidePlaylist">
-    <view>
-      <!-- 唱片机 -->
+  <view class="player {{isShowPlaylist? 'player-playlist-bg':''}}" catch:tap="onHidePlaylist">
+    <!-- 唱片机 -->
+    <view class="player-phonograph" hidden="{{isShowlyric}}" catch:tap="onToggleShowlyric">
+      <!-- 手柄 -->
       <image class="player-stick {{isPlayState?'player-stick-turn':''}}" src="../../images/stick.png" />
+      <!-- 转盘 -->
       <view class="player-disc {{isPlayState?'player-disc-running':''}}" catch:longpress="onFullPic" data-imgurl="{{playing.image||''}}">
         <image class="player-img" mode="aspectFill" src="{{playing.image||'/images/chassis.png'}}" />
         <image class="player-light" src="../../images/light.png" />
         <image class="player-cover" src="../../images/cover.png" />
       </view>
-      <!-- 更多 -->
+      <!-- 操作 -->
+      <view class="player-operation">
+        <view class="iconfont icon-love"></view>
+        <view class="iconfont icon-download-2"></view>
+        <view class="iconfont icon-polyphonic"></view>
+        <view class="iconfont icon-comment"></view>
+        <view class="iconfont icon-playerMore"></view>
+      </view>
+    </view>
+    <!-- 歌词 -->
+    <view class="player-lyric" hidden="{{!isShowlyric}}" catch:tap="onToggleShowlyric">
+      <view class="player-lyric-wrap">
+        <view class="player-lyric-list" style="top: -{{curLrcIndex*80}}rpx;">
+          <block wx:for="{{playing.lyric}}" wx:key="index">
+            <view class="{{index == curLrcIndex?'current': ''}}">{{item.lrc}}</view>
+          </block>
+        </view>
+      </view>
     </view>
 
 

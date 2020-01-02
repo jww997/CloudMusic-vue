@@ -34,7 +34,7 @@ Page({
     relatedMusic: [], // 相关音乐
     relatedVideo: [], // 相关视频
     hotComment: [], // 精彩评论
-    newcomment: [], // 最新评论
+    newComment: [], // 最新评论
 
   },
 
@@ -103,7 +103,7 @@ Page({
 
     // 相关视频
     util.getdata('related/allvideo?id=' + id, function(res) {
-      // console.log(res);
+      console.log(res);
 
       let {
 
@@ -120,6 +120,7 @@ Page({
           coverUrl, // 图片
           durationms, // 总时长
           playTime, // 播放量
+          type, // 0带MV标识1不带
         } = value;
 
         relatedVideo.push({
@@ -128,6 +129,7 @@ Page({
           image: coverUrl, // 图片
           duration: util.formatTime(durationms), // 总时长
           playCount: util.dealPlayCount(playTime), // 播放量
+          type, // 0带MV标识1不带
         });
 
       });
@@ -140,7 +142,7 @@ Page({
 
     // 精彩评论
     util.getdata('comment/mv?id='+id, res => {
-      console.log(res);
+      // console.log(res);
 
       let {
         hotComments, // 精彩评论
@@ -150,7 +152,7 @@ Page({
 
       let {
         hotComment, // 精彩评论
-        newcomment, // 最新评论
+        newComment, // 最新评论
       } = that.data;
 
       // 包装精彩评论
@@ -158,7 +160,16 @@ Page({
         hotComment.push({
           image: value.user.avatarUrl, // 头像
           name: value.user.nickname, // 用户名
-          time: value.time, // 时间
+          time: util.formatDate(value.time), // 时间
+          content: value.content, // 内容
+          likedCount: value.likedCount, // 点赞量
+        });
+      });
+      comments.forEach(value => {
+        newComment.push({
+          image: value.user.avatarUrl, // 头像
+          name: value.user.nickname, // 用户名
+          time: util.formatDate(value.time), // 时间
           content: value.content, // 内容
           likedCount: value.likedCount, // 点赞量
         });
@@ -167,7 +178,7 @@ Page({
       // 更新局部
       that.setData({
         hotComment, // 精彩评论
-        newcomment, // 最新评论
+        newComment, // 最新评论
       });
 
 

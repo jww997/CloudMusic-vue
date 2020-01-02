@@ -135,8 +135,8 @@ Page({
               writerImage: creator.avatarUrl, // 主人头像
               description: description, // 简单的介绍文本
               playCount: util.dealPlayCount(playCount), // 播放量
-              commentCount: commentCount, // 评论量
-              shareCount: shareCount, // 分享量
+              commentCount: util.dealPlayCount(commentCount), // 评论量
+              shareCount: util.dealPlayCount(shareCount), // 分享量
               collectCount: util.dealPlayCount(subscribedCount), // 收藏量
 
             },
@@ -196,8 +196,8 @@ Page({
               writer: album.artist.name, // 歌手名
               writerImage: album.artist.picUrl, // 歌手照片
               description: album.description, // 简单的介绍文本
-              commentCount: album.info.commentCount, // 歌单评论次数
-              shareCount: album.info.shareCount, // 歌单评论次数
+              commentCount: util.dealPlayCount(album.info.commentCount), // 歌单评论次数
+              shareCount: util.dealPlayCount(album.info.shareCount), // 歌单评论次数
               collectCount: util.dealPlayCount(album.info.likedCount), // 歌单收藏次数
 
             },
@@ -235,6 +235,9 @@ Page({
             app.globalData.playlist = songs;
           });
         });
+        break;
+      case "rankingList": // 排行榜
+        console.log(11111111111111111111111111);
         break;
     };
 

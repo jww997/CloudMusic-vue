@@ -12,9 +12,6 @@ Page({
     recommendList: [], // 推荐榜
     globalList: [], // 全球榜
     moreList: [], // 更多榜单
-    
-
-    list: null, // 排行榜列表
 
   },
 
@@ -54,6 +51,9 @@ Page({
           });
         });
         break;
+      case 'mv': // 视频页
+        util.navigateTo('/pages/mv/mv?id=' + id);
+        break;
     };
   },
 
@@ -63,14 +63,54 @@ Page({
   onLoad: function(options) {
 
     // --------------获取数据---------------
-    var that = this;
+    let that = this;
+    let {
+      officialList, // 官方榜
+      recommendList, // 推荐榜
+      globalList, // 全球榜
+      moreList, // 更多榜单
+    } = that.data;
+    // 获取所有榜单内容摘要
     util.getdata('toplist/detail', res => {
-      console.log(res.data);
+      // console.log(res.data);
+
+      let {
+        artistToplist,
+        rewardToplist,
+        list
+      } = res.data;
+
+      for (let i in list) {
+
+        let name = list[i].name;
+
+        if (name == "云音乐飙升榜" || name == "云音乐新歌榜" || name == "云音乐热歌榜" || name == "网易原创歌曲榜") {
+          officialList.push(list[i]);
+        } else if (name == "云音乐说唱榜" || name == "云音乐电音榜" || name == "云音乐欧美新歌榜" || name == "抖音排行榜" || name == "云音乐ACG音乐榜" || name == "抖音排行榜") {
+          recommendList.push(list[i]);
+        } else if (name == "美国Billboard周榜" || name == "UK排行榜周榜" || name == "Beatport全球电子舞曲榜" || name == "日本Oricon周榜" || name == "iTunes榜" || name == "英国Q杂志中文版周榜") {
+          globalList.push(list[i]);
+        } else {
+          moreList.push(list[i]);
+        };
+      };
+
+      // moreList.push(artistToplist);
+      // moreList.push(rewardToplist);
+
       that.setData({
-        officialList: res.data.list // 官方榜
+        officialList, // 官方榜
+        recommendList, // 推荐榜
+        globalList, // 全球榜
+        moreList, // 更多榜单
       });
 
     });
+
+    // 获取排行榜中的歌手榜
+    // util.getdata('toplist/artist', res => {
+    //   console.log(res);
+    // });
 
   },
 

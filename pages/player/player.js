@@ -24,13 +24,13 @@ Page({
     isPlayState: false, // 播放&暂停
     isShowPlayBar: false, // 显示&隐藏 底部栏
     isShowPlaylist: false, // 显示&隐藏 播放列表
-    isShowlyric: true, // 显示&隐藏 歌词
+    isShowlyric: false, // 显示&隐藏 歌词
 
     currentTime: '00:00', // 进度时长
     duration: '00:00', // 总时长
     sliderValue: 0, // 当前滑块值
     sliderMax: 0, // 滑块最大值
-    curLrcIndex: 0, // m
+    curLrcIndex: 0, // 当前歌词下标
 
   },
 

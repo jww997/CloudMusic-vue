@@ -150,7 +150,7 @@ Page {
   font-size: 28rpx;
   color: rgba(255,255,255,.5);
   text-align: center;
-  transition: top .5s;
+  transition: top 1s;
   position: absolute;
   top: 0;
   left: 0;

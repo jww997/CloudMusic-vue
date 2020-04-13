@@ -14,11 +14,9 @@
       <swiper-slide>我的（待开发）</swiper-slide>
       <!-- 发现 -->
       <swiper-slide class="discover">
-        <home-banner :banners="home.banners" />
-        <home-menus :menus="home.menus" />
-        <home-recommends :recommends="home.recommends" />
-
-
+        <discover-banner :banners="discover.banners" />
+        <discover-menus :menus="discover.menus" />
+        <discover-recommends :recommends="discover.recommends" />
       </swiper-slide>
       <!-- 云村 -->
       <swiper-slide>云村（待开发）</swiper-slide>
@@ -30,22 +28,21 @@
 
 <script>
   import axios from 'axios';
-  import HomeBanner from './components/banner';
-  import HomeMenus from './components/menus';
-  import homeRecommends from './components/recommends'; // 热门推荐
-
-
+  // 发现
+  import DiscoverBanner from './components/discover/banner'; // 轮播图
+  import DiscoverMenus from './components/discover/menus'; // 菜单
+  import DiscoverRecommends from './components/discover/recommends'; // 热门推荐
   export default {
     name: "Home",
     components: {
-      HomeBanner,
-      HomeMenus,
-      homeRecommends,
+      DiscoverBanner,
+      DiscoverMenus,
+      DiscoverRecommends,
     },
     data() {
       const that = this;
       return {
-        home: {
+        discover: {
           banners: [], // 轮播图
           menus: [{
             name: '每日推荐',
@@ -112,11 +109,11 @@
     mounted() {
       const that = this;
       that.getdata('banner', res => {
-        that.home.banners = res.data.banners;
+        that.discover.banners = res.data.banners;
       });
       that.getdata('personalized', res => {
         console.log(res.data.result);
-        that.home.recommends = res.data.result;
+        that.discover.recommends = res.data.result;
       });
     }
   }
@@ -166,9 +163,6 @@
 
   .homeSwiper {
     width: 100%;
-    flex-grow: 1;
-    border: 1px solid #f00;
-    box-sizing: border-box;
   }
 
   .discover {

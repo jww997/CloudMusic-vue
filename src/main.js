@@ -11,6 +11,7 @@ Vue.prototype.$axios = axios; //在Vue的原型上添加$axios方法
 import "./assets/fonts/iconfont.css";
 import "./assets/styles/common.css";
 import "./assets/styles/reset.css";
+import "./assets/styles/border.css";
 import "swiper/dist/css/swiper.css";
 
 fastClick.attach(document.body);

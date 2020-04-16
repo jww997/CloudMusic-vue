@@ -5,7 +5,7 @@
     <discover-banner :banners="discover.banners" />
     <discover-menus :menus="discover.menus" />
     <discover-recommends :recommends="discover.recommends" />
-
+123
   </view>
 </template>
 
@@ -14,8 +14,9 @@
   import DiscoverBanner from './components/banner'; // 轮播图
   import DiscoverMenus from './components/menus'; // 菜单
   import DiscoverRecommends from './components/recommends'; // 热门推荐
+
   export default {
-    name: "Home",
+    name: "discover",
     components: {
       DiscoverBanner,
       DiscoverMenus,
@@ -49,24 +50,6 @@
           }], // 菜单栏
           recommends: [], // 推荐歌单
         },
-
-
-
-
-        homeSwiperItems: ['我的', '发现', '云村', '视频'],
-        homeSwiper: {},
-        homeSwiperIndex: 1, // 容器下标
-        homeSwiperOption: {
-          initialSlide: 1, // 初始下标
-          watchSlidesProgress: true,
-          watchSlidesVisibility: true,
-          on: {
-            slideChange: function (event) {
-              that.homeSwiper = this;
-              that.homeSwiperIndex = this.activeIndex;
-            },
-          },
-        },
       }
     },
     computed: {
@@ -75,10 +58,6 @@
       }
     },
     methods: {
-      toggleHomeSwiperIndex(event) { // 容器下标
-        console.log('event.target.dataset.id=', event.target.dataset.id);
-        console.log(this.homeSwiper.activeIndex);
-      },
       getdata(api, callBack) {
         axios.get('http://localhost:3000/' + api)
           .then(res => {
@@ -103,7 +82,4 @@
 
 <style scoped>
 
-  .discover {
-    overflow: scroll;
-  }
 </style>

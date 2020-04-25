@@ -1,6 +1,6 @@
 <template>
   <div class="menus-items">
-    <div class="menus-item" v-for="item in menus">
+    <div class="menus-item" v-for="(item, index) in menus" :key="index">
       <div class="iconfont" :class="item.iconClass"></div>
       <div class="name">{{item.name}}</div>
     </div>

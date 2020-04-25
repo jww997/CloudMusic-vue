@@ -22,7 +22,9 @@
       ref="mySwiper"
     >
       <!-- 我的 -->
-      <swiper-slide>我的（待开发）</swiper-slide>
+      <swiper-slide>
+        <mine :mine="mine" />
+      </swiper-slide>
       <!-- 发现 -->
       <swiper-slide>
         <discover :discover="discover" />
@@ -37,11 +39,14 @@
 
 <script>
 import axios from "axios";
+
+import Mine from "./Mine/mine"; // 我的
 import Discover from "./Discover/discover"; // 发现
 
 export default {
   name: "Home",
   components: {
+    Mine,
     Discover
   },
   data() {
@@ -49,9 +54,9 @@ export default {
     return {
       homeSwiperItems: ["我的", "发现", "云村", "视频"],
       homeSwiper: {},
-      homeSwiperIndex: 1, // 容器下标
+      homeSwiperIndex: 0, // 容器下标
       homeSwiperOption: {
-        initialSlide: 1, // 初始下标
+        initialSlide: 0, // 初始下标
         watchSlidesProgress: true,
         watchSlidesVisibility: true,
         on: {
@@ -60,6 +65,35 @@ export default {
             that.homeSwiperIndex = this.activeIndex;
           }
         }
+      },
+      mine: {
+        menus: [
+          {
+            name: "每日推荐",
+            iconClass: "icon-dailySpecial",
+            dataTo: ""
+          },
+          {
+            name: "歌单",
+            iconClass: "icon-songList",
+            dataTo: "songListSquare"
+          },
+          {
+            name: "排行榜",
+            iconClass: "icon-rankingList",
+            dataTo: "rankingList"
+          },
+          {
+            name: "电台",
+            iconClass: "icon-radioStation",
+            dataTo: "radioStation"
+          },
+          {
+            name: "私人FM",
+            iconClass: "icon-FM",
+            dataTo: ""
+          }
+        ], // 菜单栏
       },
       discover: {
         banners: [], // 轮播图

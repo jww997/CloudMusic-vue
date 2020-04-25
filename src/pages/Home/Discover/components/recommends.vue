@@ -6,7 +6,7 @@
       <button>查看更多</button>
     </div>
     <swiper class="recommends-items" :options="recommendsSwiperOption">
-      <swiper-slide class="recommends-item" v-for="item in this.recommends">
+      <swiper-slide class="recommends-item" v-for="(item,index) in this.recommends" :key="index">
         <div class="img">
           <img :src="item.picUrl" />
         </div>

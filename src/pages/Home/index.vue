@@ -1,37 +1,28 @@
 <template>
   <!-- 首页 -->
   <div class="container">
-    <div class="topBar">
+    <div class="nav">
       <div class="iconfont icon-sidebar"></div>
-      <div class="topBar-pagination">
+      <div class="nav-pagination">
         <div
-          class="swiper-slide-visible topBar-pagination-item"
-          :class="homeSwiperIndex == index? 'topBar-pagination-item-active': ''"
-          v-for="(item,index) in homeSwiperItems"
+          class="nav-pagination-item"
+          :class="home.index == index? 'nav-pagination-item-active': ''"
+          v-for="(item,index) in home.navs"
           :key="index"
-          @click="toggleHomeSwiperIndex"
-          :data-id="index"
+          @click="toggleHomeIndex"
+          :data-index="index"
         >{{item}}</div>
       </div>
       <div class="iconfont icon-search"></div>
     </div>
-    <swiper
-      class="homeSwiper"
-      :options="homeSwiperOption"
-      :activeIndex="homeSwiperIndex"
-      ref="mySwiper"
-    >
-      <!-- 我的 -->
+    <swiper class="swiper" :options="home.option" :activeIndex="home.index" ref="homeSwiper">
       <swiper-slide>
         <mine :mine="mine" />
       </swiper-slide>
-      <!-- 发现 -->
       <swiper-slide>
         <discover :discover="discover" />
       </swiper-slide>
-      <!-- 云村 -->
       <swiper-slide>云村（待开发）</swiper-slide>
-      <!-- 视频 -->
       <swiper-slide>视频（待开发）</swiper-slide>
     </swiper>
   </div>
@@ -40,7 +31,7 @@
 <script>
 import axios from "axios";
 
-import Mine from "./Mine/mine"; // 我的
+import Mine from "./mine"; // 我的
 import Discover from "./Discover/discover"; // 发现
 
 export default {
@@ -52,20 +43,20 @@ export default {
   data() {
     const that = this;
     return {
-      homeSwiperItems: ["我的", "发现", "云村", "视频"],
-      homeSwiper: {},
-      homeSwiperIndex: 0, // 容器下标
-      homeSwiperOption: {
-        initialSlide: 0, // 初始下标
-        watchSlidesProgress: true,
-        watchSlidesVisibility: true,
-        on: {
-          slideChange: function(event) {
-            that.homeSwiper = this;
-            that.homeSwiperIndex = this.activeIndex;
+      home: {
+        index: 1,
+        swiper: {},
+        navs: ["我的", "发现", "云村", "视频"],
+        option: {
+          initialSlide: 1,
+          on: {
+            slideChange: function(event) {
+              that.home.index = this.activeIndex;
+            }
           }
         }
       },
+
       mine: {
         menus: [
           {
@@ -93,7 +84,7 @@ export default {
             iconClass: "icon-FM",
             dataTo: ""
           }
-        ], // 菜单栏
+        ] // 菜单栏
       },
       discover: {
         banners: [], // 轮播图
@@ -130,15 +121,17 @@ export default {
   },
   computed: {
     swiper() {
-      return this.$refs.mySwiper.swiper;
+      const that = this;
+      return that.$refs.homeSwiper.swiper;
     }
   },
   methods: {
-    toggleHomeSwiperIndex(event) {
-      // 容器下标
-      console.log("event.target.dataset.id=", event.target.dataset.id);
-      console.log(this.homeSwiper.activeIndex);
+    toggleHomeIndex(event) {
+      const that = this;
+      let { index } = event.target.dataset;
+      that.$refs.homeSwiper.swiper.slideTo(index, 500, false);
     },
+
     getdata(api, callBack) {
       axios.get("http://localhost:3000/" + api).then(res => {
         if (res.status == 200) {
@@ -160,49 +153,45 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  height: 100%;
+.container,
+.nav,
+.nav-pagination,
+.nav-pagination-item {
   display: flex;
-  flex-direction: column;
-  overflow: hidden;
 }
 
-.topBar {
-  flex-shrink: 0;
-  height: 0.8rem;
-  line-height: 0.8rem;
-  text-align: center;
-  background-color: #f00;
-  color: #fff;
-  display: flex;
+.nav,
+.nav-pagination {
   justify-content: space-between;
   align-items: center;
 }
 
-.topBar > .iconfont {
+.container {
+  height: 100%;
+  flex-direction: column;
+}
+
+.nav {
+  flex-shrink: 0;
   padding: 0 0.3rem;
 }
 
-.topBar-pagination {
-  font-size: 0.25rem;
-  color: rgba(255, 255, 255, 0.5);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.nav-pagination {
+  width: 55%;
+  height: 1rem;
 }
 
-.topBar-pagination-item {
-  width: 1.2rem;
+.nav-pagination-item {
+  transition: 0.1s;
 }
 
-.topBar-pagination-item-active {
-  font-size: 0.3rem;
+.nav-pagination-item-active {
   font-weight: bold;
-  color: #fff;
+  transform: scale(1.2);
 }
 
-.homeSwiper {
-  width: 100%;
+.swiper {
   flex-grow: 1;
+  width: 100%;
 }
 </style>

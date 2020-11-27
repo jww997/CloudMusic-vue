@@ -1,5 +1,5 @@
 <template>
-  <div class="search">
+  <div class="container">
     <div class="icon iconfont">&#xe70d;</div>
     <div class="frame">
       <span class="icon iconfont">&#xe607;</span>
@@ -18,9 +18,9 @@ export default {
 <style lang="scss" scoped>
 @import "~styles/mixins.scss";
 @import "~styles/varibles.scss";
-.search {
+.container {
   margin: 0.2rem 0;
-  @include horizontalBetween;
+  @include flexSpaceBetween;
   .icon {
     flex-shrink: 0;
     margin: 0.2rem;
@@ -33,7 +33,7 @@ export default {
     padding: 0 0.1rem;
     overflow: hidden;
     color: #666;
-    @include horizontalBetween;
+    @include flexSpaceBetween;
     .iconfont {
       font-size: 0.3rem;
     }

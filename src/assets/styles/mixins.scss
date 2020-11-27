@@ -1,18 +1,20 @@
-@mixin ellipsis {
+@mixin omit {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
 // vertical 垂直 horizontal 水平
-@mixin horizontalBetween {
+@mixin flexSpaceBetween {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-@mixin horizontalCenter {
+@mixin flexCenter {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
+

@@ -1,10 +1,10 @@
 <template>
-  <div class="banner">
+  <div class="container">
     <van-swipe class="swiper" :autoplay="3000" indicator-color="white">
       <van-swipe-item
         class="swiper-item"
-        v-for="item in list"
-        :key="item.targetId"
+        v-for="(item, index) in list"
+        :key="index"
       >
         <div class="box" :data-url="item.url" :data-video="item.video">
           <img class="image" :src="item.imageUrl" />
@@ -35,12 +35,13 @@ export default {
 <style lang="scss" scoped>
 @import "~styles/mixins.scss";
 @import "~styles/varibles.scss";
-.banner {
+.container {
   .swiper {
     .swiper-item {
-      @include horizontalCenter;
+      @include flexCenter;
       .box {
-        width: 7rem;
+        // width: 7rem;
+        width: 94%;
         border-radius: 0.2rem;
         position: relative;
         overflow: hidden;

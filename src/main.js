@@ -4,16 +4,15 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
-
-import '@/assets/js/vant.js'
-import '@/assets/js/axios.js'
-
-
-
 import 'styles/reset.css'
 import 'styles/border.css'
 import 'styles/iconfont.css'
 
+import '@/assets/js/vant.js'
+import '@/assets/js/axios.js'
+
+import api from "@/api";
+Vue.prototype.$api = api;
 
 Vue.config.productionTip = false
 
@@ -24,3 +23,5 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+
+

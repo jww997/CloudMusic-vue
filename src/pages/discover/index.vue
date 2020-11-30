@@ -26,6 +26,7 @@ export default {
   },
   mounted: function () {
     const that = this;
+    // console.log(that.$store.state);
     that.$api
       .getBanner()
       .then((res) => {

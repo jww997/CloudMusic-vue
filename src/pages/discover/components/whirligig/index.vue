@@ -13,15 +13,15 @@
     >
       <div v-for="(item, index) in list" :key="index">
         <van-swipe-item class="swiper-item" v-if="index < 6">
-          <router-link :to="{ path: '/playlist', query: { id: item.id } }">
-            <div class="box" :data-id="item.id">
-              <img class="image" :src="item.picUrl" />
-              <span class="text">{{ item.name }}</span>
-              <div class="count">
-                <span class="iconfont">&#xe656;</span>
-                <span>{{ item.playCount }}</span>
-              </div>
-            </div>
+          <router-link
+            :to="{ path: '/playlist', query: { id: item.id } }"
+            :key="item.id"
+          >
+            <cover
+              :image="item.picUrl"
+              :name="item.name"
+              :count="item.playCount"
+            ></cover>
           </router-link>
         </van-swipe-item>
       </div>
@@ -30,8 +30,12 @@
 </template>
 
 <script>
+import Cover from "@/components/cover";
 export default {
   name: "whirligig",
+  components: {
+    Cover,
+  },
   props: {
     list: {
       type: Array,
@@ -76,47 +80,6 @@ export default {
       margin-top: 0.3rem;
       padding-left: 0.2rem;
       box-sizing: border-box;
-      .box {
-        position: relative;
-        .image {
-          width: 100%;
-          border-radius: 0.2rem;
-          margin-bottom: 0.1rem;
-          background-color: $gray;
-        }
-        .text {
-          line-height: 0.3rem;
-          font-size: 0.2rem;
-          color: #333;
-        }
-        .count {
-          color: #fff;
-          font-size: 0.2rem;
-          background-color: rgba(0, 0, 0, 0.5);
-          padding: 0.05rem 0.1rem;
-          border-radius: 1rem;
-          position: absolute;
-          right: 0.15rem;
-          top: 0.15rem;
-          @include flexCenter;
-          .iconfont {
-            font-size: 0.1rem;
-          }
-        }
-        &:after {
-          content: "";
-          width: 2rem;
-          padding-bottom: 2rem;
-          margin: -0.1rem auto;
-          background-color: $gray;
-          border-radius: 0.1rem;
-          z-index: -1;
-          position: absolute;
-          right: 0;
-          left: 0;
-          top: 0;
-        }
-      }
     }
   }
 }

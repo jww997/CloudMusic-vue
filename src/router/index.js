@@ -5,6 +5,8 @@ import Playlist from '@/pages/playlist'
 
 Vue.use(Router)
 
+
+
 export default new Router({
   routes: [
     {

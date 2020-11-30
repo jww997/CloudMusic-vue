@@ -1,29 +1,31 @@
 <template>
   <div class="container">
-    <heade :obj="playlist"></heade>
+    <cap :obj="playlist"></cap>
   </div>
 </template>
 
 <script>
-import Heade from "@/pages/playlist/components/header";
-
+import Cap from "@/pages/playlist/components/cap";
 export default {
   name: "playlist",
   components: {
-    Heade,
+    Cap,
   },
   data: function () {
     return {
       playlist: {},
     };
   },
-  mounted: function () {
+  beforeCreate: function () {
     const that = this;
+    console.log("已创建");
     let id = that.$route.query.id;
     that.$api.getPlaylistDetail({ id }).then((res) => {
-      console.log(res.data.playlist);
       that.playlist = res.data.playlist;
     });
+  },
+  destroyed: function () {
+    console.log("已销毁");
   },
 };
 </script>

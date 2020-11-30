@@ -10,6 +10,7 @@ import 'styles/iconfont.css'
 
 import '@/assets/js/vant.js'
 import '@/assets/js/axios.js'
+import '@/assets/js/vuex.js'
 
 import api from "@/api";
 Vue.prototype.$api = api;

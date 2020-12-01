@@ -15,7 +15,6 @@
         <van-swipe-item class="swiper-item" v-if="index < 6">
           <router-link
             :to="{ path: '/playlist', query: { id: item.id } }"
-            :key="item.id"
           >
             <cover
               :image="item.picUrl"

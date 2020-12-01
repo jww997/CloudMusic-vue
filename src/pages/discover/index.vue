@@ -26,7 +26,7 @@ export default {
   },
   mounted: function () {
     const that = this;
-    // console.log(that.$store.state);
+    // console.log(that.$store.state.keepAlives);
     that.$api
       .getBanner()
       .then((res) => {
@@ -34,7 +34,6 @@ export default {
         return that.$api.getPersonalized();
       })
       .then((res) => {
-        console.log(res.data.result);
         that.recommend = res.data.result;
       });
   },
@@ -42,4 +41,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~styles/mixins.scss";
+@import "~styles/varibles.scss";
 </style>

@@ -1,34 +1,44 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="playlist">
     <cap :obj="playlist"></cap>
+    <list :obj="playlist"></list>
   </div>
 </template>
 
 <script>
 import Cap from "@/pages/playlist/components/cap";
+import List from "@/pages/playlist/components/list";
 export default {
-  name: "playlist",
+  name: "Playlist",
   components: {
     Cap,
+    List,
   },
   data: function () {
     return {
       playlist: {},
     };
   },
-  beforeCreate: function () {
+  created: function () {
     const that = this;
-    console.log("已创建");
     let id = that.$route.query.id;
     that.$api.getPlaylistDetail({ id }).then((res) => {
+      console.log(id);
       that.playlist = res.data.playlist;
     });
   },
-  destroyed: function () {
-    console.log("已销毁");
+
+  beforeRouteLeave(to, from, next) {
+    const that = this;
+    if (to.name !== "Playlist") {
+      that.$store.commit("keepAlivesDel", "Discover");
+    }
+    next();
   },
 };
 </script>
 
 <style lang="scss" scoped>
+@import "~styles/mixins.scss";
+@import "~styles/varibles.scss";
 </style>

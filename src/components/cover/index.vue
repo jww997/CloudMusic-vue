@@ -1,7 +1,7 @@
 <template>
   <div class="cover">
     <img class="image" :src="image" />
-    <span class="text">{{ name }}</span>
+    <span class="text" v-if="name">{{ name }}</span>
     <div class="count" v-if="count">
       <span class="iconfont">&#xe656;</span>
       <span>{{ count }}</span>
@@ -34,14 +34,16 @@ export default {
 @import "~styles/varibles.scss";
 .cover {
   position: relative;
+  display: flex;
+  flex-direction: column;
   .image {
     width: 100%;
     border-radius: 0.2rem;
-    margin-bottom: 0.1rem;
     background-color: $gray;
   }
   .text {
     line-height: 0.3rem;
+    padding-top: 0.1rem;
     font-size: 0.2rem;
     color: #333;
   }
@@ -52,8 +54,8 @@ export default {
     padding: 0.05rem 0.1rem;
     border-radius: 1rem;
     position: absolute;
-    right: 0.15rem;
-    top: 0.15rem;
+    right: 5%;
+    top: 5%;
     @include flexCenter;
     .iconfont {
       font-size: 0.1rem;

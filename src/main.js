@@ -10,10 +10,11 @@ import 'styles/iconfont.css'
 
 import '@/assets/js/vant.js'
 import '@/assets/js/axios.js'
-import '@/assets/js/vuex.js'
 
-import api from "@/api";
-Vue.prototype.$api = api;
+import store from '@/store'
+import api from "@/api"
+// Vue.prototype.$store = store
+Vue.prototype.$api = api
 
 Vue.config.productionTip = false
 
@@ -22,7 +23,8 @@ new Vue({
   el: '#app',
   router,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  store,
 })
 
 

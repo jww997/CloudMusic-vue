@@ -3,10 +3,13 @@
     <search></search>
     <banner :list="banners"></banner>
     <whirligig :list="recommend"></whirligig>
+
+    <tabbar :active="0"></tabbar>
   </div>
 </template>
 
 <script>
+import Tabbar from "@/components/tabbar";
 import Search from "@/pages/discover/components/search";
 import Banner from "@/pages/discover/components/banner";
 import Whirligig from "@/pages/discover/components/whirligig";
@@ -17,6 +20,7 @@ export default {
     Search,
     Banner,
     Whirligig,
+    Tabbar,
   },
   data: function () {
     return {
@@ -26,7 +30,6 @@ export default {
   },
   mounted: function () {
     const that = this;
-    // console.log(that.$store.state.keepAlives);
     that.$api
       .getBanner()
       .then((res) => {

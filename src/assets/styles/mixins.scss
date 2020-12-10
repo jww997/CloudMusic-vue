@@ -19,6 +19,12 @@
 
 
 // vertical 垂直 horizontal 水平
+@mixin flexSpaceAround {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
 @mixin flexSpaceBetween {
   display: flex;
   justify-content: space-between;

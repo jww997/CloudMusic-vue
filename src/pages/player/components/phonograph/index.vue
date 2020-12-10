@@ -6,7 +6,7 @@
         backgroundImage: 'url(' + require('@/assets/images/chassis.png') + ')',
       }"
     >
-      <img class="cover" :src="obj.al.picUrl" :alt="obj.al.name" />
+      <img class="cover" :src="image" />
       <img class="lid" :src="require('@/assets/images/lid.png')" />
       <img class="light" :src="require('@/assets/images/light.png')" />
     </div>
@@ -21,6 +21,13 @@ export default {
     obj: {
       type: Object,
       value: {},
+    },
+  },
+  computed: {
+    image: function () {
+      const that = this;
+      let al = that.obj && that.obj.al;
+      return al && al.picUrl;
     },
   },
 };
@@ -39,9 +46,8 @@ export default {
 }
 .container {
   padding-top: 1.8rem;
+  padding-bottom: 0.5rem;
   position: relative;
-  border: 1px solid #f00;
-  background: #000;
   .disc {
     width: 5rem;
     height: 0;

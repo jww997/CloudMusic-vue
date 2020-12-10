@@ -8,7 +8,7 @@ import actions from "@/store/actions.js"
 
 const store = new Vuex.Store({
   state: {
-    keepAlives: ['Discover'], // 保存缓存的列表
+    keepAlives: ['Discover', 'Player'], // 保存缓存的列表
   },
   mutations,
   actions,

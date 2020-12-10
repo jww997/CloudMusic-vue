@@ -1,33 +1,45 @@
+"use strict";
 
-import Vue from 'vue'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
 
-Vue.use(VueAxios, axios)
+var _vue = _interopRequireDefault(require("vue"));
 
-// const api = "http://www.mikonchen.top/banner";
-let api = "http://49.234.76.196:3000/";
+var _axios = _interopRequireDefault(require("axios"));
+
+var _vueAxios = _interopRequireDefault(require("vue-axios"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+_vue["default"].use(_vueAxios["default"], _axios["default"]); // const api = "http://www.mikonchen.top/banner";
+
+
+var api = "http://49.234.76.196:3000/";
 
 function request(port, parameter) {
-  const that = this;
-  return axios.post(api + port, parameter);
+  var that = this;
+  return _axios["default"].post(api + port, parameter);
 }
 
-
-export default {
-  getBanner: parameter => { // 轮播图
+var _default = {
+  getBanner: function getBanner(parameter) {
+    // 轮播图
     return request("banner", parameter);
     /**
      * @param type (选)资源类型,0PC, 1android, 2iphone, 3ipad
      */
   },
-  getPersonalized: parameter => { // 推荐歌单
+  getPersonalized: function getPersonalized(parameter) {
+    // 推荐歌单
     return request("personalized", parameter);
     /**
      * @param limit (选)取出数量,默认为30(不支持offset)
      */
   },
-  getPlaylistDetail: parameter => { // 推荐歌单
+  getPlaylistDetail: function getPlaylistDetail(parameter) {
+    // 推荐歌单
     return request("playlist/detail", parameter);
     /**
      * @param id 歌单 id
@@ -35,14 +47,16 @@ export default {
      * 说明:歌单能看到歌单名字,但看不到具体歌单内容,调用此接口,传入歌单id,可以获取对应歌单内的所有的音乐(未登录状态只能获取不完整的歌单,登录后是完整的)，但是返回的trackIds是完整的，tracks则是不完整的，可拿全部trackIds请求一次song/detail接口获取所有歌曲的详情(https://github.com/Binaryify/NeteaseCloudMusicApi/issues/452)
      */
   },
-  getSongDetail: parameter => { // 获取歌曲详情
+  getSongDetail: function getSongDetail(parameter) {
+    // 获取歌曲详情
     return request("song/detail", parameter);
     /**
      * @param ids 音乐id,如ids=347230
      * 说明:调用此接口,传入音乐id(支持多个id,用,隔开),可获得歌曲详情(注意:歌曲封面现在需要通过专辑内容接口获取)
      */
   },
-  getSongUrl: parameter => { // 获取音乐地址
+  getSongUrl: function getSongUrl(parameter) {
+    // 获取音乐地址
     return request("song/url", parameter);
     /**
      * @param id 音乐id
@@ -50,20 +64,6 @@ export default {
      * 说明:使用歌单详情接口后,能得到的音乐的id,但不能得到的音乐url,调用此接口,传入的音乐id(可多个,用逗号隔开),可以获取对应的音乐的url,未登录状态返回试听片段(返回字段包含被截取的正常歌曲的开始时间和结束时间)
      * 注:部分用户反馈获取的url会403,hwaphon找到的解决方案是当获取到音乐的id后，将https://music.163.com/song/media/outer/url?id=id.mp3以src赋予Audio即可播放
      */
-  },
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
+  }
+};
+exports["default"] = _default;

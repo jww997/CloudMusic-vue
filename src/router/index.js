@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Discover from '@/pages/discover'
 import Playlist from '@/pages/playlist'
+import Player from '@/pages/player'
 
 import store from '@/store';
 
@@ -20,6 +21,11 @@ let router = new Router({
       path: '/playlist',
       name: 'Playlist',
       component: Playlist,
+    },
+    {
+      path: '/player',
+      name: 'Player',
+      component: Player,
     },
   ],
   scrollBehavior(to, from, savedPosition) {

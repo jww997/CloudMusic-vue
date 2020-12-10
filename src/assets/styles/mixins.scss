@@ -4,6 +4,15 @@
   text-overflow: ellipsis;
 }
 
+@mixin positionCenter {
+  margin: auto;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+}
+
 @mixin test {
   border: 1px solid #f00;
 }

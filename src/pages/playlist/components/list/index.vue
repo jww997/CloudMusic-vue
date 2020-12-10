@@ -10,7 +10,12 @@
       <div class="iconfont">&#xe65a;</div>
     </div>
     <div class="list">
-      <div class="line song" v-for="(item, index) in obj.tracks" :key="index">
+      <router-link
+        class="line song"
+        v-for="(item, index) in obj.tracks"
+        :key="index"
+        :to="{ path: '/player', query: { id: item.id } }"
+      >
         <div class="front index">{{ ++index }}</div>
         <div class="name">
           <p class="songname">
@@ -20,7 +25,7 @@
           <p class="source">{{ source(item) }}</p>
         </div>
         <div class="iconfont">&#xe690;</div>
-      </div>
+      </router-link>
     </div>
     <div class="line collect">
       <div class="portrait">
@@ -124,6 +129,7 @@ export default {
           font-size: 0.2rem;
           @include omit;
           .title {
+            color: #000;
           }
           .subtitle {
             color: #666;

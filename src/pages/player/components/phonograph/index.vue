@@ -1,5 +1,5 @@
 <template>
-  <div class="container active1">
+  <div class="container active">
     <div
       class="disc"
       :style="{
@@ -7,7 +7,7 @@
       }"
     >
       <img class="cover" :src="image" />
-      <img class="lid" :src="require('@/assets/images/lid.png')" />
+      <!-- <img class="lid" :src="require('@/assets/images/lid.png')" /> -->
       <img class="light" :src="require('@/assets/images/light.png')" />
     </div>
     <img class="stick" :src="require('@/assets/images/stick.png')" />
@@ -72,9 +72,9 @@ export default {
       border-radius: 50%;
       z-index: 1;
     }
-    .lid {
-      z-index: 2;
-    }
+    // .lid {
+    //   z-index: 2;
+    // }
     .light {
       z-index: 3;
     }

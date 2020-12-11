@@ -9,7 +9,7 @@ import 'styles/border.css'
 import 'styles/iconfont.css'
 
 import '@/assets/js/vant.js'
-import '@/assets/js/axios.js'
+// import '@/assets/js/axios.js'
 
 import store from '@/store'
 import api from "@/api"

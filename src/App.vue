@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <keep-alive :include="keepAlives">
-      <router-view />
+      <router-view v-if="!$route.meta.keepAlive" />
     </keep-alive>
   </div>
 </template>

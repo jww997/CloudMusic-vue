@@ -24,6 +24,24 @@ var store = new _vuex["default"].Store({
   },
   mutations: _mutations["default"],
   actions: _actions["default"]
-});
+}); // const store = new Vue({
+//   // state
+//   data() {
+//     return {
+//       count: 0
+//     }
+//   },
+//   // view
+//   template: `
+//     <div>{{ count }}</div>
+//   `,
+//   // actions
+//   methods: {
+//     increment() {
+//       this.count++
+//     }
+//   }
+// })
+
 var _default = store;
 exports["default"] = _default;

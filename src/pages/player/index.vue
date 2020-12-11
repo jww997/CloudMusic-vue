@@ -35,7 +35,13 @@ export default {
 @import "~styles/mixins.scss";
 @import "~styles/varibles.scss";
 .container {
-  // height: 100vh;
-  background: #000;
+  height: 100vh;
+  background: center no-repeat #000;
+  background-size: 120% auto;
+  position: relative;
+  overflow: hidden;
+  .container {
+    height: auto;
+  }
 }
 </style>

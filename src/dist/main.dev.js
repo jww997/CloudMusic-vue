@@ -14,8 +14,6 @@ require("styles/iconfont.css");
 
 require("@/assets/js/vant.js");
 
-require("@/assets/js/axios.js");
-
 var _store = _interopRequireDefault(require("@/store"));
 
 var _api = _interopRequireDefault(require("@/api"));
@@ -24,6 +22,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+// import '@/assets/js/axios.js'
 // Vue.prototype.$store = store
 _vue["default"].prototype.$api = _api["default"];
 _vue["default"].config.productionTip = false;

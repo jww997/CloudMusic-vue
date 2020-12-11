@@ -33,11 +33,23 @@ var router = new _vueRouter["default"]({
   }, {
     path: '/playlist',
     name: 'Playlist',
-    component: _playlist["default"]
+    component: _playlist["default"],
+    meta: {
+      keepAlive: false,
+      //此组件不需要被缓存
+      isBack: false //用于判断上一个页面是哪个
+
+    }
   }, {
     path: '/player',
     name: 'Player',
-    component: _player["default"]
+    component: _player["default"],
+    meta: {
+      keepAlive: false,
+      //此组件不需要被缓存
+      isBack: false //用于判断上一个页面是哪个
+
+    }
   }],
   scrollBehavior: function scrollBehavior(to, from, savedPosition) {
     return {

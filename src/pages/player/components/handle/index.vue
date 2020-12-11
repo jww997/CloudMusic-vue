@@ -3,16 +3,29 @@
     <div class="top">
       <span class="iconfont">&#xe66a;</span>
       <span class="iconfont">&#xe694;</span>
-      <span class="iconfont">&#xe66a;</span>
+      <span class="iconfont">&#xe612;</span>
       <span class="iconfont">&#xe65d;</span>
-      <span class="iconfont">&#xe66a;</span>
+      <span class="iconfont">&#xe690;</span>
+    </div>
+    <div class="progress">
+      <div>00:00</div>
+      <div class="strip">
+        <van-progress
+          :percentage="50"
+          pivot-text=" "
+          color="#fff"
+          track-color="#494949"
+          stroke-width="1px"
+        />
+      </div>
+      <div>00:00</div>
     </div>
     <div class="bottom">
-      <span class="iconfont">&#xe66a;</span>
-      <span class="iconfont">&#xe66a;</span>
-      <span class="iconfont">&#xe66a;</span>
-      <span class="iconfont">&#xe66a;</span>
-      <span class="iconfont">&#xe66a;</span>
+      <span class="iconfont">&#xe600;</span>
+      <span class="iconfont">&#xe663;</span>
+      <span class="iconfont play">&#xe666;</span>
+      <span class="iconfont">&#xe668;</span>
+      <span class="iconfont">&#xe664;</span>
     </div>
   </div>
 </template>
@@ -27,17 +40,41 @@ export default {
 @import "~styles/mixins.scss";
 @import "~styles/varibles.scss";
 .container {
+  padding: 0.5rem 0;
+  @include positionCenter;
+  top: auto;
+  >>> .van-progress__pivot {
+    min-width: 0.15rem;
+    width: 0.15rem;
+    height: 0.15rem;
+    padding: 0;
+    border-radius: 50%;
+    top: 0;
+  }
   .iconfont {
     color: #fff;
-    font-size: 0.5rem;
+    font-size: 0.4rem;
   }
   .top {
     padding: 0.3rem 1rem;
     @include flexSpaceAround;
   }
+  .progress {
+    margin: 0.3rem;
+    font-size: 0.2rem;
+    color: #fff;
+    @include flexSpaceBetween;
+    .strip {
+      flex-grow: 1;
+      margin: 0 0.3rem;
+    }
+  }
   .bottom {
     padding: 0.3rem 1rem;
     @include flexSpaceAround;
+    .play {
+      transform: scale(2);
+    }
   }
 }
 </style>

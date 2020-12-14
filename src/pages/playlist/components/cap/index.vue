@@ -44,7 +44,7 @@ export default {
   props: {
     obj: {
       type: Object,
-      value: {
+      default: {
         name: "歌单",
       },
     },
@@ -61,7 +61,7 @@ export default {
 @import "~styles/varibles.scss";
 .container {
   width: 100%;
-  padding: 0.3rem 0.3rem 0.9rem;
+  padding: 1rem 0.3rem 0.9rem;
   margin-bottom: 0.7rem;
   box-sizing: border-box;
   position: relative;

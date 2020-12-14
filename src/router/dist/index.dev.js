@@ -33,30 +33,29 @@ var router = new _vueRouter["default"]({
   }, {
     path: '/playlist',
     name: 'Playlist',
-    component: _playlist["default"],
-    meta: {
-      keepAlive: false,
-      //此组件不需要被缓存
-      isBack: false //用于判断上一个页面是哪个
+    component: _playlist["default"] // meta: {
+    //   keepAlive: false, //此组件不需要被缓存
+    //   isBack: false, //用于判断上一个页面是哪个
+    // }
 
-    }
   }, {
     path: '/player',
     name: 'Player',
-    component: _player["default"],
-    meta: {
-      keepAlive: false,
-      //此组件不需要被缓存
-      isBack: false //用于判断上一个页面是哪个
+    component: _player["default"] // meta: {
+    //   keepAlive: false, //此组件不需要被缓存
+    //   isBack: false, //用于判断上一个页面是哪个
+    // }
 
-    }
-  }],
-  scrollBehavior: function scrollBehavior(to, from, savedPosition) {
-    return {
-      x: 0,
-      y: 0
-    };
-  }
+  }] // scrollBehavior(to, from, savedPosition) {
+  //   return { x: 0, y: 0 }
+  // },
+  // beforeRouteEnter(to, from, next) {
+  //   if (from.name == "confirm") {
+  //     to.meta.isBack = true;
+  //   }
+  //   next();
+  // },
+
 }); // 全局导航守卫
 
 router.beforeEach(function (to, from, next) {

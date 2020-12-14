@@ -51,8 +51,14 @@ export default {
      * 注:部分用户反馈获取的url会403,hwaphon找到的解决方案是当获取到音乐的id后，将https://music.163.com/song/media/outer/url?id=id.mp3以src赋予Audio即可播放
      */
   },
-
-
+  getCalendar: parameter => { // 音乐日历
+    return request("calendar", parameter);
+    /**
+     * @param id 音乐id
+     * 说明: 登录后调用此接口, 传入开始和结束时间, 可获取音乐日历
+     * 调用例子: /calendar?startTime=1606752000000&endTime=1609430399999
+     */
+  },
 
 
 

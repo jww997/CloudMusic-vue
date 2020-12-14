@@ -15,7 +15,7 @@ export default {
   props: {
     active: {
       type: Number,
-      value: 0,
+      default: 0,
     },
   },
   data: function () {

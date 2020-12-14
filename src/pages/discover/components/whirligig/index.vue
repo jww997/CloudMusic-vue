@@ -36,7 +36,7 @@ export default {
   props: {
     list: {
       type: Array,
-      value: [],
+      default: [],
     },
   },
   data: function () {

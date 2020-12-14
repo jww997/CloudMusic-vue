@@ -15,15 +15,15 @@ export default {
   props: {
     image: {
       type: String,
-      value: "",
+      default: "",
     },
     name: {
       type: String,
-      value: "",
+      default: "",
     },
     count: {
       type: Number,
-      value: 0,
+      default: 0,
     },
   },
 };

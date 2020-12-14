@@ -20,7 +20,7 @@ export default {
   props: {
     obj: {
       type: Object,
-      value: {},
+      default: {},
     },
   },
   computed: {
@@ -86,7 +86,7 @@ export default {
     transition: 0.5s;
     @include positionCenter;
     bottom: auto;
-    left: 1.5rem;
+    left: 1.3rem;
     z-index: 4;
   }
   &.active {

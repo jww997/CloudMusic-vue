@@ -64,6 +64,15 @@ var _default = {
      * 说明:使用歌单详情接口后,能得到的音乐的id,但不能得到的音乐url,调用此接口,传入的音乐id(可多个,用逗号隔开),可以获取对应的音乐的url,未登录状态返回试听片段(返回字段包含被截取的正常歌曲的开始时间和结束时间)
      * 注:部分用户反馈获取的url会403,hwaphon找到的解决方案是当获取到音乐的id后，将https://music.163.com/song/media/outer/url?id=id.mp3以src赋予Audio即可播放
      */
+  },
+  getCalendar: function getCalendar(parameter) {
+    // 音乐日历
+    return request("calendar", parameter);
+    /**
+     * @param id 音乐id
+     * 说明: 登录后调用此接口, 传入开始和结束时间, 可获取音乐日历
+     * 调用例子: /calendar?startTime=1606752000000&endTime=1609430399999
+     */
   }
 };
 exports["default"] = _default;

@@ -15,3 +15,5 @@ _vue["default"].use(_vant.Tabbar);
 _vue["default"].use(_vant.TabbarItem);
 
 _vue["default"].use(_vant.Progress);
+
+_vue["default"].use(_vant.NavBar);

@@ -16,7 +16,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 _vue["default"].use(_vueAxios["default"], _axios["default"]); // const api = "http://www.mikonchen.top/banner";
 
 
-var api = "http://49.234.76.196:3000/";
+var api = "http://49.234.76.196:3000/"; // let api = " http://localhost:3000/";
 
 function request(port, parameter) {
   var that = this;
@@ -66,10 +66,11 @@ var _default = {
      */
   },
   getCalendar: function getCalendar(parameter) {
-    // 音乐日历
+    // 音乐日历(需要登录)
     return request("calendar", parameter);
     /**
-     * @param id 音乐id
+     * @param startTime
+     * @param endTime
      * 说明: 登录后调用此接口, 传入开始和结束时间, 可获取音乐日历
      * 调用例子: /calendar?startTime=1606752000000&endTime=1609430399999
      */

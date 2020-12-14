@@ -3,6 +3,7 @@
     <search></search>
     <banner :list="banners"></banner>
     <whirligig :list="recommend"></whirligig>
+    <calendar></calendar>
 
     <tabbar :active="0"></tabbar>
   </div>
@@ -13,14 +14,16 @@ import Tabbar from "@/components/tabbar";
 import Search from "@/pages/discover/components/search";
 import Banner from "@/pages/discover/components/banner";
 import Whirligig from "@/pages/discover/components/whirligig";
+import Calendar from "@/pages/discover/components/calendar";
 
 export default {
   name: "Discover",
   components: {
+    Tabbar,
     Search,
     Banner,
     Whirligig,
-    Tabbar,
+    Calendar,
   },
   data: function () {
     return {
@@ -38,6 +41,10 @@ export default {
       })
       .then((res) => {
         that.recommend = res.data.result;
+        // return that.$api.getCalendar({
+        //   startTime: 1606752000000,
+        //   endTime: 1609430399999,
+        // });
       });
   },
 };

@@ -29,12 +29,18 @@ export default {
       songs: [],
     };
   },
+  computed: {
+    song: function () {
+      const that = this;
+      return that.songs[0];
+    },
+  },
   created: function () {
     const that = this;
     let id = that.$route.query.id;
     console.log(id);
     that.$api.getSongDetail({ ids: id }).then((res) => {
-      console.log(res);
+      // console.log(res);
       that.songs = res.data.songs;
     });
   },

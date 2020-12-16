@@ -15,6 +15,8 @@ var _playlist = _interopRequireDefault(require("@/pages/playlist"));
 
 var _player = _interopRequireDefault(require("@/pages/player"));
 
+var _mine = _interopRequireDefault(require("@/pages/mine"));
+
 var _store = _interopRequireDefault(require("@/store"));
 
 var _this = void 0;
@@ -48,6 +50,10 @@ var router = new _vueRouter["default"]({
       // isBack: false, //用于判断上一个页面是哪个
 
     }
+  }, {
+    path: '/mine',
+    name: 'Mine',
+    component: _mine["default"]
   }] // scrollBehavior(to, from, savedPosition) {
   //   return { x: 0, y: 0 }
   // },

@@ -7,7 +7,7 @@
         :key="index"
       >
         <div class="box" :data-url="item.url" :data-video="item.video">
-          <img class="image" :src="item.imageUrl" />
+          <img class="image" :src="item.pic" />
           <span
             class="text"
             :style="{ backgroundColor: item.titleColor }"
@@ -17,13 +17,22 @@
         </div>
       </van-swipe-item>
     </van-swipe>
+    <ball :list="ball"></ball>
   </div>
 </template>
 
 <script>
+import Ball from "@/pages/discover/components/ball";
 export default {
   name: "banner",
+  components: {
+    Ball,
+  },
   props: {
+    ball: {
+      type: Array,
+      default: [],
+    },
     list: {
       type: Array,
       default: [],
@@ -36,6 +45,13 @@ export default {
 @import "~styles/mixins.scss";
 @import "~styles/varibles.scss";
 .container {
+  >>> .van-swipe__indicators {
+    bottom: 6px;
+    .van-swipe__indicator {
+      width: 8px;
+      height: 2px;
+    }
+  }
   .swiper {
     .swiper-item {
       @include flexCenter;

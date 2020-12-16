@@ -1,11 +1,24 @@
 <template>
   <div class="container">
     <search></search>
-    <banner :list="banners"></banner>
-    <whirligig :list="recommend"></whirligig>
-    <calendar></calendar>
 
-    <tabbar :active="0"></tabbar>
+    <div v-for="(item, index) in blocks" :key="index">
+      <banner
+        :ball="ball"
+        :list="item.extInfo.banners"
+        v-if="item.showType == 'BANNER'"
+      ></banner>
+
+      <whirligig
+        :list="item.creatives"
+        :uielement="item.uiElement"
+        v-if="item.showType == 'HOMEPAGE_SLIDE_PLAYLIST'"
+      ></whirligig>
+    </div>
+
+    <!-- <calendar></calendar> -->
+
+    <tabbar></tabbar>
   </div>
 </template>
 
@@ -27,24 +40,37 @@ export default {
   },
   data: function () {
     return {
-      banners: [],
-      recommend: [],
+      // banners: [],
+      // recommend: [],
+
+      blocks: [],
+      ball: [],
     };
   },
   mounted: function () {
     const that = this;
+    // that.$api
+    //   .getBanner()
+    //   .then((res) => {
+    //     that.banners = res.data.banners;
+    //     return that.$api.getPersonalized();
+    //   })
+    //   .then((res) => {
+    //     that.recommend = res.data.result;
+    //     // return that.$api.getCalendar({
+    //     //   startTime: 1606752000000,
+    //     //   endTime: 1609430399999,
+    //     // });
+    //   });
+
     that.$api
-      .getBanner()
+      .getHomepageBlockPage()
       .then((res) => {
-        that.banners = res.data.banners;
-        return that.$api.getPersonalized();
+        that.blocks = res.data.data.blocks;
+        return that.$api.getHomepageDragonBall();
       })
       .then((res) => {
-        that.recommend = res.data.result;
-        // return that.$api.getCalendar({
-        //   startTime: 1606752000000,
-        //   endTime: 1609430399999,
-        // });
+        that.ball = res.data.data;
       });
   },
 };

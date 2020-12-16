@@ -14,9 +14,10 @@ var _vueAxios = _interopRequireDefault(require("vue-axios"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 _vue["default"].use(_vueAxios["default"], _axios["default"]); // const api = "http://www.mikonchen.top/banner";
+// let api = "http://49.234.76.196:3000/";
 
 
-var api = "http://49.234.76.196:3000/"; // let api = " http://localhost:3000/";
+var api = " http://localhost:3000/";
 
 function request(port, parameter) {
   var that = this;
@@ -73,6 +74,21 @@ var _default = {
      * @param endTime
      * 说明: 登录后调用此接口, 传入开始和结束时间, 可获取音乐日历
      * 调用例子: /calendar?startTime=1606752000000&endTime=1609430399999
+     */
+  },
+  getHomepageBlockPage: function getHomepageBlockPage(parameter) {
+    // 首页-发现
+    return request("homepage/block/page", parameter);
+    /**
+     * @param refresh 是否刷新数据,默认为true
+     * 说明:调用此接口,可获取APP首页信息
+     */
+  },
+  getHomepageDragonBall: function getHomepageDragonBall(parameter) {
+    // 首页-发现-圆形图标入口列表
+    return request("homepage/dragon/ball", parameter);
+    /**
+     * 说明:调用此接口,可获取APP首页圆形图标入口列表
      */
   }
 };

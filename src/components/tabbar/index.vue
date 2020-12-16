@@ -12,14 +12,15 @@
 <script>
 export default {
   name: "tabbar",
-  props: {
-    active: {
-      type: Number,
-      default: 0,
-    },
-  },
+  // props: {
+  //   active: {
+  //     type: Number,
+  //     default: 0,
+  //   },
+  // },
   data: function () {
     return {
+      active: 0,
       list: [
         {
           name: "发现",
@@ -34,7 +35,7 @@ export default {
         {
           name: "我的",
           icon: "&#xe687;",
-          to: "/",
+          to: "/mine",
         },
         {
           name: "K歌",
@@ -49,6 +50,16 @@ export default {
       ],
     };
   },
+  watch: {
+    // $route: {
+    //   handler: function (to, from) {
+    //     const that = this;
+    //     console.log(from);
+    //     // that.keepAlives = that.$store.state.keepAlives;
+    //     // console.log(that.$store.state);
+    //   },
+    // },
+  },
 };
 </script>
 
@@ -56,6 +67,3 @@ export default {
 @import "~styles/mixins.scss";
 @import "~styles/varibles.scss";
 </style>
-
-
-  

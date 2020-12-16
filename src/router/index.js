@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Discover from '@/pages/discover'
 import Playlist from '@/pages/playlist'
 import Player from '@/pages/player'
+import Mine from '@/pages/mine'
 
 import store from '@/store';
 
@@ -34,6 +35,11 @@ let router = new Router({
         keepAlive: false, //此组件不需要被缓存
         // isBack: false, //用于判断上一个页面是哪个
       }
+    },
+    {
+      path: '/mine',
+      name: 'Mine',
+      component: Mine
     },
   ],
   // scrollBehavior(to, from, savedPosition) {

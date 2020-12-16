@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <div class="header">
-      <div class="title">推荐歌单</div>
-      <div class="more">更多 &gt;</div>
+      <div class="title">{{ uielement.subTitle.title }}</div>
+      <div class="more">{{ uielement.button.text }} &gt;</div>
     </div>
     <van-swipe
       class="swiper"
@@ -13,11 +13,13 @@
     >
       <div v-for="(item, index) in list" :key="index">
         <van-swipe-item class="swiper-item" v-if="index < 6">
-          <router-link :to="{ path: '/playlist', query: { id: item.id } }">
+          <router-link
+            :to="{ path: '/playlist', query: { id: item.creativeId } }"
+          >
             <cover
-              :image="item.picUrl"
-              :name="item.name"
-              :count="item.playCount"
+              :image="item.uiElement.image.imageUrl"
+              :name="item.uiElement.mainTitle.title"
+              :count="item.resources[0].resourceExtInfo.playCount"
             ></cover>
           </router-link>
         </van-swipe-item>
@@ -34,6 +36,10 @@ export default {
     Cover,
   },
   props: {
+    uielement: {
+      type: Object,
+      default: {},
+    },
     list: {
       type: Array,
       default: [],

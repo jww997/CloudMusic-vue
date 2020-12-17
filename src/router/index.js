@@ -1,74 +1,91 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Discover from '@/pages/discover'
-import Playlist from '@/pages/playlist'
-import Player from '@/pages/player'
-import Mine from '@/pages/mine'
 
-import store from '@/store';
+
+// import Discover from '@/pages/discover'
+// import Playlist from '@/pages/playlist'
+// import Player from '@/pages/player'
+// import Mine from '@/pages/mine'
 
 Vue.use(Router)
 
-let router = new Router({
-  mode: 'hash',
-  base: process.env.BASE_URL,
+
+export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
-      name: 'Discover',
-      component: Discover,
+      name: 'discover',
+      component: resolve => require(['@/pages/discover'], resolve)
     },
     {
-      path: '/playlist',
-      name: 'Playlist',
-      component: Playlist,
+      path: '/playlist/:id',
+      name: 'playlist',
+      component: resolve => require(['@/pages/playlist'], resolve),
       meta: {
-        keepAlive: false, //此组件不需要被缓存
-        //   isBack: false, //用于判断上一个页面是哪个
-      }
+				isKeepAlive: false
+			},
     },
+
+
+
     {
       path: '/player',
-      name: 'Player',
-      component: Player,
-      meta: {
-        keepAlive: false, //此组件不需要被缓存
-        // isBack: false, //用于判断上一个页面是哪个
-      }
-    },
-    {
+      name: 'player',
+      component: resolve => require(['@/pages/player'], resolve)
+    }, {
       path: '/mine',
-      name: 'Mine',
-      component: Mine
+      name: 'mine',
+      component: resolve => require(['@/pages/mine'], resolve)
     },
-  ],
-  // scrollBehavior(to, from, savedPosition) {
-  //   return { x: 0, y: 0 }
-  // },
+  ]
+});
 
-  // beforeRouteEnter(to, from, next) {
-  //   if (from.name == "confirm") {
-  //     to.meta.isBack = true;
-  //   }
-  //   next();
-  // },
-})
-
-// 全局导航守卫
-router.beforeEach((to, from, next) => {
-  // 对组件B进行动态缓存
-  const that = this;
-  // if (to.name == 'Discover') {
-  store.commit('keepAlivesDel', to.name);
-  next();
-  // }
-})
+// export default new Router({
+//   mode: 'hash',
+//   base: process.env.BASE_URL,
+//   routes: [
+//     {
+//       path: '/',
+//       name: 'Discover',
+//       component: Discover,
+//     },
 
 
 
+//     {
+//       path: '/playlist',
+//       name: 'Playlist',
+//       component: Playlist,
+//       // meta: {
+//       //   keepAlive: false, //此组件不需要被缓存
+//       //   isBack: false, //用于判断上一个页面是哪个
+//       // }
+//     },
 
 
-export default router;
+
+
+
+//     {
+//       path: '/player',
+//       name: 'Player',
+//       component: Player,
+//       meta: {
+//         keepAlive: false, //此组件不需要被缓存
+//         // isBack: false, //用于判断上一个页面是哪个
+//       }
+//     },
+//     {
+//       path: '/mine',
+//       name: 'Mine',
+//       component: Mine
+//     },
+//   ],
+
+// })
+
+
 
 // export default new Router({
 //   routes: [
@@ -98,4 +115,15 @@ export default router;
 //       component: () => import('@/pages/playlist'),
 //     }
 //   ]
+// })
+
+
+// 全局导航守卫
+// router.beforeEach((to, from, next) => {
+//   // 对组件B进行动态缓存
+//   const that = this;
+//   // if (to.name == 'Discover') {
+//   store.commit('keepAlivesDel', to.name);
+//   next();
+//   // }
 // })

@@ -8,7 +8,7 @@
     /> -->
     <template v-if="fixed">
       <div class="icon left">
-        <div class="iconfont">&#xe65e;</div>
+        <div class="iconfont" @click="back">&#xe65e;</div>
       </div>
       <div class="center">
         <p class="title">{{ title }}</p>
@@ -20,7 +20,7 @@
     </template>
     <template v-else>
       <div class="icon left">
-        <div class="iconfont">&#xe614;</div>
+        <div class="iconfont" @click="back">&#xe614;</div>
       </div>
       <div class="center">
         <p class="title">{{ title }}</p>
@@ -53,7 +53,8 @@ export default {
   methods: {
     back() {
       const that = this;
-      console.log("返回");
+      let router = that.$router;
+      window.history.length > 1 ? router.go(-1) : router.push("/");
     },
   },
 };

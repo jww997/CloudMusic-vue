@@ -11,7 +11,7 @@ import Navbar from "@/components/navbar";
 import Cap from "@/pages/playlist/components/cap";
 import List from "@/pages/playlist/components/list";
 export default {
-  name: "Playlist",
+  name: "playlist",
   components: {
     Navbar,
     Cap,
@@ -22,13 +22,44 @@ export default {
       playlist: {},
     };
   },
-  activated: function () {
-    const that = this;
-    let id = that.$route.query.id;
-    that.$api.getPlaylistDetail({ id }).then((res) => {
+  // watch: {
+  // $route(to, from) {
+  //   const that = this;
+  //   // console.log(to.query.id != from.query.id);
+  //   if (to.query.id != from.query.id) {
+  //     that.id = to.query.id;
+  //     that.getdata();
+  //   }
+  // },
+  // },
+  methods: {
+    getdata: function () {
+      const that = this;
+
+      let id = that.$route.params.id;
       console.log(id);
-      that.playlist = res.data.playlist;
-    });
+
+      that.$api.getPlaylistDetail({ id }).then((res) => {
+        that.playlist = res.data.playlist;
+
+        // that.$set(that, "playlist", res.data.playlist);
+
+        // that.$set(that, "playlist", {});
+        // that.playlist = [];
+        // console.log(res.data.playlist);
+
+        // res.data.playlist.forEach(item => {
+        //   that.playlist.push(item);
+        // });
+      });
+    },
+  },
+  created() {
+    const that = this;
+    if (that.$route.query) {
+      that.id = that.$route.query.id;
+      that.getdata();
+    }
   },
 };
 </script>

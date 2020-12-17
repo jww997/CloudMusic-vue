@@ -9,72 +9,79 @@ var _vue = _interopRequireDefault(require("vue"));
 
 var _vueRouter = _interopRequireDefault(require("vue-router"));
 
-var _discover = _interopRequireDefault(require("@/pages/discover"));
-
-var _playlist = _interopRequireDefault(require("@/pages/playlist"));
-
-var _player = _interopRequireDefault(require("@/pages/player"));
-
-var _mine = _interopRequireDefault(require("@/pages/mine"));
-
-var _store = _interopRequireDefault(require("@/store"));
-
-var _this = void 0;
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
+// import Discover from '@/pages/discover'
+// import Playlist from '@/pages/playlist'
+// import Player from '@/pages/player'
+// import Mine from '@/pages/mine'
 _vue["default"].use(_vueRouter["default"]);
 
-var router = new _vueRouter["default"]({
-  mode: 'hash',
-  base: process.env.BASE_URL,
+var _default = new _vueRouter["default"]({
+  mode: 'history',
   routes: [{
     path: '/',
-    name: 'Discover',
-    component: _discover["default"]
+    name: 'discover',
+    component: function component(resolve) {
+      return require(['@/pages/discover'], resolve);
+    }
   }, {
-    path: '/playlist',
-    name: 'Playlist',
-    component: _playlist["default"],
+    path: '/playlist/:id',
+    name: 'playlist',
+    component: function component(resolve) {
+      return require(['@/pages/playlist'], resolve);
+    },
     meta: {
-      keepAlive: false //此组件不需要被缓存
-      //   isBack: false, //用于判断上一个页面是哪个
-
+      isKeepAlive: false
     }
   }, {
     path: '/player',
-    name: 'Player',
-    component: _player["default"],
-    meta: {
-      keepAlive: false //此组件不需要被缓存
-      // isBack: false, //用于判断上一个页面是哪个
-
+    name: 'player',
+    component: function component(resolve) {
+      return require(['@/pages/player'], resolve);
     }
   }, {
     path: '/mine',
-    name: 'Mine',
-    component: _mine["default"]
-  }] // scrollBehavior(to, from, savedPosition) {
-  //   return { x: 0, y: 0 }
-  // },
-  // beforeRouteEnter(to, from, next) {
-  //   if (from.name == "confirm") {
-  //     to.meta.isBack = true;
-  //   }
-  //   next();
-  // },
-
-}); // 全局导航守卫
-
-router.beforeEach(function (to, from, next) {
-  // 对组件B进行动态缓存
-  var that = _this; // if (to.name == 'Discover') {
-
-  _store["default"].commit('keepAlivesDel', to.name);
-
-  next(); // }
-});
-var _default = router; // export default new Router({
+    name: 'mine',
+    component: function component(resolve) {
+      return require(['@/pages/mine'], resolve);
+    }
+  }]
+}); // export default new Router({
+//   mode: 'hash',
+//   base: process.env.BASE_URL,
+//   routes: [
+//     {
+//       path: '/',
+//       name: 'Discover',
+//       component: Discover,
+//     },
+//     {
+//       path: '/playlist',
+//       name: 'Playlist',
+//       component: Playlist,
+//       // meta: {
+//       //   keepAlive: false, //此组件不需要被缓存
+//       //   isBack: false, //用于判断上一个页面是哪个
+//       // }
+//     },
+//     {
+//       path: '/player',
+//       name: 'Player',
+//       component: Player,
+//       meta: {
+//         keepAlive: false, //此组件不需要被缓存
+//         // isBack: false, //用于判断上一个页面是哪个
+//       }
+//     },
+//     {
+//       path: '/mine',
+//       name: 'Mine',
+//       component: Mine
+//     },
+//   ],
+// })
+// export default new Router({
 //   routes: [
 //     {
 //       path: '/',
@@ -102,5 +109,15 @@ var _default = router; // export default new Router({
 //     }
 //   ]
 // })
+// 全局导航守卫
+// router.beforeEach((to, from, next) => {
+//   // 对组件B进行动态缓存
+//   const that = this;
+//   // if (to.name == 'Discover') {
+//   store.commit('keepAlivesDel', to.name);
+//   next();
+//   // }
+// })
+
 
 exports["default"] = _default;

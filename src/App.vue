@@ -1,12 +1,15 @@
 <template>
   <div id="app">
-    <keep-alive :exclude="keepAlives">
-      <router-view v-if="!$route.meta.keepAlive" />
+    <keep-alive>
+      <router-view />
     </keep-alive>
+    <!-- <keep-alive :exclude="keepAlives">
+      <router-view :key="$router.fullPath" />
+    </keep-alive> -->
     <!-- <keep-alive>
       <router-view v-if="$route.meta.keepAlive"></router-view>
-    </keep-alive> -->
-    <!-- <router-view v-if="!$route.meta.keepAlive"></router-view> -->
+    </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive"></router-view> -->
   </div>
 </template>
 
@@ -16,17 +19,17 @@ export default {
   data: function () {
     const that = this;
     return {
-      keepAlives: that.$store.state.keepAlives,
+      // keepAlives: that.$store.state.keepAlives,
     };
   },
   watch: {
-    $route: {
-      handler: function (to, from) {
-        const that = this;
-        that.keepAlives = that.$store.state.keepAlives;
-        console.log(that.$store.state);
-      },
-    },
+    // $route: {
+    //   handler: function (to, from) {
+    //     const that = this;
+    //     that.keepAlives = that.$store.state.keepAlives;
+    //     // console.log(that.$store.state);
+    //   },
+    // },
   },
   components: {},
 };

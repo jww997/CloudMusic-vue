@@ -83,7 +83,7 @@ export default {
         border-radius: 50%;
         overflow: hidden;
 
-        filter: invert(100%);
+        // filter: invert(100%);
         background: #f00 no-repeat center;
         background-size: cover;
 

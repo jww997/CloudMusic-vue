@@ -14,7 +14,8 @@
       <div v-for="(item, index) in list" :key="index">
         <van-swipe-item class="swiper-item" v-if="index < 6">
           <router-link
-            :to="{ path: '/playlist', query: { id: item.creativeId } }"
+            :to="{ name: 'playlist', params: { id: item.creativeId } }"
+            :key="item.creativeId"
           >
             <cover
               :image="item.uiElement.image.imageUrl"

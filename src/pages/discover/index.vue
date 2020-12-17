@@ -30,7 +30,7 @@ import Whirligig from "@/pages/discover/components/whirligig";
 import Calendar from "@/pages/discover/components/calendar";
 
 export default {
-  name: "Discover",
+  name: "discover",
   components: {
     Tabbar,
     Search,

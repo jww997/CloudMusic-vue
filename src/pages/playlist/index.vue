@@ -1,5 +1,5 @@
 <template>
-  <transition>
+  <transition name="fade">
     <div class="playlist">
       <navbar :title="'歌单'"></navbar>
       <cap :obj="playlist"></cap>
@@ -66,7 +66,16 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
-
   z-index: 100;
+
+  &.fade-enter,
+  &.fade-leave-to {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  &.fade-enter-active,
+  &.fade-leave-active {
+    transition: 0.5s;
+  }
 }
 </style>

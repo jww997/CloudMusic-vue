@@ -11,44 +11,66 @@ var _vueRouter = _interopRequireDefault(require("vue-router"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
 // import Discover from '@/pages/discover'
 // import Playlist from '@/pages/playlist'
 // import Player from '@/pages/player'
 // import Mine from '@/pages/mine'
 _vue["default"].use(_vueRouter["default"]);
 
+var _component = function _component(name) {
+  return function (resolve) {
+    Promise.resolve().then(function () {
+      return _interopRequireWildcard(require("@/pages/".concat(name)));
+    }).then(function (module) {
+      resolve(module);
+    });
+  };
+};
+
 var router = new _vueRouter["default"]({
   mode: 'history',
   routes: [{
-    path: '/',
+    path: '*',
+    redirect: '/discover'
+  }, {
+    path: '/discover',
     name: 'discover',
-    component: function component(resolve) {
-      return require(['@/pages/discover'], resolve);
-    }
+    component: _component("discover"),
+    children: [{
+      path: 'playlist/:id',
+      name: 'playlist',
+      component: _component("playlist") // meta: {
+      //   isKeepAlive: false,
+      // },
+
+    }]
   }, {
-    path: '/playlist/:id',
-    name: 'playlist',
-    meta: {
-      isKeepAlive: false
-    },
-    component: function component(resolve) {
-      return require(['@/pages/playlist'], resolve);
-    }
-  }, {
+    path: '/mine',
+    name: 'mine',
+    component: _component("mine")
+  }, // {
+  //   path: '/playlist/:id',
+  //   name: 'playlist',
+  //   component: resolve => require(['@/pages/playlist'], resolve),
+  //   meta: {
+  //     isKeepAlive: false,
+  //   },
+  // },
+  {
     path: '/player',
     name: 'player',
     component: function component(resolve) {
       return require(['@/pages/player'], resolve);
+    },
+    meta: {
+      isKeepAlive: false
     }
-  }, {
-    path: '/mine',
-    name: 'mine',
-    component: function component(resolve) {
-      return require(['@/pages/mine'], resolve);
-    }
-  }, {
-    path: '*',
-    redirect: '/'
   }]
 });
 var _default = router; // export default new Router({

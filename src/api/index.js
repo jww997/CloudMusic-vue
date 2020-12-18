@@ -6,26 +6,46 @@ import VueAxios from 'vue-axios'
 Vue.use(VueAxios, axios);
 
 
-Vue.config.devtools = true
-axios.defaults.timeout = 5000; // 默认5s超时
-axios.defaults.baseURL = 'http://localhost:3000/';
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-
-// const api = "http://www.mikonchen.top/";
-// let api = "http://49.234.76.196:3000/";
-// let api = " http://localhost:3000/";
+// Vue.config.devtools = true
+// axios.defaults.timeout = 5000; // 默认5s超时
+// axios.defaults.baseURL = 'http://49.234.76.196:3000/';
+// // axios.defaults.baseURL = 'http://localhost:3000/';
+// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 const limit = 20;
 
+// const api = "http://www.mikonchen.top/";
+// let api = "http://49.234.76.196:3000/";
+let api = " http://localhost:3000/";
+
+
 function request(port, parameter) {
   const that = this;
-  return axios(port, { params: parameter });
-  // return axios.post(api + port, parameter);
-  // return axios.post(api + port + '?' + Date.parse(new Date()) / 1000, parameter);
+  port += `?timestamp=${Date.parse(new Date()) / 1000}`;
+  return axios.post(api + port, parameter);
+
+  // return axios(port, { params: parameter });
 }
 
 
 export default {
+  getHomepageBlockPage: parameter => { // 首页-发现
+    return request("homepage/block/page", parameter);
+    /**
+     * @param refresh 是否刷新数据,默认为true
+     * 说明:调用此接口,可获取APP首页信息
+     */
+  },
+  getHomepageDragonBall: parameter => { // 首页-发现-圆形图标入口列表
+    return request("homepage/dragon/ball", parameter);
+    /**
+     * 说明:调用此接口,可获取APP首页圆形图标入口列表
+     */
+  },
+
+
+
+
   getBanner: parameter => { // 轮播图
     return request("banner", parameter);
     /**
@@ -77,19 +97,7 @@ export default {
 
 
 
-  getHomepageBlockPage: parameter => { // 首页-发现
-    return request("homepage/block/page", parameter);
-    /**
-     * @param refresh 是否刷新数据,默认为true
-     * 说明:调用此接口,可获取APP首页信息
-     */
-  },
-  getHomepageDragonBall: parameter => { // 首页-发现-圆形图标入口列表
-    return request("homepage/dragon/ball", parameter);
-    /**
-     * 说明:调用此接口,可获取APP首页圆形图标入口列表
-     */
-  },
+
 
 
 

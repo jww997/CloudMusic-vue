@@ -17,7 +17,6 @@
             :to="{
               name: 'playlist',
               params: { id: item.creativeId },
-              query: { title: item.uiElement.mainTitle.title },
             }"
             :key="item.creativeId"
           >

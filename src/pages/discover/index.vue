@@ -18,6 +18,8 @@
 
     <!-- <calendar></calendar> -->
 
+    <router-view></router-view>
+
     <tabbar></tabbar>
   </div>
 </template>

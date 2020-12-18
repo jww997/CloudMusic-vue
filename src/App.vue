@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <keep-alive exclude="playlist">
+    <!-- <keep-alive exclude="playlist">
       <router-view />
-    </keep-alive>
+    </keep-alive> -->
     <!-- <keep-alive>
       <router-view />
     </keep-alive> -->
@@ -10,16 +10,21 @@
     <!-- <keep-alive :exclude="keepAlives">
       <router-view :key="$router.fullPath" />
     </keep-alive> -->
-    <!-- <keep-alive>
+
+    <keep-alive>
       <router-view v-if="$route.meta.isKeepAlive"></router-view>
     </keep-alive>
-    <router-view v-if="!$route.meta.isKeepAlive"></router-view> -->
+    <router-view v-if="!$route.meta.isKeepAlive"></router-view>
+
+    <!-- <tabbar></tabbar> -->
   </div>
 </template>
 
 <script>
+// import Tabbar from "@/components/tabbar";
 export default {
   name: "App",
+  // components: { Tabbar },
   // data: function () {
   //   const that = this;
   //   return {
@@ -35,7 +40,6 @@ export default {
   //   },
   // },
   // },
-  // components: {},
 };
 </script>
 

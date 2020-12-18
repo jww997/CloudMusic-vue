@@ -12,12 +12,6 @@
 <script>
 export default {
   name: "tabbar",
-  // props: {
-  //   active: {
-  //     type: Number,
-  //     default: 0,
-  //   },
-  // },
   data: function () {
     return {
       active: 0,

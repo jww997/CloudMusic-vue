@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
-
 // import Discover from '@/pages/discover'
 // import Playlist from '@/pages/playlist'
 // import Player from '@/pages/player'
@@ -9,41 +7,69 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-let router = new Router({
+
+const _component = (name) => {
+  return (resolve) => {
+    import(`@/pages/${name}`)
+      .then((module) => {
+        resolve(module)
+      })
+  }
+}
+
+const router = new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
-      name: 'discover',
-      component: resolve => require(['@/pages/discover'], resolve)
+      path: '*',
+      redirect: '/discover',
     },
     {
-      path: '/playlist/:id',
-      name: 'playlist',
-      meta: {
-        isKeepAlive: false
-      },
-      component: resolve => require(['@/pages/playlist'], resolve),
+      path: '/discover',
+      name: 'discover',
+      component: _component("discover"),
+      children: [
+        {
+          path: 'playlist/:id',
+          name: 'playlist',
+          component: _component("playlist"),
+          // meta: {
+          //   isKeepAlive: false,
+          // },
+        }
+      ]
+    },
+    {
+      path: '/mine',
+      name: 'mine',
+      component: _component("mine"),
     },
 
 
 
+
+    // {
+    //   path: '/playlist/:id',
+    //   name: 'playlist',
+    //   component: resolve => require(['@/pages/playlist'], resolve),
+    //   meta: {
+    //     isKeepAlive: false,
+    //   },
+    // },
     {
       path: '/player',
       name: 'player',
-      component: resolve => require(['@/pages/player'], resolve)
-    }, {
-      path: '/mine',
-      name: 'mine',
-      component: resolve => require(['@/pages/mine'], resolve)
+      component: resolve => require(['@/pages/player'], resolve),
+      meta: {
+        isKeepAlive: false
+      },
     },
 
 
 
-    {
-      path: '*',
-      redirect: '/'
-    }
+
+
+
   ]
 });
 

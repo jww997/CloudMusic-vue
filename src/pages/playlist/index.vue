@@ -1,9 +1,11 @@
 <template>
-  <div class="container">
-    <navbar :title="'歌单'"></navbar>
-    <cap :obj="playlist"></cap>
-    <list :obj="playlist"></list>
-  </div>
+  <transition>
+    <div class="playlist">
+      <navbar :title="'歌单'"></navbar>
+      <cap :obj="playlist"></cap>
+      <list :obj="playlist"></list>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -57,4 +59,14 @@ export default {
 <style lang="scss" scoped>
 @import "~styles/mixins.scss";
 @import "~styles/varibles.scss";
+.playlist {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  z-index: 100;
+}
 </style>

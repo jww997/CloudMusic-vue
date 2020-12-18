@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <!-- <keep-alive exclude="playlist">
+    <keep-alive exclude="playlist">
       <router-view />
-    </keep-alive> -->
+    </keep-alive>
     <!-- <keep-alive>
       <router-view />
     </keep-alive> -->
@@ -10,10 +10,10 @@
     <!-- <keep-alive :exclude="keepAlives">
       <router-view :key="$router.fullPath" />
     </keep-alive> -->
-    <keep-alive>
-      <router-view v-if="$route.meta.KeepAlive"></router-view>
+    <!-- <keep-alive>
+      <router-view v-if="$route.meta.isKeepAlive"></router-view>
     </keep-alive>
-    <router-view v-if="!$route.meta.KeepAlive"></router-view>
+    <router-view v-if="!$route.meta.isKeepAlive"></router-view> -->
   </div>
 </template>
 

@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 // import Mine from '@/pages/mine'
 _vue["default"].use(_vueRouter["default"]);
 
-var _default = new _vueRouter["default"]({
+var router = new _vueRouter["default"]({
   mode: 'history',
   routes: [{
     path: '/',
@@ -28,11 +28,11 @@ var _default = new _vueRouter["default"]({
   }, {
     path: '/playlist/:id',
     name: 'playlist',
-    component: function component(resolve) {
-      return require(['@/pages/playlist'], resolve);
-    },
     meta: {
       isKeepAlive: false
+    },
+    component: function component(resolve) {
+      return require(['@/pages/playlist'], resolve);
     }
   }, {
     path: '/player',
@@ -46,8 +46,12 @@ var _default = new _vueRouter["default"]({
     component: function component(resolve) {
       return require(['@/pages/mine'], resolve);
     }
+  }, {
+    path: '*',
+    redirect: '/'
   }]
-}); // export default new Router({
+});
+var _default = router; // export default new Router({
 //   mode: 'hash',
 //   base: process.env.BASE_URL,
 //   routes: [
@@ -118,6 +122,5 @@ var _default = new _vueRouter["default"]({
 //   next();
 //   // }
 // })
-
 
 exports["default"] = _default;

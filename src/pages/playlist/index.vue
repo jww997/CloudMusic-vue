@@ -17,33 +17,20 @@ export default {
     Cap,
     List,
   },
-  data: function () {
+  data() {
     return {
       playlist: {},
     };
   },
-  // watch: {
-  // $route(to, from) {
-  //   const that = this;
-  //   // console.log(to.query.id != from.query.id);
-  //   if (to.query.id != from.query.id) {
-  //     that.id = to.query.id;
-  //     that.getdata();
-  //   }
-  // },
-  // },
   methods: {
     getdata: function () {
       const that = this;
 
       let id = that.$route.params.id;
-      console.log(id);
-
       that.$api.getPlaylistDetail({ id }).then((res) => {
         that.playlist = res.data.playlist;
 
         // that.$set(that, "playlist", res.data.playlist);
-
         // that.$set(that, "playlist", {});
         // that.playlist = [];
         // console.log(res.data.playlist);
@@ -56,10 +43,13 @@ export default {
   },
   created() {
     const that = this;
-    if (that.$route.query) {
-      that.id = that.$route.query.id;
-      that.getdata();
-    }
+    console.log(that.$route);
+    console.log(that.$route.params.id);
+    // that.timestamp = Date.parse(new Date());
+    that.getdata();
+    // if (that.$route.query) {
+    // that.id = that.$route.params.id;
+    // }
   },
 };
 </script>

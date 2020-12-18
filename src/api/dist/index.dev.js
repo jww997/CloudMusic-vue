@@ -13,15 +13,24 @@ var _vueAxios = _interopRequireDefault(require("vue-axios"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-_vue["default"].use(_vueAxios["default"], _axios["default"]); // const api = "http://www.mikonchen.top/banner";
+_vue["default"].use(_vueAxios["default"], _axios["default"]);
+
+_vue["default"].config.devtools = true;
+_axios["default"].defaults.timeout = 5000; // 默认5s超时
+
+_axios["default"].defaults.baseURL = 'http://localhost:3000/';
+_axios["default"].defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'; // const api = "http://www.mikonchen.top/";
 // let api = "http://49.234.76.196:3000/";
+// let api = " http://localhost:3000/";
 
-
-var api = " http://localhost:3000/";
+var limit = 20;
 
 function request(port, parameter) {
   var that = this;
-  return _axios["default"].post(api + port, parameter);
+  return (0, _axios["default"])(port, {
+    params: parameter
+  }); // return axios.post(api + port, parameter);
+  // return axios.post(api + port + '?' + Date.parse(new Date()) / 1000, parameter);
 }
 
 var _default = {

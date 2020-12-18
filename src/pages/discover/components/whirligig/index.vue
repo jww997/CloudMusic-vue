@@ -14,7 +14,11 @@
       <div v-for="(item, index) in list" :key="index">
         <van-swipe-item class="swiper-item" v-if="index < 6">
           <router-link
-            :to="{ name: 'playlist', params: { id: item.creativeId } }"
+            :to="{
+              name: 'playlist',
+              params: { id: item.creativeId },
+              query: { title: item.uiElement.mainTitle.title },
+            }"
             :key="item.creativeId"
           >
             <cover

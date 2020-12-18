@@ -9,8 +9,7 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-
-export default new Router({
+let router = new Router({
   mode: 'history',
   routes: [
     {
@@ -21,10 +20,10 @@ export default new Router({
     {
       path: '/playlist/:id',
       name: 'playlist',
-      component: resolve => require(['@/pages/playlist'], resolve),
       meta: {
-				isKeepAlive: false
-			},
+        isKeepAlive: false
+      },
+      component: resolve => require(['@/pages/playlist'], resolve),
     },
 
 
@@ -38,8 +37,17 @@ export default new Router({
       name: 'mine',
       component: resolve => require(['@/pages/mine'], resolve)
     },
+
+
+
+    {
+      path: '*',
+      redirect: '/'
+    }
   ]
 });
+
+export default router;
 
 // export default new Router({
 //   mode: 'hash',

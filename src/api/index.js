@@ -3,15 +3,25 @@ import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
-Vue.use(VueAxios, axios)
+Vue.use(VueAxios, axios);
 
-// const api = "http://www.mikonchen.top/banner";
+
+Vue.config.devtools = true
+axios.defaults.timeout = 5000; // 默认5s超时
+axios.defaults.baseURL = 'http://localhost:3000/';
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+
+// const api = "http://www.mikonchen.top/";
 // let api = "http://49.234.76.196:3000/";
-let api = " http://localhost:3000/";
+// let api = " http://localhost:3000/";
+
+const limit = 20;
 
 function request(port, parameter) {
   const that = this;
-  return axios.post(api + port, parameter);
+  return axios(port, { params: parameter });
+  // return axios.post(api + port, parameter);
+  // return axios.post(api + port + '?' + Date.parse(new Date()) / 1000, parameter);
 }
 
 
@@ -66,7 +76,7 @@ export default {
 
 
 
-  
+
   getHomepageBlockPage: parameter => { // 首页-发现
     return request("homepage/block/page", parameter);
     /**

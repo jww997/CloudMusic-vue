@@ -19,9 +19,10 @@ const limit = 20;
 let api = " http://localhost:3000/";
 
 
-function request(port, parameter) {
+function request(port, parameter = {}) {
   const that = this;
   port += `?timestamp=${Date.parse(new Date()) / 1000}`;
+  parameter.cookie = "__csrf=31ed9189fba0069c1e61e6e73e14fbac; Max-Age=1296010; Expires=Tue, 5 Jan 2021 07:42:06 GMT; Path=/;;MUSIC_U=64d65234a8d5b8547f2b23029b23920535b02604a2d2a0743b50d5d0a4c789f55cb0fcee37c101bd; Max-Age=1296000; Expires=Tue, 5 Jan 2021 07:41:56 GMT; Path=/;;__remember_me=true; Max-Age=1296000; Expires=Tue, 5 Jan 2021 07:41:56 GMT; Path=/;;NMTID=00O-SUleSwRVPxDRkGjg8NsL0r6oVsAAAF2hD9oMQ; Max-Age=315360000; Expires=Thu, 19 Dec 2030 07:41:56 GMT; Path=/;";
   return axios.post(api + port, parameter);
 
   // return axios(port, { params: parameter });
@@ -29,6 +30,93 @@ function request(port, parameter) {
 
 
 export default {
+
+
+
+
+  getLoginCellphone: parameter => { // 手机登录
+    return request("login/cellphone", parameter);
+    /**
+     * @param phone 手机号码
+     * @param password 密码
+     * @param countrycode (选)国家码,用于国外手机号登录,例如美国传入:1
+     * @param md5_password (选)md5加密后的密码,传入后password将失效
+     */
+  },
+
+  getLoginStatus: parameter => { // 登录状态
+    return request("login/status", parameter);
+    /**
+     * 说明: 调用此接口, 可获取登录状态
+     */
+  },
+  getUserDetail: parameter => { // 获取用户详情
+    return request("user/detail", parameter);
+    /**
+     * @param uid 用户id
+     * 说明:登录后调用此接口,传入用户id,可以获取用户详情
+     */
+  },
+  getUserAccount: parameter => { // 获取账号信息
+    return request("user/account", parameter);
+    /**
+     * 说明:登录后调用此接口,可获取用户账号信息
+     */
+  },
+  getUserSubcount: parameter => { // 获取用户信息,歌单,收藏,mv,dj数量
+    return request("user/subcount", parameter);
+    /**
+     * 说明:登录后调用此接口,可获取用户账号信息
+     */
+  },
+  getUserLevel: parameter => { // 获取用户等级信息
+    return request("user/level", parameter);
+    /**
+     * 说明:登录后调用此接口,可以获取用户等级信息,包含当前登录天数,听歌次数,下一等级需要的登录天数和听歌次数,当前等级进度,对应https://music.163.com/#/user/level
+     */
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   getHomepageBlockPage: parameter => { // 首页-发现
     return request("homepage/block/page", parameter);
     /**

@@ -1,11 +1,13 @@
 <template>
-  <div class="children"></div>
+  <div class="conatiner">
+    
+  </div>
 </template>
 
 <script>
 export default {
   name: "application",
-};
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,16 +1,18 @@
 <template>
-  <div
-    class="container"
-    :style="{ backgroundImage: 'url(' + songs[0].al.picUrl + ')' }"
-  >
-    <navbar
-      :title="songs[0].name"
-      :subtitle="songs[0].ar[0].name"
-      :fixed="false"
-    ></navbar>
-    <phonograph :obj="songs[0]"></phonograph>
-    <handle></handle>
-  </div>
+  <transition name="fade">
+    <div
+      class="container"
+      :style="{ backgroundImage: 'url(' + songs[0].al.picUrl + ')' }"
+    >
+      <navbar
+        :title="songs[0].name"
+        :subtitle="songs[0].ar[0].name"
+        :fixed="false"
+      ></navbar>
+      <phonograph :obj="songs[0]"></phonograph>
+      <handle></handle>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -72,6 +74,16 @@ export default {
     @include positionCenter;
     -webkit-filter: blur(20px);
     filter: blur(20px);
+  }
+
+  &.fade-enter,
+  &.fade-leave-to {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  &.fade-enter-active,
+  &.fade-leave-active {
+    transition: 0.5s;
   }
 }
 </style>

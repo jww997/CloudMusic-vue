@@ -45,16 +45,17 @@ var router = new _vueRouter["default"]({
     children: [{
       path: 'playlist/:id',
       name: 'playlist',
-      component: _component("playlist") // meta: {
-      //   isKeepAlive: false,
-      // },
-
+      component: _component("playlist")
     }]
   }, {
     path: '/mine',
     name: 'mine',
     component: _component("mine")
-  }, // {
+  }, {
+    path: '/player',
+    name: 'player',
+    component: _component("player")
+  } // {
   //   path: '/playlist/:id',
   //   name: 'playlist',
   //   component: resolve => require(['@/pages/playlist'], resolve),
@@ -62,16 +63,7 @@ var router = new _vueRouter["default"]({
   //     isKeepAlive: false,
   //   },
   // },
-  {
-    path: '/player',
-    name: 'player',
-    component: function component(resolve) {
-      return require(['@/pages/player'], resolve);
-    },
-    meta: {
-      isKeepAlive: false
-    }
-  }]
+  ]
 });
 var _default = router; // export default new Router({
 //   mode: 'hash',

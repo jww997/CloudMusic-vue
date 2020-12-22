@@ -80,6 +80,16 @@ var _default = {
      * 说明:登录后调用此接口,可以获取用户等级信息,包含当前登录天数,听歌次数,下一等级需要的登录天数和听歌次数,当前等级进度,对应https://music.163.com/#/user/level
      */
   },
+  getUserPlaylist: function getUserPlaylist(parameter) {
+    // 获取用户歌单
+    return request("user/playlist", parameter);
+    /**
+     * @param uid 用户id
+     * @param limit (选)返回数量,默认为30
+     * @param offset (选)偏移数量，用于分页,如:(页数-1)*30,其中30为limit的值,默认为0
+     * 说明:登录后调用此接口,传入用户id,可以获取用户歌单
+     */
+  },
   getHomepageBlockPage: function getHomepageBlockPage(parameter) {
     // 首页-发现
     return request("homepage/block/page", parameter);

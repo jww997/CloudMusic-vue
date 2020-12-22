@@ -33,9 +33,6 @@ const router = new Router({
           path: 'playlist/:id',
           name: 'playlist',
           component: _component("playlist"),
-          // meta: {
-          //   isKeepAlive: false,
-          // },
         }
       ]
     },
@@ -43,6 +40,11 @@ const router = new Router({
       path: '/mine',
       name: 'mine',
       component: _component("mine"),
+    },
+    {
+      path: '/player',
+      name: 'player',
+      component: _component("player"),
     },
 
 
@@ -56,14 +58,6 @@ const router = new Router({
     //     isKeepAlive: false,
     //   },
     // },
-    {
-      path: '/player',
-      name: 'player',
-      component: resolve => require(['@/pages/player'], resolve),
-      meta: {
-        isKeepAlive: false
-      },
-    },
 
 
 

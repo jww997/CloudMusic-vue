@@ -21,7 +21,7 @@
   </div>
 </template>
 
-<script>
+<script> 
 import Ball from "@/pages/discover/components/ball";
 export default {
   name: "banner",

@@ -81,6 +81,7 @@ export default {
     opacity: 0;
     transform: translateY(1rem);
   }
+
   &.fade-enter-active,
   &.fade-leave-active {
     transition: 0.5s;

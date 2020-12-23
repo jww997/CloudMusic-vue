@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="children">
     <div class="left">
       <cover :image="obj.coverImgUrl" :count="obj.playCount"></cover>
     </div>
@@ -20,15 +20,19 @@
     <div class="operation">
       <div class="item">
         <span class="iconfont">&#xe61d;</span>
-        <span class="text">{{ obj.subscribedCount }}</span>
+        <span class="text" v-html="formatCount(obj.subscribedCount)">收藏</span>
       </div>
       <div class="item">
         <span class="iconfont">&#xe65d;</span>
-        <span class="text">{{ obj.commentCount }}</span>
+        <span class="text" v-html="formatCount(obj.commentCount)">评论</span>
       </div>
       <div class="item">
         <span class="iconfont">&#xe65c;</span>
-        <span class="text">{{ obj.shareCount }}</span>
+        <span class="text">{{
+          formatCount(obj.shareCount) == 0
+            ? "分享"
+            : formatCount(obj.shareCount)
+        }}</span>
       </div>
     </div>
   </div>
@@ -36,6 +40,8 @@
 
 <script>
 import Cover from "@/components/cover";
+import { formatCount } from "@/assets/js/filter";
+
 export default {
   name: "Cap",
   components: {
@@ -49,6 +55,12 @@ export default {
       },
     },
   },
+  methods: {
+    formatCount,
+    // formatCount(num) {
+    //   return formatCount(num)
+    // },
+  },
   data: function () {
     return {};
   },
@@ -59,7 +71,7 @@ export default {
 <style lang="scss" scoped>
 @import "~styles/mixins.scss";
 @import "~styles/varibles.scss";
-.container {
+.children {
   width: 100%;
   padding: 1rem 0.3rem 0.9rem;
   margin-bottom: 0.7rem;

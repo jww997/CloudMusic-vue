@@ -1,6 +1,12 @@
 <template>
-  <transition name="fade">
-    <div class="playlist">
+  <transition name="fade" :duration="1000">
+    <div
+      class="contaubn"
+    >
+      <!-- v-infinite-scroll="loadMore"
+      infinite-scroll-disabled="busy"
+      infinite-scroll-distance="10" -->
+      <div v-for="item in data" :key="item.index">{{ item.name }}</div>
       <navbar :title="'歌单'"></navbar>
       <cap :obj="playlist"></cap>
       <list :obj="playlist"></list>
@@ -22,9 +28,22 @@ export default {
   data() {
     return {
       playlist: {},
+      // count: 0,
+      // data: [],
+      // busy: false,
     };
   },
   methods: {
+    // loadMore: function () {
+    //   this.busy = true;
+    //   setTimeout(() => {
+    //     for (var i = 0, j = 10; i < j; i++) {
+    //       this.data.push({ name: this.count++ });
+    //     }
+    //     console.log(this.data);
+    //     this.busy = false;
+    //   }, 1000);
+    // },
     getdata: function () {
       const that = this;
 
@@ -59,7 +78,7 @@ export default {
 <style lang="scss" scoped>
 @import "~styles/mixins.scss";
 @import "~styles/varibles.scss";
-.playlist {
+.contaubn {
   width: 100%;
   height: 100%;
   background-color: #fff;
@@ -73,6 +92,12 @@ export default {
     opacity: 0;
     transform: translateY(1rem);
   }
+
+  &.fade-enter-to,
+  &.fade-leave {
+    opacity: 1;
+  }
+
   &.fade-enter-active,
   &.fade-leave-active {
     transition: 0.5s;

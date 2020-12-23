@@ -6,19 +6,22 @@
         v-for="(item, index) in list"
         :key="index"
       >
-        <!-- <router-link :to="item.to && item.to"> -->
-        <div class="item">
-          <!-- <div class="iconfont" v-html="item.icon"></div> -->
-          <div
-            class="icon"
-            :style="{ webkitMask: 'url(' + item.iconUrl + ')' }"
-            :alt="item.name"
-          >
-            <!-- <img :src="item.iconUrl" :alt="item.name" /> -->
+        <router-link :to="{ name: setToName(item.id) }">
+          <div class="item">
+            <!-- <div class="iconfont" v-html="item.icon"></div> -->
+            <div
+              class="icon"
+              :style="{
+                backgroundImage: 'url(' + item.iconUrl + ')',
+              }"
+              :alt="item.name"
+            >
+              <!-- webkitMask: 'url(' + item.iconUrl + ')' -->
+              <!-- <img :src="item.iconUrl" :alt="item.name" /> -->
+            </div>
+            <span class="text">{{ item.name }}</span>
           </div>
-          <span class="text">{{ item.name }}</span>
-        </div>
-        <!-- </router-link> -->
+        </router-link>
       </van-swipe-item>
     </van-swipe>
   </div>
@@ -33,31 +36,25 @@ export default {
       default: [],
     },
   },
-  data: function () {
-    return {
-      // list: [
-      //   {
-      //     icon: "&#xe603;",
-      //     text: "每日推荐",
-      //     to: "",
-      //   },
-      //   // {
-      //   //   icon: "&#xe634;",
-      //   //   text: "私人FM",
-      //   //   to: "",
-      //   // },
-      //   {
-      //     icon: "&#xe602;",
-      //     text: "歌单",
-      //     to: "",
-      //   },
-      //   {
-      //     icon: "&#xe604;",
-      //     text: "排行榜",
-      //     to: "/ranking",
-      //   },
-      // ],
-    };
+  methods: {
+    setToName(id) {
+      let name;
+      switch (id) {
+        case -1:
+          name = "dailyspecial";
+          break;
+        case -2:
+          name = "";
+          break;
+        case -3:
+          name = "";
+          break;
+        case -6:
+          name = "";
+          break;
+      }
+      return name;
+    },
   },
 };
 </script>
@@ -70,7 +67,7 @@ export default {
   margin-top: 0.3rem;
   .swiper-item {
     // padding: 0 0.2rem;
-    padding-left: 0.2rem;
+    padding-left: 0.35rem;
     .item {
       width: 100%;
       @include flexCenter;
@@ -84,7 +81,7 @@ export default {
         overflow: hidden;
 
         // filter: invert(100%);
-        background: #f00 no-repeat center;
+        // background: #f00 no-repeat center;
         background-size: cover;
 
         &::after {

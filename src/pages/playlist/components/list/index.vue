@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="children">
     <div class="line guide">
       <div class="playall">
         <span class="iconfont front">&#xe674;</span>
@@ -76,7 +76,7 @@ export default {
 <style lang="scss" scoped>
 @import "~styles/mixins.scss";
 @import "~styles/varibles.scss";
-.container {
+.children {
   .line {
     padding: 0.2rem 0.3rem;
     @include flexSpaceBetween;

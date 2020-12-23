@@ -31,6 +31,7 @@ import Banner from "@/pages/discover/components/banner";
 import Whirligig from "@/pages/discover/components/whirligig";
 import Calendar from "@/pages/discover/components/calendar";
 
+
 export default {
   name: "discover",
   components: {

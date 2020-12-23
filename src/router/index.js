@@ -30,6 +30,11 @@ const router = new Router({
       component: _component("discover"),
       children: [
         {
+          path: 'dailyspecial',
+          name: 'dailyspecial',
+          component: _component("dailyspecial"),
+        },
+        {
           path: 'playlist/:id',
           name: 'playlist',
           component: _component("playlist"),

@@ -9,6 +9,7 @@ import 'styles/border.css'
 import 'styles/iconfont.css'
 
 import '@/assets/js/vant.js'
+import '@/assets/js/filter.js'
 // import '@/assets/js/axios.js'
 
 import store from '@/store'
@@ -17,6 +18,10 @@ import api from "@/api"
 Vue.prototype.$api = api
 
 Vue.config.productionTip = false
+
+
+import infiniteScroll from 'vue-infinite-scroll'
+Vue.use(infiniteScroll)
 
 /* eslint-disable no-new */
 new Vue({

@@ -23,7 +23,7 @@
             <cover
               :image="item.uiElement.image.imageUrl"
               :name="item.uiElement.mainTitle.title"
-              :count="item.resources[0].resourceExtInfo.playCount"
+              :count="formatCount(item.resources[0].resourceExtInfo.playCount)"
             ></cover>
           </router-link>
         </van-swipe-item>
@@ -34,6 +34,9 @@
 
 <script>
 import Cover from "@/components/cover";
+
+import { formatCount } from "@/assets/js/filter";
+
 export default {
   name: "whirligig",
   components: {
@@ -51,6 +54,9 @@ export default {
   },
   data: function () {
     return {};
+  },
+  methods: {
+    formatCount,
   },
   mounted: function () {
     const that = this;

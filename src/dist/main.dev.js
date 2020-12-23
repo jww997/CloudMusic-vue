@@ -14,9 +14,13 @@ require("styles/iconfont.css");
 
 require("@/assets/js/vant.js");
 
+require("@/assets/js/filter.js");
+
 var _store = _interopRequireDefault(require("@/store"));
 
 var _api = _interopRequireDefault(require("@/api"));
+
+var _vueInfiniteScroll = _interopRequireDefault(require("vue-infinite-scroll"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -26,7 +30,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 // Vue.prototype.$store = store
 _vue["default"].prototype.$api = _api["default"];
 _vue["default"].config.productionTip = false;
+
+_vue["default"].use(_vueInfiniteScroll["default"]);
 /* eslint-disable no-new */
+
 
 new _vue["default"]({
   el: '#app',

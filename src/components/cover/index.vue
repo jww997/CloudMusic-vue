@@ -4,12 +4,14 @@
     <span class="text" v-if="name">{{ name }}</span>
     <div class="count" v-if="count">
       <span class="iconfont">&#xe656;</span>
-      <span>{{ count }}</span>
+      <span>{{ formatCount(count) }}</span>
     </div>
   </div>
 </template>
 
 <script>
+import { formatCount } from "@/assets/js/filter";
+
 export default {
   name: "cover",
   props: {
@@ -26,12 +28,16 @@ export default {
       default: 0,
     },
   },
+  methods: {
+    formatCount,
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 @import "~styles/mixins.scss";
 @import "~styles/varibles.scss";
+
 .cover {
   position: relative;
   display: flex;

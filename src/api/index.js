@@ -14,9 +14,10 @@ Vue.use(VueAxios, axios);
 
 const limit = 20;
 
-// const api = "http://www.mikonchen.top/";
+// const api = "http://www.mikonchen.top:3000/";
 // let api = "http://49.234.76.196:3000/";
-let api = " http://localhost:3000/";
+let api = "http://49.234.76.196:3000/";
+// let api = " http://localhost:3000/";
 
 
 function request(port, parameter = {}, isNeedCookie = true) {

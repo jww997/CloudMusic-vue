@@ -3,7 +3,7 @@
     <div class="icon iconfont">&#xe70d;</div>
     <div class="frame">
       <span class="icon iconfont">&#xe607;</span>
-      <span class="text">123</span>
+      <span class="text">搜索</span>
     </div>
     <div class="icon iconfont">&#xe60a;</div>
   </div>

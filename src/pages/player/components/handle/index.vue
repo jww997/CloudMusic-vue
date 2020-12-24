@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="children">
     <div class="top">
       <span class="iconfont">&#xe66a;</span>
       <span class="iconfont">&#xe694;</span>
@@ -39,7 +39,7 @@ export default {
 <style lang="scss" scoped>
 @import "~styles/mixins.scss";
 @import "~styles/varibles.scss";
-.container {
+.children {
   padding: 0.5rem 0;
   @include positionCenter;
   top: auto;

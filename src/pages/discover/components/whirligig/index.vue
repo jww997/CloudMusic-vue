@@ -23,8 +23,9 @@
             <cover
               :image="item.uiElement.image.imageUrl"
               :name="item.uiElement.mainTitle.title"
-              :count="formatCount(item.resources[0].resourceExtInfo.playCount)"
+              :count="item.resources[0].resourceExtInfo.playCount"
             ></cover>
+            <!-- :count="formatCount(item.resources[0].resourceExtInfo.playCount)" -->
           </router-link>
         </van-swipe-item>
       </div>

@@ -2,14 +2,15 @@
   <transition name="fade">
     <div
       class="container"
-      :style="{ backgroundImage: 'url(' + songs[0].al.picUrl + ')' }"
+      :style="{ backgroundImage: 'url(' + song.al.picUrl + ')' }"
+      v-if="song"
     >
       <navbar
-        :title="songs[0].name"
-        :subtitle="songs[0].ar[0].name"
+        :title="song.name"
+        :subtitle="song.ar[0].name"
         :fixed="false"
       ></navbar>
-      <phonograph :obj="songs[0]"></phonograph>
+      <phonograph :obj="song"></phonograph>
       <handle></handle>
     </div>
   </transition>
@@ -61,25 +62,46 @@ export default {
   // backdrop-filter: saturate(180%) blur(20px);
   position: relative;
   overflow: hidden;
-  .container {
-    height: auto;
-  }
+  &::before,
   &::after {
     content: "";
     width: 100%;
     height: 100%;
-    z-index: -1;
-    background: inherit;
-    background-size: cover;
     @include positionCenter;
+  }
+  &::before {
+    z-index: -1;
+    background-color: #000;
+    opacity: 0.5;
+  }
+  &::after {
+    z-index: -2;
+    background: inherit;
+    // background-color: #000;
+    background-size: cover;
     -webkit-filter: blur(20px);
     filter: blur(20px);
   }
+  .container {
+    height: auto;
+    &::before {
+      display: none;
+    }
+    &::after {
+      display: none;
+    }
+  }
+
 
   &.fade-enter,
   &.fade-leave-to {
     opacity: 0;
     transform: translateY(1rem);
+  }
+
+  &.fade-enter-to,
+  &.fade-leave {
+    opacity: 1;
   }
 
   &.fade-enter-active,

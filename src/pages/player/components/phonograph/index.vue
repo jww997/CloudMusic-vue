@@ -1,12 +1,12 @@
 <template>
-  <div class="container active">
+  <div class="children active">
     <div
       class="disc"
       :style="{
         backgroundImage: 'url(' + require('@/assets/images/chassis.png') + ')',
       }"
     >
-      <img class="cover" :src="image" />
+      <img class="cover" :src="obj.al.picUrl" />
       <!-- <img class="lid" :src="require('@/assets/images/lid.png')" /> -->
       <img class="light" :src="require('@/assets/images/light.png')" />
     </div>
@@ -44,7 +44,7 @@ export default {
     transform: rotate(360deg);
   }
 }
-.container {
+.children {
   padding-top: 1.8rem;
   padding-bottom: 0.5rem;
   position: relative;

@@ -28,11 +28,7 @@
       </div>
       <div class="item">
         <span class="iconfont">&#xe65c;</span>
-        <span class="text">{{
-          formatCount(obj.shareCount) == 0
-            ? "分享"
-            : formatCount(obj.shareCount)
-        }}</span>
+        <span class="text" v-html="formatCount(obj.shareCount)">分享</span>
       </div>
     </div>
   </div>

@@ -28,6 +28,9 @@ const router = new Router({
       path: '/discover',
       name: 'discover',
       component: _component("discover"),
+      meta: {
+        isKeepAlive: true,
+      },
       children: [
         {
           path: 'dailyspecial',
@@ -38,7 +41,10 @@ const router = new Router({
           path: 'playlist/:id',
           name: 'playlist',
           component: _component("playlist"),
-        }
+          meta: {
+            isKeepAlive: true,
+          }
+        },
       ]
     },
     {

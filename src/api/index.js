@@ -14,10 +14,10 @@ Vue.use(VueAxios, axios);
 
 const limit = 20;
 
-// const api = "http://www.mikonchen.top:3000/";
-// let api = "http://49.234.76.196:3000/";
-let api = "http://49.234.76.196:3000/";
-// let api = " http://localhost:3000/";
+const api = "http://www.mikonchen.top:3000/";
+// const api = "http://49.234.76.196:3000/";
+// const api = "http://49.234.76.196:3000/";
+// const api = " http://localhost:3000/";
 
 
 function request(port, parameter = {}, isNeedCookie = true) {
@@ -90,7 +90,7 @@ export default {
 
 
 
-  
+
   getRecommendResource: parameter => { // 获取每日推荐歌单(需要登录)
     return request("recommend/resource", parameter);
     /**
@@ -101,6 +101,73 @@ export default {
     return request("recommend/songs", parameter);
     /**
      * 说明:调用此接口,可获得每日推荐歌曲
+     */
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  getPlaylistCatlist: parameter => { // 歌单分类
+    return request("playlist/catlist", parameter);
+    /**
+     * 说明:调用此接口,可获取歌单分类,包含category信息
+     */
+  },
+  getPlaylistHot: parameter => { // 热门歌单分类
+    return request("playlist/hot", parameter);
+    /**
+     * 说明:调用此接口,可获取歌单分类,包含category信息
+     */
+  },
+  getTopPlaylist: parameter => { // 歌单(网友精选碟)
+    return request("top/playlist", parameter);
+    /**
+     * @param order(选)可选值为'new'和'hot',分别对应最新和最热,默认为'hot'
+     * @param cat cat:tag,比如"华语"、"古风"、"欧美"、"流行",默认为"全部",可从歌单分类接口获取(/playlist/catlist)
+     * @param limit 取出歌单数量,默认为50
+     * @param offset 偏移数量,用于分页,如:(评论页数-1)*50,其中50为limit的值
+     * 说明:调用此接口,可获取网友精选碟歌单
+     */
+  },
+  getPlaylistHighqualityTags: parameter => { // 精品歌单标签列表
+    return request("playlist/highquality/tags", parameter);
+    /**
+     * 说明:调用此接口,可获取精品歌单标签列表
+     */
+  },
+  getTopPlaylistHighquality: parameter => { // 获取精品歌单
+    return request("top/playlist/highquality", parameter);
+    /**
+     *  @param cat (选)比如"华语"、"古风"、"欧美"、"流行",默认为"全部",可从精品歌单标签列表接口获取(/playlist/highquality/tags)
+     *  @param limit  取出歌单数量,默认为20
+     *  @param before 分页参数,取上一页最后一个歌单的updateTime获取下一页数据
+     * 说明:调用此接口,可获取精品歌单
+     */
+  },
+  getRelatedPlaylist: parameter => { // 相关歌单推荐
+    return request("related/playlist", parameter);
+    /**
+     *  @param id 歌单id
+     * 说明:调用此接口,传入歌单id可获取相关歌单(对应页面https://music.163.com/#/playlist?id=1)
+     */
+  },
+  getPlaylistDetail: parameter => { // 获取歌单详情
+    return request("playlist/detail", parameter);
+    /**
+     *  @param id 歌单id
+     *  @param s (选)歌单最近的s个收藏者,默认为8
+     * 说明:歌单能看到歌单名字,但看不到具体歌单内容,调用此接口,传入歌单id,可以获取对应歌单内的所有的音乐(未登录状态只能获取不完整的歌单,登录后是完整的)，但是返回的trackIds是完整的，tracks则是不完整的，可拿全部trackIds请求一次song/detail接口获取所有歌曲的详情(https://github.com/Binaryify/NeteaseCloudMusicApi/issues/452)
      */
   },
 

@@ -11,7 +11,11 @@ var _axios = _interopRequireDefault(require("axios"));
 
 var _vueAxios = _interopRequireDefault(require("vue-axios"));
 
+var _getLoginCellphone$ge;
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 _vue["default"].use(_vueAxios["default"], _axios["default"]); // Vue.config.devtools = true
 // axios.defaults.timeout = 5000; // 默认5s超时
@@ -20,10 +24,10 @@ _vue["default"].use(_vueAxios["default"], _axios["default"]); // Vue.config.devt
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 
-var limit = 20; // const api = "http://www.mikonchen.top/";
-// let api = "http://49.234.76.196:3000/";
-
-var api = " http://localhost:3000/";
+var limit = 20;
+var api = "http://www.mikonchen.top:3000/"; // const api = "http://49.234.76.196:3000/";
+// const api = "http://49.234.76.196:3000/";
+// const api = " http://localhost:3000/";
 
 function request(port) {
   var parameter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -34,7 +38,7 @@ function request(port) {
   return _axios["default"].post(api + port, parameter);
 }
 
-var _default = {
+var _default = (_getLoginCellphone$ge = {
   getLoginCellphone: function getLoginCellphone(parameter) {
     // 手机登录
     return request("login/cellphone", parameter);
@@ -105,6 +109,65 @@ var _default = {
      * 说明:调用此接口,可获得每日推荐歌曲
      */
   },
+  getPlaylistCatlist: function getPlaylistCatlist(parameter) {
+    // 歌单分类
+    return request("playlist/catlist", parameter);
+    /**
+     * 说明:调用此接口,可获取歌单分类,包含category信息
+     */
+  },
+  getPlaylistHot: function getPlaylistHot(parameter) {
+    // 热门歌单分类
+    return request("playlist/hot", parameter);
+    /**
+     * 说明:调用此接口,可获取歌单分类,包含category信息
+     */
+  },
+  getTopPlaylist: function getTopPlaylist(parameter) {
+    // 歌单(网友精选碟)
+    return request("top/playlist", parameter);
+    /**
+     * @param order(选)可选值为'new'和'hot',分别对应最新和最热,默认为'hot'
+     * @param cat cat:tag,比如"华语"、"古风"、"欧美"、"流行",默认为"全部",可从歌单分类接口获取(/playlist/catlist)
+     * @param limit 取出歌单数量,默认为50
+     * @param offset 偏移数量,用于分页,如:(评论页数-1)*50,其中50为limit的值
+     * 说明:调用此接口,可获取网友精选碟歌单
+     */
+  },
+  getPlaylistHighqualityTags: function getPlaylistHighqualityTags(parameter) {
+    // 精品歌单标签列表
+    return request("playlist/highquality/tags", parameter);
+    /**
+     * 说明:调用此接口,可获取精品歌单标签列表
+     */
+  },
+  getTopPlaylistHighquality: function getTopPlaylistHighquality(parameter) {
+    // 获取精品歌单
+    return request("top/playlist/highquality", parameter);
+    /**
+     *  @param cat (选)比如"华语"、"古风"、"欧美"、"流行",默认为"全部",可从精品歌单标签列表接口获取(/playlist/highquality/tags)
+     *  @param limit  取出歌单数量,默认为20
+     *  @param before 分页参数,取上一页最后一个歌单的updateTime获取下一页数据
+     * 说明:调用此接口,可获取精品歌单
+     */
+  },
+  getRelatedPlaylist: function getRelatedPlaylist(parameter) {
+    // 相关歌单推荐
+    return request("related/playlist", parameter);
+    /**
+     *  @param id 歌单id
+     * 说明:调用此接口,传入歌单id可获取相关歌单(对应页面https://music.163.com/#/playlist?id=1)
+     */
+  },
+  getPlaylistDetail: function getPlaylistDetail(parameter) {
+    // 获取歌单详情
+    return request("playlist/detail", parameter);
+    /**
+     *  @param id 歌单id
+     *  @param s (选)歌单最近的s个收藏者,默认为8
+     * 说明:歌单能看到歌单名字,但看不到具体歌单内容,调用此接口,传入歌单id,可以获取对应歌单内的所有的音乐(未登录状态只能获取不完整的歌单,登录后是完整的)，但是返回的trackIds是完整的，tracks则是不完整的，可拿全部trackIds请求一次song/detail接口获取所有歌曲的详情(https://github.com/Binaryify/NeteaseCloudMusicApi/issues/452)
+     */
+  },
   getHomepageBlockPage: function getHomepageBlockPage(parameter) {
     // 首页-发现
     return request("homepage/block/page", parameter);
@@ -133,43 +196,40 @@ var _default = {
     /**
      * @param limit (选)取出数量,默认为30(不支持offset)
      */
-  },
-  getPlaylistDetail: function getPlaylistDetail(parameter) {
-    // 推荐歌单
-    return request("playlist/detail", parameter);
-    /**
-     * @param id 歌单 id
-     * @param s  (选)歌单最近的s个收藏者,默认为8
-     * 说明:歌单能看到歌单名字,但看不到具体歌单内容,调用此接口,传入歌单id,可以获取对应歌单内的所有的音乐(未登录状态只能获取不完整的歌单,登录后是完整的)，但是返回的trackIds是完整的，tracks则是不完整的，可拿全部trackIds请求一次song/detail接口获取所有歌曲的详情(https://github.com/Binaryify/NeteaseCloudMusicApi/issues/452)
-     */
-  },
-  getSongDetail: function getSongDetail(parameter) {
-    // 获取歌曲详情
-    return request("song/detail", parameter);
-    /**
-     * @param ids 音乐id,如ids=347230
-     * 说明:调用此接口,传入音乐id(支持多个id,用,隔开),可获得歌曲详情(注意:歌曲封面现在需要通过专辑内容接口获取)
-     */
-  },
-  getSongUrl: function getSongUrl(parameter) {
-    // 获取音乐地址
-    return request("song/url", parameter);
-    /**
-     * @param id 音乐id
-     * @param br (选)码率,默认设置了999000即最大码率,如果要320k则可设置为320000,其他类推
-     * 说明:使用歌单详情接口后,能得到的音乐的id,但不能得到的音乐url,调用此接口,传入的音乐id(可多个,用逗号隔开),可以获取对应的音乐的url,未登录状态返回试听片段(返回字段包含被截取的正常歌曲的开始时间和结束时间)
-     * 注:部分用户反馈获取的url会403,hwaphon找到的解决方案是当获取到音乐的id后，将https://music.163.com/song/media/outer/url?id=id.mp3以src赋予Audio即可播放
-     */
-  },
-  getCalendar: function getCalendar(parameter) {
-    // 音乐日历(需要登录)
-    return request("calendar", parameter);
-    /**
-     * @param startTime
-     * @param endTime
-     * 说明: 登录后调用此接口, 传入开始和结束时间, 可获取音乐日历
-     * 调用例子: /calendar?startTime=1606752000000&endTime=1609430399999
-     */
   }
-};
+}, _defineProperty(_getLoginCellphone$ge, "getPlaylistDetail", function getPlaylistDetail(parameter) {
+  // 推荐歌单
+  return request("playlist/detail", parameter);
+  /**
+   * @param id 歌单 id
+   * @param s  (选)歌单最近的s个收藏者,默认为8
+   * 说明:歌单能看到歌单名字,但看不到具体歌单内容,调用此接口,传入歌单id,可以获取对应歌单内的所有的音乐(未登录状态只能获取不完整的歌单,登录后是完整的)，但是返回的trackIds是完整的，tracks则是不完整的，可拿全部trackIds请求一次song/detail接口获取所有歌曲的详情(https://github.com/Binaryify/NeteaseCloudMusicApi/issues/452)
+   */
+}), _defineProperty(_getLoginCellphone$ge, "getSongDetail", function getSongDetail(parameter) {
+  // 获取歌曲详情
+  return request("song/detail", parameter);
+  /**
+   * @param ids 音乐id,如ids=347230
+   * 说明:调用此接口,传入音乐id(支持多个id,用,隔开),可获得歌曲详情(注意:歌曲封面现在需要通过专辑内容接口获取)
+   */
+}), _defineProperty(_getLoginCellphone$ge, "getSongUrl", function getSongUrl(parameter) {
+  // 获取音乐地址
+  return request("song/url", parameter);
+  /**
+   * @param id 音乐id
+   * @param br (选)码率,默认设置了999000即最大码率,如果要320k则可设置为320000,其他类推
+   * 说明:使用歌单详情接口后,能得到的音乐的id,但不能得到的音乐url,调用此接口,传入的音乐id(可多个,用逗号隔开),可以获取对应的音乐的url,未登录状态返回试听片段(返回字段包含被截取的正常歌曲的开始时间和结束时间)
+   * 注:部分用户反馈获取的url会403,hwaphon找到的解决方案是当获取到音乐的id后，将https://music.163.com/song/media/outer/url?id=id.mp3以src赋予Audio即可播放
+   */
+}), _defineProperty(_getLoginCellphone$ge, "getCalendar", function getCalendar(parameter) {
+  // 音乐日历(需要登录)
+  return request("calendar", parameter);
+  /**
+   * @param startTime
+   * @param endTime
+   * 说明: 登录后调用此接口, 传入开始和结束时间, 可获取音乐日历
+   * 调用例子: /calendar?startTime=1606752000000&endTime=1609430399999
+   */
+}), _getLoginCellphone$ge);
+
 exports["default"] = _default;

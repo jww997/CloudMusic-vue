@@ -38,6 +38,11 @@ const router = new Router({
           component: _component("dailyspecial"),
         },
         {
+          path: 'square',
+          name: 'square',
+          component: _component("square")
+        },
+        {
           path: 'playlist/:id',
           name: 'playlist',
           component: _component("playlist"),

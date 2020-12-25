@@ -9,6 +9,10 @@ import actions from "@/store/actions.js"
 const store = new Vuex.Store({
   state: {
     keepAlives: ['Discover', 'Player'], // 保存缓存的列表
+
+    audio: new Audio(), // 音频
+    isPlaying: false,
+
   },
   mutations,
   actions,

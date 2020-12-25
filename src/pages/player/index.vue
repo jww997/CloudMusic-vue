@@ -10,8 +10,10 @@
         :subtitle="song.ar[0].name"
         :fixed="false"
       ></navbar>
-      <phonograph :obj="song"></phonograph>
-      <handle></handle>
+      <phonograph :obj="song" :isPlaying="isPlaying"></phonograph>
+      <handle :isPlaying="isPlaying"></handle>
+
+      <!-- <audio id="audio" src="http://m7.music.126.net/20201225221627/93f9982b705e6e97f20ac302ea27f12d/ymusic/782f/b210/c82d/a2403f9916efa7e3b74ca1a10301257c.mp3" v-if="url" controls="controls" autoplay></audio> -->
     </div>
   </transition>
 </template>
@@ -28,10 +30,13 @@ export default {
     Handle,
   },
   data: function () {
+    const that = this;
     return {
+      isPlaying: that.$store.state.isPlaying,
       songs: [],
     };
   },
+  watch: {},
   computed: {
     song: function () {
       const that = this;
@@ -41,11 +46,18 @@ export default {
   created: function () {
     const that = this;
     let id = that.$route.query.id;
-    console.log(id);
-    that.$api.getSongDetail({ ids: id }).then((res) => {
-      // console.log(res);
-      that.songs = res.data.songs;
-    });
+    that.$api
+      .getSongDetail({ ids: id })
+      .then((res) => {
+        that.songs = res.data.songs;
+        return that.$api.getSongUrl({
+          id: that.song.id,
+        });
+      })
+      .then((res) => {
+        that.$store.state.audio.src = res.data.data[0].url;
+        // that.isPlaying = that.$store.state.isPlaying;
+      });
   },
 };
 </script>

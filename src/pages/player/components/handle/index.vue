@@ -23,7 +23,11 @@
     <div class="bottom">
       <span class="iconfont">&#xe600;</span>
       <span class="iconfont">&#xe663;</span>
-      <span class="iconfont play">&#xe666;</span>
+      <span
+        :class="{ 'iconfont center': true, playing: $store.state.isPlaying }"
+        @click="toggleStatus"
+        >{{ $store.state.isPlaying ? "&#xe665;" : "&#xe666;" }}
+      </span>
       <span class="iconfont">&#xe668;</span>
       <span class="iconfont">&#xe664;</span>
     </div>
@@ -33,6 +37,22 @@
 <script>
 export default {
   name: "handle",
+  // props: {
+  //   isPlaying: {
+  //     type: Boolean,
+  //     default: false,
+  //   },
+  // },
+  methods: {
+    toggleStatus: function () {
+      const that = this;
+      if (!that.$store.state.isPlaying) {
+        that.$store.commit("play");
+      } else {
+        that.$store.commit("pause");
+      }
+    },
+  },
 };
 </script>
 
@@ -72,7 +92,7 @@ export default {
   .bottom {
     padding: 0.3rem 1rem;
     @include flexSpaceAround;
-    .play {
+    .center {
       transform: scale(2);
     }
   }

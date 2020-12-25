@@ -1,5 +1,5 @@
 <template>
-  <div class="children active">
+  <div :class="{ children: true, active: $store.state.isPlaying }">
     <div
       class="disc"
       :style="{
@@ -22,6 +22,10 @@ export default {
       type: Object,
       default: {},
     },
+    // isPlaying: {
+    //   type: Boolean,
+    //   default: false,
+    // },
   },
   computed: {
     image: function () {
@@ -48,6 +52,10 @@ export default {
   padding-top: 1.8rem;
   padding-bottom: 0.5rem;
   position: relative;
+  .disc,
+  .stick {
+    transition: 0.5s;
+  }
   .disc {
     width: 5rem;
     height: 0;

@@ -25,9 +25,9 @@ _vue["default"].use(_vueAxios["default"], _axios["default"]); // Vue.config.devt
 
 
 var limit = 20;
-var api = "http://www.mikonchen.top:3000/"; // const api = "http://49.234.76.196:3000/";
-// const api = "http://49.234.76.196:3000/";
-// const api = " http://localhost:3000/";
+var api = "http://www.mikonchen.top:3000/"; // let api = "http://49.234.76.196:3000/";
+// let api = "http://49.234.76.196:3000/";
+// let api = " http://localhost:3000/";
 
 function request(port) {
   var parameter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};

@@ -1,5 +1,5 @@
 <template>
-  <div class="cover">
+  <div class="kid">
     <img class="image" :src="image" />
     <span class="text" v-if="name">{{ name }}</span>
     <div class="count" v-if="count">
@@ -38,7 +38,7 @@ export default {
 @import "~styles/mixins.scss";
 @import "~styles/varibles.scss";
 
-.cover {
+.kid {
   position: relative;
   display: flex;
   flex-direction: column;

@@ -10,15 +10,17 @@ import 'styles/iconfont.css'
 
 import '@/assets/js/vant.js'
 import '@/assets/js/filter.js'
+
+
 // import '@/assets/js/axios.js'
 
-import store from '@/store'
 import api from "@/api"
+import store from '@/store'
 // Vue.prototype.$store = store
+
+
 Vue.prototype.$api = api
-
 Vue.config.productionTip = false
-
 
 import infiniteScroll from 'vue-infinite-scroll'
 Vue.use(infiniteScroll)

@@ -44,7 +44,7 @@ export default {
           name = "dailyspecial";
           break;
         case -2:
-          name = "";
+          name = "square";
           break;
         case -3:
           name = "";

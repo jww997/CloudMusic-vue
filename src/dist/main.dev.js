@@ -16,9 +16,9 @@ require("@/assets/js/vant.js");
 
 require("@/assets/js/filter.js");
 
-var _store = _interopRequireDefault(require("@/store"));
-
 var _api = _interopRequireDefault(require("@/api"));
+
+var _store = _interopRequireDefault(require("@/store"));
 
 var _vueInfiniteScroll = _interopRequireDefault(require("vue-infinite-scroll"));
 

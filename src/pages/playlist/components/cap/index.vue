@@ -69,8 +69,8 @@ export default {
 @import "~styles/varibles.scss";
 .children {
   width: 100%;
-  padding: 1rem 0.3rem 0.9rem;
   margin-bottom: 0.7rem;
+  padding: 1rem 0.3rem 0.9rem;
   box-sizing: border-box;
   position: relative;
   background-color: rgba(0, 0, 0, 0.3);

@@ -7,7 +7,7 @@
       infinite-scroll-disabled="busy"
       infinite-scroll-distance="10" -->
       <!-- <div v-for="item in data" :key="item.index">{{ item.name }}</div> -->
-      <navbar :title="'歌单'"></navbar>
+      <navbar :title="'歌单'" fixed></navbar>
       <cap :obj="playlist"></cap>
       <list :obj="playlist"></list>
     </div>

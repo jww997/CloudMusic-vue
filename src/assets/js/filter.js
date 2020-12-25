@@ -1,8 +1,5 @@
 function formatCount(num) {
 
-  // console.log(typeof num);
-  // console.log(num);
-
   if (typeof num == 'number') {
     if (!num) {
       num = 0;

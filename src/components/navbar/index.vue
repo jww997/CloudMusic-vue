@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ container: true, fixed }">
+  <div :class="{ kid: true, fixed }">
     <!-- <van-nav-bar
       left-arrow
       :title="title"
@@ -63,11 +63,17 @@ export default {
 <style lang="scss" scoped>
 @import "~styles/mixins.scss";
 @import "~styles/varibles.scss";
-.container {
+.kid {
+  height: 1rem;
   padding: 0.2rem 0.3rem;
+  box-sizing: border-box;
   color: #fff;
   z-index: 100;
   @include flexSpaceBetween;
+  // position: absolute;
+  // right: 0;
+  // left: 0;
+  // top: 0;
   .iconfont {
     font-size: 0.5rem;
   }
@@ -100,7 +106,7 @@ export default {
       justify-content: flex-end;
     }
   }
-  .fixed {
+  &.fixed {
     position: fixed;
     right: 0;
     left: 0;

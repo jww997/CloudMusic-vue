@@ -1,20 +1,27 @@
+
 export default {
+
   play: function (state) {
     console.log('播放');
-    state.audio.play();
-    state.isPlaying = true;
+    state.audio.example.play();
+    state.audio.isPlaying = true;
   },
   pause: function (state) {
     console.log('暂停');
-    const that = this;
-    state.audio.pause();
+    state.audio.example.pause();
+    state.audio.isPlaying = false;
+  },
+  stop: function (state) {
+    console.log('停止');
+    state.audio.example.stop();
     state.isPlaying = false;
   },
-  // stop: function () {
-  //   const that = this;
-  //   that.state.audio.stop();
-  //   that.state.isPlaying = false;
-  // },
+  timeupdate: function (state, callback) { // 状态更新
+    console.log('状态更新');
+    callback && (state.audio.example.ontimeupdate = callback);
+  },
+
+
 
 
 

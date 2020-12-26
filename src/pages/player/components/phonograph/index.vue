@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ children: true, active: $store.state.isPlaying }">
+  <div :class="{ children: true, active: $store.state.audio.isPlaying }">
     <div
       class="disc"
       :style="{
@@ -22,10 +22,6 @@ export default {
       type: Object,
       default: {},
     },
-    // isPlaying: {
-    //   type: Boolean,
-    //   default: false,
-    // },
   },
   computed: {
     image: function () {

@@ -16,7 +16,13 @@
         :key="index"
         :to="{ path: '/player', query: { id: item.id } }"
       >
-        <div class="front index">{{ ++index }}</div>
+        <div
+          class="front iconfont active"
+          v-if="$store.state.audio.current.id == item.id"
+        >
+          &#xe604;
+        </div>
+        <div class="front index" v-else>{{ ++index }}</div>
         <div class="name">
           <p class="songname">
             <span class="title">{{ item.name }}</span>
@@ -24,7 +30,7 @@
           </p>
           <p class="source">{{ source(item) }}</p>
         </div>
-        <div class="iconfont">&#xe690;</div>
+        <div class="iconfont more">&#xe690;</div>
       </router-link>
     </div>
     <div class="line collect">
@@ -118,7 +124,12 @@ export default {
   }
   .list {
     .song {
+      .active {
+        font-size: .4rem;
+        color: #f00;
+      }
       .index {
+        text-align: center;
         color: #333;
       }
       .name {
@@ -141,7 +152,7 @@ export default {
           color: #666;
         }
       }
-      .iconfont {
+      .more {
         color: #666;
         margin-left: 0.3rem;
       }

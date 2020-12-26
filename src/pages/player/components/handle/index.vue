@@ -8,50 +8,124 @@
       <span class="iconfont">&#xe690;</span>
     </div>
     <div class="progress">
-      <div>00:00</div>
+      <div class="text">
+        {{ currentTime }}
+      </div>
       <div class="strip">
-        <van-progress
-          :percentage="50"
-          pivot-text=" "
-          color="#fff"
-          track-color="#494949"
-          stroke-width="1px"
+        <van-slider
+          v-model="percentage"
+          :step="10"
+          button-size="10px"
+          active-color="#f00"
+          inactive-color="#494949"
+          @change="togglePercentage"
         />
       </div>
-      <div>00:00</div>
+      <div class="text">
+        {{ duration }}
+      </div>
     </div>
     <div class="bottom">
       <span class="iconfont">&#xe600;</span>
       <span class="iconfont">&#xe663;</span>
       <span
-        :class="{ 'iconfont center': true, playing: $store.state.isPlaying }"
+        :class="{
+          'iconfont center': true,
+          playing: $store.state.audio.isPlaying,
+        }"
         @click="toggleStatus"
-        >{{ $store.state.isPlaying ? "&#xe665;" : "&#xe666;" }}
+        >{{ $store.state.audio.isPlaying ? "&#xe665;" : "&#xe666;" }}
       </span>
       <span class="iconfont">&#xe668;</span>
       <span class="iconfont">&#xe664;</span>
     </div>
+    <!-- 
+    <audio
+      ref="audio"
+      :src="$store.state.audio.example.src"
+      @timeupdate="updateTime"
+    ></audio> -->
+    <!-- <audio
+      ref="audio"
+      :src="$store.state.audio.example.src"
+      @play="$store.commit('play')"
+      @pause="$store.commit('pause')"
+      @timeupdate="updateTime"
+    ></audio> -->
   </div>
 </template>
 
 <script>
+import { mapState, mapGetters } from "vuex";
+import { formatTime } from "@/assets/js/filter.js";
 export default {
   name: "handle",
-  // props: {
-  //   isPlaying: {
-  //     type: Boolean,
-  //     default: false,
-  //   },
-  // },
+  data: function () {
+    return {
+      percentage: 0,
+      currentTime: "00:00",
+      duration: "00:00",
+    };
+  },
+  computed: {
+    // currentTime: function () {
+    //   const that = this;
+    //   return formatTime(that.$store.state.audio.example.currentTime);
+    // },
+    // duration: function () {
+    //   const that = this;
+    //   return formatTime(that.$store.state.audio.example.duration);
+    // },
+    // percentage: function () {
+    //   const that = this;
+    //   let example = that.$store.state.audio.example;
+    //   return Number.parseInt((example.currentTime / example.duration) * 100);
+    // },
+    // ...mapGetters(["currentTime", "duration"]),
+  },
+  watch: {
+    currentTime: function () {
+      const that = this;
+      let example = that.$store.state.audio.example;
+      that.percentage =
+        Number.parseFloat(example.currentTime / example.duration) * 100;
+    },
+  },
   methods: {
+    updateTime: function (event) {
+      const that = this;
+      console.log(event);
+      // that.currentTime = event.target.currentTime;
+    },
+    togglePercentage: function (val) {
+      const that = this;
+      let example = that.$store.state.audio.example;
+      example.currentTime = example.duration * (val / 100); // 根据选中百分比修改进度条
+    },
     toggleStatus: function () {
       const that = this;
-      if (!that.$store.state.isPlaying) {
+
+      // let example = that.$store.state.audio.example;
+      // console.log(example.currentTime);
+      // console.log(example.duration);
+      // console.log(example.currentTime / example.duration);
+      // that.$refs.src = that.$store.state.audio.example.src;
+      if (!that.$store.state.audio.isPlaying) {
         that.$store.commit("play");
+        // that.$refs.audio.play();
       } else {
         that.$store.commit("pause");
+        // that.$refs.audio.pause();
       }
     },
+  },
+  created: function () {
+    const that = this;
+    let example = that.$store.state.audio.example;
+    that.$store.commit("timeupdate", () => {
+      that.currentTime = formatTime(example.currentTime);
+      that.duration = formatTime(example.duration);
+    }); // 封装了一层
   },
 };
 </script>
@@ -85,8 +159,12 @@ export default {
     color: #fff;
     @include flexSpaceBetween;
     .strip {
-      flex-grow: 1;
-      margin: 0 0.3rem;
+      width: 5rem;
+    }
+    .text {
+      width: 0.7rem;
+      text-align: center;
+      @include omit;
     }
   }
   .bottom {

@@ -6,7 +6,8 @@ import {
   TabbarItem,
   Progress,
   NavBar,
-  PullRefresh
+  PullRefresh,
+  Slider,
 } from "vant";
 
 
@@ -20,3 +21,4 @@ Vue.use(TabbarItem);
 Vue.use(Progress);
 Vue.use(NavBar);
 Vue.use(PullRefresh);
+Vue.use(Slider);

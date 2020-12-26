@@ -1,8 +1,6 @@
 <template>
   <transition name="fade" :duration="1000">
-    <div
-      class="contaubn"
-    >
+    <div class="contaubn">
       <!-- v-infinite-scroll="loadMore"
       infinite-scroll-disabled="busy"
       infinite-scroll-distance="10" -->
@@ -64,7 +62,7 @@ export default {
   },
   created() {
     const that = this;
-    console.log(that.$route);
+    // console.log(that.$route);
     console.log(that.$route.params.id);
     // that.timestamp = Date.parse(new Date());
     that.getdata();

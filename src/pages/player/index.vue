@@ -12,8 +12,6 @@
       ></navbar>
       <phonograph :obj="song" :isPlaying="isPlaying"></phonograph>
       <handle :isPlaying="isPlaying"></handle>
-
-      <!-- <audio id="audio" src="http://m7.music.126.net/20201225221627/93f9982b705e6e97f20ac302ea27f12d/ymusic/782f/b210/c82d/a2403f9916efa7e3b74ca1a10301257c.mp3" v-if="url" controls="controls" autoplay></audio> -->
     </div>
   </transition>
 </template>
@@ -36,7 +34,6 @@ export default {
       songs: [],
     };
   },
-  watch: {},
   computed: {
     song: function () {
       const that = this;
@@ -55,8 +52,11 @@ export default {
         });
       })
       .then((res) => {
-        that.$store.state.audio.src = res.data.data[0].url;
-        // that.isPlaying = that.$store.state.isPlaying;
+        // that.$store.commit("pause");
+        // that.$store.state.audio.example = new Audio(res.data.data[0].url);
+        that.$store.state.audio.example.src = res.data.data[0].url;
+        that.$store.state.audio.current = res.data.data[0];
+        that.$store.commit("play");
       });
   },
 };
@@ -66,14 +66,16 @@ export default {
 @import "~styles/mixins.scss";
 @import "~styles/varibles.scss";
 .container {
+  width: 100vw;
   height: 100vh;
-  background: center no-repeat;
+  background: center no-repeat transparent;
   background-size: 0;
   // background-size: cover;
   // -webkit-backdrop-filter: saturate(180%) blur(20px);
   // backdrop-filter: saturate(180%) blur(20px);
   position: relative;
   overflow: hidden;
+  position: fixed;
   &::before,
   &::after {
     content: "";
@@ -94,25 +96,27 @@ export default {
     -webkit-filter: blur(20px);
     filter: blur(20px);
   }
-  .container {
-    height: auto;
-    &::before {
-      display: none;
-    }
-    &::after {
-      display: none;
-    }
-  }
+  // .container {
+  //   height: auto;
+  //   &::before {
+  //     display: none;
+  //   }
+  //   &::after {
+  //     display: none;
+  //   }
+  // }
 
   &.fade-enter,
   &.fade-leave-to {
-    opacity: 0;
-    transform: translateY(1rem);
+    // opacity: 0;
+    // transform: translateY(100%);
+    top: 100%;
   }
 
   &.fade-enter-to,
   &.fade-leave {
-    opacity: 1;
+    // opacity: 1;
+    top: 0;
   }
 
   &.fade-enter-active,

@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ kid: true, fixed }">
+  <div :class="{ kid: true, fixed, black }">
     <!-- <van-nav-bar
       left-arrow
       :title="title"
@@ -49,6 +49,10 @@ export default {
       type: Boolean,
       default: true,
     },
+    black: {
+      type: Boolean,
+      default: false,
+    },
   },
   methods: {
     back() {
@@ -79,15 +83,18 @@ export default {
   }
   .center {
     flex-grow: 1;
+    max-width: 5rem;
     text-align: center;
     .title {
       font-size: 0.35rem;
       font-weight: bold;
+      @include omit;
     }
     .subtitle {
       margin-top: 0.1rem;
       font-size: 0.1rem;
       color: #efefef;
+      @include omit;
     }
   }
   .icon {
@@ -117,6 +124,9 @@ export default {
     .center {
       text-align: left;
     }
+  }
+  &.black {
+    color: #000;
   }
 }
 </style>

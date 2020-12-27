@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <!-- <van-skeleton title animate :row="1" /> -->
     <div class="header">
       <div class="title">{{ uielement.subTitle.title }}</div>
       <div class="more">{{ uielement.button.text }} &gt;</div>

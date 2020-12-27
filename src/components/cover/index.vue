@@ -48,6 +48,12 @@ export default {
     background-color: $gray;
   }
   .text {
+    @include omit;
+    display: -webkit-box;
+    white-space: normal;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
     line-height: 0.3rem;
     padding-top: 0.1rem;
     font-size: 0.2rem;

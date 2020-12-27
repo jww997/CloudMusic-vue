@@ -18,7 +18,9 @@
 
     <!-- <calendar></calendar> -->
 
-    <router-view></router-view>
+    <transition name="children">
+      <router-view></router-view>
+    </transition>
 
     <tabbar></tabbar>
   </div>
@@ -30,7 +32,6 @@ import Search from "@/pages/discover/components/search";
 import Banner from "@/pages/discover/components/banner";
 import Whirligig from "@/pages/discover/components/whirligig";
 import Calendar from "@/pages/discover/components/calendar";
-
 
 export default {
   name: "discover",
@@ -82,4 +83,21 @@ export default {
 <style lang="scss" scoped>
 @import "~styles/mixins.scss";
 @import "~styles/varibles.scss";
+.container {
+  &.children-enter,
+  &.children-leave-to {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  &.children-enter-to,
+  &.children-leave {
+    opacity: 1;
+  }
+
+  &.children-enter-active,
+  &.children-leave-active {
+    transition: 0.5s;
+  }
+}
 </style>

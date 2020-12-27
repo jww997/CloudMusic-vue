@@ -1,17 +1,15 @@
 <template>
   <div class="children">
-    <div>
-      <div>推荐</div>
-      <div>官方</div>
-      <div>视频歌单</div>
-      <div>推荐</div>
-    </div>
+    <div class="line">{{ list }}</div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "tab",
+  name: "lyric",
+  props: {
+    list: {},
+  },
 };
 </script>
 
@@ -19,5 +17,12 @@ export default {
 @import "~styles/mixins.scss";
 @import "~styles/varibles.scss";
 .children {
+  height: 50vh;
+  overflow: hidden;
+  .line {
+    line-height: 0.7rem;
+    text-align: center;
+    color: #fff;
+  }
 }
 </style>

@@ -1,18 +1,28 @@
 <template>
-  <transition name="fade" :duration="1000">
-    <div class="contaubn">
-      <!-- v-infinite-scroll="loadMore"
+  <!-- <transition name="fade" :duration="1000"> -->
+  <!-- <div
+      class="container"
+      v-infinite-scroll="loadMore"
       infinite-scroll-disabled="busy"
-      infinite-scroll-distance="10" -->
-      <!-- <div v-for="item in data" :key="item.index">{{ item.name }}</div> -->
-      <navbar :title="'歌单'" fixed></navbar>
-      <cap :obj="playlist"></cap>
-      <list :obj="playlist"></list>
-    </div>
-  </transition>
+      infinite-scroll-distance="10"
+    > -->
+  <!-- <div v-for="item in data" :key="item.index">{{ item.name }}</div> -->
+  <div class="container">
+    <navbar :title="'歌单'" fixed></navbar>
+    <cap :obj="playlist"></cap>
+    <list :obj="playlist"></list>
+
+    <!-- <transition name="children">
+      <router-view></router-view>
+    </transition> -->
+  </div>
+
+  <!-- </div> -->
+  <!-- </transition> -->
 </template>
 
 <script>
+import BetterScroll from "better-scroll";
 import Navbar from "@/components/navbar";
 import Cap from "@/pages/playlist/components/cap";
 import List from "@/pages/playlist/components/list";
@@ -26,22 +36,22 @@ export default {
   data() {
     return {
       playlist: {},
-      // count: 0,
-      // data: [],
-      // busy: false,
+      count: 0,
+      data: [],
+      busy: false,
     };
   },
   methods: {
-    // loadMore: function () {
-    //   this.busy = true;
-    //   setTimeout(() => {
-    //     for (var i = 0, j = 10; i < j; i++) {
-    //       this.data.push({ name: this.count++ });
-    //     }
-    //     console.log(this.data);
-    //     this.busy = false;
-    //   }, 1000);
-    // },
+    loadMore: function () {
+      this.busy = true;
+      setTimeout(() => {
+        for (var i = 0, j = 10; i < j; i++) {
+          this.data.push({ name: this.count++ });
+        }
+        console.log(this.data);
+        this.busy = false;
+      }, 1000);
+    },
     getdata: function () {
       const that = this;
 
@@ -70,35 +80,44 @@ export default {
     // that.id = that.$route.params.id;
     // }
   },
+  mounted() {
+    const that = this;
+    console.log(that.$refs.playlist);
+
+    // let bs = new BetterScroll(that.$refs.playlist, {
+    //   movable: true,
+    //   zoom: true,
+    // });
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 @import "~styles/mixins.scss";
 @import "~styles/varibles.scss";
-.contaubn {
+.container {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: #fff;
+  @include positionCenter;
   position: fixed;
-  top: 0;
-  left: 0;
+  overflow: auto;
   z-index: 100;
 
-  &.fade-enter,
-  &.fade-leave-to {
-    opacity: 0;
-    transform: translateY(1rem);
-  }
+  // &.children-enter,
+  // &.children-leave-to {
+  //   opacity: 0;
+  //   transform: translateY(1rem);
+  // }
 
-  &.fade-enter-to,
-  &.fade-leave {
-    opacity: 1;
-  }
+  // &.children-enter-to,
+  // &.children-leave {
+  //   opacity: 1;
+  // }
 
-  &.fade-enter-active,
-  &.fade-leave-active {
-    transition: 0.5s;
-  }
+  // &.children-enter-active,
+  // &.children-leave-active {
+  //   transition: 0.5s;
+  // }
 }
 </style>

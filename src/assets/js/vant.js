@@ -8,6 +8,7 @@ import {
   NavBar,
   PullRefresh,
   Slider,
+  Skeleton,
 } from "vant";
 
 
@@ -22,3 +23,4 @@ Vue.use(Progress);
 Vue.use(NavBar);
 Vue.use(PullRefresh);
 Vue.use(Slider);
+Vue.use(Skeleton);

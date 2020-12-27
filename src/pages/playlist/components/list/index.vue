@@ -125,7 +125,7 @@ export default {
   .list {
     .song {
       .active {
-        font-size: .4rem;
+        font-size: 0.4rem;
         color: #f00;
       }
       .index {

@@ -111,6 +111,13 @@ export default {
 
 
 
+  getLyric: parameter => { // 获取歌词
+    return request("lyric", parameter);
+    /**
+     * @param id 音乐id
+     * 说明:调用此接口,传入音乐id可获得对应音乐的歌词(不需要登录)
+     */
+  },
 
 
 

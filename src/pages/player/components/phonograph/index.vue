@@ -66,8 +66,13 @@ export default {
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-play-state: paused;
+
+    overflow: hidden;
     img {
-      width: 100%;
+      width: 5rem;
+      height: 5rem; // 部分图片呈长方形
+      // max-width: 100%;
+      // max-height: 100%;
       @include positionCenter;
       transform: scale(1.1);
     }

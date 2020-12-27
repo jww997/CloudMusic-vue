@@ -36,11 +36,17 @@ const router = new Router({
           path: 'dailyspecial',
           name: 'dailyspecial',
           component: _component("dailyspecial"),
+          meta: {
+            isKeepAlive: true,
+          }
         },
         {
           path: 'square',
           name: 'square',
-          component: _component("square")
+          component: _component("square"),
+          meta: {
+            isKeepAlive: true,
+          }
         },
         {
           path: 'playlist/:id',
@@ -61,6 +67,9 @@ const router = new Router({
       path: '/player',
       name: 'player',
       component: _component("player"),
+      meta: {
+        isKeepAlive: false,
+      }
     },
 
 

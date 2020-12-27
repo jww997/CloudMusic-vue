@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="app" id="app">
     <!-- <keep-alive exclude="playlist">
       <router-view />
     </keep-alive> -->
@@ -11,10 +11,14 @@
       <router-view :key="$router.fullPath" />
     </keep-alive> -->
 
+    <!-- <transition name="app"> -->
+
     <keep-alive>
       <router-view v-if="$route.meta.isKeepAlive"></router-view>
     </keep-alive>
     <router-view v-if="!$route.meta.isKeepAlive"></router-view>
+
+    <!-- </transition> -->
 
     <!-- <tabbar></tabbar> -->
   </div>
@@ -43,5 +47,25 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "~styles/mixins.scss";
+@import "~styles/varibles.scss";
+.app {
+  &.app-enter,
+  &.app-leave-to {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  &.app-enter-to,
+  &.app-leave {
+    opacity: 1;
+  }
+
+  &.app-enter-active,
+  &.app-leave-active {
+    transition: 0.5s;
+  }
+}
 </style>
+

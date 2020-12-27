@@ -18,6 +18,10 @@ import api from "@/api"
 import store from '@/store'
 // Vue.prototype.$store = store
 
+import BScroll from '@better-scroll/core'
+import Pulldown from '@better-scroll/pull-down'
+BScroll.use(Pulldown)
+
 
 Vue.prototype.$api = api
 Vue.config.productionTip = false

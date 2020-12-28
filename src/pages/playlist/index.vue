@@ -96,13 +96,12 @@ export default {
 @import "~styles/mixins.scss";
 @import "~styles/varibles.scss";
 .container {
-  width: 100%;
-  height: 100vh;
-  background-color: #fff;
-  @include positionCenter;
-  position: fixed;
-  overflow: auto;
-  z-index: 100;
+  @include suspension;
+
+  // @include positionCenter;
+  // position: fixed;
+  // overflow: auto;
+  // z-index: 100;
 
   // &.children-enter,
   // &.children-leave-to {

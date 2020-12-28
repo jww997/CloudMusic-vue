@@ -20,15 +20,15 @@
     <div class="operation">
       <div class="item">
         <span class="iconfont">&#xe61d;</span>
-        <span class="text" v-html="formatCount(obj.subscribedCount)">收藏</span>
+        <span class="text" v-html="formatUnit(obj.subscribedCount)">收藏</span>
       </div>
       <div class="item">
         <span class="iconfont">&#xe65d;</span>
-        <span class="text" v-html="formatCount(obj.commentCount)">评论</span>
+        <span class="text" v-html="formatUnit(obj.commentCount)">评论</span>
       </div>
       <div class="item">
         <span class="iconfont">&#xe65c;</span>
-        <span class="text" v-html="formatCount(obj.shareCount)">分享</span>
+        <span class="text" v-html="formatUnit(obj.shareCount)">分享</span>
       </div>
     </div>
   </div>
@@ -36,7 +36,7 @@
 
 <script>
 import Cover from "@/components/cover";
-import { formatCount } from "@/assets/js/filter";
+import { formatUnit } from "@/assets/js/filter";
 
 export default {
   name: "Cap",
@@ -52,9 +52,9 @@ export default {
     },
   },
   methods: {
-    formatCount,
-    // formatCount(num) {
-    //   return formatCount(num)
+    formatUnit,
+    // formatUnit(num) {
+    //   return formatUnit(num)
     // },
   },
   data: function () {

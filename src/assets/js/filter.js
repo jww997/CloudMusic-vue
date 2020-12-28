@@ -1,4 +1,11 @@
-function formatCount(num) {
+export {
+  // formatCount, 
+  formatUnit,
+  formatLyric,
+  formatTime,
+}
+
+function formatUnit(num) { // 处理单位
 
   if (typeof num == 'number') {
     if (!num) {
@@ -15,7 +22,34 @@ function formatCount(num) {
 
 }
 
-function formatTime(num) {
+function formatLyric(str) { // 处理歌词
+
+  if (typeof str != 'string') return str;
+  let arr = new Array();
+  str.split("\n").forEach(item => {
+
+    if (!item) return false;
+    if (item.indexOf("]") == "-1") {
+      arr.push({
+        text: item,
+      });
+    } else {
+      let time = item.split("]").shift().substr(1, 8);
+      if (item.split("]").pop()) {
+        arr.push({
+          text: item.split("]").pop(),
+          sec: parseInt(
+            time.split(":")[0] * 60 + time.split(":")[1] * 1
+          ),
+        });
+      };
+    }
+
+  });
+  return arr;
+}
+
+function formatTime(num) { // 处理时间
 
   if (isNaN(num)) return '00:00';
   let date = new Date(num * 1000);
@@ -23,7 +57,7 @@ function formatTime(num) {
 
 }
 
-// 带下划线用于内部调用
+// 以下带下划线的，用于内部调用，不对外开放
 function _addZero(num) { // 个位数处理给时间补零 0 => 00
 
   if (isNaN(num)) return '00';
@@ -32,7 +66,3 @@ function _addZero(num) { // 个位数处理给时间补零 0 => 00
   return num;
 }
 
-export {
-  formatCount,
-  formatTime,
-}

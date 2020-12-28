@@ -99,8 +99,13 @@ export default {
     },
     togglePercentage: function (val) {
       const that = this;
-      let example = that.$store.state.audio.example;
-      example.currentTime = example.duration * (val / 100); // 根据选中百分比修改进度条
+      let audio = that.$store.state.audio;
+      let currentTime = audio.example.duration * (val / 100);
+      audio.example.currentTime = currentTime; // 根据选中百分比修改进度条
+      console.log(currentTime);
+
+      console.log(audio.lyric);
+      audio.lyric.seek(currentTime);
     },
     toggleStatus: function () {
       const that = this;
@@ -134,9 +139,11 @@ export default {
 @import "~styles/mixins.scss";
 @import "~styles/varibles.scss";
 .children {
+  flex-shrink: 0;
+  width: 100%;
   padding: 0.5rem 0;
-  @include positionCenter;
-  top: auto;
+  // @include positionCenter;
+  // top: auto;
   >>> .van-progress__pivot {
     min-width: 0.15rem;
     width: 0.15rem;

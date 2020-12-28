@@ -26,7 +26,7 @@
               :name="item.uiElement.mainTitle.title"
               :count="item.resources[0].resourceExtInfo.playCount"
             ></cover>
-            <!-- :count="formatCount(item.resources[0].resourceExtInfo.playCount)" -->
+            <!-- :count="formatUnit(item.resources[0].resourceExtInfo.playCount)" -->
           </router-link>
         </van-swipe-item>
       </div>
@@ -37,7 +37,7 @@
 <script>
 import Cover from "@/components/cover";
 
-import { formatCount } from "@/assets/js/filter";
+import { formatUnit } from "@/assets/js/filter";
 
 export default {
   name: "whirligig",
@@ -58,7 +58,7 @@ export default {
     return {};
   },
   methods: {
-    formatCount,
+    formatUnit,
   },
   mounted: function () {
     const that = this;

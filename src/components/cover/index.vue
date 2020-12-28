@@ -4,13 +4,13 @@
     <span class="text" v-if="name">{{ name }}</span>
     <div class="count" v-if="count">
       <span class="iconfont">&#xe656;</span>
-      <span>{{ formatCount(count) }}</span>
+      <span>{{ formatUnit(count) }}</span>
     </div>
   </div>
 </template>
 
 <script>
-import { formatCount } from "@/assets/js/filter";
+import { formatUnit } from "@/assets/js/filter";
 
 export default {
   name: "cover",
@@ -29,7 +29,7 @@ export default {
     },
   },
   methods: {
-    formatCount,
+    formatUnit,
   },
 };
 </script>
@@ -44,6 +44,8 @@ export default {
   flex-direction: column;
   .image {
     width: 100%;
+    // width: 2rem;
+    // height: 2rem;
     border-radius: 0.2rem;
     background-color: $gray;
   }

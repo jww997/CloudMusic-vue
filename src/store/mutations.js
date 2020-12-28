@@ -1,24 +1,38 @@
-
+import LyricParser from "lyric-parser"; // 歌词解析
 export default {
 
   play: function (state) {
     console.log('播放');
-    state.audio.example.play();
     state.audio.isPlaying = true;
+    state.audio.example.play();
+    state.audio.lyric.play();
   },
   pause: function (state) {
     console.log('暂停');
-    state.audio.example.pause();
     state.audio.isPlaying = false;
+    state.audio.example.pause();
+    state.audio.lyric.stop();
   },
   stop: function (state) {
     console.log('停止');
-    state.audio.example.stop();
     state.isPlaying = false;
+    state.audio.example.stop();
+    state.audio.lyric.stop();
   },
   timeupdate: function (state, callback) { // 状态更新
     console.log('状态更新');
     callback && (state.audio.example.ontimeupdate = callback);
+  },
+
+  lyric: function (state, lyric) {
+    console.log(state);
+    console.log(lyric);
+    if (!lyric) return;
+    // if (!lyric) lyric = state.lyric;
+    return new LyricParser(lyric, function ({ lineNum, txt }) {
+      console.log(`lineNum = ${lineNum}, txt = ${txt}`);
+      state.audio.lyric.curLine = lineNum; // 歌词实时下标
+    })
   },
 
 

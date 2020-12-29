@@ -9,6 +9,8 @@ var _vue = _interopRequireDefault(require("vue"));
 
 var _vuex = _interopRequireDefault(require("vuex"));
 
+var _state = _interopRequireDefault(require("@/store/state.js"));
+
 var _getters = _interopRequireDefault(require("@/store/getters.js"));
 
 var _mutations = _interopRequireDefault(require("@/store/mutations.js"));
@@ -20,19 +22,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 _vue["default"].use(_vuex["default"]);
 
 var store = new _vuex["default"].Store({
-  state: {
-    // keepAlives: ['Discover', 'Player'], // 保存缓存的列表
-    audio: {
-      example: new Audio(),
-      // 实例
-      isPlaying: false,
-      current: {},
-      // 当前播放的音乐信息
-      lyric: {} // 歌词
-
-    }
-  },
-  // getters,
+  state: _state["default"],
+  getters: _getters["default"],
   mutations: _mutations["default"],
   actions: _actions["default"]
 });

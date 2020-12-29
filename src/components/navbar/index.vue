@@ -68,6 +68,7 @@ export default {
 @import "~styles/mixins.scss";
 @import "~styles/varibles.scss";
 .kid {
+  flex-shrink: 0;
   width: 100%;
   height: 1rem;
   padding: 0.2rem 0.3rem;

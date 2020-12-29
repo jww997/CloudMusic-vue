@@ -2,15 +2,15 @@
   <div
     class="children"
     :style="{
-      transform: `translateY(-${0.7 * $store.state.audio.lyric.curLine}rem)`,
+      transform: `translateY(-${0.7 * lyric.curLine}rem)`,
     }"
   >
     <div
       :class="{
         line: true,
-        active: index == $store.state.audio.lyric.curLine,
+        active: index == lyric.curLine,
       }"
-      v-for="(item, index) in $store.state.audio.lyric.lines"
+      v-for="(item, index) in lyric.lines"
       :key="index"
       :data-time="item.time"
     >
@@ -22,6 +22,12 @@
 <script>
 export default {
   name: "lyric",
+  props: {
+    lyric: {
+      type: Object,
+      default: {},
+    },
+  },
 };
 </script>
 

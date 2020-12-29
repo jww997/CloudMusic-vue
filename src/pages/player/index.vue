@@ -11,7 +11,7 @@
     ></navbar>
     <div class="song" @click="toggleShowLyric">
       <!-- <transition name="fade"> -->
-      <lyric v-show="isShowLyric"></lyric>
+      <lyric :lyric="lyric" v-show="isShowLyric"></lyric>
       <phonograph
         :obj="song"
         :isPlaying="isPlaying"
@@ -19,7 +19,11 @@
       ></phonograph>
       <!-- </transition> -->
     </div>
-    <handle :isPlaying="isPlaying"></handle>
+    <handle
+      :lyric="lyric"
+      @seekLyric="seekLyric"
+      :isPlaying="isPlaying"
+    ></handle>
   </div>
 </template>
 
@@ -44,7 +48,7 @@ export default {
       isPlaying: that.$store.state.isPlaying,
       isShowLyric: true,
       songs: [],
-      // lyric: [],
+      lyric: {},
     };
   },
   computed: {
@@ -57,11 +61,23 @@ export default {
     toggleShowLyric: function () {
       const that = this;
       that.isShowLyric = !that.isShowLyric;
+      that.lyric.togglePlay();
+    },
+    seekLyric: function (time) {
+      const that = this;
+      that.lyric.seek(time);
+    },
+    setLyric: function ({ lineNum, txt }) {
+      const that = this;
+      console.log(`lineNum = ${lineNum}, txt = ${txt}`);
+      that.lyric.curLine = lineNum; // 歌词实时下标
     },
   },
   created: function () {
     const that = this;
     let id = that.$route.query.id;
+    console.log("创建");
+    console.log(that.lyric);
     that.$api
       .getSongDetail({ ids: id })
       .then((res) => {
@@ -71,16 +87,24 @@ export default {
         });
       })
       .then((res) => {
-        that.$store.state.audio.example.src = res.data.data[0].url;
-        that.$store.state.audio.example.autoplay = true;
         that.$store.state.audio.current = res.data.data[0];
+        that.$store.state.audio.example.src = res.data.data[0].url;
+        // that.$store.state.audio.example.autoplay = true;
         return that.$api.getLyric({
           id: that.song.id,
         });
       })
       .then((res) => {
         let lyric = res.data.lrc.lyric;
-        let audio = that.$store.state.audio;
+        try {
+          clearInterval(that.lyric.timer); // 清掉没用的
+        } catch (e) {}
+        that.lyric = new LyricParser(lyric, that.setLyric);
+
+        that.$store.commit("play");
+        that.lyric.play();
+
+        // let audio = that.$store.state.audio;
         // debugger;
         // console.log(that.$store.getters.lyric);
         // debugger;
@@ -92,20 +116,21 @@ export default {
         // console.log(getLyric(lyric));
 
         // audio.lyric = getLyric(lyric);
-        audio.lyric = new LyricParser(lyric, function ({ lineNum, txt }) {
-          console.log(`lineNum = ${lineNum}, txt = ${txt}`);
-          audio.lyric.curLine = lineNum; // 歌词实时下标
-        });
-        that.$store.commit("play");
+
+        // that.$store.commit("canplay", () => {
+        //   that.$store.state.audio.lyric.play();;
+        // });
       });
   },
-  // mounted: function () {
-  //   const that = this;
-  //   setTimeout(() => {
-  //     that.$store.commit("play");
-  //     // that.$store.lyric.play();
-  //   }, 1000);
-  // },
+  mounted: function () {
+    const that = this;
+    console.log("创建");
+    console.log(that.lyric);
+    //   setTimeout(() => {
+    //     that.$store.commit("play");
+    //     // that.$store.lyric.play();
+    // }, 1000);
+  },
 };
 </script>
 

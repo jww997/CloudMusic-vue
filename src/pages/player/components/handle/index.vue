@@ -67,6 +67,12 @@ export default {
       duration: "00:00",
     };
   },
+  props: {
+    lyric: {
+      type: Object,
+      default: {},
+    },
+  },
   computed: {
     // currentTime: function () {
     //   const that = this;
@@ -92,20 +98,17 @@ export default {
     },
   },
   methods: {
-    updateTime: function (event) {
-      const that = this;
-      console.log(event);
-      // that.currentTime = event.target.currentTime;
-    },
+    // updateTime: function (event) {
+    //   const that = this;
+    //   console.log(event);
+    //   // that.currentTime = event.target.currentTime;
+    // },
     togglePercentage: function (val) {
       const that = this;
       let audio = that.$store.state.audio;
       let currentTime = audio.example.duration * (val / 100);
       audio.example.currentTime = currentTime; // 根据选中百分比修改进度条
-      console.log(currentTime);
-
-      console.log(audio.lyric);
-      audio.lyric.seek(currentTime);
+      that.$emit("seekLyric", currentTime * 1000); // 接收秒数，要处理下
     },
     toggleStatus: function () {
       const that = this;
@@ -117,9 +120,11 @@ export default {
       // that.$refs.src = that.$store.state.audio.example.src;
       if (!that.$store.state.audio.isPlaying) {
         that.$store.commit("play");
+        that.lyric.play();
         // that.$refs.audio.play();
       } else {
         that.$store.commit("pause");
+        that.lyric.pause();
         // that.$refs.audio.pause();
       }
     },

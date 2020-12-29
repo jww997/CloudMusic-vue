@@ -96,6 +96,7 @@ export default {
       })
       .then((res) => {
         let lyric = res.data.lrc.lyric;
+        if (!lyric) return false;
         try {
           clearInterval(that.lyric.timer); // 清掉没用的
         } catch (e) {}
@@ -130,6 +131,11 @@ export default {
     //     that.$store.commit("play");
     //     // that.$store.lyric.play();
     // }, 1000);
+  },
+
+  destroyed: function () {
+    const that = this;
+    console.log("销毁");
   },
 };
 </script>
@@ -183,7 +189,22 @@ export default {
   .song {
     // height: 10rem;
     flex-grow: 1;
+
+    mask-image: linear-gradient(
+      rgba(255, 255, 255, 0),
+      #fff 40%,
+      #fff 60%,
+      rgba(255, 255, 255, 0)
+    );
+    -webkit-mask-image: linear-gradient(
+      rgba(255, 255, 255, 0),
+      #fff 40%,
+      #fff 60%,
+      rgba(255, 255, 255, 0)
+    );
+
     overflow: hidden;
+
     // flex-basis: 10rem;
 
     // &.fade-enter,

@@ -1,5 +1,11 @@
-import LyricParser from "lyric-parser"; // 歌词解析
+// import LyricParser from "lyric-parser"; // 歌词解析
 export default {
+
+
+  init: function (state) {
+    const that = this;
+  },
+
 
   play: function (state) {
     console.log('播放');
@@ -13,21 +19,40 @@ export default {
     state.audio.example.pause();
     // state.audio.lyric.stop();
   },
-  // stop: function (state) {
-  //   console.log('停止');
-  //   state.isPlaying = false;
-  //   state.audio.example.stop();
-  //   state.audio.lyric.stop();
-  // },
+  stop: function (state) {
+    console.log('停止');
+    state.isPlaying = false;
+    state.audio.example.pause();
+    //   state.audio.lyric.stop();
+  },
   // canplay: function (state, callback) {
   //   console.log('可播放状态');
   //   // state.audio.lyric.play();
   //   callback && (state.audio.example.oncanplay = callback);
   // },
-  timeupdate: function (state, callback) { // 状态更新
-    console.log('状态更新');
+
+
+
+
+
+
+
+
+
+  timeupdate: function (state, callback) { // 播放时间改变
     callback && (state.audio.example.ontimeupdate = callback);
   },
+  ended: function (state, callback) { // 播放结束
+    console.log('播放结束');
+    callback && (state.audio.example.ended = callback);
+  },
+
+
+
+
+
+
+
 
   // lyric: function (state, lyric) {
   //   console.log(state);

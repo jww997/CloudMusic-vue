@@ -124,7 +124,7 @@ export default {
         // that.$refs.audio.play();
       } else {
         that.$store.commit("pause");
-        that.lyric.pause();
+        that.lyric.stop();
         // that.$refs.audio.pause();
       }
     },
@@ -135,7 +135,11 @@ export default {
     that.$store.commit("timeupdate", () => {
       that.currentTime = formatTime(example.currentTime);
       that.duration = formatTime(example.duration);
-    }); // 封装了一层
+    }); // 播放时间更新
+    that.$store.commit("ended", () => {
+      that.$store.commit("pause");
+      //   that.lyric.stop();
+    }); // 歌曲结束处理
   },
 };
 </script>

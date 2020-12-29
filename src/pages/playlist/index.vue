@@ -82,7 +82,7 @@ export default {
   },
   mounted() {
     const that = this;
-    console.log(that.$refs.playlist);
+    // console.log(that.$refs.playlist);
 
     // let bs = new BetterScroll(that.$refs.playlist, {
     //   movable: true,

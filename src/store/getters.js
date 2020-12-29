@@ -26,11 +26,11 @@ export default {
 
 
     // audio: {
-        audio: function (state) {
-            console.log("getters 生成实例");
-            console.log(state);
+    audio: function (state) {
+        console.log("getters 生成实例");
+        console.log(state);
 
 
-        }
+    }
     // }
 }

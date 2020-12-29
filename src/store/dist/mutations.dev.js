@@ -4,13 +4,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-
-var _lyricParser = _interopRequireDefault(require("lyric-parser"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-// 歌词解析
+// import LyricParser from "lyric-parser"; // 歌词解析
 var _default = {
+  init: function init(state) {
+    var that = this;
+  },
   play: function play(state) {
     console.log('播放');
     state.audio.isPlaying = true;
@@ -21,21 +19,24 @@ var _default = {
     state.audio.isPlaying = false;
     state.audio.example.pause(); // state.audio.lyric.stop();
   },
-  // stop: function (state) {
-  //   console.log('停止');
-  //   state.isPlaying = false;
-  //   state.audio.example.stop();
-  //   state.audio.lyric.stop();
-  // },
+  stop: function stop(state) {
+    console.log('停止');
+    state.isPlaying = false;
+    state.audio.example.pause(); //   state.audio.lyric.stop();
+  },
   // canplay: function (state, callback) {
   //   console.log('可播放状态');
   //   // state.audio.lyric.play();
   //   callback && (state.audio.example.oncanplay = callback);
   // },
   timeupdate: function timeupdate(state, callback) {
-    // 状态更新
-    console.log('状态更新');
+    // 播放时间改变
     callback && (state.audio.example.ontimeupdate = callback);
+  },
+  ended: function ended(state, callback) {
+    // 播放结束
+    console.log('播放结束');
+    callback && (state.audio.example.ended = callback);
   } // lyric: function (state, lyric) {
   //   console.log(state);
   //   console.log(lyric);

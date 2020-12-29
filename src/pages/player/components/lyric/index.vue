@@ -16,6 +16,7 @@
     >
       {{ item.txt }}
     </div>
+    <div class="line active" v-if="!lyric.lines">暂无歌词</div>
   </div>
 </template>
 

@@ -34,6 +34,7 @@ import Navbar from "@/components/navbar";
 import Phonograph from "./components/phonograph";
 import Handle from "./components/handle";
 import Lyric from "./components/lyric";
+import { mapMutations } from "vuex";
 export default {
   name: "player",
   components: {
@@ -72,6 +73,7 @@ export default {
       console.log(`lineNum = ${lineNum}, txt = ${txt}`);
       that.lyric.curLine = lineNum; // 歌词实时下标
     },
+    ...mapMutations({ setPlayUrl: "SET_PLAY_URL" }),
   },
   created: function () {
     const that = this;
@@ -87,8 +89,14 @@ export default {
         });
       })
       .then((res) => {
-        that.$store.state.audio.current = res.data.data[0];
-        that.$store.state.audio.example.src = res.data.data[0].url;
+        // that.$store.state.audio.current = res.data.data[0];
+        // that.$store.state.audio.example.src = res.data.data[0].url;
+
+        let url = res.data.data[0].url;
+        that.setPlayUrl(url);
+        console.log(that.$store.getters);
+        console.log(that.$store.state);
+
         // that.$store.state.audio.example.autoplay = true;
         return that.$api.getLyric({
           id: that.song.id,

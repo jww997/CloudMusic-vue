@@ -71,7 +71,7 @@ export default {
   flex-shrink: 0;
   width: 100%;
   height: 1rem;
-  padding: 0.2rem 0.3rem;
+  padding: 0 0.3rem;
   box-sizing: border-box;
   color: #fff;
   z-index: 100;

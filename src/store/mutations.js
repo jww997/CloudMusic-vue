@@ -1,5 +1,36 @@
-// import LyricParser from "lyric-parser"; // 歌词解析
+import types from "./mutation-types.js"
 export default {
+
+  [types.SET_PLAY_URL](state, url) {
+    state.playUrl = url;
+  },
+  [types.SET_PLAY_INDEX](state, index) {
+    state.playIndex = index;
+  },
+  [types.SET_PLAYLIST](state, list) {
+    state.playlist = list;
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   timeupdate: function (state, callback) { // 播放时间改变
     callback && (state.audio.example.ontimeupdate = callback);
@@ -62,7 +93,7 @@ export default {
   //   })
   // },
 
-
+  // import LyricParser from "lyric-parser"; // 歌词解析
 
 
 }

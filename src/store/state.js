@@ -11,10 +11,16 @@ export default {
 
   isPlaying: false, // 播放状态
 
-  playIndex: 0, // 当前下标
-  playlist: [], // 播放列表
   playOrder: [], // 播放顺序
 
   lyric: {}, // 歌词
+
+
+
+
+
+  playUrl: "",
+  playIndex: 0, // 播放下标
+  playlist: [], // 播放列表
 
 }

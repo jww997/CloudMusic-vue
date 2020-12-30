@@ -1,0 +1,5 @@
+export default {
+  SET_PLAY_URL: "SET_PLAY_URL",
+  SET_PLAY_INDEX: "SET_PLAY_INDEX",
+  SET_PLAYLIST: "SET_PLAYLIST",
+}

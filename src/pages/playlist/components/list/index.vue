@@ -50,6 +50,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import { toPages } from "@/assets/js/skip.js";
 export default {
   name: "List",
@@ -67,7 +68,11 @@ export default {
     },
   },
   methods: {
-    toPages,
+    toPages: function (path, query) {
+      const that = this;
+      // that.insertSong();
+      toPages.call(that, path, query);
+    },
     source: function (res) {
       const that = this;
       let { ar, al } = res,
@@ -78,6 +83,7 @@ export default {
         });
       return `${singer} - ${al.name}`;
     },
+    ...mapActions(["insertSong"]),
   },
 };
 </script>

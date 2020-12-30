@@ -1,6 +1,39 @@
 // import { formatTime, formatLyric } from "@/assets/js/filter.js";
-import LyricParser from "lyric-parser"; // 歌词解析
+
 export default {
+
+
+    playUrl: state => { return state.playUrl },
+    playIndex: state => { return state.playIndex },
+    playlist: state => { return state.playlist },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // currentTime: function (state) {
     //     return formatTime(state.audio.example.currentTime);
     // },
@@ -26,11 +59,11 @@ export default {
 
 
     // audio: {
-    audio: function (state) {
-        console.log("getters 生成实例");
-        console.log(state);
+    // audio: function (state) {
+    //     console.log("getters 生成实例");
+    //     console.log(state);
 
 
-    }
+    // }
     // }
 }

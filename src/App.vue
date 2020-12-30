@@ -4,12 +4,17 @@
       <router-view v-if="$route.meta.isKeepAlive"></router-view>
     </keep-alive>
     <router-view v-if="!$route.meta.isKeepAlive"></router-view>
+    <music></music>
   </div>
 </template>
 
 <script>
+import Music from "@/components/music";
 export default {
   name: "App",
+  components: {
+    Music,
+  },
   mounted: function () {
     const that = this;
     let date = new Date();

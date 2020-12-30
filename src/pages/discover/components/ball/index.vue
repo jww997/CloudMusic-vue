@@ -60,8 +60,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~styles/mixins.scss";
-@import "~styles/varibles.scss";
+@import "~sass/mixins.scss";
+@import "~sass/varibles.scss";
 .container {
   height: 1.5rem;
   margin-top: 0.3rem;

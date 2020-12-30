@@ -67,8 +67,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~styles/mixins.scss";
-@import "~styles/varibles.scss";
+@import "~sass/mixins.scss";
+@import "~sass/varibles.scss";
 .container {
   padding-bottom: 0.2rem;
   border-bottom: 0.15rem solid #eee;

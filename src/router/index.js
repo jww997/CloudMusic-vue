@@ -1,23 +1,14 @@
+/**
+ * @Author: Gavin
+ * @Begin: 2020-12-30 10:49:29
+ * @Update: 2020-12-30 10:49:29
+ * @Update log: 路由
+ */
 import Vue from 'vue'
 import Router from 'vue-router'
-// import Discover from '@/pages/discover'
-// import Playlist from '@/pages/playlist'
-// import Player from '@/pages/player'
-// import Mine from '@/pages/mine'
 
-Vue.use(Router)
-
-
-const _component = (name) => {
-  return (resolve) => {
-    import(`@/pages/${name}`)
-      .then((module) => {
-        resolve(module)
-      })
-  }
-}
-
-const router = new Router({
+Vue.use(Router);
+export default new Router({
   mode: 'history',
   routes: [
     {
@@ -71,28 +62,34 @@ const router = new Router({
         isKeepAlive: false,
       }
     },
-
-
-
-
-    // {
-    //   path: '/playlist/:id',
-    //   name: 'playlist',
-    //   component: resolve => require(['@/pages/playlist'], resolve),
-    //   meta: {
-    //     isKeepAlive: false,
-    //   },
-    // },
-
-
-
-
-
-
   ]
 });
 
-export default router;
+function _component(name) {
+  return (resolve) => {
+    import(`@/pages/${name}`)
+      .then((module) => {
+        resolve(module)
+      })
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // export default new Router({
 //   mode: 'hash',

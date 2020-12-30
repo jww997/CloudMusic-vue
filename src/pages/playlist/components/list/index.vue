@@ -10,12 +10,13 @@
       <div class="iconfont">&#xe65a;</div>
     </div>
     <div class="list">
-      <router-link
+      <div
         class="line song"
+        @click="toPages('/player', { id: item.id })"
         v-for="(item, index) in obj.tracks"
-        :key="index"
-        :to="{ path: '/player', query: { id: item.id } }"
+        :key="item.id"
       >
+        <!-- :to="{ path: '/player', query: { id: item.id } }" -->
         <div
           class="front iconfont active"
           v-if="$store.state.audio.current.id == item.id"
@@ -31,7 +32,7 @@
           <p class="source">{{ source(item) }}</p>
         </div>
         <div class="iconfont more">&#xe690;</div>
-      </router-link>
+      </div>
     </div>
     <div class="line collect">
       <div class="portrait">
@@ -49,6 +50,7 @@
 </template>
 
 <script>
+import { toPages } from "@/assets/js/skip.js";
 export default {
   name: "List",
   props: {
@@ -65,6 +67,7 @@ export default {
     },
   },
   methods: {
+    toPages,
     source: function (res) {
       const that = this;
       let { ar, al } = res,
@@ -80,8 +83,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~styles/mixins.scss";
-@import "~styles/varibles.scss";
+@import "~sass/mixins.scss";
+@import "~sass/varibles.scss";
 .children {
   .line {
     padding: 0.2rem 0.3rem;

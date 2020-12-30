@@ -2,40 +2,24 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+import store from './store'
 import router from './router'
 
-import 'styles/reset.css'
-import 'styles/border.css'
-import 'styles/iconfont.css'
+import 'css/reset.css'
+import 'css/border.css'
+import 'css/iconfont.css'
 
-import '@/assets/js/vant.js'
-import '@/assets/js/filter.js'
-
-
-// import '@/assets/js/axios.js'
-
-import api from "@/api"
-import store from '@/store'
-// Vue.prototype.$store = store
-
-import BScroll from '@better-scroll/core'
-import Pulldown from '@better-scroll/pull-down'
-BScroll.use(Pulldown)
-
-
-Vue.prototype.$api = api
-Vue.config.productionTip = false
-
-import infiniteScroll from 'vue-infinite-scroll'
-Vue.use(infiniteScroll)
+import 'js/thirdparty.js' // 第三方整合
+import 'js/filter.js' // 格式化操作
+import 'js/skip.js' // 跳转操作
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  store,
   router,
   components: { App },
   template: '<App/>',
-  store,
 })
 
 

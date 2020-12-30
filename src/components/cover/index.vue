@@ -35,8 +35,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~styles/mixins.scss";
-@import "~styles/varibles.scss";
+@import "~sass/mixins.scss";
+@import "~sass/varibles.scss";
 
 .kid {
   position: relative;

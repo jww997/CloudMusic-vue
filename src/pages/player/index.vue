@@ -9,7 +9,7 @@
       :subtitle="song.ar[0].name"
       :fixed="false"
     ></navbar>
-    <div class="song" @click="toggleShowLyric">
+    <div :class="{ song: true, lyric: isShowLyric }" @click="toggleShowLyric">
       <!-- <transition name="fade"> -->
       <lyric :lyric="lyric" v-show="isShowLyric"></lyric>
       <phonograph
@@ -141,8 +141,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~styles/mixins.scss";
-@import "~styles/varibles.scss";
+@import "~sass/mixins.scss";
+@import "~sass/varibles.scss";
 .container {
   @include suspension;
   @include flexSpaceBetween;
@@ -190,20 +190,35 @@ export default {
     // height: 10rem;
     flex-grow: 1;
 
-    mask-image: linear-gradient(
-      rgba(255, 255, 255, 0),
-      #fff 40%,
-      #fff 60%,
-      rgba(255, 255, 255, 0)
-    );
-    -webkit-mask-image: linear-gradient(
-      rgba(255, 255, 255, 0),
-      #fff 40%,
-      #fff 60%,
-      rgba(255, 255, 255, 0)
-    );
+    // mask-image: linear-gradient(
+    //   rgba(255, 255, 255, 0),
+    //   #fff 40%,
+    //   #fff 60%,
+    //   rgba(255, 255, 255, 0)
+    // );
+    // -webkit-mask-image: linear-gradient(
+    //   rgba(255, 255, 255, 0),
+    //   #fff 40%,
+    //   #fff 60%,
+    //   rgba(255, 255, 255, 0)
+    // );
 
     overflow: hidden;
+
+    &.lyric {
+      mask-image: linear-gradient(
+        rgba(255, 255, 255, 0),
+        #fff 40%,
+        #fff 60%,
+        rgba(255, 255, 255, 0)
+      );
+      -webkit-mask-image: linear-gradient(
+        rgba(255, 255, 255, 0),
+        #fff 40%,
+        #fff 60%,
+        rgba(255, 255, 255, 0)
+      );
+    }
 
     // flex-basis: 10rem;
 

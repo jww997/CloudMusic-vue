@@ -1,3 +1,9 @@
+/**
+ * @Author: Gavin
+ * @Begin: 2020-12-30 10:49:29
+ * @Update: 2020-12-30 10:49:29
+ * @Update log: 格式化操作
+ */
 export {
   // formatCount, 
   formatUnit,

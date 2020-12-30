@@ -4,43 +4,37 @@ var _vue = _interopRequireDefault(require("vue"));
 
 var _App = _interopRequireDefault(require("./App"));
 
+var _store = _interopRequireDefault(require("./store"));
+
 var _router = _interopRequireDefault(require("./router"));
 
-require("styles/reset.css");
+require("css/reset.css");
 
-require("styles/border.css");
+require("css/border.css");
 
-require("styles/iconfont.css");
+require("css/iconfont.css");
 
-require("@/assets/js/vant.js");
+require("js/thirdparty.js");
 
-require("@/assets/js/filter.js");
+require("js/filter.js");
 
-var _api = _interopRequireDefault(require("@/api"));
-
-var _store = _interopRequireDefault(require("@/store"));
-
-var _vueInfiniteScroll = _interopRequireDefault(require("vue-infinite-scroll"));
+require("js/skip.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-// import '@/assets/js/axios.js'
-// Vue.prototype.$store = store
-_vue["default"].prototype.$api = _api["default"];
-_vue["default"].config.productionTip = false;
+// 第三方整合
+// 格式化操作
+// 跳转操作
 
-_vue["default"].use(_vueInfiniteScroll["default"]);
 /* eslint-disable no-new */
-
-
 new _vue["default"]({
   el: '#app',
+  store: _store["default"],
   router: _router["default"],
   components: {
     App: _App["default"]
   },
-  template: '<App/>',
-  store: _store["default"]
+  template: '<App/>'
 });

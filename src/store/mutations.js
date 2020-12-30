@@ -1,18 +1,39 @@
 // import LyricParser from "lyric-parser"; // 歌词解析
 export default {
 
-
-  init: function (state) {
-    const that = this;
+  timeupdate: function (state, callback) { // 播放时间改变
+    callback && (state.audio.example.ontimeupdate = callback);
   },
+  ended: function (state, callback) { // 播放结束
+    callback && (state.audio.example.ended = callback);
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   play: function (state) {
     console.log('播放');
     state.audio.isPlaying = true;
     state.audio.example.play();
-    // state.audio.lyric.play();
   },
+
+
+
+
+
+
+
   pause: function (state) {
     console.log('暂停');
     state.audio.isPlaying = false;
@@ -30,30 +51,6 @@ export default {
   //   // state.audio.lyric.play();
   //   callback && (state.audio.example.oncanplay = callback);
   // },
-
-
-
-
-
-
-
-
-
-  timeupdate: function (state, callback) { // 播放时间改变
-    callback && (state.audio.example.ontimeupdate = callback);
-  },
-  ended: function (state, callback) { // 播放结束
-    console.log('播放结束');
-    callback && (state.audio.example.ended = callback);
-  },
-
-
-
-
-
-
-
-
   // lyric: function (state, lyric) {
   //   console.log(state);
   //   console.log(lyric);
@@ -68,31 +65,4 @@ export default {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // keepAlivesPush(state, component) {
-  //   // 对指定组件进行动态更改缓存（缓存）--组件调用该方法时，判断该组件是否存在于该缓存数组，无则添加
-  //   let keepAlives = state.keepAlives;
-  //   !keepAlives.includes(component) && keepAlives.push(component);
-  // },
-  // keepAlivesDel(state, component) {
-  //   // 对指定组件进行动态更改缓存（不缓存）--组件调用该方法时，从缓存数组中删除对应的组件元素
-  //   let keepAlives = state.keepAlives;
-  //   let index = keepAlives.indexOf(component);
-  //   index > -1 && keepAlives.splice(index, 1);
-  // },
 }

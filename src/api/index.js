@@ -1,19 +1,18 @@
-
-import Vue from 'vue'
+/**
+ * @Author: Gavin
+ * @Begin: 2020-12-30 10:49:29
+ * @Update: 2020-12-30 10:49:29
+ * @Update log: 接口整合
+ */
 import axios from 'axios'
-import VueAxios from 'vue-axios'
-
-Vue.use(VueAxios, axios);
 
 
-// Vue.config.devtools = true
 // axios.defaults.timeout = 5000; // 默认5s超时
 // axios.defaults.baseURL = 'http://49.234.76.196:3000/';
 // // axios.defaults.baseURL = 'http://localhost:3000/';
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 const limit = 20;
-
 const api = "http://www.mikonchen.top:3000/";
 // let api = "http://49.234.76.196:3000/";
 // let api = "http://49.234.76.196:3000/";

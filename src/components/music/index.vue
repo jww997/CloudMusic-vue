@@ -1,32 +1,92 @@
 <template>
   <div class="kid">
-    <audio :src="playUrl" autoplay></audio>
+    <audio
+      ref="audio"
+      :src="playUrl"
+      @ended="ended"
+      @canplay="canplay"
+      @timeupdate="timeupdate"
+    ></audio>
   </div>
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   name: "music",
-  data: function () {
-    return {
-      playUrl:
-        "http://m801.music.126.net/20201230171126/d37ae51ef9c407e562a39b935ec271d1/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/5257094924/a140/bc04/5af7/93293d890b670d4ed8b1012c045dafea.mp3",
-    };
+  computed: {
+    ...mapGetters([
+      "playUrl",
+      "playState",
+      "playIndex",
+      "playlist",
+
+      "currentTime",
+      "duration",
+    ]),
   },
-  // computed: {
-  //   ...mapState["playUrl"],
-  // },
-  // watch: {
-  //   playUrl: function () {
-  //     const that = this;
-  //     console.log(111111111111);
-  //     console.log(that.playUrl);
-  //   },
-  // },
-  mounted: function () {
-    const that = this;
-    console.log(that.playUrl);
+  watch: {
+    playState: function (val) {
+      const that = this;
+      let audio = that.$refs.audio;
+      val ? audio.play() : audio.pause();
+    },
+    playIndex: function (val) {
+      const that = this;
+      try {
+        that.$api
+          .getSongUrl({
+            id: that.playlist[that.playIndex].id,
+          })
+          .then((res) => {
+            let url = res.data.data[0].url;
+            that.setPlayUrl(url);
+          });
+      } catch (error) {
+        console.log("你该充钱了");
+        console.log(error);
+      }
+    },
+    playUrl: function (val) {
+      const that = this;
+      console.log(`源 => ${val}`);
+      audio.play();
+    },
+  },
+  methods: {
+    canplay: function (event) {
+      console.log("开始 你的表演 ---------------------------------");
+      const that = this;
+      let audio = that.$refs.audio;
+      that.setPlayState(true);
+      audio.play();
+    },
+    ended: function () {
+      console.log("结束 你的表演 ---------------------------------");
+      const that = this;
+      let audio = that.$refs.audio;
+      that.setPlayState(false);
+      audio.pause();
+
+      console.log("继续 你的表演 ---------------------------------");
+      console.log(that.setPlayIndex);
+      console.log(that.playIndex++);
+      // setPlayIndex(that.playIndex++);
+    },
+    timeupdate: function () {
+      const that = this;
+      let audio = that.$refs.audio;
+      that.currentTime != audio.currentTime &&
+        that.setCurrentTime(audio.currentTime);
+      that.duration != audio.duration && that.setDuration(audio.duration);
+    },
+    ...mapMutations({
+      setPlayUrl: "SET_PLAY_URL",
+      setCurrentTime: "SET_CURRENTTIME",
+      setDuration: "SET_DURATION",
+      setPlayState: "SET_PLAY_STATE",
+      setPlayIndex: "SET_PLAY_INDEX",
+    }),
   },
 };
 </script>

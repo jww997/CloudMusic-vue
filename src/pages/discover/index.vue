@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <search></search>
-
+    
     <div v-for="(item, index) in blocks" :key="index">
       <banner
         :ball="ball"

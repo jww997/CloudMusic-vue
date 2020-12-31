@@ -1,12 +1,12 @@
 <template>
-  <div :class="{ children: true, active: $store.state.audio.isPlaying }">
+  <div :class="{ children: true, active: playState }">
     <div
       class="disc"
       :style="{
         backgroundImage: 'url(' + require('@/assets/images/chassis.png') + ')',
       }"
     >
-      <img class="cover" :src="obj.al.picUrl" />
+      <img class="cover" :src="phonograph.al.picUrl" />
       <!-- <img class="lid" :src="require('@/assets/images/lid.png')" /> -->
       <img class="light" :src="require('@/assets/images/light.png')" />
     </div>
@@ -15,10 +15,11 @@
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   name: "phonograph",
   props: {
-    obj: {
+    phonograph: {
       type: Object,
       default: {},
     },
@@ -26,9 +27,10 @@ export default {
   computed: {
     image: function () {
       const that = this;
-      let al = that.obj && that.obj.al;
+      let al = that.phonograph && that.phonograph.al;
       return al && al.picUrl;
     },
+    ...mapGetters(["playState"]),
   },
 };
 </script>

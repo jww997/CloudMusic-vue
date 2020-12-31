@@ -54,7 +54,6 @@ export default {
     },
     getdata: function () {
       const that = this;
-
       let id = that.$route.params.id;
       that.$api.getPlaylistDetail({ id }).then((res) => {
         that.playlist = res.data.playlist;
@@ -72,23 +71,25 @@ export default {
   },
   created() {
     const that = this;
-    // console.log(that.$route);
-    console.log(that.$route.params.id);
-    // that.timestamp = Date.parse(new Date());
+    console.log(`id = ${that.$route.params.id}`);
     that.getdata();
+
+
+    // console.log(that.$route);
+    // that.timestamp = Date.parse(new Date());
     // if (that.$route.query) {
     // that.id = that.$route.params.id;
     // }
   },
-  mounted() {
-    const that = this;
-    // console.log(that.$refs.playlist);
+  // mounted() {
+  //   const that = this;
+  // console.log(that.$refs.playlist);
 
-    // let bs = new BetterScroll(that.$refs.playlist, {
-    //   movable: true,
-    //   zoom: true,
-    // });
-  },
+  // let bs = new BetterScroll(that.$refs.playlist, {
+  //   movable: true,
+  //   zoom: true,
+  // });
+  // },
 };
 </script>
 

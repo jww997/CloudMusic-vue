@@ -9,7 +9,7 @@
     </div>
     <div class="progress">
       <div class="text">
-        {{ currentTime }}
+        {{ formatTime(currentTime) }}
       </div>
       <div class="strip">
         <van-slider
@@ -22,7 +22,7 @@
         />
       </div>
       <div class="text">
-        {{ duration }}
+        {{ formatTime(duration) }}
       </div>
     </div>
     <div class="bottom">
@@ -31,40 +31,25 @@
       <span
         :class="{
           'iconfont center': true,
-          playing: $store.state.audio.isPlaying,
+          playing: playState,
         }"
         @click="toggleStatus"
-        >{{ $store.state.audio.isPlaying ? "&#xe665;" : "&#xe666;" }}
+        >{{ playState ? "&#xe665;" : "&#xe666;" }}
       </span>
       <span class="iconfont">&#xe668;</span>
       <span class="iconfont">&#xe664;</span>
     </div>
-    <!-- 
-    <audio
-      ref="audio"
-      :src="$store.state.audio.example.src"
-      @timeupdate="updateTime"
-    ></audio> -->
-    <!-- <audio
-      ref="audio"
-      :src="$store.state.audio.example.src"
-      @play="$store.commit('play')"
-      @pause="$store.commit('pause')"
-      @timeupdate="updateTime"
-    ></audio> -->
   </div>
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { formatTime } from "@/assets/js/filter.js";
 export default {
   name: "handle",
   data: function () {
     return {
       percentage: 0,
-      currentTime: "00:00",
-      duration: "00:00",
     };
   },
   props: {
@@ -74,73 +59,48 @@ export default {
     },
   },
   computed: {
-    // currentTime: function () {
-    //   const that = this;
-    //   return formatTime(that.$store.state.audio.example.currentTime);
-    // },
-    // duration: function () {
-    //   const that = this;
-    //   return formatTime(that.$store.state.audio.example.duration);
-    // },
-    // percentage: function () {
-    //   const that = this;
-    //   let example = that.$store.state.audio.example;
-    //   return Number.parseInt((example.currentTime / example.duration) * 100);
-    // },
-    // ...mapGetters(["currentTime", "duration"]),
+    ...mapGetters(["playState", "currentTime", "duration"]),
   },
   watch: {
     currentTime: function () {
       const that = this;
-      let example = that.$store.state.audio.example;
       that.percentage =
-        Number.parseFloat(example.currentTime / example.duration) * 100;
+        Number.parseFloat(that.currentTime / that.duration) * 100;
     },
   },
   methods: {
-    // updateTime: function (event) {
-    //   const that = this;
-    //   console.log(event);
-    //   // that.currentTime = event.target.currentTime;
-    // },
+    formatTime,
     togglePercentage: function (val) {
       const that = this;
-      let audio = that.$store.state.audio;
-      let currentTime = audio.example.duration * (val / 100);
-      audio.example.currentTime = currentTime; // 根据选中百分比修改进度条
-      that.$emit("seekLyric", currentTime * 1000); // 接收秒数，要处理下
+
+      
+
+      // let audio = that.$store.state.audio;
+      // let currentTime = audio.example.duration * (val / 100);
+      // audio.example.currentTime = currentTime; // 根据选中百分比修改进度条
+      // that.$emit("seekLyric", currentTime * 1000); // 接收秒数，要处理下
     },
     toggleStatus: function () {
       const that = this;
-
-      // let example = that.$store.state.audio.example;
-      // console.log(example.currentTime);
-      // console.log(example.duration);
-      // console.log(example.currentTime / example.duration);
-      // that.$refs.src = that.$store.state.audio.example.src;
-      if (!that.$store.state.audio.isPlaying) {
-        that.$store.commit("play");
-        that.lyric.play();
-        // that.$refs.audio.play();
-      } else {
-        that.$store.commit("pause");
-        that.lyric.stop();
-        // that.$refs.audio.pause();
-      }
+      that.setPlayState(!that.playState);
     },
+
+    ...mapMutations({
+      setPlayState: "SET_PLAY_STATE",
+    }),
   },
-  created: function () {
-    const that = this;
-    let example = that.$store.state.audio.example;
-    that.$store.commit("timeupdate", () => {
-      that.currentTime = formatTime(example.currentTime);
-      that.duration = formatTime(example.duration);
-    }); // 播放时间更新
-    that.$store.commit("ended", () => {
-      that.$store.commit("pause");
-      //   that.lyric.stop();
-    }); // 歌曲结束处理
-  },
+  // created: function () {
+  //   const that = this;
+  //   let example = that.$store.state.audio.example;
+  // that.$store.commit("timeupdate", () => {
+  //   that.currentTime = formatTime(example.currentTime);
+  //   that.duration = formatTime(example.duration);
+  // }); // 播放时间更新
+  // that.$store.commit("ended", () => {
+  //   that.$store.commit("pause");
+  //   //   that.lyric.stop();
+  // }); // 歌曲结束处理
+  // },
 };
 </script>
 

@@ -12,18 +12,15 @@
     <div class="list">
       <div
         class="line song"
-        @click="toPages('/player', { id: item.id })"
+        @click="toPages('/player', { id: item.id, index })"
         v-for="(item, index) in obj.tracks"
         :key="item.id"
       >
         <!-- :to="{ path: '/player', query: { id: item.id } }" -->
-        <div
-          class="front iconfont active"
-          v-if="$store.state.audio.current.id == item.id"
-        >
+        <div class="front iconfont active" v-if="index == playIndex">
           &#xe604;
         </div>
-        <div class="front index" v-else>{{ ++index }}</div>
+        <div class="front index" v-else>{{ index + 1 }}</div>
         <div class="name">
           <p class="songname">
             <span class="title">{{ item.name }}</span>
@@ -50,7 +47,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { toPages } from "@/assets/js/skip.js";
 export default {
   name: "List",
@@ -66,12 +63,18 @@ export default {
       let tracks = that.obj.tracks;
       return tracks && tracks.length;
     },
+    ...mapGetters(["playIndex"]),
   },
   methods: {
     toPages: function (path, query) {
       const that = this;
       // that.insertSong();
-      toPages.call(that, path, query);
+      console.log(`query = ${query}`);
+      console.log(`query.index = ${query.index}`);
+
+      that.setPlayIndex(query.index);
+      that.setPlayList(that.obj.tracks);
+      toPages.call(that, path, { id: query.id });
     },
     source: function (res) {
       const that = this;
@@ -83,7 +86,12 @@ export default {
         });
       return `${singer} - ${al.name}`;
     },
-    ...mapActions(["insertSong"]),
+    // ...mapActions(["insertSong"]),
+    ...mapMutations({
+      setPlayList: "SET_PLAY_LIST",
+      setPlayIndex: "SET_PLAY_INDEX",
+      setPlayState: "SET_PLAY_STATE",
+    }),
   },
 };
 </script>

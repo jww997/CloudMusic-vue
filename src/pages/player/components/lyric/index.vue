@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   name: "lyric",
   props: {
@@ -28,6 +29,16 @@ export default {
       type: Object,
       default: {},
     },
+  },
+  // watch: {
+  //   playState: function (val) {
+  //     const that = this;
+  //     console.log(val);
+  //     val ? that.lyric.play() : that.lyric.stop();
+  //   },
+  // },
+  computed: {
+    ...mapGetters(["playState", "currentTime", "duration"]),
   },
 };
 </script>

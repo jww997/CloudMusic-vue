@@ -1,11 +1,19 @@
 // import { formatTime, formatLyric } from "@/assets/js/filter.js";
 
+// export const playUrl = state => state.playUrl;
+// export const playState = state => state.playState;
+
 export default {
 
 
+    playState: state => { return state.playState },
     playUrl: state => { return state.playUrl },
     playIndex: state => { return state.playIndex },
     playlist: state => { return state.playlist },
+
+
+    currentTime: state => { return state.currentTime },
+    duration: state => { return state.duration },
 
 
 

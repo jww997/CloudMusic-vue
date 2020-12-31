@@ -57,10 +57,6 @@ export default {
     //   return formatUnit(num)
     // },
   },
-  data: function () {
-    return {};
-  },
-  mounted: function () {},
 };
 </script>
 

@@ -1,42 +1,25 @@
 import types from "./mutation-types.js"
 export default {
 
-  [types.SET_PLAY_URL](state, url) {
-    state.playUrl = url;
+  [types.SET_PLAY_STATE](state, val) {
+    state.playState = val;
   },
-  [types.SET_PLAY_INDEX](state, index) {
-    state.playIndex = index;
+  [types.SET_PLAY_URL](state, val) {
+    state.playUrl = val;
   },
-  [types.SET_PLAYLIST](state, list) {
-    state.playlist = list;
+  [types.SET_PLAY_INDEX](state, val) {
+    state.playIndex = val;
+  },
+  [types.SET_PLAY_LIST](state, val) {
+    state.playlist = val;
   },
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  timeupdate: function (state, callback) { // 播放时间改变
-    callback && (state.audio.example.ontimeupdate = callback);
+  [types.SET_CURRENTTIME](state, val) {
+    state.currentTime = val;
   },
-  ended: function (state, callback) { // 播放结束
-    callback && (state.audio.example.ended = callback);
+  [types.SET_DURATION](state, val) {
+    state.duration = val;
   },
 
 
@@ -53,11 +36,6 @@ export default {
 
 
 
-  play: function (state) {
-    console.log('播放');
-    state.audio.isPlaying = true;
-    state.audio.example.play();
-  },
 
 
 
@@ -65,18 +43,51 @@ export default {
 
 
 
-  pause: function (state) {
-    console.log('暂停');
-    state.audio.isPlaying = false;
-    state.audio.example.pause();
-    // state.audio.lyric.stop();
-  },
-  stop: function (state) {
-    console.log('停止');
-    state.isPlaying = false;
-    state.audio.example.pause();
-    //   state.audio.lyric.stop();
-  },
+  // timeupdate: function (state, callback) { // 播放时间改变
+  //   callback && (state.audio.example.ontimeupdate = callback);
+  // },
+  // ended: function (state, callback) { // 播放结束
+  //   callback && (state.audio.example.ended = callback);
+  // },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // play: function (state) {
+  //   console.log('播放');
+  //   state.audio.isPlaying = true;
+  //   state.audio.example.play();
+  // },
+
+
+
+
+
+
+
+  // pause: function (state) {
+  //   console.log('暂停');
+  //   state.audio.isPlaying = false;
+  //   state.audio.example.pause();
+  //   // state.audio.lyric.stop();
+  // },
+  // stop: function (state) {
+  //   console.log('停止');
+  //   state.isPlaying = false;
+  //   state.audio.example.pause();
+  //   //   state.audio.lyric.stop();
+  // },
   // canplay: function (state, callback) {
   //   console.log('可播放状态');
   //   // state.audio.lyric.play();

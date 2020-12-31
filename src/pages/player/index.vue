@@ -12,29 +12,21 @@
     <div :class="{ song: true, lyric: isShowLyric }" @click="toggleShowLyric">
       <!-- <transition name="fade"> -->
       <lyric :lyric="lyric" v-show="isShowLyric"></lyric>
-      <phonograph
-        :obj="song"
-        :isPlaying="isPlaying"
-        v-show="!isShowLyric"
-      ></phonograph>
+      <phonograph :phonograph="song" v-show="!isShowLyric"></phonograph>
       <!-- </transition> -->
     </div>
-    <handle
-      :lyric="lyric"
-      @seekLyric="seekLyric"
-      :isPlaying="isPlaying"
-    ></handle>
+    <handle :lyric="lyric" @seekLyric="seekLyric"></handle>
   </div>
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { formatLyric } from "@/assets/js/filter.js";
 import LyricParser from "lyric-parser"; // 歌词解析
 import Navbar from "@/components/navbar";
 import Phonograph from "./components/phonograph";
 import Handle from "./components/handle";
 import Lyric from "./components/lyric";
-import { mapMutations } from "vuex";
 export default {
   name: "player",
   components: {
@@ -46,7 +38,6 @@ export default {
   data: function () {
     const that = this;
     return {
-      isPlaying: that.$store.state.isPlaying,
       isShowLyric: true,
       songs: [],
       lyric: {},
@@ -57,6 +48,13 @@ export default {
       const that = this;
       return that.songs[0];
     },
+    ...mapGetters(["playState", "currentTime", "duration"]),
+  },
+  watch: {
+    // currentTime: function (val, newval) {
+    //   const that = this;
+    //   that.lyric && that.lyric.seek(newval);
+    // },
   },
   methods: {
     toggleShowLyric: function () {
@@ -78,26 +76,28 @@ export default {
   created: function () {
     const that = this;
     let id = that.$route.query.id;
-    console.log("创建");
-    console.log(that.lyric);
+    // console.log("创建");
+    // console.log(that.lyric);
     that.$api
       .getSongDetail({ ids: id })
       .then((res) => {
         that.songs = res.data.songs;
-        return that.$api.getSongUrl({
-          id: that.song.id,
-        });
+        // return that.$api.getSongUrl({
+        //   id: that.song.id,
+        // });
       })
       .then((res) => {
+        // let url = res.data.data[0].url;
+        // that.setPlayUrl(url);
+
         // that.$store.state.audio.current = res.data.data[0];
         // that.$store.state.audio.example.src = res.data.data[0].url;
 
-        let url = res.data.data[0].url;
-        that.setPlayUrl(url);
-        console.log(that.$store.getters);
-        console.log(that.$store.state);
+        // console.log(that.$store.getters);
+        // console.log(that.$store.state);
 
         // that.$store.state.audio.example.autoplay = true;
+
         return that.$api.getLyric({
           id: that.song.id,
         });
@@ -110,8 +110,7 @@ export default {
         } catch (e) {}
         that.lyric = new LyricParser(lyric, that.setLyric);
 
-        that.$store.commit("play");
-        that.lyric.play();
+        // that.$store.commit("play");
 
         // let audio = that.$store.state.audio;
         // debugger;
@@ -131,20 +130,20 @@ export default {
         // });
       });
   },
-  mounted: function () {
-    const that = this;
-    console.log("创建");
-    console.log(that.lyric);
-    //   setTimeout(() => {
-    //     that.$store.commit("play");
-    //     // that.$store.lyric.play();
-    // }, 1000);
-  },
+  // mounted: function () {
+  //   const that = this;
+  //   console.log("创建");
+  //   console.log(that.lyric);
+  //   setTimeout(() => {
+  //     that.$store.commit("play");
+  //     // that.$store.lyric.play();
+  // }, 1000);
+  // },
 
-  destroyed: function () {
-    const that = this;
-    console.log("销毁");
-  },
+  // destroyed: function () {
+  //   const that = this;
+  //   console.log("销毁");
+  // },
 };
 </script>
 
@@ -179,20 +178,10 @@ export default {
   &::after {
     z-index: -2;
     background: inherit;
-    // background-color: #000;
     background-size: cover;
     -webkit-filter: blur(20px);
     filter: blur(20px);
   }
-  // .container {
-  //   height: auto;
-  //   &::before {
-  //     display: none;
-  //   }
-  //   &::after {
-  //     display: none;
-  //   }
-  // }
 
   .song {
     // height: 10rem;

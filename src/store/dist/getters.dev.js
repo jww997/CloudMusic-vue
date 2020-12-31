@@ -5,7 +5,12 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 // import { formatTime, formatLyric } from "@/assets/js/filter.js";
+// export const playUrl = state => state.playUrl;
+// export const playState = state => state.playState;
 var _default = {
+  playState: function playState(state) {
+    return state.playState;
+  },
   playUrl: function playUrl(state) {
     return state.playUrl;
   },
@@ -14,6 +19,12 @@ var _default = {
   },
   playlist: function playlist(state) {
     return state.playlist;
+  },
+  currentTime: function currentTime(state) {
+    return state.currentTime;
+  },
+  duration: function duration(state) {
+    return state.duration;
   } // currentTime: function (state) {
   //     return formatTime(state.audio.example.currentTime);
   // },

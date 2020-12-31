@@ -15,6 +15,9 @@ export default {
   },
 
 
+  [types.SET_CURRENTSONG](state, val) {
+    state.currentSong = val;
+  },
   [types.SET_CURRENTTIME](state, val) {
     state.currentTime = val;
   },

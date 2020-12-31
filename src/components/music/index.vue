@@ -49,8 +49,15 @@ export default {
     },
     playUrl: function (val) {
       const that = this;
+      let audio = that.$refs.audio;
       console.log(`源 => ${val}`);
-      audio.play();
+      // val && audio.play();
+
+      // that.$api
+      //   .getSongDetail({ ids: that.playlist[that.playIndex].id })
+      //   .then((res) => {
+      //     that.songs = res.data.songs;
+      //   });
     },
   },
   methods: {
@@ -69,9 +76,9 @@ export default {
       audio.pause();
 
       console.log("继续 你的表演 ---------------------------------");
-      console.log(that.setPlayIndex);
-      console.log(that.playIndex++);
-      // setPlayIndex(that.playIndex++);
+      let index = that.playIndex + 1;
+      index <= that.playlist.length ? that.setPlayIndex(index) : "";
+      that.setCurrentSong(that.playlist[index]);
     },
     timeupdate: function () {
       const that = this;
@@ -82,10 +89,12 @@ export default {
     },
     ...mapMutations({
       setPlayUrl: "SET_PLAY_URL",
-      setCurrentTime: "SET_CURRENTTIME",
-      setDuration: "SET_DURATION",
       setPlayState: "SET_PLAY_STATE",
       setPlayIndex: "SET_PLAY_INDEX",
+
+      setCurrentSong: "SET_CURRENTSONG",
+      setCurrentTime: "SET_CURRENTTIME",
+      setDuration: "SET_DURATION",
     }),
   },
 };

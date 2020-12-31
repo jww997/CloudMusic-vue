@@ -6,7 +6,7 @@
         backgroundImage: 'url(' + require('@/assets/images/chassis.png') + ')',
       }"
     >
-      <img class="cover" :src="phonograph.al.picUrl" />
+      <img class="cover" :src="picUrl" v-if="picUrl"/>
       <!-- <img class="lid" :src="require('@/assets/images/lid.png')" /> -->
       <img class="light" :src="require('@/assets/images/light.png')" />
     </div>
@@ -19,9 +19,9 @@ import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   name: "phonograph",
   props: {
-    phonograph: {
-      type: Object,
-      default: {},
+    picUrl: {
+      type: String,
+      default: "",
     },
   },
   computed: {

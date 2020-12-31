@@ -1,19 +1,9 @@
 <template>
-  <div
-    class="container"
-    :style="{ backgroundImage: 'url(' + song.al.picUrl + ')' }"
-    v-if="song"
-  >
-    <navbar
-      :title="song.name"
-      :subtitle="song.ar[0].name"
-      :fixed="false"
-    ></navbar>
+  <div class="container" :style="{ backgroundImage: 'url(' + picUrl + ')' }">
+    <navbar :title="title" :subtitle="subtitle" :fixed="false"></navbar>
     <div :class="{ song: true, lyric: isShowLyric }" @click="toggleShowLyric">
-      <!-- <transition name="fade"> -->
       <lyric :lyric="lyric" v-show="isShowLyric"></lyric>
-      <phonograph :phonograph="song" v-show="!isShowLyric"></phonograph>
-      <!-- </transition> -->
+      <phonograph :picUrl="picUrl" v-show="!isShowLyric"></phonograph>
     </div>
     <handle :lyric="lyric" @seekLyric="seekLyric"></handle>
   </div>
@@ -38,29 +28,39 @@ export default {
   data: function () {
     const that = this;
     return {
-      isShowLyric: true,
-      songs: [],
+      isShowLyric: false,
       lyric: {},
+
+      picUrl: "",
+      title: "",
+      subtitle: "",
     };
   },
   computed: {
-    song: function () {
-      const that = this;
-      return that.songs[0];
-    },
-    ...mapGetters(["playState", "currentTime", "duration"]),
+    ...mapGetters([
+      "playState",
+      "playUrl",
+      "playIndex",
+      "playlist",
+
+      "currentSong",
+      "currentTime",
+      "duration",
+    ]),
   },
   watch: {
-    // currentTime: function (val, newval) {
-    //   const that = this;
-    //   that.lyric && that.lyric.seek(newval);
-    // },
+    currentSong: function (val) {
+      const that = this;
+      that.picUrl = val.al.picUrl;
+      that.subtitle = val.ar[0].name;
+      that.title = val.name;
+    },
   },
   methods: {
     toggleShowLyric: function () {
       const that = this;
       that.isShowLyric = !that.isShowLyric;
-      that.lyric.togglePlay();
+      // that.lyric.togglePlay();
     },
     seekLyric: function (time) {
       const that = this;
@@ -71,79 +71,100 @@ export default {
       console.log(`lineNum = ${lineNum}, txt = ${txt}`);
       that.lyric.curLine = lineNum; // 歌词实时下标
     },
+
+    // getdata: function () {
+    //   const that = this;
+    //   that.$api.getSongDetail({ ids: that.id }).then((res) => {
+    //     console.log(res.data.songs);
+    //     that.song = res.data.songs[0];
+    //   });
+    // },
+
     ...mapMutations({ setPlayUrl: "SET_PLAY_URL" }),
   },
-  created: function () {
+  mounted: function () {
     const that = this;
-    let id = that.$route.query.id;
+    that.picUrl = that.currentSong.al.picUrl;
+    that.subtitle = that.currentSong.ar[0].name;
+    that.title = that.currentSong.name;
+
+    // let id = that.$route.query.id;
+
+    // that.song = that.currentSong;
+
+    // that.id = id;
+
+    // that.getdata();
+
     // console.log("创建");
     // console.log(that.lyric);
-    that.$api
-      .getSongDetail({ ids: id })
-      .then((res) => {
-        that.songs = res.data.songs;
-        // return that.$api.getSongUrl({
-        //   id: that.song.id,
-        // });
-      })
-      .then((res) => {
-        // let url = res.data.data[0].url;
-        // that.setPlayUrl(url);
 
-        // that.$store.state.audio.current = res.data.data[0];
-        // that.$store.state.audio.example.src = res.data.data[0].url;
+    // that.$api
+    //   .getSongDetail({ ids: id })
+    //   .then((res) => {
+    //     that.songs = res.data.songs;
+    //     // return that.$api.getSongUrl({
+    //     //   id: that.song.id,
+    //     // });
+    //   })
+    //   .then((res) => {
+    //     // let url = res.data.data[0].url;
+    //     // that.setPlayUrl(url);
 
-        // console.log(that.$store.getters);
-        // console.log(that.$store.state);
+    //     // that.$store.state.audio.current = res.data.data[0];
+    //     // that.$store.state.audio.example.src = res.data.data[0].url;
 
-        // that.$store.state.audio.example.autoplay = true;
+    //     // console.log(that.$store.getters);
+    //     // console.log(that.$store.state);
 
-        return that.$api.getLyric({
-          id: that.song.id,
-        });
-      })
-      .then((res) => {
-        let lyric = res.data.lrc.lyric;
-        if (!lyric) return false;
-        try {
-          clearInterval(that.lyric.timer); // 清掉没用的
-        } catch (e) {}
-        that.lyric = new LyricParser(lyric, that.setLyric);
+    //     // that.$store.state.audio.example.autoplay = true;
 
-        // that.$store.commit("play");
+    //     return that.$api.getLyric({
+    //       id: that.song.id,
+    //     });
+    //   })
+    //   .then((res) => {
+    // let lyric = res.data.lrc.lyric;
+    // if (!lyric) return false;
+    // try {
+    //   clearInterval(that.lyric.timer); // 清掉没用的
+    // } catch (e) {}
+    // that.lyric = new LyricParser(lyric, that.setLyric);
 
-        // let audio = that.$store.state.audio;
-        // debugger;
-        // console.log(that.$store.getters.lyric);
-        // debugger;
-        // let { getLyric } = that.$store.getters;
-        // that.lyric = formatLyric(lyric);
-        // audio.lyric.source = lyric;
-        // audio.lyric.derivant = formatLyric(lyric);
+    // that.$store.commit("play");
 
-        // console.log(getLyric(lyric));
+    // let audio = that.$store.state.audio;
+    // debugger;
+    // console.log(that.$store.getters.lyric);
+    // debugger;
+    // let { getLyric } = that.$store.getters;
+    // that.lyric = formatLyric(lyric);
+    // audio.lyric.source = lyric;
+    // audio.lyric.derivant = formatLyric(lyric);
 
-        // audio.lyric = getLyric(lyric);
+    // console.log(getLyric(lyric));
 
-        // that.$store.commit("canplay", () => {
-        //   that.$store.state.audio.lyric.play();;
-        // });
-      });
+    // audio.lyric = getLyric(lyric);
+
+    // that.$store.commit("canplay", () => {
+    //   that.$store.state.audio.lyric.play();;
+    // });
+    //     });
+    // },
+    // mounted: function () {
+    //   const that = this;
+    //   console.log("创建");
+    //   console.log(that.lyric);
+    //   setTimeout(() => {
+    //     that.$store.commit("play");
+    //     // that.$store.lyric.play();
+    // }, 1000);
+    // },
+
+    // destroyed: function () {
+    //   const that = this;
+    //   console.log("销毁");
   },
-  // mounted: function () {
-  //   const that = this;
-  //   console.log("创建");
-  //   console.log(that.lyric);
-  //   setTimeout(() => {
-  //     that.$store.commit("play");
-  //     // that.$store.lyric.play();
-  // }, 1000);
-  // },
-
-  // destroyed: function () {
-  //   const that = this;
-  //   console.log("销毁");
-  // },
 };
 </script>
 

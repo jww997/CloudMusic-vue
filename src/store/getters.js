@@ -12,6 +12,7 @@ export default {
     playlist: state => { return state.playlist },
 
 
+    currentSong: state => { return state.currentSong },
     currentTime: state => { return state.currentTime },
     duration: state => { return state.duration },
 

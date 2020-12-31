@@ -69,11 +69,12 @@ export default {
     toPages: function (path, query) {
       const that = this;
       // that.insertSong();
-      console.log(`query = ${query}`);
+      console.log(`query = `, query);
       console.log(`query.index = ${query.index}`);
 
       that.setPlayIndex(query.index);
       that.setPlayList(that.obj.tracks);
+      that.setCurrentSong(that.obj.tracks[query.index]);
       toPages.call(that, path, { id: query.id });
     },
     source: function (res) {
@@ -91,6 +92,7 @@ export default {
       setPlayList: "SET_PLAY_LIST",
       setPlayIndex: "SET_PLAY_INDEX",
       setPlayState: "SET_PLAY_STATE",
+      setCurrentSong: "SET_CURRENTSONG",
     }),
   },
 };

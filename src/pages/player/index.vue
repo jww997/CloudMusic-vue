@@ -60,17 +60,37 @@ export default {
     toggleShowLyric: function () {
       const that = this;
       that.isShowLyric = !that.isShowLyric;
-      // that.lyric.togglePlay();
+
+      console.log(!that.lyric);
+      console.log(that.isShowLyric);
+
+      if (that.isShowLyric) that.getLyric();
     },
-    seekLyric: function (time) {
+    getLyric: function () {
       const that = this;
-      that.lyric.seek(time);
+      that.$api
+        .getLyric({
+          id: that.$store.getters.currentSong.id,
+        })
+        .then((res) => {
+          let lyric = res.data.lrc.lyric;
+          if (!lyric) return false;
+          try {
+            clearInterval(that.lyric.timer); // 清掉没用的
+          } catch (e) {}
+          that.lyric = new LyricParser(lyric, that.setLyric);
+        });
     },
     setLyric: function ({ lineNum, txt }) {
       const that = this;
       console.log(`lineNum = ${lineNum}, txt = ${txt}`);
       that.lyric.curLine = lineNum; // 歌词实时下标
     },
+    seekLyric: function (time) {
+      const that = this;
+      that.lyric.seek(time);
+    },
+    
 
     // getdata: function () {
     //   const that = this;

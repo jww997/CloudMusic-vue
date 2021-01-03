@@ -12,6 +12,7 @@
     <cap :obj="playlist"></cap>
     <list :obj="playlist"></list>
 
+    <capplus :obj="playlist"></capplus>
     <!-- <transition name="children">
       <router-view></router-view>
     </transition> -->
@@ -25,12 +26,14 @@
 import BetterScroll from "better-scroll";
 import Navbar from "@/components/navbar";
 import Cap from "@/pages/playlist/components/cap";
+import Capplus from "@/pages/playlist/components/cappuls";
 import List from "@/pages/playlist/components/list";
 export default {
   name: "playlist",
   components: {
     Navbar,
     Cap,
+    Capplus,
     List,
   },
   data() {

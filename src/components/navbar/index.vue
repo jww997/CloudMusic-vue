@@ -14,8 +14,8 @@
         <p class="title">{{ title }}</p>
       </div>
       <div class="icon right">
-        <div class="iconfont">&#xe607;</div>
-        <div class="iconfont">&#xe690;</div>
+        <!-- <div class="iconfont">&#xe607;</div>
+        <div class="iconfont">&#xe690;</div> -->
       </div>
     </template>
     <template v-else>
@@ -27,7 +27,7 @@
         <p class="subtitle">{{ subtitle }}</p>
       </div>
       <div class="icon right">
-        <div class="iconfont">&#xe65c;</div>
+        <!-- <div class="iconfont">&#xe65c;</div> -->
       </div>
     </template>
   </div>
@@ -76,27 +76,30 @@ export default {
   color: #fff;
   z-index: 100;
   @include flexSpaceBetween;
-  // position: absolute;
-  // right: 0;
-  // left: 0;
-  // top: 0;
   .iconfont {
     font-size: 0.5rem;
   }
   .center {
     flex-grow: 1;
     max-width: 5rem;
+    height: 100%;
+    margin: 0 0.3rem;
     text-align: center;
+    @include flexCenter;
+    flex-direction: column;
+    .title,
+    .subtitle {
+      width: 100%;
+      @include omit;
+    }
     .title {
       font-size: 0.35rem;
       font-weight: bold;
-      @include omit;
     }
     .subtitle {
       margin-top: 0.1rem;
       font-size: 0.1rem;
       color: #efefef;
-      @include omit;
     }
   }
   .icon {
@@ -120,8 +123,11 @@ export default {
     right: 0;
     left: 0;
     top: 0;
+    .center {
+      align-items: flex-start;
+    }
     .icon.left {
-      flex: 0.25;
+      flex: 0.1;
     }
     .center {
       text-align: left;

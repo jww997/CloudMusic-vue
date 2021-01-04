@@ -42,7 +42,7 @@ export default {
           })
           .then((res) => {
             let url = res.data.data[0].url;
-            url == null ? that.next() : that.setPlayUrl(url);
+            url == null ? that._next() : that.setPlayUrl(url);
           });
       } catch (error) {
         console.log("你该充钱了");
@@ -70,12 +70,7 @@ export default {
       audio.pause();
 
       console.log("继续 你的表演 ---------------------------------");
-      that.next();
-    },
-    next: function () {
-      const that = this;
-      let index = that.playIndex + 1;
-      index <= that.playlist.length ? that.setPlayIndex(index) : "";
+      that._next();
     },
     timeupdate: function () {
       const that = this;
@@ -83,6 +78,11 @@ export default {
       that.currentTime != audio.currentTime &&
         that.setCurrentTime(audio.currentTime);
       that.duration != audio.duration && that.setDuration(audio.duration);
+    },
+    _next: function () {
+      const that = this;
+      let index = that.playIndex + 1;
+      index <= that.playlist.length ? that.setPlayIndex(index) : "";
     },
     ...mapMutations({
       setPlayUrl: "SET_PLAY_URL",

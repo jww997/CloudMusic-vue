@@ -90,7 +90,6 @@ export default {
       const that = this;
       that.lyric.seek(time);
     },
-    
 
     // getdata: function () {
     //   const that = this;
@@ -192,12 +191,14 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .container {
+  height: 100vh;
   @include suspension;
   @include flexSpaceBetween;
   flex-direction: column;
 
   background: center no-repeat transparent;
   background-size: 0;
+  overflow: hidden;
   // background-size: cover;
   // -webkit-backdrop-filter: saturate(180%) blur(20px);
   // backdrop-filter: saturate(180%) blur(20px);
@@ -225,7 +226,8 @@ export default {
   }
 
   .song {
-    // height: 10rem;
+    width: 100%;
+    min-height: 5rem;
     flex-grow: 1;
 
     // mask-image: linear-gradient(
@@ -241,22 +243,11 @@ export default {
     //   rgba(255, 255, 255, 0)
     // );
 
-    overflow: hidden;
+    // overflow: hidden;
 
-    &.lyric {
-      mask-image: linear-gradient(
-        rgba(255, 255, 255, 0),
-        #fff 40%,
-        #fff 60%,
-        rgba(255, 255, 255, 0)
-      );
-      -webkit-mask-image: linear-gradient(
-        rgba(255, 255, 255, 0),
-        #fff 40%,
-        #fff 60%,
-        rgba(255, 255, 255, 0)
-      );
-    }
+    // &.lyric {
+
+    // }
 
     // flex-basis: 10rem;
 

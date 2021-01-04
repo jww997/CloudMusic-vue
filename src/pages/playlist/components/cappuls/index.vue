@@ -37,14 +37,16 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
   line-height: 0.4rem;
-  padding: 1rem 0.3rem;
+  padding: 0 0.3rem 1rem;
   z-index: 200;
   box-sizing: border-box;
+  overflow: scroll;
   background-color: #999;
   color: #fff;
   .coverImgUrl {
     width: 5rem;
     border-radius: 0.3rem;
+    margin-top: 1rem;
   }
   .name {
     margin-top: 0.3rem;

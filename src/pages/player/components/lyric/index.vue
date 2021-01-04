@@ -47,9 +47,23 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .children {
-  padding-top: 5rem;
-  overflow: hidden;
+  height: 100%;
   transition: 1s;
+  padding-top: 3rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    rgba(255, 255, 255, 0),
+    #fff 40%,
+    #fff 60%,
+    rgba(255, 255, 255, 0)
+  );
+  -webkit-mask-image: linear-gradient(
+    rgba(255, 255, 255, 0),
+    #fff 40%,
+    #fff 60%,
+    rgba(255, 255, 255, 0)
+  );
   .line {
     line-height: 0.7rem;
     text-align: center;

@@ -1,12 +1,5 @@
 <template>
   <div class="children">
-    <div class="top">
-      <span class="iconfont">&#xe66a;</span>
-      <span class="iconfont">&#xe694;</span>
-      <span class="iconfont">&#xe612;</span>
-      <span class="iconfont">&#xe65d;</span>
-      <span class="iconfont">&#xe690;</span>
-    </div>
     <div class="progress">
       <div class="text">
         {{ formatTime(currentTime) }}
@@ -26,7 +19,7 @@
       </div>
     </div>
     <div class="bottom">
-      <span class="iconfont">&#xe600;</span>
+      <!-- <span class="iconfont">&#xe600;</span> -->
       <span class="iconfont" @click="prev">&#xe663;</span>
       <span
         :class="{
@@ -37,7 +30,7 @@
         >{{ playState ? "&#xe665;" : "&#xe666;" }}
       </span>
       <span class="iconfont" @click="next">&#xe668;</span>
-      <span class="iconfont">&#xe664;</span>
+      <!-- <span class="iconfont">&#xe664;</span> -->
     </div>
   </div>
 </template>
@@ -112,18 +105,6 @@ export default {
       setPlayIndex: "SET_PLAY_INDEX",
     }),
   },
-  // created: function () {
-  //   const that = this;
-  //   let example = that.$store.state.audio.example;
-  // that.$store.commit("timeupdate", () => {
-  //   that.currentTime = formatTime(example.currentTime);
-  //   that.duration = formatTime(example.duration);
-  // }); // 播放时间更新
-  // that.$store.commit("ended", () => {
-  //   that.$store.commit("pause");
-  //   //   that.lyric.stop();
-  // }); // 歌曲结束处理
-  // },
 };
 </script>
 
@@ -133,7 +114,7 @@ export default {
 .children {
   flex-shrink: 0;
   width: 100%;
-  padding: 0.5rem 0;
+  padding-bottom: 0.5rem;
   // @include positionCenter;
   // top: auto;
   >>> .van-progress__pivot {
@@ -148,19 +129,18 @@ export default {
     color: #fff;
     font-size: 0.4rem;
   }
-  .top {
-    padding: 0.3rem 1rem;
-    @include flexSpaceAround;
-  }
   .progress {
     margin: 0.3rem;
     font-size: 0.2rem;
     color: #fff;
     @include flexSpaceBetween;
     .strip {
-      width: 5rem;
+      flex-grow: 1;
+      min-width: 4.5rem;
+      margin: 0 0.3rem;
     }
     .text {
+      flex-shrink: 0;
       width: 0.7rem;
       text-align: center;
       @include omit;

@@ -16,7 +16,6 @@
     <list :obj="playlist"></list>
 
     <div @click="toggleCapplus" v-if="isShowCapplus">
-      <!-- :class="{ capplus: true, hide: !isShowCapplus }" -->
       <capplus :obj="playlist"></capplus>
     </div>
   </div>

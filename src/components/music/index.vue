@@ -34,13 +34,15 @@ export default {
     playIndex: function (val) {
       const that = this;
       try {
+        let song = that.playlist[that.playIndex];
+        that.setCurrentSong(song);
         that.$api
           .getSongUrl({
-            id: that.playlist[that.playIndex].id,
+            id: song.id,
           })
           .then((res) => {
             let url = res.data.data[0].url;
-            that.setPlayUrl(url);
+            url == null ? that.next() : that.setPlayUrl(url);
           });
       } catch (error) {
         console.log("你该充钱了");
@@ -49,15 +51,7 @@ export default {
     },
     playUrl: function (val) {
       const that = this;
-      let audio = that.$refs.audio;
       console.log(`源 => ${val}`);
-      // val && audio.play();
-
-      // that.$api
-      //   .getSongDetail({ ids: that.playlist[that.playIndex].id })
-      //   .then((res) => {
-      //     that.songs = res.data.songs;
-      //   });
     },
   },
   methods: {
@@ -76,9 +70,12 @@ export default {
       audio.pause();
 
       console.log("继续 你的表演 ---------------------------------");
+      that.next();
+    },
+    next: function () {
+      const that = this;
       let index = that.playIndex + 1;
       index <= that.playlist.length ? that.setPlayIndex(index) : "";
-      that.setCurrentSong(that.playlist[index]);
     },
     timeupdate: function () {
       const that = this;

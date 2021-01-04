@@ -27,7 +27,7 @@
     </div>
     <div class="bottom">
       <span class="iconfont">&#xe600;</span>
-      <span class="iconfont">&#xe663;</span>
+      <span class="iconfont" @click="prev">&#xe663;</span>
       <span
         :class="{
           'iconfont center': true,
@@ -36,7 +36,7 @@
         @click="toggleStatus"
         >{{ playState ? "&#xe665;" : "&#xe666;" }}
       </span>
-      <span class="iconfont">&#xe668;</span>
+      <span class="iconfont" @click="next">&#xe668;</span>
       <span class="iconfont">&#xe664;</span>
     </div>
   </div>
@@ -59,7 +59,13 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["playState", "currentTime", "duration"]),
+    ...mapGetters([
+      "playState",
+      "playIndex",
+      "playlist",
+      "currentTime",
+      "duration",
+    ]),
   },
   watch: {
     currentTime: function () {
@@ -70,10 +76,26 @@ export default {
   },
   methods: {
     formatTime,
+    prev: function () {
+      console.log("上一首");
+      const that = this;
+      if (that.playIndex == 0) {
+        that.setPlayIndex(that.playlist.length - 1);
+      } else if (that.playIndex - 1 <= that.playlist.length) {
+        that.setPlayIndex(that.playIndex - 1);
+      }
+    },
+    next: function () {
+      console.log("下一首");
+      const that = this;
+      if (that.playIndex == that.playlist.length - 1) {
+        that.setPlayIndex(0);
+      } else if (that.playIndex + 1 <= that.playlist.length) {
+        that.setPlayIndex(that.playIndex + 1);
+      }
+    },
     togglePercentage: function (val) {
       const that = this;
-
-      
 
       // let audio = that.$store.state.audio;
       // let currentTime = audio.example.duration * (val / 100);
@@ -87,6 +109,7 @@ export default {
 
     ...mapMutations({
       setPlayState: "SET_PLAY_STATE",
+      setPlayIndex: "SET_PLAY_INDEX",
     }),
   },
   // created: function () {

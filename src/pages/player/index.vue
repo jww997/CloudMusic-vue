@@ -61,8 +61,8 @@ export default {
       const that = this;
       that.isShowLyric = !that.isShowLyric;
 
-      console.log(!that.lyric);
-      console.log(that.isShowLyric);
+      // console.log(!that.lyric);
+      // console.log(that.isShowLyric);
 
       if (that.isShowLyric) that.getLyric();
     },

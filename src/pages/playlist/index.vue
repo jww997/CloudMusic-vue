@@ -9,17 +9,17 @@
   <!-- <div v-for="item in data" :key="item.index">{{ item.name }}</div> -->
   <div class="container">
     <navbar :title="'歌单'" fixed></navbar>
-    <cap :obj="playlist"></cap>
+
+    <div @click="toggleCapplus">
+      <cap :obj="playlist"></cap>
+    </div>
     <list :obj="playlist"></list>
 
-    <capplus :obj="playlist"></capplus>
-    <!-- <transition name="children">
-      <router-view></router-view>
-    </transition> -->
+    <div @click="toggleCapplus" v-if="isShowCapplus">
+      <!-- :class="{ capplus: true, hide: !isShowCapplus }" -->
+      <capplus :obj="playlist"></capplus>
+    </div>
   </div>
-
-  <!-- </div> -->
-  <!-- </transition> -->
 </template>
 
 <script>
@@ -38,6 +38,7 @@ export default {
   },
   data() {
     return {
+      isShowCapplus: false,
       playlist: {},
       count: 0,
       data: [],
@@ -45,6 +46,10 @@ export default {
     };
   },
   methods: {
+    toggleCapplus: function () {
+      const that = this;
+      that.isShowCapplus = !that.isShowCapplus;
+    },
     loadMore: function () {
       this.busy = true;
       setTimeout(() => {
@@ -77,7 +82,6 @@ export default {
     console.log(`id = ${that.$route.params.id}`);
     that.getdata();
 
-
     // console.log(that.$route);
     // that.timestamp = Date.parse(new Date());
     // if (that.$route.query) {
@@ -101,6 +105,12 @@ export default {
 @import "~sass/varibles.scss";
 .container {
   @include suspension;
+  // .capplus {
+  //   transition: 0.5s;
+  //   &.hide {
+  //     opacity: 0;
+  //   }
+  // }
 
   // @include positionCenter;
   // position: fixed;

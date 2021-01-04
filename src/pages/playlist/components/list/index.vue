@@ -17,7 +17,10 @@
         :key="item.id"
       >
         <!-- :to="{ path: '/player', query: { id: item.id } }" -->
-        <div class="front iconfont active" v-if="index == playIndex">
+        <div
+          class="front iconfont active"
+          v-if="playState && item.id == currentSong.id"
+        >
           &#xe604;
         </div>
         <div class="front index" v-else>{{ index + 1 }}</div>
@@ -63,7 +66,7 @@ export default {
       let tracks = that.obj.tracks;
       return tracks && tracks.length;
     },
-    ...mapGetters(["playIndex"]),
+    ...mapGetters(["playState", "playIndex", "currentSong"]),
   },
   methods: {
     toPages: function (path, query) {

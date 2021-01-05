@@ -47,6 +47,7 @@ export default {
       } catch (error) {
         console.log("你该充钱了");
         console.log(error);
+        that._next();
       }
     },
     playUrl: function (val) {
@@ -74,6 +75,7 @@ export default {
     },
     timeupdate: function () {
       const that = this;
+      if (!that.playState) return false;
       let audio = that.$refs.audio;
       that.currentTime != audio.currentTime &&
         that.setCurrentTime(audio.currentTime);

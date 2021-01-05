@@ -30,10 +30,13 @@ export default {
     return {
       isShowLyric: false,
       lyric: {},
+      // nolyric: true,
 
       picUrl: "",
       title: "",
       subtitle: "",
+
+      lastId: -1, // 减少没必要的歌词请求
     };
   },
   computed: {
@@ -54,35 +57,38 @@ export default {
       that.picUrl = val.al.picUrl;
       that.subtitle = val.ar[0].name;
       that.title = val.name;
+      that.getLyric();
     },
   },
   methods: {
     toggleShowLyric: function () {
       const that = this;
       that.isShowLyric = !that.isShowLyric;
-
-      // console.log(!that.lyric);
-      // console.log(that.isShowLyric);
-
       if (that.isShowLyric) that.getLyric();
     },
     getLyric: function () {
       const that = this;
+      let id = that.currentSong.id;
+      if (that.lastId == id) return false;
       that.$api
         .getLyric({
-          id: that.$store.getters.currentSong.id,
+          id: id,
         })
         .then((res) => {
+          let nolyric = res.data.nolyric;
+          if (nolyric) return false; // 判断数据有无歌词
           let lyric = res.data.lrc.lyric;
-          if (!lyric) return false;
+          if (!lyric) return false; // 判断数据歌词是否为空
           try {
             clearInterval(that.lyric.timer); // 清掉没用的
           } catch (e) {}
           that.lyric = new LyricParser(lyric, that.setLyric);
+          that.lastId = id;
         });
     },
     setLyric: function ({ lineNum, txt }) {
       const that = this;
+      if (that.lyric.curLine == lineNum) return false;
       console.log(`lineNum = ${lineNum}, txt = ${txt}`);
       that.lyric.curLine = lineNum; // 歌词实时下标
     },
@@ -91,14 +97,6 @@ export default {
       that.lyric.seek(time);
     },
 
-    // getdata: function () {
-    //   const that = this;
-    //   that.$api.getSongDetail({ ids: that.id }).then((res) => {
-    //     console.log(res.data.songs);
-    //     that.song = res.data.songs[0];
-    //   });
-    // },
-
     ...mapMutations({ setPlayUrl: "SET_PLAY_URL" }),
   },
   mounted: function () {
@@ -106,83 +104,6 @@ export default {
     that.picUrl = that.currentSong.al.picUrl;
     that.subtitle = that.currentSong.ar[0].name;
     that.title = that.currentSong.name;
-
-    // let id = that.$route.query.id;
-
-    // that.song = that.currentSong;
-
-    // that.id = id;
-
-    // that.getdata();
-
-    // console.log("创建");
-    // console.log(that.lyric);
-
-    // that.$api
-    //   .getSongDetail({ ids: id })
-    //   .then((res) => {
-    //     that.songs = res.data.songs;
-    //     // return that.$api.getSongUrl({
-    //     //   id: that.song.id,
-    //     // });
-    //   })
-    //   .then((res) => {
-    //     // let url = res.data.data[0].url;
-    //     // that.setPlayUrl(url);
-
-    //     // that.$store.state.audio.current = res.data.data[0];
-    //     // that.$store.state.audio.example.src = res.data.data[0].url;
-
-    //     // console.log(that.$store.getters);
-    //     // console.log(that.$store.state);
-
-    //     // that.$store.state.audio.example.autoplay = true;
-
-    //     return that.$api.getLyric({
-    //       id: that.song.id,
-    //     });
-    //   })
-    //   .then((res) => {
-    // let lyric = res.data.lrc.lyric;
-    // if (!lyric) return false;
-    // try {
-    //   clearInterval(that.lyric.timer); // 清掉没用的
-    // } catch (e) {}
-    // that.lyric = new LyricParser(lyric, that.setLyric);
-
-    // that.$store.commit("play");
-
-    // let audio = that.$store.state.audio;
-    // debugger;
-    // console.log(that.$store.getters.lyric);
-    // debugger;
-    // let { getLyric } = that.$store.getters;
-    // that.lyric = formatLyric(lyric);
-    // audio.lyric.source = lyric;
-    // audio.lyric.derivant = formatLyric(lyric);
-
-    // console.log(getLyric(lyric));
-
-    // audio.lyric = getLyric(lyric);
-
-    // that.$store.commit("canplay", () => {
-    //   that.$store.state.audio.lyric.play();;
-    // });
-    //     });
-    // },
-    // mounted: function () {
-    //   const that = this;
-    //   console.log("创建");
-    //   console.log(that.lyric);
-    //   setTimeout(() => {
-    //     that.$store.commit("play");
-    //     // that.$store.lyric.play();
-    // }, 1000);
-    // },
-
-    // destroyed: function () {
-    //   const that = this;
-    //   console.log("销毁");
   },
 };
 </script>
@@ -226,30 +147,25 @@ export default {
   }
 
   .song {
+    flex-grow: 1;
     width: 100%;
     min-height: 5rem;
-    flex-grow: 1;
 
-    // mask-image: linear-gradient(
-    //   rgba(255, 255, 255, 0),
-    //   #fff 40%,
-    //   #fff 60%,
-    //   rgba(255, 255, 255, 0)
-    // );
-    // -webkit-mask-image: linear-gradient(
-    //   rgba(255, 255, 255, 0),
-    //   #fff 40%,
-    //   #fff 60%,
-    //   rgba(255, 255, 255, 0)
-    // );
-
-    // overflow: hidden;
-
-    // &.lyric {
-
-    // }
-
-    // flex-basis: 10rem;
+    &.lyric {
+      overflow: hidden;
+      mask-image: linear-gradient(
+        rgba(255, 255, 255, 0),
+        #fff 40%,
+        #fff 60%,
+        rgba(255, 255, 255, 0)
+      );
+      -webkit-mask-image: linear-gradient(
+        rgba(255, 255, 255, 0),
+        #fff 40%,
+        #fff 60%,
+        rgba(255, 255, 255, 0)
+      );
+    }
 
     // &.fade-enter,
     // &.fade-leave-to {

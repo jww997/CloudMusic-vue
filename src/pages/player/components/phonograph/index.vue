@@ -8,6 +8,7 @@
             'url(' + require('@/assets/images/chassis.png') + ')',
         }"
       >
+        <!-- @dbclick.stop="imagePreview" -->
         <img class="cover" :src="picUrl" v-if="picUrl" />
         <!-- <img class="lid" :src="require('@/assets/images/lid.png')" /> -->
         <img class="light" :src="require('@/assets/images/light.png')" />
@@ -41,6 +42,13 @@ export default {
       return al && al.picUrl;
     },
     ...mapGetters(["playState"]),
+  },
+  methods: {
+    imagePreview() {
+      const that = this;
+      let image = that.picUrl;
+      that.$preview([image]);
+    },
   },
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="children">
-    <div class="left">
+    <div class="left" @click.stop="imagePreview">
       <cover :image="obj.coverImgUrl" :count="obj.playCount"></cover>
     </div>
     <div class="right">
@@ -53,9 +53,11 @@ export default {
   },
   methods: {
     formatUnit,
-    // formatUnit(num) {
-    //   return formatUnit(num)
-    // },
+    imagePreview() {
+      const that = this;
+      let image = that.obj.coverImgUrl;
+      that.$preview([image]);
+    },
   },
 };
 </script>

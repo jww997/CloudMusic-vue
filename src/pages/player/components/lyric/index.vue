@@ -30,15 +30,22 @@ export default {
       default: {},
     },
   },
-  // watch: {
-  //   playState: function (val) {
-  //     const that = this;
-  //     console.log(val);
-  //     val ? that.lyric.play() : that.lyric.stop();
-  //   },
-  // },
   computed: {
     ...mapGetters(["playState", "currentTime", "duration"]),
+  },
+  watch: {
+    playState: function (val) {
+      const that = this;
+      try {
+        that.lyric.togglePlay();
+      } catch (error) {}
+    },
+    currentTime: function (val) {
+      const that = this;
+      try {
+        that.lyric.seek(val * 1000);
+      } catch (error) {}
+    },
   },
 };
 </script>
@@ -51,19 +58,7 @@ export default {
   transition: 1s;
   padding-top: 3rem;
   box-sizing: border-box;
-  overflow: hidden;
-  mask-image: linear-gradient(
-    rgba(255, 255, 255, 0),
-    #fff 40%,
-    #fff 60%,
-    rgba(255, 255, 255, 0)
-  );
-  -webkit-mask-image: linear-gradient(
-    rgba(255, 255, 255, 0),
-    #fff 40%,
-    #fff 60%,
-    rgba(255, 255, 255, 0)
-  );
+
   .line {
     line-height: 0.7rem;
     text-align: center;

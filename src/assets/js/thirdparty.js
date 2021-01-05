@@ -19,11 +19,8 @@ import {
   PullRefresh,
   Slider,
   Skeleton,
+  ImagePreview, // 图片放大预览，支持函数调用和组件调用两种方式。
 } from "vant";
-
-Vue.config.devtools = true // 开发调试工具
-Vue.prototype.$api = api;
-Vue.use(VueAxios, axios);
 
 Vue.use(Swipe);
 Vue.use(SwipeItem);
@@ -34,9 +31,13 @@ Vue.use(NavBar);
 Vue.use(PullRefresh);
 Vue.use(Slider);
 Vue.use(Skeleton);
+Vue.use(ImagePreview);
 
+Vue.use(VueAxios, axios);
+Vue.prototype.$api = api;
+Vue.prototype.$preview = ImagePreview;
 
-
+Vue.config.devtools = true // 开发调试工具
 
 
 import BScroll from '@better-scroll/core'

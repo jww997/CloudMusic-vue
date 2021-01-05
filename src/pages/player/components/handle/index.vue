@@ -89,11 +89,10 @@ export default {
     },
     togglePercentage: function (val) {
       const that = this;
-
-      // let audio = that.$store.state.audio;
-      // let currentTime = audio.example.duration * (val / 100);
-      // audio.example.currentTime = currentTime; // 根据选中百分比修改进度条
-      // that.$emit("seekLyric", currentTime * 1000); // 接收秒数，要处理下
+      // let i = that.duration * (val / 100); // 根据选中百分比修改进度条
+      // that.setPlayState(false);
+      // that.setCurrentTime(i); // 接收秒数，要处理下
+      // that.setPlayState(true);
     },
     toggleStatus: function () {
       const that = this;
@@ -103,6 +102,7 @@ export default {
     ...mapMutations({
       setPlayState: "SET_PLAY_STATE",
       setPlayIndex: "SET_PLAY_INDEX",
+      setCurrentTime: "SET_CURRENTTIME",
     }),
   },
 };

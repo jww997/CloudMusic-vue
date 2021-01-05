@@ -51,6 +51,7 @@ export default {
   .name {
     margin-top: 0.3rem;
     font-size: 0.3rem;
+    font-weight: bold;
   }
   .tags,
   .description {
@@ -71,6 +72,8 @@ export default {
   }
   .description {
     margin-top: 0.3rem;
+    text-align: justify;
+    text-align-last: left;
   }
   .save {
     height: 0.4rem;

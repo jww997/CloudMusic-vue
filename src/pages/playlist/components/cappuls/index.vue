@@ -1,7 +1,5 @@
 <template>
   <div class="container">
-    <!-- <navbar :title="title" :subtitle="subtitle" :fixed="false"></navbar> -->
-
     <img class="coverImgUrl" :src="obj.coverImgUrl" :alt="obj.name" />
     <span class="name">{{ obj.name }}</span>
     <div class="tags">
@@ -11,6 +9,7 @@
       }}</span>
     </div>
     <div class="description">{{ obj.description }}</div>
+    <div class="iconfont close">&#xe626;</div>
     <button class="save">保存封面</button>
   </div>
 </template>
@@ -32,6 +31,7 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .container {
+  height: 100%;
   @include suspension;
   @include flexCenter;
   flex-direction: column;
@@ -74,6 +74,12 @@ export default {
     margin-top: 0.3rem;
     text-align: justify;
     text-align-last: left;
+  }
+  .close {
+    font-size: 0.5rem;
+    position: absolute;
+    right: 0.3rem;
+    top: 0.3rem;
   }
   .save {
     height: 0.4rem;

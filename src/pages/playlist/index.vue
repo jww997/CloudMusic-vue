@@ -7,14 +7,13 @@
       infinite-scroll-distance="10"
     > -->
   <!-- <div v-for="item in data" :key="item.index">{{ item.name }}</div> -->
+
   <div class="container">
     <navbar :title="'歌单'" fixed></navbar>
-
     <div @click="toggleCapplus">
       <cap :obj="playlist"></cap>
     </div>
     <list :obj="playlist"></list>
-
     <div @click="toggleCapplus" v-if="isShowCapplus">
       <capplus :obj="playlist"></capplus>
     </div>
@@ -62,6 +61,7 @@ export default {
     getdata: function () {
       const that = this;
       let id = that.$route.params.id;
+      console.log(`id = ${id}`);
       that.$api.getPlaylistDetail({ id }).then((res) => {
         that.playlist = res.data.playlist;
 
@@ -78,7 +78,7 @@ export default {
   },
   created() {
     const that = this;
-    console.log(`id = ${that.$route.params.id}`);
+
     that.getdata();
 
     // console.log(that.$route);

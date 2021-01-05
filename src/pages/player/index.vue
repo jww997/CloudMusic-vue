@@ -105,6 +105,10 @@ export default {
     that.subtitle = that.currentSong.ar[0].name;
     that.title = that.currentSong.name;
   },
+  destroyed: function () {
+    const that = this;
+    delete that.lyric; // 避免定时器残留，导致歌词抖动
+  },
 };
 </script>
 

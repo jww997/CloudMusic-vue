@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="children">
     <div class="icon iconfont">&#xe70d;</div>
     <div class="frame">
       <span class="icon iconfont">&#xe607;</span>
@@ -18,7 +18,7 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-.container {
+.children {
   margin: 0.2rem 0;
   @include flexSpaceBetween;
   .icon {

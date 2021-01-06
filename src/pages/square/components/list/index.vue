@@ -1,26 +1,32 @@
 <template>
   <div class="children">
     <div class="list">
-      <router-link
+      <!-- <router-link
         :to="{
           name: 'playlist',
           params: { id: item.id },
         }"
+      > -->
+      <div
+        class="item"
         v-for="item in list"
         :key="item.id"
+        @click="toPages({ name: 'playlist', params: { id: item.id } })"
       >
         <cover
-          class="item"
+          class="cover"
           :image="item.coverImgUrl"
           :name="item.name"
           :count="item.playCount"
         ></cover>
-      </router-link>
+      </div>
+      <!-- </router-link> -->
     </div>
   </div>
 </template>
 
 <script>
+import { toPages } from "@/assets/js/skip.js";
 import Cover from "@/components/cover";
 export default {
   name: "list",
@@ -33,6 +39,9 @@ export default {
   components: {
     Cover,
   },
+  methods: {
+    toPages,
+  },
 };
 </script>
 
@@ -41,14 +50,19 @@ export default {
 @import "~sass/varibles.scss";
 .children {
   .list {
-    @include flexSpaceBetween;
-    justify-content: flex-start;
+    width: 100%;
+    display: flex;
     flex-wrap: wrap;
-    padding-left: 0.25rem;
+    padding-left: 2.5%;
     .item {
-      width: 3rem;
-      margin-bottom: 0.25rem;
-      margin-right: 0.25rem;
+      width: 30%;
+      margin-bottom: 2.5%;
+      margin-right: 2.5%;
+      .cover {
+        >>> .text {
+          font-size: $text-XS;
+        }
+      }
     }
   }
 }

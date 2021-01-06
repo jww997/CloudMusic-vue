@@ -8,8 +8,20 @@ export {
   toPages,
 }
 
-function toPages(path, query) {
+function toPages(to = {}) {
   const that = this;
-  console.log(`path = ${path}, query = `, query);
-  that.$router.push({ path, query });
+  console.log(`to = `, to);
+
+  let {
+    name,
+    params,
+    path,
+    query
+  } = to;
+  if (typeof to.name == 'string') {
+    that.$router.push({ name, params });
+  } else {
+    that.$router.push({ path, query });
+  };
+
 }

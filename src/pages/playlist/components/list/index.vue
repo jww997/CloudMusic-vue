@@ -12,7 +12,7 @@
     <div class="list">
       <div
         class="line song"
-        @click="toPages('/player', { id: item.id, index })"
+        @click="toPages({ path: '/player', query: { id: item.id } }, index)"
         v-for="(item, index) in obj.tracks"
         :key="item.id"
       >
@@ -33,7 +33,7 @@
         </div>
         <div
           class="iconfont mv"
-          @click.stop="toPages('/mv', { id: item.mv })"
+          @click.stop="toPages({ path: '/mv', query: { id: item.mv } })"
           v-if="item.mv != 0"
         >
           &#xe606;
@@ -78,16 +78,16 @@ export default {
     ...mapGetters(["playState", "playIndex", "currentSong"]),
   },
   methods: {
-    toPages: function (path, query) {
+    toPages: function (to, index) {
       const that = this;
       // that.insertSong();
-      console.log(`query = `, query);
-      console.log(`query.index = ${query.index}`);
-
-      that.setPlayIndex(query.index);
-      that.setPlayList(that.obj.tracks);
-      that.setCurrentSong(that.obj.tracks[query.index]);
-      toPages.call(that, path, { id: query.id });
+      if (index) {
+        console.log(`to.query.index = ${index}`);
+        that.setPlayIndex(index);
+        that.setPlayList(that.obj.tracks);
+        that.setCurrentSong(that.obj.tracks[index]);
+      }
+      toPages.call(that, to);
     },
     source: function (res) {
       const that = this;
@@ -183,7 +183,7 @@ export default {
         }
         .source {
           @include omit;
-          font-size: $text-XXXS;
+          font-size: $text-XS;
           color: #666;
         }
       }

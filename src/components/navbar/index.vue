@@ -82,7 +82,7 @@ export default {
   }
   .center {
     flex-grow: 1;
-    max-width: 5rem;
+    max-width: 7.5rem;
     height: 100%;
     margin: 0 0.3rem;
     text-align: center;

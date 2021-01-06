@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="children">
     <van-swipe class="swiper" :autoplay="3000" indicator-color="white">
       <van-swipe-item
         class="swiper-item"
@@ -44,7 +44,7 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-.container {
+.children {
   >>> .van-swipe__indicators {
     bottom: 6px;
     .van-swipe__indicator {

@@ -101,9 +101,11 @@ export default {
   },
   mounted: function () {
     const that = this;
-    that.picUrl = that.currentSong.al.picUrl;
-    that.subtitle = that.currentSong.ar[0].name;
-    that.title = that.currentSong.name;
+    try {
+      that.picUrl = that.currentSong.al.picUrl;
+      that.subtitle = that.currentSong.ar[0].name;
+      that.title = that.currentSong.name;
+    } catch (error) {}
   },
   destroyed: function () {
     const that = this;

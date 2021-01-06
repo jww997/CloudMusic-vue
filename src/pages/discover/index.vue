@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <search></search>
-    
+
     <div v-for="(item, index) in blocks" :key="index">
       <banner
         :ball="ball"
@@ -84,6 +84,7 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .container {
+  padding-bottom: $safeDistance-BOTTOM;
   &.children-enter,
   &.children-leave-to {
     opacity: 0;

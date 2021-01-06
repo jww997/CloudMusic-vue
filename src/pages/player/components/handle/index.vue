@@ -147,7 +147,7 @@ export default {
     }
   }
   .bottom {
-    padding: 0.3rem 1rem;
+    padding: 0.5rem 1rem;
     @include flexSpaceAround;
     .center {
       transform: scale(2);

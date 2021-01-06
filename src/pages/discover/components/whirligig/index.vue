@@ -35,9 +35,8 @@
 </template>
 
 <script>
-import Cover from "@/components/cover";
-
 import { formatUnit } from "@/assets/js/filter";
+import Cover from "@/components/cover";
 
 export default {
   name: "whirligig",
@@ -53,9 +52,6 @@ export default {
       type: Array,
       default: [],
     },
-  },
-  data: function () {
-    return {};
   },
   methods: {
     formatUnit,

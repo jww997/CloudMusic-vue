@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="children">
     <van-swipe class="swiper" width="50" :loop="false" :show-indicators="false">
       <van-swipe-item
         class="swiper-item"
@@ -62,7 +62,7 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-.container {
+.children {
   padding: 0.3rem 0;
   margin-top: 0.3rem;
   .swiper-item {

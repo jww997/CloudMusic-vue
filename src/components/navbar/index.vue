@@ -71,13 +71,14 @@ export default {
   flex-shrink: 0;
   width: 100%;
   height: 1rem;
+  // height: 1.5rem; // 准备使用插槽solt
   padding: 0 0.3rem;
   box-sizing: border-box;
   color: #fff;
   z-index: 100;
   @include flexSpaceBetween;
   .iconfont {
-    font-size: 0.5rem;
+    font-size: $text-L;
   }
   .center {
     flex-grow: 1;
@@ -93,14 +94,14 @@ export default {
       @include omit;
     }
     .title {
-      height: 0.5rem;
-      line-height: 0.5rem;
-      font-size: 0.35rem;
+      height: 0.6rem;
+      line-height: 0.6rem;
+      font-size: $text-M;
       font-weight: bold;
     }
     .subtitle {
       margin-top: 0.1rem;
-      font-size: 0.1rem;
+      font-size: $text-XS;
       color: #efefef;
     }
   }

@@ -73,16 +73,16 @@ export default {
   position: relative;
   background-color: rgba(0, 0, 0, 0.3);
   color: #666;
-  display: flex;
+  @include flexSpaceBetween;
   .left {
     flex-shrink: 0;
-    width: 2.2rem;
+    width: 2.7rem;
   }
   .right {
     flex-grow: 1;
     width: 3rem;
-    height: 2.2rem;
-    line-height: 0.38rem;
+    height: 2.7rem;
+    line-height: 0.65rem;
     margin-left: 0.2rem;
     @include flexSpaceBetween;
     align-items: flex-start;
@@ -92,6 +92,7 @@ export default {
       .name {
         width: 100%;
         color: #fff;
+        font-size: $text-M;
         @include omit;
         display: -webkit-box;
         white-space: normal;
@@ -108,7 +109,7 @@ export default {
           border-radius: 50%;
         }
         .nickname {
-          font-size: 0.2rem;
+          font-size: $text-S;
           margin-left: 0.1rem;
         }
       }
@@ -117,17 +118,17 @@ export default {
       width: 100%;
       .signature {
         width: 100%;
-        font-size: 0.2rem;
+        font-size: $text-XS;
         @include omit;
       }
     }
   }
   .operation {
     width: 80%;
-    height: 0.9rem;
+    height: 1.1rem;
     margin: 0 auto;
-    margin-bottom: -0.45rem;
-    font-size: 0.2rem;
+    margin-bottom: -0.5rem;
+    font-size: $text-XS;
     border-radius: 2rem;
     background-color: #fff;
     box-shadow: 0 0 10px 0 #ccc;
@@ -140,8 +141,9 @@ export default {
       flex: 1;
       border-right: 1px solid #ccc;
       @include flexCenter;
+      font-size: $text-XS;
       .iconfont {
-        font-size: 0.4rem;
+        font-size: $text-M;
       }
       .text {
         margin-left: 0.1rem;

@@ -63,18 +63,17 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .container {
-  height: 1.5rem;
+  padding: 0.3rem 0;
   margin-top: 0.3rem;
   .swiper-item {
-    // padding: 0 0.2rem;
     padding-left: 0.35rem;
     .item {
       width: 100%;
       @include flexCenter;
       flex-direction: column;
       .icon {
-        width: 0.8rem;
-        height: 0.8rem;
+        width: 1rem;
+        height: 1rem;
         position: relative;
         margin-bottom: 0.2rem;
         border-radius: 50%;
@@ -113,7 +112,7 @@ export default {
         // opacity: 0.6;
       }
       .text {
-        font-size: 0.2rem;
+        font-size: $text-XS;
         color: #000;
       }
     }

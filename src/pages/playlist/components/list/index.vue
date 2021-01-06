@@ -18,7 +18,7 @@
       >
         <!-- :to="{ path: '/player', query: { id: item.id } }" -->
         <div
-          class="front iconfont active"
+          class="front iconfont index active"
           v-if="playState && item.id == currentSong.id"
         >
           &#xe604;
@@ -48,10 +48,12 @@
           v-for="(item, index) in obj.subscribers"
           :key="index"
         >
-          <img :src="item.avatarUrl" :alt="item.name" v-if="index < 5" />
+          <img :src="item.avatarUrl" :alt="item.name" />
         </div>
       </div>
-      <div class="text">12人收藏</div>
+      <div class="text" v-if="obj.subscribers">
+        {{ obj.subscribers.length }}人收藏
+      </div>
     </div>
   </div>
 </template>
@@ -112,6 +114,10 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .children {
+  // .line,
+  // .list {
+  //   flex-shrink: 0;
+  // }
   .line {
     padding: 0.2rem 0.3rem;
     @include flexSpaceBetween;
@@ -119,13 +125,12 @@ export default {
       width: 0.4rem;
       flex-shrink: 0;
       text-align: center;
-      margin-right: 0.2rem;
+      margin-right: 0.4rem;
     }
     .iconfont {
       flex-shrink: 0;
     }
   }
-
   .guide {
     .playall {
       flex-grow: 1;
@@ -134,39 +139,40 @@ export default {
       .iconfont {
         color: $red;
         margin-left: 0;
+        font-size: $text-S;
       }
       .text {
-        font-size: 0.25rem;
+        font-size: $text-S;
         font-weight: bold;
       }
       .total {
-        font-size: 0.15rem;
+        font-size: $text-XS;
         margin-left: 0.15rem;
         color: #666;
       }
       ~ .iconfont {
         color: #000;
-        font-size: 0.35rem;
+        font-size: $text-M;
         margin-left: 0.3rem;
       }
     }
   }
   .list {
     .song {
-      .active {
-        font-size: 0.4rem;
-        color: #f00;
-      }
       .index {
-        text-align: center;
+        font-size: $text-L;
         color: #333;
+        @include flexCenter;
+        &.active {
+          color: #f00;
+        }
       }
       .name {
         flex-grow: 1;
         width: 1rem;
-        line-height: 0.38rem;
+        line-height: 0.5rem;
         .songname {
-          font-size: 0.2rem;
+          font-size: $text-S;
           @include omit;
           .title {
             color: #000;
@@ -177,7 +183,7 @@ export default {
         }
         .source {
           @include omit;
-          font-size: 0.1rem;
+          font-size: $text-XXXS;
           color: #666;
         }
       }
@@ -185,6 +191,7 @@ export default {
       .more {
         color: #666;
         margin-left: 0.3rem;
+        font-size: $text-M;
       }
     }
   }
@@ -196,10 +203,11 @@ export default {
       @include omit;
       display: flex;
       .image {
-        width: 0.5rem;
-        height: 0.5rem;
+        width: 0.7rem;
+        height: 0.7rem;
+        line-height: 0;
         border-radius: 50%;
-        margin-right: 0.1rem;
+        margin-right: 0.2rem;
         overflow: hidden;
         img {
           width: 100%;
@@ -208,7 +216,7 @@ export default {
     }
     .text {
       flex-shrink: 0;
-      font-size: 0.2rem;
+      font-size: $text-XS;
       color: #666;
     }
   }

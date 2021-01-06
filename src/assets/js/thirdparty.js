@@ -9,6 +9,8 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import api from "@/api"
 
+import 'amfe-flexible/index.js' // rem 动态适配
+
 import {
   Swipe,
   SwipeItem,
@@ -38,6 +40,9 @@ Vue.prototype.$api = api;
 Vue.prototype.$preview = ImagePreview;
 
 Vue.config.devtools = true // 开发调试工具
+Vue.config.productionTip = false // 阻止启动生产消息
+
+
 
 
 import BScroll from '@better-scroll/core'

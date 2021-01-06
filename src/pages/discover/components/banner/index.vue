@@ -21,7 +21,7 @@
   </div>
 </template>
 
-<script> 
+<script>
 import Ball from "@/pages/discover/components/ball";
 export default {
   name: "banner",
@@ -50,6 +50,7 @@ export default {
     .van-swipe__indicator {
       width: 8px;
       height: 2px;
+      border-radius: 30px;
     }
   }
   .swiper {
@@ -66,7 +67,7 @@ export default {
           height: 100%;
         }
         .text {
-          font-size: 0.1rem;
+          font-size: $text-XXXS;
           padding: 0.1rem 0.2rem;
           border-radius: 0.15rem 0 0 0;
           opacity: 0.8;

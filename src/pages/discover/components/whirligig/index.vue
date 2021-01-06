@@ -76,13 +76,13 @@ export default {
     margin: 0.2rem 0.2rem 0;
     @include flexSpaceBetween;
     .title {
-      font-size: 0.3rem;
+      font-size: $text-S;
       font-weight: bold;
       @include omit;
     }
     .more {
       flex-shrink: 0;
-      font-size: 0.2rem;
+      font-size: $text-XS;
       font-weight: bold;
       margin-left: 0.2rem;
       padding: 0.1rem 0.2rem;

@@ -56,23 +56,23 @@ export default {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     line-clamp: 2;
-    line-height: 0.3rem;
+    line-height: 0.5rem;
     padding-top: 0.1rem;
-    font-size: 0.2rem;
+    font-size: $text-XXS;
     color: #333;
   }
   .count {
     color: #fff;
-    font-size: 0.2rem;
+    font-size: $text-XS;
     background-color: rgba(0, 0, 0, 0.5);
-    padding: 0.05rem 0.1rem;
+    padding: 0.1rem 0.2rem;
     border-radius: 1rem;
     position: absolute;
     right: 5%;
     top: 5%;
     @include flexCenter;
     .iconfont {
-      font-size: 0.1rem;
+      font-size: $text-XS;
     }
   }
   &:after {

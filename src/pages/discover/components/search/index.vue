@@ -23,8 +23,8 @@ export default {
   @include flexSpaceBetween;
   .icon {
     flex-shrink: 0;
-    margin: 0.2rem;
-    font-size: 0.4rem;
+    margin: 0.3rem;
+    font-size: $text-M;
   }
   .frame {
     flex-grow: 1;
@@ -35,13 +35,13 @@ export default {
     color: #666;
     @include flexSpaceBetween;
     .iconfont {
-      font-size: 0.3rem;
+      margin: 0.25rem;
     }
     .text {
       flex-grow: 1;
       height: 0.7rem;
       line-height: 0.7rem;
-      font-size: 0.35rem;
+      font-size: $text-S;
     }
   }
 }

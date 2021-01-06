@@ -107,7 +107,7 @@ export default {
   },
   destroyed: function () {
     const that = this;
-    delete that.lyric; // 避免定时器残留，导致歌词抖动
+    // delete that.lyric; // 避免定时器残留，导致歌词抖动
   },
 };
 </script>

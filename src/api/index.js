@@ -191,7 +191,99 @@ export default {
 
 
 
+  getMvSub: parameter => { // 收藏/取消收藏MV
+    return request("mv/sub", parameter);
+    /**
+     *  @param mvid MVid
+     *  @param t (选)1为收藏,其他为取消收藏
+     * 说明:调用此接口,可收藏/取消收藏MV
+     */
+  },
+  getMvSublist: parameter => { // 收藏的MV列表
+    return request("mv/sublist", parameter);
+    /**
+     * 说明:调用此接口,可获取收藏的MV列表
+     */
+  },
 
+
+
+
+
+  getTopMv: parameter => { // mv排行
+    return request("top/mv", parameter);
+    /**
+     *  @param limit (选)取出数量,默认为30
+     *  @param area (选)地区,可选值为内地,港台,欧美,日本,韩国,不填则为全部
+     *  @param offset (选)偏移数量,用于分页,如:(页数-1)*30,其中30为limit的值,默认为0
+     * 说明:调用此接口,可获取mv排行
+     */
+  },
+  getMvDetail: parameter => { // 获取mv数据
+    return request("mv/detail", parameter);
+    /**
+     *  @param mvid MVid
+     * 说明:调用此接口,传入mvid(在搜索音乐的时候传type=1004获得),可获取对应MV数据,数据包含mv名字,歌手,发布时间,mv视频地址等数据,其中mv视频网易做了防盗链处理,可能不能直接播放,需要播放的话需要调用'mv地址'接口
+     */
+  },
+  getMvDetailInfo: parameter => { // 获取mv点赞转发评论数数据
+    return request("mv/detail/info", parameter);
+    /**
+     *  @param mvid MVid
+     *  说明:调用此接口,传入mvid(在搜索音乐的时候传type=1004获得),可获取对应MV点赞转发评论数数据
+     */
+  },
+  getMvUrl: parameter => { // mv地址
+    return request("mv/url", parameter);
+    /**
+     *  @param id mvid
+     *  @param r (选)分辨率,默认1080,可从/mv/detail接口获取分辨率列表
+     *  说明:调用此接口,传入mvid,可获取mv播放地址
+     */
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  getArtistMv: parameter => { // 获取歌手mv
+    return request("artist/mv", parameter);
+    /**
+     * @param id 歌手id,可由搜索接口获得
+     * 说明:调用此接口,传入歌手id,可获得歌手mv信息,具体mv播放地址可调用/mv传入此接口获得的mvid来拿到,如:/artist/mv?id=6452,/mv?mvid=5461064
+     */
+  },
 
 
 

@@ -31,6 +31,13 @@
           </p>
           <p class="source">{{ source(item) }}</p>
         </div>
+        <div
+          class="iconfont mv"
+          @click.stop="toPages('/mv', { id: item.mv })"
+          v-if="item.mv != 0"
+        >
+          &#xe606;
+        </div>
         <div class="iconfont more">&#xe690;</div>
       </div>
     </div>
@@ -174,6 +181,7 @@ export default {
           color: #666;
         }
       }
+      .mv,
       .more {
         color: #666;
         margin-left: 0.3rem;

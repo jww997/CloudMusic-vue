@@ -50,17 +50,27 @@ export default new Router({
       ]
     },
     {
-      path: '/mine',
-      name: 'mine',
-      component: _component("mine"),
-    },
-    {
       path: '/player',
       name: 'player',
       component: _component("player"),
       meta: {
         isKeepAlive: false,
       }
+    },
+    {
+      path: '/mv',
+      name: 'mv',
+      component: _component("mv"),
+      meta: {
+        isKeepAlive: false,
+      }
+    },
+
+
+    {
+      path: '/mine',
+      name: 'mine',
+      component: _component("mine"),
     },
   ]
 });

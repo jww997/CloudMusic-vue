@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="children">
     <img class="coverImgUrl" :src="obj.coverImgUrl" :alt="obj.name" />
     <span class="name">{{ obj.name }}</span>
     <div class="tags">
@@ -30,7 +30,7 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-.container {
+.children {
   height: 100%;
   @include suspension;
   @include flexCenter;

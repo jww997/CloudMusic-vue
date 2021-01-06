@@ -93,6 +93,8 @@ export default {
       @include omit;
     }
     .title {
+      height: 0.5rem;
+      line-height: 0.5rem;
       font-size: 0.35rem;
       font-weight: bold;
     }

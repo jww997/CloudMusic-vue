@@ -2,7 +2,7 @@
   <div
     class="children"
     :style="{
-      transform: `translateY(-${0.7 * lyric.curLine}rem)`,
+      transform: `translateY(-${1 * lyric.curLine}rem)`,
     }"
   >
     <div
@@ -56,16 +56,20 @@ export default {
 .children {
   height: 100%;
   transition: 1s;
-  padding-top: 3rem;
+  // padding-top: 4rem;
+  padding-top: 50%;
   box-sizing: border-box;
 
   .line {
-    line-height: 0.7rem;
+    line-height: 1rem;
+    transition: 1s;
+    font-size: $text-M;
     text-align: center;
     transition: 1s;
     color: #aaa;
     &.active {
       color: #fff;
+      font-size: $text-L;
       font-weight: bold;
     }
   }

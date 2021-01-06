@@ -70,8 +70,8 @@ export default {
 .kid {
   flex-shrink: 0;
   width: 100%;
-  height: 1rem;
-  // height: 1.5rem; // 准备使用插槽solt
+  // height: 1rem;
+  height: $safeDistance-TOP; // 准备使用插槽solt
   padding: 0 0.3rem;
   box-sizing: border-box;
   color: #fff;

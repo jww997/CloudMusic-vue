@@ -72,7 +72,8 @@ export default {
 
   .phonograph {
     flex-grow: 1;
-    padding-top: 1.8rem;
+    width: 75%;
+    padding-top: 20%;
     padding-bottom: 0.5rem;
     position: relative;
     .disc,
@@ -80,10 +81,10 @@ export default {
       transition: 0.5s;
     }
     .disc {
-      width: 5rem;
+      width: 100%;
       height: 0;
       margin: 0 auto;
-      padding-bottom: 5rem;
+      padding-bottom: 100%;
       background: no-repeat center;
       background-size: 100% 100%;
       border-radius: 50%;
@@ -96,8 +97,8 @@ export default {
 
       overflow: hidden;
       img {
-        width: 5rem;
-        height: 5rem; // 部分图片呈长方形
+        width: 100%;
+        height: 100%; // 部分图片呈长方形
         // max-width: 100%;
         // max-height: 100%;
         @include positionCenter;
@@ -116,7 +117,7 @@ export default {
       }
     }
     .stick {
-      width: 2rem;
+      width: 25%;
       transform-origin: 0.35rem 0.35rem;
       transform: rotate(-40deg);
       transition: 0.5s;
@@ -143,7 +144,7 @@ export default {
     @include flexSpaceAround;
     .iconfont {
       color: #fff;
-      font-size: 0.4rem;
+      font-size: $text-L;
     }
   }
 }

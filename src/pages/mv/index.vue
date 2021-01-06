@@ -75,7 +75,7 @@ export default {
   @include suspension;
   position: relative;
 
-  padding-top: 1rem;
+  padding-top: $safeDistance-TOP;
   box-sizing: border-box;
 
   background-color: #000;

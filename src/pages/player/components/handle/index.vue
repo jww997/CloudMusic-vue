@@ -127,11 +127,11 @@ export default {
   }
   .iconfont {
     color: #fff;
-    font-size: 0.4rem;
+    font-size: $text-L;
   }
   .progress {
     margin: 0.3rem;
-    font-size: 0.2rem;
+    font-size: $text-S;
     color: #fff;
     @include flexSpaceBetween;
     .strip {
@@ -141,7 +141,7 @@ export default {
     }
     .text {
       flex-shrink: 0;
-      width: 0.7rem;
+      width: 1.2rem;
       text-align: center;
       @include omit;
     }

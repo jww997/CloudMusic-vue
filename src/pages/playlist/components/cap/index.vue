@@ -68,7 +68,7 @@ export default {
 .children {
   width: 100%;
   margin-bottom: 0.7rem;
-  padding: 1rem 0.3rem 0.9rem;
+  padding: $safeDistance-TOP 0.3rem 0.9rem;
   box-sizing: border-box;
   position: relative;
   background-color: rgba(0, 0, 0, 0.3);
@@ -76,14 +76,14 @@ export default {
   @include flexSpaceBetween;
   .left {
     flex-shrink: 0;
-    width: 2.7rem;
+    width: 2.8rem;
   }
   .right {
     flex-grow: 1;
     width: 3rem;
     height: 2.7rem;
     line-height: 0.65rem;
-    margin-left: 0.2rem;
+    margin-left: 0.3rem;
     @include flexSpaceBetween;
     align-items: flex-start;
     flex-direction: column;

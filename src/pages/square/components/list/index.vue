@@ -44,12 +44,11 @@ export default {
     @include flexSpaceBetween;
     justify-content: flex-start;
     flex-wrap: wrap;
-    padding-left: 0.2rem;
+    padding-left: 0.25rem;
     .item {
-      width: 2.2rem;
-      height: 3rem;
-      margin-top: 0.2rem;
-      margin-right: 0.2rem;
+      width: 3rem;
+      margin-bottom: 0.25rem;
+      margin-right: 0.25rem;
     }
   }
 }

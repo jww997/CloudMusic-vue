@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="children">
     <!-- <van-skeleton title animate :row="1" /> -->
     <div class="header">
       <div class="title">{{ uielement.subTitle.title }}</div>
@@ -65,7 +65,7 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-.container {
+.children {
   padding-bottom: 0.2rem;
   border-bottom: 0.15rem solid #eee;
   .header {

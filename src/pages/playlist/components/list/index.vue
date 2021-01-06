@@ -81,7 +81,7 @@ export default {
     toPages: function (to, index) {
       const that = this;
       // that.insertSong();
-      if (index) {
+      if (typeof index != "underfind") {
         console.log(`to.query.index = ${index}`);
         that.setPlayIndex(index);
         that.setPlayList(that.obj.tracks);

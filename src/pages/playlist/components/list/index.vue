@@ -4,7 +4,7 @@
       <div class="playall">
         <span class="iconfont front">&#xe674;</span>
         <span class="text">播放全部</span>
-        <span class="total">({{ total }})</span>
+        <span class="total">({{ total ? total : 0 }})</span>
       </div>
       <div class="iconfont">&#xe65b;</div>
       <div class="iconfont">&#xe65a;</div>
@@ -114,12 +114,8 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .children {
-  // .line,
-  // .list {
-  //   flex-shrink: 0;
-  // }
   .line {
-    padding: 0.2rem 0.3rem;
+    padding: 0.3rem;
     @include flexSpaceBetween;
     .front {
       width: 0.4rem;
@@ -160,18 +156,19 @@ export default {
   .list {
     .song {
       .index {
-        font-size: $text-L;
+        font-size: $text-S;
         color: #333;
         @include flexCenter;
         &.active {
           color: #f00;
+          font-size: $text-L;
         }
       }
       .name {
         flex-grow: 1;
         width: 1rem;
-        line-height: 0.5rem;
         .songname {
+          line-height: $text-M;
           font-size: $text-S;
           @include omit;
           .title {
@@ -183,6 +180,7 @@ export default {
         }
         .source {
           @include omit;
+          margin-top: 0.1rem;
           font-size: $text-XS;
           color: #666;
         }

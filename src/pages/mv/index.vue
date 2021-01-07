@@ -3,7 +3,7 @@
     <navbar :title="'视频'" fixed></navbar>
     <video class="video" :src="url" controls autoplay></video>
 
-    <info :info="info"></info>
+    <info :info="info" :count="count"></info>
   </div>
 </template>
 
@@ -55,7 +55,7 @@ export default {
         return that.$api.getMvDetailInfo({ mvid: id });
       })
       .then((res) => {
-        console.log(res);
+        that.count = res.data;
       });
   },
   destroyed: function () {

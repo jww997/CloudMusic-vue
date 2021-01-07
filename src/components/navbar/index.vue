@@ -94,13 +94,13 @@ export default {
       @include omit;
     }
     .title {
-      height: 0.6rem;
-      line-height: 0.6rem;
+      line-height: $text-L;
       font-size: $text-M;
       font-weight: bold;
     }
     .subtitle {
       margin-top: 0.1rem;
+      line-height: $text-S;
       font-size: $text-XS;
       color: #efefef;
     }

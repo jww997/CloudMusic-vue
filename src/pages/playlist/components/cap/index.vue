@@ -76,12 +76,12 @@ export default {
   @include flexSpaceBetween;
   .left {
     flex-shrink: 0;
-    width: 2.8rem;
+    width: 3.2rem;
   }
   .right {
     flex-grow: 1;
-    width: 3rem;
-    height: 2.7rem;
+    min-width: 3rem;
+    height: 3.2rem;
     line-height: 0.65rem;
     margin-left: 0.3rem;
     @include flexSpaceBetween;

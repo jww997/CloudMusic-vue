@@ -1,5 +1,5 @@
 <template>
-  <div class="kid">
+  <div class="kid" v-if="image">
     <img class="image" :src="image" />
     <span class="text" v-if="name">{{ name }}</span>
     <div class="count" v-if="count">
@@ -77,9 +77,9 @@ export default {
   }
   &:after {
     content: "";
-    width: 2rem;
-    padding-bottom: 2rem;
-    margin: -0.1rem auto;
+    width: 90%;
+    padding-bottom: 90%;
+    margin: -0.2rem auto;
     background-color: $gray;
     border-radius: 0.1rem;
     z-index: -1;

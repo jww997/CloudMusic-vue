@@ -49,15 +49,17 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .children {
+  padding-left: 2.5%;
+  box-sizing: border-box;
   .list {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    padding-left: 2.5%;
+    overflow: hidden;
     .item {
       width: 30%;
-      margin-bottom: 2.5%;
-      margin-right: 2.5%;
+      margin-bottom: 4%;
+      margin-right: 3.3%;
       .cover {
         >>> .text {
           font-size: $text-XS;

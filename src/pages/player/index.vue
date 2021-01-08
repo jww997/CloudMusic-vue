@@ -110,7 +110,8 @@ export default {
   destroyed: function () {
     const that = this;
     try {
-      delete that.lyric.timer; // 避免定时器残留，导致歌词抖动
+      clearInterval(that.lyric.timer); // 避免定时器残留，导致歌词抖动
+      console.log("定时器清除成功");
     } catch (error) {}
   },
 };

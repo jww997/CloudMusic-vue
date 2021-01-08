@@ -40,7 +40,7 @@ export default {
       playlist: {},
       count: 0,
       data: [],
-      busy: false,
+      // busy: false,
     };
   },
   methods: {
@@ -48,49 +48,33 @@ export default {
       const that = this;
       that.isShowCapplus = !that.isShowCapplus;
     },
-    loadMore: function () {
-      this.busy = true;
-      setTimeout(() => {
-        for (var i = 0, j = 10; i < j; i++) {
-          this.data.push({ name: this.count++ });
-        }
-        console.log(this.data);
-        this.busy = false;
-      }, 1000);
-    },
     getdata: function () {
       const that = this;
       let id = that.$route.params.id;
+      if (!id) return false;
       console.log(`id = ${id}`);
       that.$api.getPlaylistDetail({ id }).then((res) => {
         that.playlist = res.data.playlist;
-
-        // that.$set(that, "playlist", res.data.playlist);
-        // that.$set(that, "playlist", {});
-        // that.playlist = [];
-        // console.log(res.data.playlist);
-
-        // res.data.playlist.forEach(item => {
-        //   that.playlist.push(item);
-        // });
       });
     },
+    //loadMore: function () {
+    //   this.busy = true;
+    //   setTimeout(() => {
+    //     for (var i = 0, j = 10; i < j; i++) {
+    //       this.data.push({ name: this.count++ });
+    //     }
+    //     console.log(this.data);
+    //     this.busy = false;
+    //   }, 1000);
+    // },
   },
   created() {
     const that = this;
-
     that.getdata();
-
-    // console.log(that.$route);
-    // that.timestamp = Date.parse(new Date());
-    // if (that.$route.query) {
-    // that.id = that.$route.params.id;
-    // }
   },
   // mounted() {
   //   const that = this;
   // console.log(that.$refs.playlist);
-
   // let bs = new BetterScroll(that.$refs.playlist, {
   //   movable: true,
   //   zoom: true,

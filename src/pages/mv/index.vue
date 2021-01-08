@@ -1,8 +1,16 @@
 <template>
   <div class="container">
     <navbar :title="'视频'" fixed></navbar>
-    <video class="video" ref="video" :src="url" controls autoplay loop></video>
-
+    <video
+      class="video"
+      ref="video"
+      :src="url"
+      :poster="info.cover"
+      controls
+      autoplay
+      loop
+      v-if="info.cover"
+    ></video>
     <info :info="info" :count="count"></info>
   </div>
 </template>
@@ -29,6 +37,24 @@ export default {
     ...mapState(["playState"]),
   },
   methods: {
+    getdata: function () {
+      const that = this;
+      let id = that.$route.query.id;
+      console.log(`mv = ${id}`);
+      that.$api
+        .getMvDetail({ mvid: id })
+        .then((res) => {
+          that.info = res.data.data;
+          return that.$api.getMvUrl({ id });
+        })
+        .then((res) => {
+          that.url = res.data.data.url;
+          return that.$api.getMvDetailInfo({ mvid: id });
+        })
+        .then((res) => {
+          that.count = res.data;
+        });
+    },
     ...mapMutations({
       setPlayState: "SET_PLAY_STATE",
     }),
@@ -39,29 +65,11 @@ export default {
       that.setPlayState(false);
       that.isPlaying = true;
     }
-
-    let id = that.$route.query.id;
-    console.log(`MVid = ${id}`);
-    that.$api
-      .getMvDetail({ mvid: id })
-      .then((res) => {
-        // console.log(res);
-        that.info = res.data.data;
-        return that.$api.getMvUrl({ id });
-      })
-      .then((res) => {
-        that.url = res.data.data.url;
-        return that.$api.getMvDetailInfo({ mvid: id });
-      })
-      .then((res) => {
-        that.count = res.data;
-      });
+    that.getdata();
   },
   destroyed: function () {
     const that = this;
-    if (that.isPlaying) {
-      that.setPlayState(true);
-    }
+    if (that.isPlaying) that.setPlayState(true);
   },
 };
 </script>
@@ -73,13 +81,10 @@ export default {
   height: 100vh;
   @include suspension;
   position: relative;
-
   padding-top: $safeDistance-TOP;
   box-sizing: border-box;
-
   background-color: #000;
   color: #fff;
-
   .video {
     margin-top: 1.5rem;
     width: 100%;

@@ -54,9 +54,9 @@
         :class="{
           iconfont: true,
           like: true,
-          active: isLike,
+          active: count.liked,
         }"
-        v-html="isLike ? '&#xe669;' : '&#xe66a;'"
+        v-html="count.liked ? '&#xe669;' : '&#xe66a;'"
       ></div>
       <div class="title">
         <span class="name">{{ info.name }}</span>
@@ -75,7 +75,7 @@ export default {
   },
   data: function () {
     return {
-      isLike: true,
+      // isLike: true,
       isShowDesc: false,
     };
   },
@@ -107,6 +107,7 @@ export default {
       .desc,
       .playCount {
         margin-top: 0.2rem;
+        text-align: justify;
       }
       .name {
         display: flex;
@@ -131,7 +132,6 @@ export default {
       .desc {
         line-height: $text-S;
         font-size: $text-XS;
-        text-align: justify;
       }
       .playCount {
         font-size: $text-XS;

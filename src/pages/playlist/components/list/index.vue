@@ -78,11 +78,9 @@ export default {
     ...mapGetters(["playState", "playIndex", "currentSong"]),
   },
   methods: {
-    toPages: function (to, index) {
+    toPages: function (to, index = "") {
       const that = this;
-      // that.insertSong();
-      if (typeof index != "underfind") {
-        console.log(`to.query.index = ${index}`);
+      if (typeof index == "number") {
         that.setPlayIndex(index);
         that.setPlayList(that.obj.tracks);
         that.setCurrentSong(that.obj.tracks[index]);
@@ -99,7 +97,6 @@ export default {
         });
       return `${singer} - ${al.name}`;
     },
-    // ...mapActions(["insertSong"]),
     ...mapMutations({
       setPlayList: "SET_PLAY_LIST",
       setPlayIndex: "SET_PLAY_INDEX",

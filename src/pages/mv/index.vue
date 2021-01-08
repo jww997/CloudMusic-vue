@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <navbar :title="'视频'" fixed></navbar>
-    <video class="video" :src="url" controls autoplay></video>
+    <video class="video" ref="video" :src="url" controls autoplay loop></video>
 
     <info :info="info" :count="count"></info>
   </div>
@@ -22,6 +22,7 @@ export default {
       isPlaying: false, // 记录音乐播放状态
       url: "",
       info: {},
+      count: {},
     };
   },
   computed: {
@@ -34,8 +35,6 @@ export default {
   },
   mounted: function () {
     const that = this;
-
-    console.log(that.playState);
     if (that.playState) {
       that.setPlayState(false);
       that.isPlaying = true;
@@ -46,7 +45,7 @@ export default {
     that.$api
       .getMvDetail({ mvid: id })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         that.info = res.data.data;
         return that.$api.getMvUrl({ id });
       })

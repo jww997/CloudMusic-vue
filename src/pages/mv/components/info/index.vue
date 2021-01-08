@@ -2,20 +2,34 @@
   <div class="children">
     <div class="top">
       <div class="left">
-        (待开发)
-
-        <div class="desc">{{ info.desc }}</div>
+        <div class="artists">
+          <span v-for="(item, index) in info.artists" :key="index"
+            >{{ item.name }} /
+          </span>
+        </div>
+        <div class="name" @click="toggleDesc">
+          <span>{{ info.name }}</span>
+          <span
+            :class="{
+              triangle: true,
+              active: isShowDesc,
+            }"
+            v-if="info.desc"
+          ></span>
+        </div>
+        <div class="desc" v-if="isShowDesc">{{ info.desc }}</div>
+        <div class="playCount">{{ info.playCount }}次观看</div>
       </div>
       <div class="right">
-        <div class="handle">
+        <div class="handle" v-if="count.likedCount">
           <div class="iconfont">&#xe697;</div>
           <div class="text">{{ count.likedCount }}</div>
         </div>
-        <div class="handle">
+        <div class="handle" v-if="count.commentCount">
           <div class="iconfont">&#xe65d;</div>
           <div class="text">{{ count.commentCount }}</div>
         </div>
-        <div class="handle">
+        <div class="handle" v-if="count.shareCount">
           <div class="iconfont">&#xe65c;</div>
           <div class="text">{{ count.shareCount }}</div>
         </div>
@@ -25,7 +39,16 @@
         </div>
       </div>
     </div>
-
+    <div class="strip">
+      <van-slider
+        :step="10"
+        button-size="10px"
+        active-color="#f00"
+        inactive-color="#494949"
+      />
+      <!-- v-model="percentage"
+        @change="togglePercentage" -->
+    </div>
     <div class="bottom">
       <div
         :class="{
@@ -35,7 +58,10 @@
         }"
         v-html="isLike ? '&#xe669;' : '&#xe66a;'"
       ></div>
-      <div class="name">{{ info.name }} - {{ info.artistName }}</div>
+      <div class="title">
+        <span class="name">{{ info.name }}</span>
+        <span class="artistName">- {{ info.artistName }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -48,7 +74,17 @@ export default {
     count: {},
   },
   data: function () {
-    return { isLike: true };
+    return {
+      isLike: true,
+      isShowDesc: false,
+    };
+  },
+  methods: {
+    toggleDesc: function () {
+      const that = this;
+      if (!that.info.desc) return false;
+      that.isShowDesc = !that.isShowDesc;
+    },
   },
 };
 </script>
@@ -63,26 +99,55 @@ export default {
   .top {
     @include flexSpaceBetween;
     align-items: flex-end;
-    @include test;
     .left {
-      @include test;
+      padding: 0.3rem 0.5rem;
+      line-height: $text-M;
+      font-size: $text-S;
+      .name,
+      .desc,
+      .playCount {
+        margin-top: 0.2rem;
+      }
+      .name {
+        display: flex;
+        align-items: center;
+        .triangle {
+          width: 0;
+          height: 0;
+          margin-left: 0.2rem;
+          margin-bottom: -0.2rem;
+          border: 0.2rem solid;
+          border-radius: 0.1rem;
+          border-color: #fff transparent transparent;
+          transform-origin: center;
+          transition: 0.3s;
+          &.active {
+            margin-bottom: 0;
+            margin-top: -0.2rem;
+            transform: rotate(180deg);
+          }
+        }
+      }
       .desc {
-        line-height: $text-M;
-        font-size: $text-S;
+        line-height: $text-S;
+        font-size: $text-XS;
         text-align: justify;
+      }
+      .playCount {
+        font-size: $text-XS;
+        color: #666;
       }
     }
     .right {
-      @include test;
       .handle {
         @include flexCenter;
         flex-direction: column;
         padding: 0.3rem;
         .iconfont {
-          font-size: $text-XXXL;
+          font-size: $text-XL;
         }
         .text {
-          font-size: $text-S;
+          font-size: $text-XS;
           margin-top: 0.2rem;
         }
       }
@@ -100,8 +165,14 @@ export default {
         color: #ff3e43;
       }
     }
-    .name {
+    .title {
       font-size: 0.3rem;
+      .name {
+        color: #999;
+      }
+      .artistName {
+        color: #666;
+      }
     }
   }
 }

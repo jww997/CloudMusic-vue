@@ -13,6 +13,9 @@ export default {
   [types.SET_PLAY_LIST](state, val) {
     state.playlist = val;
   },
+  [types.SET_PLAY_LIST_SHOW](state, val) {
+    state.playlistShow = val;
+  },
   [types.SET_PLAY_SEQUENCE](state, val) {
     state.playSequence = val;
   },

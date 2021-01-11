@@ -17,12 +17,14 @@
     <div @click="toggleCapplus" v-if="isShowCapplus">
       <capplus :obj="playlist"></capplus>
     </div>
+    <bottombar></bottombar>
   </div>
 </template>
 
 <script>
 import BetterScroll from "better-scroll";
 import Navbar from "@/components/navbar";
+import bottombar from "@/components/bottombar";
 import Cap from "@/pages/playlist/components/cap";
 import Capplus from "@/pages/playlist/components/cappuls";
 import List from "@/pages/playlist/components/list";
@@ -30,6 +32,7 @@ export default {
   name: "playlist",
   components: {
     Navbar,
+    bottombar,
     Cap,
     Capplus,
     List,
@@ -88,6 +91,7 @@ export default {
 @import "~sass/varibles.scss";
 .container {
   @include suspension;
+  padding-bottom: $safeDistance;
   // .capplus {
   //   transition: 0.5s;
   //   &.hide {

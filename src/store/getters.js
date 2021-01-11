@@ -10,6 +10,7 @@ export default {
     playUrl: state => { return state.playUrl },
     playIndex: state => { return state.playIndex },
     playlist: state => { return state.playlist },
+    playlistShow: state => { return state.playlistShow },
     playSequence: state => { return state.playSequence },
     playMode: state => { return state.playMode },
 

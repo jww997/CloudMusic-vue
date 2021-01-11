@@ -13,25 +13,6 @@
   top: 0;
 }
 
-@mixin test {
-  border: 1px solid #f00;
-}
-
-@mixin suspension {
-  width: 100vw;
-  height: 100vh;
-  z-index: 100;
-  overflow: auto;
-  background-color: #fff;
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  top: 0;
-}
-
-
-// vertical 垂直 horizontal 水平
 @mixin flexSpaceAround {
   display: flex;
   justify-content: space-around;
@@ -48,4 +29,29 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@mixin suspension {
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  overflow: auto;
+  background-color: #fff;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+}
+
+
+
+
+
+
+
+
+
+@mixin test {
+  border: 1px solid #f00;
 }

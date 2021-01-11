@@ -95,7 +95,6 @@ export default {
       let playIndex = that.playIndex;
       let length = that.playlist.length;
       let audio = that.$refs.audio;
-      console.log(`原下标 => ${playIndex}`);
       switch (that.playSequence) {
         case 0: // 顺序循环
           if (playIndex == length - 1) {

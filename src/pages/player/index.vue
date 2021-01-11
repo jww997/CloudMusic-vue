@@ -113,7 +113,6 @@ export default {
     const that = this;
     try {
       clearInterval(that.lyric.timer); // 避免定时器残留，导致歌词抖动
-      console.log("定时器清除成功");
     } catch (error) {}
   },
 };

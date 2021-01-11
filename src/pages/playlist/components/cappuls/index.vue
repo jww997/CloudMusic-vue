@@ -10,7 +10,7 @@
     </div>
     <div class="description">{{ obj.description }}</div>
     <div class="iconfont close">&#xe626;</div>
-    <button class="save">保存封面</button>
+    <!-- <button class="save">保存封面</button> -->
   </div>
 </template>
 

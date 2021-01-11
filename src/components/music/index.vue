@@ -92,8 +92,27 @@ export default {
     },
     _next: function () {
       const that = this;
-      let index = that.playIndex + 1;
-      index <= that.playlist.length ? that.setPlayIndex(index) : "";
+      let playIndex = that.playIndex;
+      let length = that.playlist.length;
+      let audio = that.$refs.audio;
+      console.log(`原下标 => ${playIndex}`);
+      switch (that.playSequence) {
+        case 0: // 顺序循环
+          if (playIndex == length - 1) {
+            playIndex = 0;
+          } else if (playIndex + 1 <= length) {
+            playIndex = playIndex + 1;
+          }
+          that.setPlayIndex(playIndex);
+          break;
+        case 1: // 随机播放
+          let random = Math.random();
+          that.setPlayIndex(Math.round(length * random));
+          break;
+        case 2: // 单曲循环
+          audio.load();
+          break;
+      }
     },
     ...mapMutations({
       setPlayUrl: "SET_PLAY_URL",

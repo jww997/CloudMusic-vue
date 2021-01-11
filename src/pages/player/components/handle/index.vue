@@ -19,7 +19,11 @@
       </div>
     </div>
     <div class="bottom">
-      <!-- <span class="iconfont">&#xe600;</span> -->
+      <span
+        class="iconfont"
+        @click="toggleSequence"
+        v-html="playMode[playSequence].icon"
+      ></span>
       <span class="iconfont" @click="prev">&#xe663;</span>
       <span
         :class="{
@@ -30,8 +34,46 @@
         >{{ playState ? "&#xe665;" : "&#xe666;" }}
       </span>
       <span class="iconfont" @click="next">&#xe668;</span>
-      <!-- <span class="iconfont">&#xe664;</span> -->
+      <span class="iconfont" @click="toggleShowList">&#xe664;</span>
     </div>
+    <van-popup
+      round
+      lock-scroll
+      position="bottom"
+      v-model="isShowList"
+      :style="{ height: '60%' }"
+    >
+      <div class="list">
+        <div class="title">
+          <span class="left">当前播放</span>
+          <span class="length">({{ playlist.length }})</span>
+        </div>
+        <div class="operation">
+          <div class="module" @click="toggleSequence">
+            <span class="iconfont" v-html="playMode[playSequence].icon"></span>
+            <span class="text">{{ playMode[playSequence].text }}</span>
+          </div>
+          <div class="module">
+            <span class="iconfont">&#xe61d;</span>
+            <span class="text">收藏全部</span>
+          </div>
+          <div class="iconfont clear">&#xe632;</div>
+        </div>
+        <div
+          v-for="(item, index) in playlist"
+          :key="item.id"
+          :class="{ song: true, active: item.id == currentSong.id }"
+          @click="setPlayIndex(index)"
+        >
+          <div class="iconfont playing">&#xe604;</div>
+          <div class="monicker">
+            <span class="name">{{ item.name }}</span>
+            <span class="ar">{{ item.ar[0].name }}</span>
+          </div>
+          <div class="iconfont delete">&#xe626;</div>
+        </div>
+      </div>
+    </van-popup>
   </div>
 </template>
 
@@ -43,6 +85,7 @@ export default {
   data: function () {
     return {
       percentage: 0,
+      isShowList: false,
     };
   },
   props: {
@@ -56,12 +99,15 @@ export default {
       "playState",
       "playIndex",
       "playlist",
+      "playSequence",
+      "playMode",
+      "currentSong",
       "currentTime",
       "duration",
     ]),
   },
   watch: {
-    currentTime: function () {
+    currentTime: function (val) {
       const that = this;
       that.percentage =
         Number.parseFloat(that.currentTime / that.duration) * 100;
@@ -98,10 +144,23 @@ export default {
       const that = this;
       that.setPlayState(!that.playState);
     },
-
+    toggleShowList: function () {
+      const that = this;
+      that.isShowList = !that.isShowList;
+    },
+    toggleSequence: function () {
+      const that = this;
+      let i = that.playSequence + 1;
+      let min = 0;
+      let max = 2;
+      i > max ? (i = min) : "";
+      i < min ? (i = max) : "";
+      that.setPlaySequence(i);
+    },
     ...mapMutations({
       setPlayState: "SET_PLAY_STATE",
       setPlayIndex: "SET_PLAY_INDEX",
+      setPlaySequence: "SET_PLAY_SEQUENCE",
       setCurrentTime: "SET_CURRENTTIME",
     }),
   },
@@ -115,8 +174,6 @@ export default {
   flex-shrink: 0;
   width: 100%;
   padding-bottom: 0.5rem;
-  // @include positionCenter;
-  // top: auto;
   >>> .van-progress__pivot {
     min-width: 0.15rem;
     width: 0.15rem;
@@ -125,10 +182,7 @@ export default {
     border-radius: 50%;
     top: 0;
   }
-  .iconfont {
-    color: #fff;
-    font-size: $text-L;
-  }
+
   .progress {
     margin: 0.3rem;
     font-size: $text-S;
@@ -151,6 +205,103 @@ export default {
     @include flexSpaceAround;
     .center {
       transform: scale(2);
+    }
+    .iconfont {
+      color: #fff;
+      font-size: $text-L;
+    }
+  }
+  .list {
+    line-height: $text-L;
+    padding: 0.3rem;
+    transition: 1s;
+    .title {
+      height: 0.8rem;
+      @include flexCenter;
+      justify-content: flex-start;
+      font-weight: bold;
+      .left {
+        font-size: $text-M;
+      }
+      .length {
+        font-size: $text-XS;
+        color: $theme-GRAY;
+      }
+    }
+    .operation {
+      @include flexSpaceBetween;
+      margin-bottom: $text-XXS;
+      .module {
+        width: 2rem;
+        margin-right: $text-XXS;
+        display: flex;
+        .iconfont {
+          font-size: $text-S;
+          color: $theme-GRAY;
+        }
+        .text {
+          font-size: $text-XS;
+          margin-left: $text-XXXS;
+        }
+        &:first-child {
+          flex-grow: 1;
+        }
+      }
+      .clear {
+        font-size: $text-S;
+        color: $theme-GRAY;
+      }
+    }
+    .song {
+      height: $text-XXXL;
+      @include flexSpaceBetween;
+      &.active,
+      .playing {
+        font-size: $text-L;
+        color: $theme-RED;
+      }
+      &.active {
+        .playing {
+          display: block;
+          margin-left: -$text-XXXS;
+        }
+        .monicker {
+          .name,
+          .ar {
+            color: $theme-RED;
+          }
+        }
+      }
+      .playing,
+      .delete {
+        flex-shrink: 0;
+      }
+      .playing {
+        display: none;
+      }
+      .monicker {
+        flex-grow: 1;
+        padding-bottom: $text-XXXS;
+        box-sizing: border-box;
+        @include flexCenter;
+        justify-content: flex-start;
+        @include omit;
+        .name {
+          font-size: $text-S;
+        }
+        .ar {
+          font-size: $text-XS;
+          color: $theme-GRAY;
+          &::before {
+            content: "-";
+            margin: 0 $text-XXXS;
+          }
+        }
+      }
+      .delete {
+        font-size: $text-S;
+        color: $theme-GRAY;
+      }
     }
   }
 }

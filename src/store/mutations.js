@@ -13,13 +13,15 @@ export default {
   [types.SET_PLAY_LIST](state, val) {
     state.playlist = val;
   },
+  [types.SET_PLAY_SEQUENCE](state, val) {
+    state.playSequence = val;
+  },
 
 
   [types.SET_CURRENTSONG](state, val) {
     state.currentSong = val;
   },
   [types.SET_CURRENTTIME](state, val) {
-    // console.log(`state.currentTime = ${val}`);
     state.currentTime = val;
   },
   [types.SET_DURATION](state, val) {

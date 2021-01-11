@@ -2,8 +2,10 @@
   <div class="container" :style="{ backgroundImage: 'url(' + picUrl + ')' }">
     <navbar :title="title" :subtitle="subtitle" :fixed="false"></navbar>
     <div :class="{ song: true, lyric: isShowLyric }" @click="toggleShowLyric">
+      <!-- <transform name="center" appear> -->
       <lyric :lyric="lyric" v-show="isShowLyric"></lyric>
       <phonograph :picUrl="picUrl" v-show="!isShowLyric"></phonograph>
+      <!-- </transform> -->
     </div>
     <handle :lyric="lyric" @seekLyric="seekLyric"></handle>
   </div>
@@ -154,6 +156,22 @@ export default {
     -webkit-filter: blur(20px);
     filter: blur(20px);
   }
+
+  // &.center-enter,
+  // &.center-leave-to {
+  //   opacity: 0;
+  //   transform: translateY(1rem);
+  // }
+
+  // &.center-enter-to,
+  // &.center-leave {
+  //   opacity: 1;
+  // }
+
+  // &.center-enter-active,
+  // &.center-leave-active {
+  //   transition: 0.5s;
+  // }
 
   .song {
     flex-grow: 1;

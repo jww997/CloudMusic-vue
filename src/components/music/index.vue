@@ -12,6 +12,7 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
+import { Notify } from "vant";
 export default {
   name: "music",
   computed: {
@@ -20,6 +21,8 @@ export default {
       "playState",
       "playIndex",
       "playlist",
+      "playSequence",
+      "playMode",
 
       "currentTime",
       "duration",
@@ -53,6 +56,12 @@ export default {
     playUrl: function (val) {
       const that = this;
       console.log(`源 => ${val}`);
+    },
+    playSequence: function (val) {
+      const that = this;
+      let text = that.playMode[val].text;
+      console.log(`模式 => ${text}`);
+      Notify({ type: "primary", duration: 500, message: text });
     },
   },
   methods: {

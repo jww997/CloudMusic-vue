@@ -178,6 +178,7 @@ export default {
         .source {
           @include omit;
           margin-top: 0.1rem;
+          line-height: $text-S;
           font-size: $text-XS;
           color: #666;
         }

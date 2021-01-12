@@ -1,14 +1,14 @@
 <template>
   <div class="container">
     <navbar :title="'歌单广场'" fixed black>·</navbar>
-
-    <!-- <tab></tab> -->
     <list :list="playlists"></list>
+    <bottombar></bottombar>
   </div>
 </template>
 
 <script>
 import Navbar from "@/components/navbar";
+import Bottombar from "@/components/bottombar";
 import Tab from "@/pages/square/components/tab";
 import List from "@/pages/square/components/list";
 
@@ -16,6 +16,7 @@ export default {
   name: "square",
   components: {
     Navbar,
+    Bottombar,
     Tab,
     List,
   },

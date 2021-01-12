@@ -243,7 +243,187 @@ export default {
 
 
 
+  getUserEvent: parameter => { // 获取用户动态
+    return request("user/event", parameter);
+    /**
+     *  @param uid 用户id
+     *  @param limit (选)返回数量,默认为30
+     *  @param lasttime (选)返回数据的lasttime,默认-1,传入上一次返回结果的lasttime,将会返回下一页的数据
+     *  说明:登录后调用此接口,传入用户id,可以获取用户动态
+     *  返回结果的type参数对应:
+     *  18分享单曲
+     *  19分享专辑
+     *  17、28分享电台节目
+     *  22转发
+     *  39发布视频
+     *  35、13分享歌单
+     *  24分享专栏文章
+     *  41、21分享视频
+     */
+  },
 
+
+
+
+
+
+
+
+
+
+
+
+  getCommentMusic: parameter => { // 歌曲评论
+    return request("comment/music", parameter);
+    /**
+     *  @param id 音乐id
+     *  @param limit (选)取出评论数量,默认为20
+     *  @param offset (选)偏移数量,用于分页,如:(评论页数-1)*20,其中20为limit的值
+     *  @param before (选)分页参数,取上一页最后一项的time获取下一页数据(获取超过5000条评论的时候需要用到)
+     *  说明:调用此接口,传入音乐id和limit参数,可获得该音乐的所有评论(不需要登录)
+     */
+  },
+  getCommentFloor: parameter => { // 楼层评论
+    return request("comment/floor", parameter);
+    /**
+     *  @param parentCommentId 楼层评论id
+     *  @param id 资源id
+     *  @param type 数字,资源类型,对应歌曲,mv,专辑,歌单,电台,视频对应以下类型 0:歌曲 1:mv 2:歌单 3:专辑 4:电台 5:视频
+     *  @param limit (选)取出评论数量,默认为20
+     *  @param time (选)分页参数,取上一页最后一项的time获取下一页数据
+     *  说明:调用此接口,传入资源parentCommentId和资源类型type和资源id参数,可获得该资源的歌曲楼层评论
+     */
+  },
+  getCommentAlbum: parameter => { // 专辑评论
+    return request("comment/album", parameter);
+    /**
+     *  @param id 专辑id
+     *  @param limit (选)取出评论数量,默认为20
+     *  @param offset (选)偏移数量,用于分页,如:(评论页数-1)*20,其中20为limit的值
+     *  @param before (选)分页参数,取上一页最后一项的time获取下一页数据(获取超过5000条评论的时候需要用到)
+     *  说明:调用此接口,传入音乐id和limit参数,可获得该专辑的所有评论(不需要登录)
+     */
+  },
+  getCommentPlaylist: parameter => { // 歌单评论
+    return request("comment/playlist", parameter);
+    /**
+     *  @param id 歌单id
+     *  @param limit (选)取出评论数量,默认为20
+     *  @param offset (选)偏移数量,用于分页,如:(评论页数-1)*20,其中20为limit的值
+     *  @param before (选)分页参数,取上一页最后一项的time获取下一页数据(获取超过5000条评论的时候需要用到)
+     *  说明:调用此接口,传入音乐id和limit参数,可获得该歌单的所有评论(不需要登录)
+     */
+  },
+  getCommentMv: parameter => { // mv评论
+    return request("comment/mv", parameter);
+    /**
+     *  @param id mvid
+     *  @param limit (选)取出评论数量,默认为20
+     *  @param offset (选)偏移数量,用于分页,如:(评论页数-1)*20,其中20为limit的值
+     *  @param before (选)分页参数,取上一页最后一项的time获取下一页数据(获取超过5000条评论的时候需要用到)
+     *  说明:调用此接口,传入音乐id和limit参数,可获得该mv的所有评论(不需要登录)
+     */
+  },
+  getCommentDj: parameter => { // 电台节目评论
+    return request("comment/dj", parameter);
+    /**
+     *  @param id 电台节目的id
+     *  @param limit (选)取出评论数量,默认为20
+     *  @param offset (选)偏移数量,用于分页,如:(评论页数-1)*20,其中20为limit的值
+     *  @param before (选)分页参数,取上一页最后一项的time获取下一页数据(获取超过5000条评论的时候需要用到)
+     *  说明:调用此接口,传入音乐id和limit参数,可获得该电台节目的所有评论(不需要登录)
+     */
+  },
+  getCommentVideo: parameter => { // 视频评论
+    return request("comment/video", parameter);
+    /**
+     *  @param id 视频的id
+     *  @param limit (选)取出评论数量,默认为20
+     *  @param offset (选)偏移数量,用于分页,如:(评论页数-1)*20,其中20为limit的值
+     *  @param before (选)分页参数,取上一页最后一项的time获取下一页数据(获取超过5000条评论的时候需要用到)
+     *  说明:调用此接口,传入音乐id和limit参数,可获得该视频的所有评论(不需要登录)
+     */
+  },
+  getCommentHot: parameter => { // 热门评论
+    return request("comment/hot", parameter);
+    /**
+     *  @param id 资源id
+     *  @param type 数字,资源类型,对应歌曲,mv,专辑,歌单,电台,视频对应以下类型 0:歌曲 1:mv 2:歌单 3:专辑 4:电台 5:视频
+     *  @param limit (选)取出评论数量,默认为20
+     *  @param offset (选)偏移数量,用于分页,如:(评论页数-1)*20,其中20为limit的值
+     *  @param before (选)分页参数,取上一页最后一项的time获取下一页数据(获取超过5000条评论的时候需要用到)
+     *  说明:调用此接口,传入type,资源id可获得对应资源热门评论(不需要登录)
+     */
+  },
+  getCommentNew: parameter => { // 新版评论接口
+    return request("comment/new", parameter);
+    /**
+     *  @param id 资源id,如歌曲id,mvid
+     *  @param type 数字,资源类型,对应歌曲,mv,专辑,歌单,电台,视频对应以下类型 0:歌曲 1:mv 2:歌单 3:专辑 4:电台 5:视频 6:动态
+     *  @param pageNo (选)分页参数,第N页,默认为1
+     *  @param pageSize (选)分页参数,每页多少条数据,默认20
+     *  @param sortType (选)1:按推荐排序,2:按热度排序,3:按时间排序
+     *  @param cursor (选)当sortType为3时且页数不是第一页时需传入,值为上一条数据的time
+     *  说明:调用此接口,传入资源类型和资源id,以及排序方式,可获取对应资源的评论
+     */
+  },
+  getCommentLike: parameter => { // 给评论点赞
+    return request("comment/like", parameter);
+    /**
+     *  @param id 资源id,如歌曲id,mvid
+     *  @param cid 评论id
+     *  @param t 是否点赞,1为点赞,0为取消点赞
+     *  @param type 数字,资源类型,对应歌曲,mv,专辑,歌单,电台,视频对应以下类型 0:歌曲 1:mv 2:歌单 3:专辑 4:电台 5:视频 6:动态
+     *  说明:调用此接口,传入type,资源id,和评论idcid和是否点赞参数t即可给对应评论点赞(需要登录)
+     *  调用例子:/comment/like?id=29178366&cid=12840183&t=1&type=0对应给https://music.163.com/#/song?id=29178366最热门的评论点赞
+     *  注意：动态点赞不需要传入id参数，需要传入动态的threadId参数,如：/comment/like?type=6&cid=1419532712&threadId=A_EV_2_6559519868_32953014&t=0，threadId可通过/event，/user/event接口获取
+     */
+  },
+  getHugComment: parameter => { // 抱一抱评论
+    return request("hug/comment", parameter);
+    /**
+     *  @param uid 用户id
+     *  @param cid 评论id
+     *  @param sid 资源id
+     *  说明:调用此接口,可抱一抱评论
+     */
+  },
+  getCommentHugList: parameter => { // 评论抱一抱列表
+    return request("comment/hug/list", parameter);
+    /**
+     *  @param uid 用户id
+     *  @param cid 评论id
+     *  @param sid 资源id 
+     *  @param page (选)页数
+     *  @param cursor (选)上一页返回的cursor,默认-1,第一页不需要传
+     *  @param idCursor (选)上一页返回的idCursor,默认-1,第一页不需要传
+     *  @param pageSize (选)每页页数,默认100
+     *  说明:调用此接口,可获取评论抱一抱列表
+     */
+  },
+  getComment: parameter => { // 发送/删除评论
+    return request("comment", parameter);
+    /**
+     *  @param t 1发送,2回复
+     *  @param type 数字,资源类型,对应歌曲,mv,专辑,歌单,电台,视频对应以下类型 0:歌曲 1:mv 2:歌单 3:专辑 4:电台 5:视频 6:动态
+     *  @param id 对应资源id 
+     *  @param content 要发送的内容
+     *  @param commentId 回复的评论id(回复评论时必填)
+     *  说明:调用此接口,可发送评论或者删除评论
+     *  调用例子:/comment?t=1&type=1&id=5436712&content=test(往广岛之恋mv发送评论:test)
+     *  注意：如给动态发送评论，则不需要传id，需要传动态的threadId,如：/comment?t=1&type=6&threadId=A_EV_2_6559519868_32953014&content=test
+     */
+  },
+  getComment: parameter => { // 删除评论
+    return request("comment", parameter);
+    /**
+     *  @param t 0删除
+     *  @param type 数字,资源类型,对应歌曲,mv,专辑,歌单,电台,视频对应以下类型 0:歌曲 1:mv 2:歌单 3:专辑 4:电台 5:视频 6:动态
+     *  @param id 对应资源idcontent:内容id,可通过/comment/mv等接口获取
+     *  调用例子:/comment?t=0&type=1&id=5436712&commentId=1535550516319(在广岛之恋mv删除评论)
+     *  注意：如给动态删除评论，则不需要传id，需要传动态的`threadId`,如：`/comment?t=0&type=6&threadId=A_EV_2_6559519868_32953014&commentId=1419516382`
+     */
+  },
 
 
 

@@ -22,7 +22,10 @@
         <span class="iconfont">&#xe61d;</span>
         <span class="text" v-html="formatUnit(obj.subscribedCount)">收藏</span>
       </div>
-      <div class="item">
+      <div
+        class="item"
+        @click.stop="toPages({ name: 'comment', params: { id: obj.id } })"
+      >
         <span class="iconfont">&#xe65d;</span>
         <span class="text" v-html="formatUnit(obj.commentCount)">评论</span>
       </div>
@@ -37,6 +40,7 @@
 <script>
 import Cover from "@/components/cover";
 import { formatUnit } from "@/assets/js/filter";
+import { toPages } from "@/assets/js/skip.js";
 
 export default {
   name: "Cap",
@@ -53,6 +57,7 @@ export default {
   },
   methods: {
     formatUnit,
+    toPages,
     imagePreview() {
       const that = this;
       let image = that.obj.coverImgUrl;

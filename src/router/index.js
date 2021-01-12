@@ -53,7 +53,16 @@ export default new Router({
             isKeepAlive: true,
           }
         },
+
       ]
+    },
+    {
+      path: '/comment/:id',
+      name: 'comment',
+      component: _component("comment"),
+      meta: {
+        isKeepAlive: true,
+      }
     },
     {
       path: '/player',

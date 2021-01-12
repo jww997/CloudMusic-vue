@@ -24,7 +24,7 @@
 <script>
 import BetterScroll from "better-scroll";
 import Navbar from "@/components/navbar";
-import bottombar from "@/components/bottombar";
+import Bottombar from "@/components/bottombar";
 import Cap from "@/pages/playlist/components/cap";
 import Capplus from "@/pages/playlist/components/cappuls";
 import List from "@/pages/playlist/components/list";
@@ -32,7 +32,7 @@ export default {
   name: "playlist",
   components: {
     Navbar,
-    bottombar,
+    Bottombar,
     Cap,
     Capplus,
     List,

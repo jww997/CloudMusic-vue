@@ -15,6 +15,7 @@ export default {
   currentTime: "",        // 当前时间
   duration: "",           // 总时间
 
+  playId: -1,             // 播放标识号
   playIndex: -1,          // 播放下标
   playlist: [],           // 播放列表
   playlistShow: false,    // 播放列表显示

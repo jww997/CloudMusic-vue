@@ -25,11 +25,11 @@
         'iconfont center': true,
         playing: playState,
       }"
-      @click="toggleStatus"
+      @click.stop="toggleStatus"
       >{{ playState ? "&#xe665;" : "&#xe666;" }}
     </span>
     <span class="iconfont">&#xe664;</span>
-    <!-- <span class="iconfont" @click="toggleShowList">&#xe664;</span> -->
+    <!-- <span class="iconfont" @click.stop="toggleShowList">&#xe664;</span> -->
   </div>
 </template>
 

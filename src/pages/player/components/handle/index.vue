@@ -2,7 +2,7 @@
   <div class="children">
     <div class="progress">
       <div class="text">
-        {{ formatTime(currentTime) }}
+        {{ formatTime(currentTime * 1000, 2) }}
       </div>
       <div class="strip">
         <van-slider
@@ -15,7 +15,7 @@
         />
       </div>
       <div class="text">
-        {{ formatTime(duration) }}
+        {{ formatTime(duration * 1000, 2) }}
       </div>
     </div>
     <div class="bottom">

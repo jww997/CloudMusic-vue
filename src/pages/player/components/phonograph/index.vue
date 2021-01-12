@@ -7,8 +7,10 @@
           backgroundImage:
             'url(' + require('@/assets/images/chassis.png') + ')',
         }"
+        @touchstart="touchstart"
+        @touchmove="touchmove"
+        @touchend="touchend"
       >
-        <!-- @dbclick.stop="imagePreview" -->
         <img class="cover" :src="picUrl" v-if="picUrl" />
         <!-- <img class="lid" :src="require('@/assets/images/lid.png')" /> -->
         <img class="light" :src="require('@/assets/images/light.png')" />
@@ -35,6 +37,12 @@ export default {
       default: "",
     },
   },
+  data: function () {
+    return {
+      touchTimer: 0,
+      touchDuration: 500,
+    };
+  },
   computed: {
     image: function () {
       const that = this;
@@ -44,10 +52,28 @@ export default {
     ...mapGetters(["playState"]),
   },
   methods: {
-    imagePreview() {
+    touchstart: function () {
       const that = this;
-      let image = that.picUrl;
-      that.$preview([image]);
+      let touchTimer = that.touchTimer;
+      clearTimeout(touchTimer); // 清除定时器
+      touchTimer = 0;
+      that.touchTimer = setTimeout(function () {
+        that.$vant.ImagePreview([that.picUrl]);
+      }, that.touchDuration);
+    },
+    touchmove: function () {
+      const that = this; // 如果手指有移动，则取消所有事件，此时说明用户只是要移动而不是长按
+      let touchTimer = that.touchTimer;
+      clearTimeout(touchTimer); // 清除定时器
+      touchTimer = 0;
+    },
+    touchend: function () {
+      const that = this; // 手释放，如果在500毫秒内就释放，则取消长按事件，此时可以执行onclick应该执行的事件
+      let touchTimer = that.touchTimer;
+      clearTimeout(touchTimer);
+      if (touchTimer != 0) {
+        // 这里写要执行的内容（尤如onclick事件）
+      }
     },
   },
 };

@@ -61,7 +61,7 @@ export default new Router({
       name: 'comment',
       component: _component("comment"),
       meta: {
-        isKeepAlive: true,
+        isKeepAlive: false,
       }
     },
     {

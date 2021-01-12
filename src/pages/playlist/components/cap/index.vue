@@ -61,7 +61,7 @@ export default {
     imagePreview() {
       const that = this;
       let image = that.obj.coverImgUrl;
-      that.$preview([image]);
+      that.$vant.ImagePreview([image]);
     },
   },
 };

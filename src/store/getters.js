@@ -5,7 +5,6 @@
 
 export default {
 
-
     playState: state => { return state.playState },
     playUrl: state => { return state.playUrl },
     playIndex: state => { return state.playIndex },
@@ -14,16 +13,8 @@ export default {
     playSequence: state => { return state.playSequence },
     playMode: state => { return state.playMode },
 
-
     currentSong: state => { return state.currentSong },
     currentTime: state => { return state.currentTime },
     duration: state => { return state.duration },
-
-
-
-
-
-
-
 
 }

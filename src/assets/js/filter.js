@@ -1,17 +1,17 @@
 /**
  * @Author: Gavin
  * @Begin: 2020-12-30 10:49:29
- * @Update: 2020-12-30 10:49:29
+ * @Update: 2021-1-12 16:54:43
  * @Update log: 格式化操作
  */
 export {
-  // formatCount, 
-  formatUnit,
-  formatLyric,
-  formatTime,
+  formatUnit,  // 处理单位
+  formatLyric, // 处理歌词
+  formatDate,  // 处理日期
+  formatTime,  // 处理时间
 }
 
-function formatUnit(num) { // 处理单位
+function formatUnit(num) {
 
   if (typeof num == 'number') {
     if (!num) {
@@ -28,7 +28,7 @@ function formatUnit(num) { // 处理单位
 
 }
 
-function formatLyric(str) { // 处理歌词
+function formatLyric(str) {
 
   if (typeof str != 'string') return str;
   let arr = new Array();
@@ -55,11 +55,40 @@ function formatLyric(str) { // 处理歌词
   return arr;
 }
 
-function formatTime(num) { // 处理时间
+function formatDate(num = new Date(), type = 1) {
 
-  if (isNaN(num)) return '00:00';
-  let date = new Date(num * 1000);
-  return `${_addZero(date.getMinutes())}:${_addZero(date.getSeconds())}`;
+  if (isNaN(num)) return num;
+  let date = new Date(num), r;
+  let y = date.getFullYear();
+  let m = date.getMonth() + 1;
+  let d = date.getDate();
+  switch (type) { // 连接器类型
+    case 1:
+      r = `${y}年${m}月${d}日`;
+      break;
+    case 2:
+      r = `${y}-${m}-${d}`;
+      break;
+  }
+  return r;
+}
+
+function formatTime(num = new Date(), type = 1) {
+
+  if (isNaN(num)) return num;
+  let time = new Date(num), r;
+  let h = _addZero(time.getHours());
+  let m = _addZero(time.getMinutes());
+  let s = _addZero(time.getSeconds());
+  switch (type) { // 连接器类型
+    case 1:
+      r = `${h}:${m}:${s}`;
+      break;
+    case 2:
+      r = `${m}:${s}`;
+      break;
+  }
+  return r;
 
 }
 

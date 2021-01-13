@@ -10,10 +10,17 @@ export default {
     playIndex: state => { return state.playIndex },
     playId: state => { return state.playId },
     playlist: state => { return state.playlist },
-    playlistShow: state => { return state.playlistShow },
     playSequence: state => { return state.playSequence },
     playMode: state => { return state.playMode },
+
+
+
+
     playDrag: state => { return state.playDrag },
+    playlistToast: state => { return state.playlistToast },
+
+
+
 
     currentSong: state => { return state.currentSong },
     currentTime: state => { return state.currentTime },

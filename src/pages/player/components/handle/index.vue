@@ -34,61 +34,14 @@
         >{{ playState ? "&#xe665;" : "&#xe666;" }}
       </span>
       <span class="iconfont" @click="next">&#xe668;</span>
-      <span class="iconfont" @click="toggleShowList">&#xe664;</span>
+      <span class="iconfont" @click="togglePlaylistToast">&#xe664;</span>
     </div>
-    <!-- <bottomlist></bottomlist> -->
-    <van-popup
-      round
-      lock-scroll
-      position="bottom"
-      v-model="isShowList"
-      :style="{ height: '60%' }"
-    >
-      <div class="list">
-        <div class="top">
-          <div class="title">
-            <span class="left">当前播放</span>
-            <span class="length">({{ playlist.length }})</span>
-          </div>
-          <div class="operation">
-            <div class="module" @click="toggleSequence">
-              <span
-                class="iconfont"
-                v-html="playMode[playSequence].icon"
-              ></span>
-              <span class="text">{{ playMode[playSequence].text }}</span>
-            </div>
-            <div class="module">
-              <span class="iconfont">&#xe61d;</span>
-              <span class="text">收藏全部</span>
-            </div>
-            <div class="iconfont clear">&#xe632;</div>
-          </div>
-        </div>
-        <div class="songs">
-          <div
-            v-for="(item, index) in playlist"
-            :key="item.id"
-            :class="{ song: true, active: item.id == currentSong.id }"
-            @click="setPlayIndex(index)"
-          >
-            <div class="iconfont playing">&#xe604;</div>
-            <div class="monicker">
-              <span class="name">{{ item.name }}</span>
-              <span class="ar">{{ item.ar[0].name }}</span>
-            </div>
-            <div class="iconfont delete">&#xe626;</div>
-          </div>
-        </div>
-      </div>
-    </van-popup>
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { formatTime } from "@/assets/js/filter.js";
-import Bottomlist from "@/components/bottomlist";
 export default {
   name: "handle",
   props: {
@@ -97,13 +50,9 @@ export default {
       default: {},
     },
   },
-  components: {
-    Bottomlist,
-  },
   data: function () {
     return {
       percentage: 0,
-      isShowList: false,
     };
   },
   computed: {
@@ -111,7 +60,9 @@ export default {
       "playState",
       "playIndex",
       "playlist",
-      "playlistShow",
+
+      "playlistToast",
+
       "playSequence",
       "playMode",
       "currentSong",
@@ -160,11 +111,9 @@ export default {
       const that = this;
       that.setPlayState(!that.playState);
     },
-    toggleShowList: function () {
+    togglePlaylistToast: function () {
       const that = this;
-      that.isShowList = !that.isShowList;
-      // console.log(!that.playlistShow);
-      // that.setPlaylistShow(!that.playlistShow);
+      that.setPlaylistToast(true);
     },
     toggleSequence: function () {
       const that = this;
@@ -178,7 +127,7 @@ export default {
     ...mapMutations({
       setPlayState: "SET_PLAY_STATE",
       setPlayIndex: "SET_PLAY_INDEX",
-      setPlaylistShow: "SET_PLAY_LIST_SHOW",
+      setPlaylistToast: "SET_PLAY_LIST_TOAST",
       setPlaySequence: "SET_PLAY_SEQUENCE",
       setPlayDrag: "SET_PLAY_DRAG",
       setCurrentTime: "SET_CURRENTTIME",

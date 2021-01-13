@@ -16,7 +16,6 @@
         v-for="(item, index) in obj.tracks"
         :key="item.id"
       >
-        <!-- :to="{ path: '/player', query: { id: item.id } }" -->
         <div
           class="front iconfont index active"
           v-if="playState && item.id == currentSong.id"
@@ -27,9 +26,11 @@
         <div class="name">
           <p class="songname">
             <span class="title">{{ item.name }}</span>
-            <span class="subtitle">{{ item.alia[0] }}</span>
+            <span class="subtitle">{{ formatArtists(item.alia) }}</span>
           </p>
-          <p class="source">{{ source(item) }}</p>
+          <p class="source">
+            {{ `${formatArtists(item.ar)} - ${item.al.name}` }}
+          </p>
         </div>
         <div
           class="iconfont mv"
@@ -60,6 +61,7 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
+import { formatArtists } from "@/assets/js/filter.js";
 import { toPages } from "@/assets/js/skip.js";
 export default {
   name: "List",
@@ -78,6 +80,7 @@ export default {
     ...mapGetters(["playId", "playState", "playIndex", "currentSong"]),
   },
   methods: {
+    formatArtists,
     toPages: function (to, index = "") {
       const that = this;
       if (typeof index == "number") {
@@ -89,16 +92,6 @@ export default {
         that.setCurrentSong(current);
       }
       toPages.call(that, to);
-    },
-    source: function (res) {
-      const that = this;
-      let { ar, al } = res,
-        singer = "";
-      ar &&
-        ar.forEach((item, index) => {
-          singer += (index != 0 ? "/" : "") + item.name;
-        });
-      return `${singer} - ${al.name}`;
     },
     ...mapMutations({
       setPlayList: "SET_PLAY_LIST",

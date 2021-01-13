@@ -8,26 +8,30 @@
     /> -->
     <template v-if="fixed">
       <div class="icon left">
-        <div class="iconfont" @click="back">&#xe65e;</div>
+        <van-icon name="arrow-left" @click="back" />
+        <!-- <div class="iconfont" @click="back">&#xe65e;</div> -->
       </div>
       <div class="center">
         <p class="title">{{ title }}</p>
       </div>
       <div class="icon right">
         <!-- <div class="iconfont">&#xe607;</div>
+        <van-icon name="search" />
         <div class="iconfont">&#xe690;</div> -->
       </div>
     </template>
     <template v-else>
       <div class="icon left">
-        <div class="iconfont" @click="back">&#xe614;</div>
+        <van-icon name="arrow-down" @click="back" />
+        <!-- <div class="iconfont" @click="back">&#xe614;</div> -->
       </div>
       <div class="center">
         <p class="title">{{ title }}</p>
         <p class="subtitle">{{ subtitle }}</p>
       </div>
       <div class="icon right">
-        <!-- <div class="iconfont">&#xe65c;</div> -->
+        <!-- <div class="iconfont">&#xe65c;</div>
+        <van-icon name="search" /> -->
       </div>
     </template>
   </div>
@@ -77,8 +81,9 @@ export default {
   color: #fff;
   z-index: 100;
   @include flexSpaceBetween;
-  .iconfont {
-    font-size: $text-L;
+  // .iconfont,
+  >>> .van-icon {
+    font-size: $text-XL;
   }
   .center {
     flex-grow: 1;

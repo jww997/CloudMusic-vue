@@ -2,7 +2,7 @@
   <div class="children">
     <div class="icon iconfont">&#xe70d;</div>
     <div class="frame">
-      <span class="icon iconfont">&#xe607;</span>
+      <van-icon name="search" />
       <span class="text">搜索</span>
     </div>
     <div class="icon iconfont">&#xe60a;</div>
@@ -21,7 +21,8 @@ export default {
 .children {
   margin: 0.2rem 0;
   @include flexSpaceBetween;
-  .icon {
+  .icon,
+  >>> .van-icon {
     flex-shrink: 0;
     margin: 0.3rem;
     font-size: $text-M;
@@ -34,7 +35,7 @@ export default {
     overflow: hidden;
     color: #666;
     @include flexSpaceBetween;
-    .iconfont {
+    >>> .van-icon {
       margin: 0.25rem;
     }
     .text {

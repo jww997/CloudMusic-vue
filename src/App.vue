@@ -5,16 +5,41 @@
     </keep-alive>
     <router-view v-if="!$route.meta.isKeepAlive"></router-view>
     <music></music>
+
+    <bottomlist :playlistToast="playlistToast"></bottomlist>
   </div>
 </template>
 
 <script>
-import Music from "@/components/music";
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { formatTime, formatDate } from "@/assets/js/filter.js";
+import Music from "@/components/music";
+import Bottomlist from "@/components/bottomlist";
 export default {
   name: "App",
   components: {
     Music,
+    Bottomlist,
+  },
+  computed: {
+    ...mapGetters([
+      "currentSong",
+      "currentTime",
+      "duration",
+
+      "playId",
+      "playIndex",
+
+      "playlist",
+      "playUrl",
+
+      "playState",
+      "playDrag",
+      "playlistToast",
+
+      "playSequence",
+      "playMode",
+    ]),
   },
   mounted: function () {
     const that = this;

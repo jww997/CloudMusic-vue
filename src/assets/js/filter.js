@@ -1,14 +1,15 @@
 /**
  * @Author: Gavin
  * @Begin: 2020-12-30 10:49:29
- * @Update: 2021-1-12 16:54:43
+ * @Update: 2021-1-13 16:44:47
  * @Update log: 格式化操作
  */
 export {
-  formatUnit,  // 处理单位
-  formatLyric, // 处理歌词
-  formatDate,  // 处理日期
-  formatTime,  // 处理时间
+  formatUnit,    // 处理单位
+  formatLyric,   // 处理歌词
+  formatArtists, // 处理艺术家
+  formatDate,    // 处理日期
+  formatTime,    // 处理时间
 }
 
 function formatUnit(num) {
@@ -53,6 +54,16 @@ function formatLyric(str) {
 
   });
   return arr;
+}
+
+function formatArtists(list = []) {
+  const that = this;
+  let r = "";
+  list.forEach((item, index) => {
+    let separator = index == 0 ? '' : '/';
+    r += separator + item.name;
+  });
+  return r;
 }
 
 function formatDate(num = new Date(), type = 1) {

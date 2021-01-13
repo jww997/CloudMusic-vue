@@ -11,7 +11,7 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
-import { formatLyric } from "@/assets/js/filter.js";
+import { formatLyric, formatArtists } from "@/assets/js/filter.js";
 import LyricParser from "lyric-parser"; // 歌词解析
 import Navbar from "@/components/navbar";
 import Phonograph from "./components/phonograph";
@@ -55,12 +55,13 @@ export default {
     playId: function (val) {
       const that = this;
       that.picUrl = that.currentSong.al.picUrl;
-      that.subtitle = that.currentSong.ar[0].name;
       that.title = that.currentSong.name;
+      that.subtitle = that.formatArtists(that.currentSong.ar);
       that.getLyric();
     },
   },
   methods: {
+    formatArtists,
     toggleShowLyric: function () {
       const that = this;
       that.isShowLyric = !that.isShowLyric;
@@ -73,14 +74,14 @@ export default {
       if (that.lastId == id) return false;
       that.$api.getLyric({ id }).then((res) => {
         let nolyric = res.data.nolyric;
-        if (nolyric) return false; // 判断数据有无歌词
         let lyric = res.data.lrc.lyric;
+        if (nolyric) return false; // 判断数据有无歌词
         if (!lyric) return false; // 判断数据歌词是否为空
         try {
           clearInterval(that.lyric.timer); // 清掉没用的
+          that.lyric = new LyricParser(lyric, that.setLyric);
+          that.lastId = id;
         } catch (e) {}
-        that.lyric = new LyricParser(lyric, that.setLyric);
-        that.lastId = id;
       });
     },
     setLyric: function ({ lineNum, txt }) {
@@ -95,8 +96,8 @@ export default {
     const that = this;
     try {
       that.picUrl = that.currentSong.al.picUrl;
-      that.subtitle = that.currentSong.ar[0].name;
       that.title = that.currentSong.name;
+      that.subtitle = that.formatArtists(that.currentSong.ar);
     } catch (error) {}
   },
   destroyed: function () {

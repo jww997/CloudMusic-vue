@@ -1,4 +1,4 @@
-const _mode = [{
+const mode = [{
   icon: "&#xe600;",
   text: "列表循环",
 }, {
@@ -17,13 +17,17 @@ export default {
 
   playId: -1,             // 播放标识号
   playIndex: -1,          // 播放下标
+
   playlist: [],           // 播放列表
-  playlistShow: false,    // 播放列表显示
   playUrl: "",            // 播放地址
+
   playState: false,       // 播放状态
   playDrag: false,        // 播放拖拽(歌词，进度条)
+  playlistToast: false,   // 播放列表显示隐藏
 
-  playSequence: 0,        // 播放顺序
-  playMode: _mode,        // 播放模式
+  // playlistShow: false,    // 播放列表显示隐藏
+
+  playSequence: 0,        // 播放模式下标
+  playMode: mode,         // 播放模式所有
 
 }

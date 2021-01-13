@@ -5,13 +5,14 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.formatUnit = formatUnit;
 exports.formatLyric = formatLyric;
+exports.formatArtists = formatArtists;
 exports.formatDate = formatDate;
 exports.formatTime = formatTime;
 
 /**
  * @Author: Gavin
  * @Begin: 2020-12-30 10:49:29
- * @Update: 2021-1-12 16:54:43
+ * @Update: 2021-1-13 16:44:47
  * @Update log: 格式化操作
  */
 function formatUnit(num) {
@@ -56,6 +57,17 @@ function formatLyric(str) {
     }
   });
   return arr;
+}
+
+function formatArtists() {
+  var list = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var that = this;
+  var r = "";
+  list.forEach(function (item, index) {
+    var separator = index == 0 ? '' : '/';
+    r += separator + item.name;
+  });
+  return r;
 }
 
 function formatDate() {

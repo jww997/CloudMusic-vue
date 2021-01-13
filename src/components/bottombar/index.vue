@@ -28,8 +28,7 @@
       @click.stop="toggleStatus"
       >{{ playState ? "&#xe665;" : "&#xe666;" }}
     </span>
-    <span class="iconfont">&#xe664;</span>
-    <!-- <span class="iconfont" @click.stop="toggleShowList">&#xe664;</span> -->
+    <span class="iconfont" @click.stop="togglePlaylistToast">&#xe664;</span>
   </div>
 </template>
 
@@ -47,8 +46,13 @@ export default {
       const that = this;
       that.setPlayState(!that.playState);
     },
+    togglePlaylistToast: function () {
+      const that = this;
+      that.setPlaylistToast(true);
+    },
     ...mapMutations({
       setPlayState: "SET_PLAY_STATE",
+      setPlaylistToast: "SET_PLAY_LIST_TOAST",
     }),
   },
 };
@@ -78,7 +82,7 @@ export default {
   .al,
   .cover {
     border-radius: 50%;
-    overflow: hidden;
+    overflow: visible;
   }
   .cover,
   .light {
@@ -89,7 +93,7 @@ export default {
     width: 1.5rem;
     height: 1.5rem;
     margin: -0.8rem 0.2rem 0 0;
-    background-size: cover;
+    background-size: 100% 100%;
     position: relative;
     animation-duration: 20s;
     animation-name: turn;

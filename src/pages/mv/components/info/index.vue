@@ -3,9 +3,10 @@
     <div class="top">
       <div class="left">
         <div class="artists">
-          <span v-for="(item, index) in info.artists" :key="index"
+          {{ formatArtists(info.artists) }}
+          <!-- <span v-for="(item, index) in info.artists" :key="index"
             >{{ item.name }} /
-          </span>
+          </span> -->
         </div>
         <div class="name" @click="toggleDesc">
           <span>{{ info.name }}</span>
@@ -67,6 +68,7 @@
 </template>
 
 <script>
+import { formatArtists } from "@/assets/js/filter.js";
 export default {
   name: "info",
   props: {
@@ -80,6 +82,7 @@ export default {
     };
   },
   methods: {
+    formatArtists,
     toggleDesc: function () {
       const that = this;
       if (!that.info.desc) return false;

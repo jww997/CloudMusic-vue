@@ -4,44 +4,48 @@
       round
       lock-scroll
       position="bottom"
-      v-model="playlistShow"
+      v-model="playlistToast"
+      safe-area-inset-bottom
       :style="{ height: '60%' }"
+      @close="close"
     >
-      123
-      <!-- <div class="list">
-      <div class="top">
-        <div class="title">
-          <span class="left">当前播放</span>
-          <span class="length">({{ playlist.length }})</span>
+      <div class="list">
+        <div class="top">
+          <div class="title">
+            <span class="left">当前播放</span>
+            <span class="length">({{ playlist.length }})</span>
+          </div>
+          <div class="operation">
+            <div class="module" @click="toggleSequence">
+              <span
+                class="iconfont"
+                v-html="playMode[playSequence].icon"
+              ></span>
+              <span class="text">{{ playMode[playSequence].text }}</span>
+            </div>
+            <div class="module">
+              <span class="iconfont">&#xe61d;</span>
+              <span class="text">收藏全部</span>
+            </div>
+            <div class="iconfont clear">&#xe632;</div>
+          </div>
         </div>
-        <div class="operation">
-          <div class="module" @click="toggleSequence">
-            <span class="iconfont" v-html="playMode[playSequence].icon"></span>
-            <span class="text">{{ playMode[playSequence].text }}</span>
+        <div class="songs">
+          <div
+            v-for="(item, index) in playlist"
+            :key="item.id"
+            :class="{ song: true, active: item.id == currentSong.id }"
+            @click="setPlayIndex(index)"
+          >
+            <div class="iconfont playing">&#xe604;</div>
+            <div class="monicker">
+              <span class="name">{{ item.name }}</span>
+              <span class="ar">{{ item.ar[0].name }}</span>
+            </div>
+            <div class="iconfont delete">&#xe626;</div>
           </div>
-          <div class="module">
-            <span class="iconfont">&#xe61d;</span>
-            <span class="text">收藏全部</span>
-          </div>
-          <div class="iconfont clear">&#xe632;</div>
         </div>
       </div>
-      <div class="songs">
-        <div
-          v-for="(item, index) in playlist"
-          :key="item.id"
-          :class="{ song: true, active: item.id == currentSong.id }"
-          @click="setPlayIndex(index)"
-        >
-          <div class="iconfont playing">&#xe604;</div>
-          <div class="monicker">
-            <span class="name">{{ item.name }}</span>
-            <span class="ar">{{ item.ar[0].name }}</span>
-          </div>
-          <div class="iconfont delete">&#xe626;</div>
-        </div>
-      </div>
-    </div> -->
     </van-popup>
   </div>
 </template>
@@ -51,7 +55,42 @@ import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   name: "bottomlist",
   computed: {
-    ...mapGetters(["playlist", "playlistShow"]),
+    ...mapGetters([
+      "currentSong",
+      "playMode",
+      "playlist",
+      // "playlistToast",
+      "playSequence",
+    ]),
+  },
+  props: {
+    playlistToast: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  methods: {
+    toggleSequence: function () {
+      const that = this;
+      let i = that.playSequence + 1;
+      let min = 0;
+      let max = 2;
+      i > max ? (i = min) : "";
+      i < min ? (i = max) : "";
+      that.setPlaySequence(i);
+    },
+    close: function () {
+      const that = this;
+      that.setPlaylistToast(false);
+    },
+    ...mapMutations({
+      setPlayState: "SET_PLAY_STATE",
+      setPlayIndex: "SET_PLAY_INDEX",
+      setPlaylistToast: "SET_PLAY_LIST_TOAST",
+      setPlaySequence: "SET_PLAY_SEQUENCE",
+      setPlayDrag: "SET_PLAY_DRAG",
+      setCurrentTime: "SET_CURRENTTIME",
+    }),
   },
 };
 </script>
@@ -68,6 +107,8 @@ export default {
     transition: 1s;
     position: relative;
     overflow: hidden;
+
+    // z-index: 10000;
     .top {
       position: absolute;
       right: 0.3rem;

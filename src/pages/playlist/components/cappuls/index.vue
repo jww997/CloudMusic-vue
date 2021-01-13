@@ -9,7 +9,8 @@
       }}</span>
     </div>
     <div class="description">{{ obj.description }}</div>
-    <div class="iconfont close">&#xe626;</div>
+    <van-icon name="cross" />
+    <!-- <div class="iconfont close">&#xe626;</div> -->
     <!-- <button class="save">保存封面</button> -->
   </div>
 </template>
@@ -80,7 +81,8 @@ export default {
     text-align: justify;
     text-align-last: left;
   }
-  .close {
+  .close,
+  >>> .van-icon {
     font-size: $text-XL;
     position: absolute;
     right: 0.4rem;

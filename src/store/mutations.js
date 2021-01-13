@@ -19,6 +19,9 @@ export default {
   [types.SET_PLAY_SEQUENCE](state, val) {
     state.playSequence = val;
   },
+  [types.SET_PLAY_ID](state, val) {
+    state.playId = val;
+  },
 
 
   [types.SET_CURRENTSONG](state, val) {

@@ -8,6 +8,7 @@ export default {
     playState: state => { return state.playState },
     playUrl: state => { return state.playUrl },
     playIndex: state => { return state.playIndex },
+    playId: state => { return state.playId },
     playlist: state => { return state.playlist },
     playlistShow: state => { return state.playlistShow },
     playSequence: state => { return state.playSequence },

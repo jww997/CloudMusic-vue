@@ -75,15 +75,17 @@ export default {
       let tracks = that.obj.tracks;
       return tracks && tracks.length;
     },
-    ...mapGetters(["playState", "playIndex", "currentSong"]),
+    ...mapGetters(["playId", "playState", "playIndex", "currentSong"]),
   },
   methods: {
     toPages: function (to, index = "") {
       const that = this;
       if (typeof index == "number") {
-        that.setPlayIndex(index);
-        that.setPlayList(that.obj.tracks);
-        that.setCurrentSong(that.obj.tracks[index]);
+        let list = that.obj.tracks;
+        let current = list[index];
+        that.setPlayId(current.id);
+        that.setPlayList(list);
+        that.setCurrentSong(current);
       }
       toPages.call(that, to);
     },
@@ -100,6 +102,7 @@ export default {
     ...mapMutations({
       setPlayList: "SET_PLAY_LIST",
       setPlayIndex: "SET_PLAY_INDEX",
+      setPlayId: "SET_PLAY_ID",
       setPlayState: "SET_PLAY_STATE",
       setCurrentSong: "SET_CURRENTSONG",
     }),

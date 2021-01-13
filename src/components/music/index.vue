@@ -4,6 +4,7 @@
       ref="audio"
       :src="playUrl"
       @ended="ended"
+      @error="error"
       @canplay="canplay"
       @timeupdate="timeupdate"
     ></audio>
@@ -19,6 +20,7 @@ export default {
       "playUrl",
       "playState",
       "playIndex",
+      "playId",
       "playlist",
       "playSequence",
       "playMode",
@@ -34,14 +36,6 @@ export default {
       let audio = that.$refs.audio;
       val ? audio.play() : audio.pause();
     },
-    // currentSong: function (val) {
-    //   const that = this;
-    //   that.getdata();
-    // },
-    playIndex: function (val) {
-      const that = this;
-      that.getdata();
-    },
     playUrl: function (val) {
       const that = this;
       console.log(`源 => ${val}`);
@@ -52,9 +46,20 @@ export default {
       console.log(`模式 => ${text}`);
       that.$vant.Toast({ type: "html", duration: 500, message: text });
     },
+
+    playId: function (val) {
+      const that = this;
+      that.getdata();
+    },
+    playIndex: function (val) {
+      const that = this;
+      let current = that.playlist[val];
+      that.setPlayId(current.id);
+      that.setCurrentSong(current);
+    },
   },
   methods: {
-    canplay: function (event) {
+    canplay: function () {
       console.log("开始 你的表演 ---------------------------------");
       const that = this;
       let audio = that.$refs.audio;
@@ -67,9 +72,7 @@ export default {
       let audio = that.$refs.audio;
       that.setPlayState(false);
       audio.pause();
-
-      console.log("继续 你的表演 ---------------------------------");
-      that._next();
+      that.next();
     },
     timeupdate: function () {
       const that = this;
@@ -79,26 +82,32 @@ export default {
         that.setCurrentTime(audio.currentTime);
       that.duration != audio.duration && that.setDuration(audio.duration);
     },
+    error: function () {
+      console.log("翻车啦(首次是正常的，可忽略) --------------------");
+      const that = this;
+    },
     getdata: function () {
       const that = this;
       try {
-        let song = that.playlist[that.playIndex];
-        that.setCurrentSong(song);
-        that.$api
-          .getSongUrl({
-            id: song.id,
-          })
-          .then((res) => {
-            let url = res.data.data[0].url;
-            url == null ? that._next() : that.setPlayUrl(url);
-          });
-      } catch (error) {
-        console.log("你该充钱了");
-        console.log(error);
-        that._next();
-      }
+        that.$api.getSongUrl({ id: that.playId }).then((res) => {
+          let url = res.data.data[0].url;
+          if (!url) {
+            let duration = 3000;
+            that.$vant.Toast({
+              duration,
+              message: "没有版权 / VIP专享",
+            });
+            setTimeout(() => {
+              that.next();
+            }, duration);
+          } else {
+            that.setPlayUrl(url);
+          }
+        });
+      } catch (error) {}
     },
-    _next: function () {
+    next: function () {
+      console.log("继续 你的表演 ---------------------------------");
       const that = this;
       let playIndex = that.playIndex;
       let length = that.playlist.length;
@@ -125,6 +134,7 @@ export default {
       setPlayUrl: "SET_PLAY_URL",
       setPlayState: "SET_PLAY_STATE",
       setPlayIndex: "SET_PLAY_INDEX",
+      setPlayId: "SET_PLAY_ID",
 
       setCurrentSong: "SET_CURRENTSONG",
       setCurrentTime: "SET_CURRENTTIME",

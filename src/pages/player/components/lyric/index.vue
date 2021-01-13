@@ -2,13 +2,16 @@
   <div
     class="children"
     :style="{
-      transform: `translateY(-${1 * lyric.curLine}rem)`,
+      transform: `translateY(-${lineHeight * lyric.curLine}rem)`,
     }"
   >
     <div
       :class="{
         line: true,
         active: index == lyric.curLine,
+      }"
+      :style="{
+        lineHeight: `${lineHeight}rem`,
       }"
       v-for="(item, index) in lyric.lines"
       :key="index"
@@ -29,6 +32,11 @@ export default {
       type: Object,
       default: {},
     },
+  },
+  data: function () {
+    return {
+      lineHeight: 0.9,
+    };
   },
   computed: {
     ...mapGetters(["playState", "currentTime", "duration"]),
@@ -56,20 +64,17 @@ export default {
 .children {
   height: 100%;
   transition: 1s;
-  // padding-top: 4rem;
   padding-top: 50%;
   box-sizing: border-box;
-
+  transition: 1s;
   .line {
-    line-height: 1rem;
-    transition: 1s;
-    font-size: $text-M;
+    font-size: $text-S;
     text-align: center;
     transition: 1s;
     color: #aaa;
     &.active {
       color: #fff;
-      font-size: $text-L;
+      font-size: $text-M;
       font-weight: bold;
     }
   }

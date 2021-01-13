@@ -84,6 +84,7 @@ export default {
         let list = that.obj.tracks;
         let current = list[index];
         that.setPlayId(current.id);
+        that.setPlayIndex(index);
         that.setPlayList(list);
         that.setCurrentSong(current);
       }

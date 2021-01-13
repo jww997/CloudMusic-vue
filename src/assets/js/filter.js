@@ -75,7 +75,8 @@ function formatDate(num = new Date(), type = 1) {
 
 function formatTime(num = new Date(), type = 1) {
 
-  if (isNaN(num)) return num;
+  if (isNaN(num)) return "00:00";
+  // if (isNaN(num)) return num;
   let time = new Date(num), r;
   let h = _addZero(time.getHours());
   let m = _addZero(time.getMinutes());
@@ -99,5 +100,6 @@ function _addZero(num) { // 个位数处理给时间补零 0 => 00
   num = num.toString(); // 转为字符串获取长度
   if (num.length == 1) num = `0${num}`;
   return num;
+
 }
 

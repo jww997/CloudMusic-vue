@@ -2,12 +2,10 @@
   <div class="container" :style="{ backgroundImage: 'url(' + picUrl + ')' }">
     <navbar :title="title" :subtitle="subtitle" :fixed="false"></navbar>
     <div :class="{ song: true, lyric: isShowLyric }" @click="toggleShowLyric">
-      <!-- <transform name="center" appear> -->
       <lyric :lyric="lyric" v-show="isShowLyric"></lyric>
       <phonograph :picUrl="picUrl" v-show="!isShowLyric"></phonograph>
-      <!-- </transform> -->
     </div>
-    <handle :lyric="lyric" @seekLyric="seekLyric"></handle>
+    <handle :lyric="lyric"></handle>
   </div>
 </template>
 
@@ -32,7 +30,6 @@ export default {
     return {
       isShowLyric: false,
       lyric: {},
-      // nolyric: true,
 
       picUrl: "",
       title: "",
@@ -46,6 +43,7 @@ export default {
       "playState",
       "playUrl",
       "playIndex",
+      "playId",
       "playlist",
 
       "currentSong",
@@ -54,11 +52,11 @@ export default {
     ]),
   },
   watch: {
-    currentSong: function (val) {
+    playId: function (val) {
       const that = this;
-      that.picUrl = val.al.picUrl;
-      that.subtitle = val.ar[0].name;
-      that.title = val.name;
+      that.picUrl = that.currentSong.al.picUrl;
+      that.subtitle = that.currentSong.ar[0].name;
+      that.title = that.currentSong.name;
       that.getLyric();
     },
   },
@@ -66,39 +64,31 @@ export default {
     toggleShowLyric: function () {
       const that = this;
       that.isShowLyric = !that.isShowLyric;
-      if (that.isShowLyric) that.getLyric();
+      that.getLyric();
     },
     getLyric: function () {
       const that = this;
       let id = that.currentSong.id;
+      if (!that.isShowLyric) return false;
       if (that.lastId == id) return false;
-      that.$api
-        .getLyric({
-          id: id,
-        })
-        .then((res) => {
-          let nolyric = res.data.nolyric;
-          if (nolyric) return false; // 判断数据有无歌词
-          let lyric = res.data.lrc.lyric;
-          if (!lyric) return false; // 判断数据歌词是否为空
-          try {
-            clearInterval(that.lyric.timer); // 清掉没用的
-          } catch (e) {}
-          that.lyric = new LyricParser(lyric, that.setLyric);
-          that.lastId = id;
-        });
+      that.$api.getLyric({ id }).then((res) => {
+        let nolyric = res.data.nolyric;
+        if (nolyric) return false; // 判断数据有无歌词
+        let lyric = res.data.lrc.lyric;
+        if (!lyric) return false; // 判断数据歌词是否为空
+        try {
+          clearInterval(that.lyric.timer); // 清掉没用的
+        } catch (e) {}
+        that.lyric = new LyricParser(lyric, that.setLyric);
+        that.lastId = id;
+      });
     },
     setLyric: function ({ lineNum, txt }) {
       const that = this;
       if (that.lyric.curLine == lineNum) return false;
+      that.$set(that.lyric, "curLine", lineNum); // 歌词实时下标
       console.log(`lineNum = ${lineNum}, txt = ${txt}`);
-      that.lyric.curLine = lineNum; // 歌词实时下标
     },
-    seekLyric: function (time) {
-      const that = this;
-      that.lyric.seek(time);
-    },
-
     ...mapMutations({ setPlayUrl: "SET_PLAY_URL" }),
   },
   mounted: function () {
@@ -155,22 +145,6 @@ export default {
     -webkit-filter: blur(20px);
     filter: blur(20px);
   }
-
-  // &.center-enter,
-  // &.center-leave-to {
-  //   opacity: 0;
-  //   transform: translateY(1rem);
-  // }
-
-  // &.center-enter-to,
-  // &.center-leave {
-  //   opacity: 1;
-  // }
-
-  // &.center-enter-active,
-  // &.center-leave-active {
-  //   transition: 0.5s;
-  // }
 
   .song {
     flex-grow: 1;

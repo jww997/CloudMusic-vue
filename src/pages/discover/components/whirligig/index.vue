@@ -72,6 +72,7 @@ export default {
     margin: 0.2rem 0.2rem 0;
     @include flexSpaceBetween;
     .title {
+      line-height: $text-M;
       font-size: $text-S;
       font-weight: bold;
       @include omit;

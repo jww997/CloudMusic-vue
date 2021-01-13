@@ -24,6 +24,7 @@ export default {
       "playlist",
       "playSequence",
       "playMode",
+      "playDrag",
 
       "currentSong",
       "currentTime",
@@ -57,6 +58,14 @@ export default {
       that.setPlayId(current.id);
       that.setCurrentSong(current);
     },
+    playDrag: function (val) {
+      const that = this;
+      if (val) {
+        let audio = that.$refs.audio;
+        audio.currentTime = that.currentTime;
+        that.setPlayDrag(false);
+      }
+    },
   },
   methods: {
     canplay: function () {
@@ -76,7 +85,7 @@ export default {
     },
     timeupdate: function () {
       const that = this;
-      if (!that.playState) return false;
+      if (!that.playState || that.playDrag) return false;
       let audio = that.$refs.audio;
       that.currentTime != audio.currentTime &&
         that.setCurrentTime(audio.currentTime);
@@ -135,6 +144,7 @@ export default {
       setPlayState: "SET_PLAY_STATE",
       setPlayIndex: "SET_PLAY_INDEX",
       setPlayId: "SET_PLAY_ID",
+      setPlayDrag: "SET_PLAY_DRAG",
 
       setCurrentSong: "SET_CURRENTSONG",
       setCurrentTime: "SET_CURRENTTIME",

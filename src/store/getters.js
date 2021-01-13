@@ -13,6 +13,7 @@ export default {
     playlistShow: state => { return state.playlistShow },
     playSequence: state => { return state.playSequence },
     playMode: state => { return state.playMode },
+    playDrag: state => { return state.playDrag },
 
     currentSong: state => { return state.currentSong },
     currentTime: state => { return state.currentTime },

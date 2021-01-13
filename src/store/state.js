@@ -21,6 +21,8 @@ export default {
   playlistShow: false,    // 播放列表显示
   playUrl: "",            // 播放地址
   playState: false,       // 播放状态
+  playDrag: false,        // 播放拖拽(歌词，进度条)
+
   playSequence: 0,        // 播放顺序
   playMode: _mode,        // 播放模式
 

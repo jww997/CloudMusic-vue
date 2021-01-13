@@ -7,9 +7,14 @@ export default {
   [types.SET_PLAY_URL](state, val) {
     state.playUrl = val;
   },
+
   [types.SET_PLAY_INDEX](state, val) {
     state.playIndex = val;
   },
+  [types.SET_PLAY_ID](state, val) {
+    state.playId = val;
+  },
+
   [types.SET_PLAY_LIST](state, val) {
     state.playlist = val;
   },
@@ -19,8 +24,8 @@ export default {
   [types.SET_PLAY_SEQUENCE](state, val) {
     state.playSequence = val;
   },
-  [types.SET_PLAY_ID](state, val) {
-    state.playId = val;
+  [types.SET_PLAY_DRAG](state, val) {
+    state.playDrag = val;
   },
 
 

@@ -131,27 +131,30 @@ export default {
     prev: function () {
       console.log("上一首");
       const that = this;
-      if (that.playIndex == 0) {
+      let playIndex = that.playIndex;
+
+      if (playIndex == 0) {
         that.setPlayIndex(that.playlist.length - 1);
-      } else if (that.playIndex - 1 <= that.playlist.length) {
-        that.setPlayIndex(that.playIndex - 1);
+      } else if (playIndex - 1 <= that.playlist.length) {
+        that.setPlayIndex(playIndex - 1);
       }
     },
     next: function () {
       console.log("下一首");
       const that = this;
-      if (that.playIndex == that.playlist.length - 1) {
+      let playIndex = that.playIndex;
+
+      if (playIndex >= that.playlist.length - 1) {
         that.setPlayIndex(0);
-      } else if (that.playIndex + 1 <= that.playlist.length) {
-        that.setPlayIndex(that.playIndex + 1);
+      } else if (playIndex + 1 <= that.playlist.length) {
+        that.setPlayIndex(playIndex + 1);
       }
     },
     togglePercentage: function (val) {
       const that = this;
-      // let i = that.duration * (val / 100); // 根据选中百分比修改进度条
-      // that.setPlayState(false);
-      // that.setCurrentTime(i); // 接收秒数，要处理下
-      // that.setPlayState(true);
+      let i = that.duration * (val / 100); // 根据选中百分比修改进度条
+      that.setPlayDrag(true);
+      that.setCurrentTime(i); // 接收秒数，要处理下
     },
     toggleStatus: function () {
       const that = this;
@@ -177,6 +180,7 @@ export default {
       setPlayIndex: "SET_PLAY_INDEX",
       setPlaylistShow: "SET_PLAY_LIST_SHOW",
       setPlaySequence: "SET_PLAY_SEQUENCE",
+      setPlayDrag: "SET_PLAY_DRAG",
       setCurrentTime: "SET_CURRENTTIME",
     }),
   },

@@ -108,7 +108,6 @@ export default {
     position: relative;
     overflow: hidden;
 
-    // z-index: 10000;
     .top {
       position: absolute;
       right: 0.3rem;

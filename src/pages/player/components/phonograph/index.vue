@@ -133,13 +133,13 @@ export default {
       .cover {
         transform: scale(0.7);
         border-radius: 50%;
-        z-index: 1;
+        z-index: $zIndex-XXXS;
       }
       // .lid {
-      //   z-index: 2;
+      //   z-index: $zIndex-XXS;
       // }
       .light {
-        z-index: 3;
+        z-index: $zIndex-XS;
       }
     }
     .stick {
@@ -150,7 +150,7 @@ export default {
       @include positionCenter;
       bottom: auto;
       left: 1.3rem;
-      z-index: 4;
+      z-index: $zIndex-S;
     }
     &.active {
       .disc {

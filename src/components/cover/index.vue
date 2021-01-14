@@ -47,7 +47,7 @@ export default {
     // width: 2rem;
     // height: 2rem;
     border-radius: 0.2rem;
-    background-color: $gray;
+    background-color: $theme-LIGHITGRAY;
   }
   .text {
     @include omit;
@@ -80,7 +80,7 @@ export default {
     width: 90%;
     padding-bottom: 90%;
     margin: -0.2rem auto;
-    background-color: $gray;
+    background-color: $theme-LIGHITGRAY;
     border-radius: 0.1rem;
     z-index: -1;
     position: absolute;

@@ -27,6 +27,6 @@ export default {
 .container {
   @include suspension;
   box-sizing: border-box;
-  padding-top: $safeDistance-TOP;
+  padding-top: $safeDistance;
 }
 </style>

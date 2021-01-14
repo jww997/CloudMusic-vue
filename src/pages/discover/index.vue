@@ -1,7 +1,5 @@
 <template>
   <div class="container">
-    <search></search>
-
     <div v-for="(item, index) in blocks" :key="index">
       <banner
         :ball="ball"
@@ -16,19 +14,14 @@
       ></whirligig>
     </div>
 
-    <!-- <calendar></calendar> -->
-
-    <transition name="children">
+    <transition name="second">
       <router-view></router-view>
     </transition>
-
-    <tabbar></tabbar>
   </div>
 </template>
 
 <script>
 import Tabbar from "@/components/tabbar";
-import Search from "@/pages/discover/components/search";
 import Banner from "@/pages/discover/components/banner";
 import Whirligig from "@/pages/discover/components/whirligig";
 import Calendar from "@/pages/discover/components/calendar";
@@ -37,7 +30,6 @@ export default {
   name: "discover",
   components: {
     Tabbar,
-    Search,
     Banner,
     Whirligig,
     Calendar,
@@ -84,20 +76,19 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .container {
-  padding-bottom: $safeDistance-BOTTOM;
-  &.children-enter,
-  &.children-leave-to {
+  &.second-enter,
+  &.second-leave-to {
     opacity: 0;
     transform: translateY(1rem);
   }
 
-  &.children-enter-to,
-  &.children-leave {
+  &.second-enter-to,
+  &.second-leave {
     opacity: 1;
   }
 
-  &.children-enter-active,
-  &.children-leave-active {
+  &.second-enter-active,
+  &.second-leave-active {
     transition: 0.5s;
   }
 }

@@ -1,25 +1,29 @@
 <template>
-  <div class="children">
-    <swiper :list="list"></swiper>
-
-    <ball :list="ball"></ball>
+  <div class="grandson">
+    <van-swipe class="swiper" :autoplay="3000" indicator-color="white">
+      <van-swipe-item
+        class="swiper-item"
+        v-for="(item, index) in list"
+        :key="index"
+      >
+        <div class="box" :data-url="item.url" :data-video="item.video">
+          <img class="image" :src="item.pic" />
+          <span
+            class="text"
+            :style="{ backgroundColor: item.titleColor }"
+            v-if="item.typeTitle"
+            >{{ item.typeTitle }}</span
+          >
+        </div>
+      </van-swipe-item>
+    </van-swipe>
   </div>
 </template>
 
 <script>
-import Swiper from "./components/swiper";
-import Ball from "./components/ball";
 export default {
-  name: "banner",
-  components: {
-    Swiper,
-    Ball,
-  },
+  name: "swiper",
   props: {
-    ball: {
-      type: Array,
-      default: [],
-    },
     list: {
       type: Array,
       default: [],
@@ -31,7 +35,8 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-.children {
+.grandson {
+  padding-top: 0.3rem;
   >>> .van-swipe__indicators {
     bottom: 6px;
     .van-swipe__indicator {

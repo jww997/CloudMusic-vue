@@ -17,14 +17,12 @@
     <div @click="toggleCapplus" v-if="isShowCapplus">
       <capplus :obj="playlist"></capplus>
     </div>
-    <bottombar></bottombar>
   </div>
 </template>
 
 <script>
 import BetterScroll from "better-scroll";
 import Navbar from "@/components/navbar";
-import Bottombar from "@/components/bottombar";
 import Cap from "@/pages/playlist/components/cap";
 import Capplus from "@/pages/playlist/components/cappuls";
 import List from "@/pages/playlist/components/list";
@@ -32,7 +30,6 @@ export default {
   name: "playlist",
   components: {
     Navbar,
-    Bottombar,
     Cap,
     Capplus,
     List,
@@ -102,7 +99,6 @@ export default {
   // @include positionCenter;
   // position: fixed;
   // overflow: auto;
-  // z-index: 100;
 
   // &.children-enter,
   // &.children-leave-to {

@@ -70,12 +70,13 @@ export default {
   }
 }
 .kid {
-  @include suspension;
+  // @include suspension;
   height: $safeDistance;
-  top: auto;
+  // top: auto;
   padding: 0 0.3rem;
   box-sizing: border-box;
   background-image: linear-gradient(#efefef, transparent);
+  background-color: #fff;
   @include flexSpaceBetween;
   transition: 0.5s;
   overflow: visible;
@@ -106,12 +107,12 @@ export default {
     .cover {
       width: 65%;
       height: 65%;
-      z-index: 2;
+      z-index: $zIndex-XXXS;
     }
     .light {
       width: 100%;
       height: 100%;
-      z-index: 3;
+      z-index: $zIndex-XXS;
     }
   }
   .monicker {

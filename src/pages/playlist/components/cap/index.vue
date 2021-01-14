@@ -73,7 +73,7 @@ export default {
 .children {
   width: 100%;
   margin-bottom: 0.7rem;
-  padding: $safeDistance-TOP 0.3rem 0.9rem;
+  padding: $safeDistance 0.3rem 0.9rem;
   box-sizing: border-box;
   position: relative;
   background-color: rgba(0, 0, 0, 0.3);

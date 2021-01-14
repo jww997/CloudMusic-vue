@@ -81,7 +81,7 @@ export default {
   height: 100vh;
   @include suspension;
   position: relative;
-  padding-top: $safeDistance-TOP;
+  padding-top: $safeDistance;
   box-sizing: border-box;
   background-color: #000;
   color: #fff;

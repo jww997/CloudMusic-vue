@@ -3,6 +3,7 @@
     <audio
       ref="audio"
       :src="playUrl"
+      v-if="playUrl"
       @ended="ended"
       @error="error"
       @canplay="canplay"
@@ -92,7 +93,7 @@ export default {
       that.duration != audio.duration && that.setDuration(audio.duration);
     },
     error: function () {
-      console.log("翻车啦(首次是正常的，可忽略) --------------------");
+      console.log("翻车啦  --------------------------------------");
       const that = this;
     },
     getdata: function () {

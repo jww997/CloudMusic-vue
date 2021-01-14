@@ -67,12 +67,13 @@ export default {
 @import "~sass/varibles.scss";
 .children {
   padding-bottom: 0.2rem;
-  border-bottom: 0.15rem solid #eee;
+  border-top: 0.15rem solid #eee;
+
   .header {
     margin: 0.2rem 0.2rem 0;
     @include flexSpaceBetween;
     .title {
-      line-height: $text-M;
+      line-height: $text-L;
       font-size: $text-S;
       font-weight: bold;
       @include omit;

@@ -1,25 +1,40 @@
 <template>
-  <div id="app">
-    <keep-alive>
-      <router-view v-if="$route.meta.isKeepAlive"></router-view>
-    </keep-alive>
-    <router-view v-if="!$route.meta.isKeepAlive"></router-view>
-    <music></music>
+  <div class="app" id="app">
+    <div class="topbar" v-if="isShowTopBar">
+      <topbar></topbar>
+    </div>
+
+    <div class="view">
+      <keep-alive>
+        <router-view v-if="$route.meta.isKeepAlive"></router-view>
+      </keep-alive>
+      <router-view v-if="!$route.meta.isKeepAlive"></router-view>
+    </div>
+    <div class="bottombar" v-if="isShowBottomBar">
+      <bottombar></bottombar>
+    </div>
 
     <bottomlist :playlistToast="playlistToast"></bottomlist>
+    <music></music>
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { formatTime, formatDate } from "@/assets/js/filter.js";
-import Music from "@/components/music";
 import Bottomlist from "@/components/bottomlist";
+import Bottombar from "@/components/bottombar";
+import Topbar from "@/components/topbar";
+import Tabbar from "@/components/tabbar";
+import Music from "@/components/music";
 export default {
   name: "App",
   components: {
-    Music,
     Bottomlist,
+    Bottombar,
+    Topbar,
+    Tabbar,
+    Music,
   },
   computed: {
     ...mapGetters([
@@ -41,6 +56,12 @@ export default {
       "playMode",
     ]),
   },
+  data: function () {
+    return {
+      isShowBottomBar: true,
+      isShowTopBar: true,
+    };
+  },
   mounted: function () {
     const that = this;
     console.log(`欢迎来到村乐，网易云音乐的搬运工！`);
@@ -50,11 +71,41 @@ export default {
     console.log(`VUE版 https://github.com/jww997/CloudMusic-vue`);
     console.log(formatDate(undefined, 2), formatTime()); // undefined还是有点用
   },
+  created: function () {
+    const that = this;
+    let bottomDislodge = ["player"];
+    let topDislodge = ["discover"];
+    that.$router.beforeEach((to, from, next) => {
+      that.isShowBottomBar = !bottomDislodge.find((item) => {
+        return item == to.name;
+      });
+      that.isShowTopBar = topDislodge.find((item) => {
+        return item == to.name;
+      });
+      next();
+    });
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  .view {
+    flex-grow: 1;
+    height: calc(100vh - $safeDistance);
+    z-index: $zIndex-S;
+    overflow: scroll;
+  }
+  .topbar,
+  .bottombar {
+    flex-shrink: 0;
+    z-index: $zIndex-M;
+  }
+}
 </style>
 

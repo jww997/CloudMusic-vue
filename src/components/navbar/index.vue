@@ -75,11 +75,11 @@ export default {
   flex-shrink: 0;
   width: 100%;
   // height: 1rem;
-  height: $safeDistance-TOP; // 准备使用插槽solt
+  height: $safeDistance; // 准备使用插槽solt
   padding: 0 0.3rem;
   box-sizing: border-box;
   color: #fff;
-  z-index: 100;
+  z-index: $zIndex-M;
   @include flexSpaceBetween;
   // .iconfont,
   >>> .van-icon {

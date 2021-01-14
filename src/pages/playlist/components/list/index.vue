@@ -127,7 +127,7 @@ export default {
       @include flexCenter;
       justify-content: flex-start;
       .iconfont {
-        color: $red;
+        color: $theme-RED;
         margin-left: 0;
         font-size: $text-S;
       }

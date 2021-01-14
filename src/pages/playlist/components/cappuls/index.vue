@@ -39,10 +39,10 @@ export default {
   justify-content: flex-start;
   line-height: 0.5rem;
   padding: 0 0.3rem 1rem;
-  z-index: 200;
   box-sizing: border-box;
   overflow: scroll;
   background-color: #999;
+  z-index: $zIndex-L;
   color: #fff;
   .coverImgUrl {
     width: 6rem;

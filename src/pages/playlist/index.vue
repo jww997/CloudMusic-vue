@@ -86,34 +86,34 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-.container {
-  @include suspension;
-  padding-bottom: $safeDistance;
-  // .capplus {
-  //   transition: 0.5s;
-  //   &.hide {
-  //     opacity: 0;
-  //   }
-  // }
+// .container {
+// @include suspension;
+// padding-bottom: $safeDistance;
+// .capplus {
+//   transition: 0.5s;
+//   &.hide {
+//     opacity: 0;
+//   }
+// }
 
-  // @include positionCenter;
-  // position: fixed;
-  // overflow: auto;
+// @include positionCenter;
+// position: fixed;
+// overflow: auto;
 
-  // &.children-enter,
-  // &.children-leave-to {
-  //   opacity: 0;
-  //   transform: translateY(1rem);
-  // }
+// &.children-enter,
+// &.children-leave-to {
+//   opacity: 0;
+//   transform: translateY(1rem);
+// }
 
-  // &.children-enter-to,
-  // &.children-leave {
-  //   opacity: 1;
-  // }
+// &.children-enter-to,
+// &.children-leave {
+//   opacity: 1;
+// }
 
-  // &.children-enter-active,
-  // &.children-leave-active {
-  //   transition: 0.5s;
-  // }
-}
+// &.children-enter-active,
+// &.children-leave-active {
+//   transition: 0.5s;
+// }
+// }
 </style>

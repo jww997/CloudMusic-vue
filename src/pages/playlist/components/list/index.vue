@@ -26,7 +26,9 @@
         <div class="name">
           <p class="songname">
             <span class="title">{{ item.name }}</span>
-            <span class="subtitle">{{ formatArtists(item.alia) }}</span>
+            <span class="subtitle" v-if="formatArtists(item.alia)"
+              >({{ formatArtists(item.alia) }})</span
+            >
           </p>
           <p class="source">
             {{ `${formatArtists(item.ar)} - ${item.al.name}` }}

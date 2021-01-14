@@ -25,14 +25,18 @@
         v-html="playMode[playSequence].icon"
       ></span>
       <span class="iconfont" @click="prev">&#xe663;</span>
-      <span
+      <div class="center" @click.stop="toggleStatus">
+        <van-icon name="pause-circle-o" v-if="playState" />
+        <van-icon name="play-circle-o" v-else />
+      </div>
+      <!-- <span
         :class="{
           'iconfont center': true,
           playing: playState,
         }"
         @click="toggleStatus"
         >{{ playState ? "&#xe665;" : "&#xe666;" }}
-      </span>
+      </span> -->
       <span class="iconfont" @click="next">&#xe668;</span>
       <span class="iconfont" @click="togglePlaylistToast">&#xe664;</span>
     </div>
@@ -174,7 +178,9 @@ export default {
     padding: 0.5rem 1rem;
     @include flexSpaceAround;
     .center {
-      transform: scale(2);
+      transform: scale(1.5);
+      @include flexCenter;
+      color: #fff;
     }
     .iconfont {
       color: #fff;

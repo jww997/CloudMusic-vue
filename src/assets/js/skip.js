@@ -11,17 +11,18 @@ export {
 function toPages(to = {}) {
   const that = this;
   console.log(`to = `, to);
-
   let {
     name,
     params,
     path,
     query
   } = to;
-  if (typeof to.name == 'string') {
-    that.$router.push({ name, params });
-  } else {
-    that.$router.push({ path, query });
-  };
+  try {
+    if (typeof name == 'string') {
+      that.$router.push({ name, params });
+    } else {
+      that.$router.push({ path, query });
+    };
+  } catch (error) { }
 
 }

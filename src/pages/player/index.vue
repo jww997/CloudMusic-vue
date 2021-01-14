@@ -74,8 +74,8 @@ export default {
       if (that.lastId == id) return false;
       that.$api.getLyric({ id }).then((res) => {
         let nolyric = res.data.nolyric;
-        let lyric = res.data.lrc.lyric;
         if (nolyric) return false; // 判断数据有无歌词
+        let lyric = res.data.lrc.lyric;
         if (!lyric) return false; // 判断数据歌词是否为空
         try {
           clearInterval(that.lyric.timer); // 清掉没用的

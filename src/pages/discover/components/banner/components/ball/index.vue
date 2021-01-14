@@ -1,33 +1,32 @@
 <template>
   <div class="grandson">
-    <van-swipe class="swiper" width="50" :loop="false" :show-indicators="false">
+    <van-swipe class="swiper" width="70" :loop="false" :show-indicators="false">
       <van-swipe-item
         class="swiper-item"
         v-for="(item, index) in list"
         :key="index"
       >
-        <router-link :to="{ name: setToName(item.id) }">
-          <div class="item">
-            <!-- <div class="iconfont" v-html="item.icon"></div> -->
-            <div
-              class="icon"
-              :style="{
-                backgroundImage: 'url(' + item.iconUrl + ')',
-              }"
-              :alt="item.name"
-            >
-              <!-- webkitMask: 'url(' + item.iconUrl + ')' -->
-              <!-- <img :src="item.iconUrl" :alt="item.name" /> -->
-            </div>
-            <span class="text">{{ item.name }}</span>
+        <div class="item" @click="toPage(item.id)">
+          <!-- <div class="iconfont" v-html="item.icon"></div> -->
+          <div
+            class="icon"
+            :style="{
+              backgroundImage: 'url(' + item.iconUrl + ')',
+            }"
+            :alt="item.name"
+          >
+            <!-- webkitMask: 'url(' + item.iconUrl + ')' -->
+            <!-- <img :src="item.iconUrl" :alt="item.name" /> -->
           </div>
-        </router-link>
+          <span class="text">{{ item.name }}</span>
+        </div>
       </van-swipe-item>
     </van-swipe>
   </div>
 </template>
 
 <script>
+import { toPages } from "@/assets/js/skip.js";
 export default {
   name: "list",
   props: {
@@ -37,7 +36,9 @@ export default {
     },
   },
   methods: {
-    setToName(id) {
+    toPages,
+    toPage: function (id) {
+      const that = this;
       let name;
       switch (id) {
         case -1:
@@ -53,7 +54,11 @@ export default {
           name = "";
           break;
       }
-      return name;
+      if (!name) {
+        that.$vant.Toast({ type: "html", duration: 500, message: "敬请期待" });
+        return false;
+      }
+      that.toPages({ name, params: {} });
     },
   },
 };
@@ -64,13 +69,17 @@ export default {
 @import "~sass/varibles.scss";
 .grandson {
   padding: 0.3rem 0;
-  margin-top: 0.3rem;
   .swiper-item {
-    padding-left: 0.35rem;
+    // padding-left: 0.35rem;
     .item {
-      width: 100%;
+      // width: 100%;
+      box-sizing: content-box;
       @include flexCenter;
       flex-direction: column;
+      .icon,
+      .text {
+        flex-shrink: 0;
+      }
       .icon {
         width: 1rem;
         height: 1rem;
@@ -86,7 +95,8 @@ export default {
         &::after {
           content: "";
           z-index: -1;
-          background-color: #ffadba;
+          // background-color: $theme-PICK;
+          background-color: $theme-RED;
           @include positionCenter;
         }
 
@@ -113,7 +123,7 @@ export default {
       }
       .text {
         font-size: $text-XS;
-        color: #000;
+        color: $theme-BLACK;
       }
     }
   }

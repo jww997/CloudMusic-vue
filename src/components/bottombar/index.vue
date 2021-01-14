@@ -20,14 +20,18 @@
       <span class="name">{{ currentSong.name }}</span>
       <span class="ar">{{ currentSong.ar[0].name }}</span>
     </div>
-    <span
+    <div class="state" @click.stop="toggleStatus">
+      <van-icon name="pause-circle-o" v-if="playState" />
+      <van-icon name="play-circle-o" v-else />
+    </div>
+    <!-- <span
       :class="{
         'iconfont center': true,
         playing: playState,
       }"
       @click.stop="toggleStatus"
-      >{{ playState ? "&#xe665;" : "&#xe666;" }}
-    </span>
+      >{{ playState ? "&#xe665;" : "&#xe666;" }} 
+    </span>-->
     <span class="iconfont" @click.stop="togglePlaylistToast">&#xe664;</span>
   </div>
 </template>
@@ -117,17 +121,19 @@ export default {
   }
   .monicker {
     flex-grow: 1;
+    line-height: 1;
     padding-bottom: $text-XXXS;
     box-sizing: border-box;
-    @include flexCenter;
-    justify-content: flex-start;
     @include omit;
+    .name,
+    .ar {
+      line-height: $safeDistance;
+    }
     .name {
-      line-height: $text-M;
       font-size: $text-S;
     }
     .ar {
-      line-height: $text-S;
+      margin-left: -0.2rem;
       font-size: $text-XS;
       color: $theme-GRAY;
       &::before {
@@ -136,9 +142,16 @@ export default {
       }
     }
   }
-  .iconfont {
-    font-size: $text-XL;
+  .iconfont,
+  .state {
     margin-left: $text-XS;
+  }
+  .state {
+    @include flexCenter;
+    font-size: $text-XXL;
+  }
+  .iconfont {
+    font-size: $text-L;
   }
 }
 </style>

@@ -61,7 +61,8 @@ function formatArtists(list = []) {
   let r = "";
   list.forEach((item, index) => {
     let separator = index == 0 ? '' : '/';
-    r += separator + item.name;
+    let name = !item.name ? item : item.name;
+    r += (separator + name);
   });
   return r;
 }

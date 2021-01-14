@@ -58,8 +58,8 @@ export default {
   },
   data: function () {
     return {
-      isShowBottomBar: true,
       isShowTopBar: true,
+      isShowBottomBar: true,
     };
   },
   mounted: function () {
@@ -70,16 +70,17 @@ export default {
     console.log(`小程序版 https://github.com/jww997/CloudMusic-wx`);
     console.log(`VUE版 https://github.com/jww997/CloudMusic-vue`);
     console.log(formatDate(undefined, 2), formatTime()); // undefined还是有点用
+    console.log(`需求墙：1. 播放页加个分享功能`);
   },
   created: function () {
     const that = this;
-    let bottomDislodge = ["player"];
-    let topDislodge = ["discover"];
+    let top = ["discover"];
+    let bottom = ["player"];
     that.$router.beforeEach((to, from, next) => {
-      that.isShowBottomBar = !bottomDislodge.find((item) => {
+      that.isShowTopBar = !!top.find((item) => {
         return item == to.name;
       });
-      that.isShowTopBar = topDislodge.find((item) => {
+      that.isShowBottomBar = !bottom.find((item) => {
         return item == to.name;
       });
       next();
@@ -97,7 +98,6 @@ export default {
   flex-direction: column;
   .view {
     flex-grow: 1;
-    height: calc(100vh - $safeDistance);
     z-index: $zIndex-S;
     overflow: scroll;
   }

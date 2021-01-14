@@ -81,6 +81,7 @@ export default {
   color: #fff;
   z-index: $zIndex-M;
   @include flexSpaceBetween;
+  transition: 0.5s;
   // .iconfont,
   >>> .van-icon {
     font-size: $text-XL;
@@ -127,6 +128,8 @@ export default {
     }
   }
   &.fixed {
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
     position: fixed;
     right: 0;
     left: 0;

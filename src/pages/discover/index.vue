@@ -15,7 +15,7 @@
     </div>
 
     <transition name="second">
-      <router-view></router-view>
+      <router-view class="second"></router-view>
     </transition>
   </div>
 </template>
@@ -36,29 +36,12 @@ export default {
   },
   data: function () {
     return {
-      // banners: [],
-      // recommend: [],
-
       blocks: [],
       ball: [],
     };
   },
   mounted: function () {
     const that = this;
-    // that.$api
-    //   .getBanner()
-    //   .then((res) => {
-    //     that.banners = res.data.banners;
-    //     return that.$api.getPersonalized();
-    //   })
-    //   .then((res) => {
-    //     that.recommend = res.data.result;
-    //     // return that.$api.getCalendar({
-    //     //   startTime: 1606752000000,
-    //     //   endTime: 1609430399999,
-    //     // });
-    //   });
-
     that.$api
       .getHomepageBlockPage()
       .then((res) => {
@@ -76,6 +59,12 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .container {
+  z-index: $zIndex-M;
+  .second {
+    z-index: $zIndex-L;
+    @include suspension;
+    padding-bottom: $safeDistance;
+  }
   &.second-enter,
   &.second-leave-to {
     opacity: 0;

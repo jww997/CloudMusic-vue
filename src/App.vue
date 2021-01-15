@@ -1,7 +1,7 @@
 <template>
   <div class="app" id="app">
     <div class="topbar" v-if="isShowTopBar">
-      <topbar></topbar>
+      <!-- <topbar></topbar> -->
     </div>
 
     <div class="view">

@@ -1,38 +1,50 @@
 <template>
   <div class="container">
-    <navbar :title="'歌单广场'" fixed black>·</navbar>
+    <navbar :title="'歌单广场'" fixed black></navbar>
+    <tags :list="tags"></tags>
     <list :list="playlists"></list>
   </div>
 </template>
 
 <script>
 import Navbar from "@/components/navbar";
-import Tab from "@/pages/square/components/tab";
-import List from "@/pages/square/components/list";
+import Tags from "./components/tags";
+import List from "./components/list";
 
 export default {
   name: "square",
   components: {
     Navbar,
-    Tab,
+    Tags,
     List,
   },
   data: function () {
     return {
       playlists: [],
+      tags: [],
     };
+  },
+  methods: {
+    getdata: function () {
+      const that = this;
+      that.$api
+        .getTopPlaylist({
+          limit: 50,
+        })
+        .then((res) => {
+          that.playlists = res.data.playlists;
+        });
+    },
   },
   mounted: function () {
     const that = this;
-    that.$api.getPlaylistHot().then((res) => {});
-    that.$api
-      .getTopPlaylist({
-        limit: 30,
-      })
-      .then((res) => {
-        that.playlists = res.data.playlists;
-      });
-    // that.$api.getPlaylistCatlist().then((res) => {});
+
+    that.$api.getPlaylistCatlist().then((res) => {
+      console.log(res);
+      that.tags = res.data.sub;
+
+      that.getdata();
+    });
   },
 };
 </script>

@@ -178,9 +178,12 @@ export default {
     padding: 0.5rem 1rem;
     @include flexSpaceAround;
     .center {
-      transform: scale(1.5);
+      // transform: scale(1.5);
       @include flexCenter;
       color: #fff;
+      .van-icon {
+        font-size: 1.5rem;
+      }
     }
     .iconfont {
       color: #fff;

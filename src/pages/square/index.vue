@@ -2,7 +2,7 @@
   <scroll :data="[playlists]" :refreshDelay="1000">
     <div class="container">
       <navbar :title="'歌单广场'" fixed black></navbar>
-      <!-- <tags :list="tags" @toggleCat="toggleCat"></tags> -->
+      <tags :list="tags" @toggleCat="toggleCat"></tags>
       <list :list="playlists"></list>
     </div>
   </scroll>

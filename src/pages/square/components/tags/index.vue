@@ -48,11 +48,13 @@ export default {
   overflow: visible;
   .tags {
     flex-grow: 1;
+    width: 3rem;
     @include flexSpaceBetween;
+    flex-wrap: nowrap;
     overflow: scroll;
     .tag {
       flex-shrink: 0;
-      padding: 0 $text-S;
+      padding: 0.1rem $text-S;
       font-size: $text-XS;
       transition: 0.5s;
       color: $theme-GRAY;

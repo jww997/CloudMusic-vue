@@ -5,6 +5,16 @@
       transform: `translateY(-${lineHeight * lyric.curLine}rem)`,
     }"
   >
+    <!-- <div class="volume">
+      <van-slider
+        v-model="percentage"
+        :step="10"
+        button-size="10px"
+        active-color="#f00"
+        inactive-color="#494949"
+        @change="togglePercentage"
+      />
+    </div> -->
     <div
       :class="{
         line: true,
@@ -67,6 +77,11 @@ export default {
   padding-top: 50%;
   box-sizing: border-box;
   transition: 1s;
+  // .volume {
+  //   // flex-grow: 1;
+  //   min-width: 6rem;
+  //   margin: 0.3rem;
+  // }
   .line {
     font-size: $text-S;
     text-align: center;

@@ -60,21 +60,12 @@ Vue.prototype.$vant.Notify = Notify;
 Vue.prototype.$vant.Toast = Toast;
 
 
-Vue.config.devtools = true // 开发调试工具
+// Vue.config.devtools = true // 开发调试工具
 Vue.config.productionTip = false // 阻止启动生产消息
 
 
 
+// import infiniteScroll from 'vue-infinite-scroll'
 
-
-
-
-
-
-import BScroll from '@better-scroll/core'
-import Pulldown from '@better-scroll/pull-down'
-import infiniteScroll from 'vue-infinite-scroll'
-BScroll.use(Pulldown)
-
-Vue.use(infiniteScroll)
-Vue.config.productionTip = false
+// Vue.use(infiniteScroll)
+// Vue.config.productionTip = false

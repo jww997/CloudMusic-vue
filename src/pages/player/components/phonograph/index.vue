@@ -95,7 +95,6 @@ export default {
   height: 100%;
   @include flexSpaceBetween;
   flex-direction: column;
-
   .phonograph {
     flex-grow: 1;
     width: 75%;

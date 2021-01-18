@@ -1,10 +1,17 @@
 <template>
   <div class="children">
     <div class="tags">
-      <span class="tag" v-for="item in list" :key="item.id" :data-id="item.id">
+      <span
+        :class="{ tag: true, active: index == tagsIndex }"
+        v-for="(item, index) in list"
+        :key="item.id"
+        @click="toggleCat(item.name, index)"
+      >
         {{ item.name }}
       </span>
+      <!-- <div class="slider" :style="{ left: `${tagsIndex}rem` }"></div> -->
     </div>
+    <div class="iconfont">&#xe609;</div>
   </div>
 </template>
 
@@ -17,6 +24,18 @@ export default {
       default: [],
     },
   },
+  data: function () {
+    return {
+      tagsIndex: -1,
+    };
+  },
+  methods: {
+    toggleCat: function (name, index) {
+      const that = this;
+      that.tagsIndex = index;
+      that.$emit("toggleCat", name);
+    },
+  },
 };
 </script>
 
@@ -24,17 +43,48 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .children {
+  @include flexSpaceBetween;
+  padding: 0.3rem 0;
+  overflow: visible;
   .tags {
-    // @include flexCenter;
-    // @include omit;
-    white-space: nowrap;
+    flex-grow: 1;
+    @include flexSpaceBetween;
     overflow: scroll;
     .tag {
-      display: inline-block;
-      // flex-shrink: 0;
-      font-size: $text-S;
-      padding: $text-S;
+      flex-shrink: 0;
+      padding: 0 $text-S;
+      font-size: $text-XS;
+      transition: 0.5s;
+      color: $theme-GRAY;
+      &.active {
+        color: $theme-BLACK;
+        font-weight: bold;
+        position: relative;
+        &::before {
+          content: "";
+          width: 50%;
+          height: 0.1rem;
+          background-color: $theme-RED;
+          border-radius: 5rem;
+          z-index: -1;
+          @include positionCenter;
+          top: auto;
+        }
+      }
     }
+    // .slider {
+    //   width: 1rem;
+    //   height: 0.1rem;
+    //   background-color: $theme-RED;
+    //   border-radius: 5rem;
+    //   position: absolute;
+    //   bottom: 0;
+    //   left: 0;
+    // }
+  }
+  .iconfont {
+    flex-shrink: 0;
+    margin-left: $text-XS;
   }
 }
 </style>

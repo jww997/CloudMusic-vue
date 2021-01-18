@@ -1,17 +1,23 @@
 <template>
-  <div class="container">
-    <navbar :title="`评论(${comments.length})`" fixed black></navbar>
+  <scroll :data="[comments]" :refreshDelay="1000">
+    <div class="container">
+      <navbar :title="`评论(${comments.length})`" fixed black></navbar>
 
-    <list :comments="comments"></list>
-  </div>
+      <list :comments="comments"></list>
+    </div>
+  </scroll>
 </template>
 
 <script>
+import Scroll from "@/components/scroll";
+
 import Navbar from "@/components/navbar";
 import List from "./components/list";
 export default {
   name: "comment",
   components: {
+    Scroll,
+
     Navbar,
     List,
   },

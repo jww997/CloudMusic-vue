@@ -1,19 +1,22 @@
 <template>
   <div class="container">
-    <div v-for="(item, index) in blocks" :key="index">
-      <banner
-        :ball="ball"
-        :list="item.extInfo.banners"
-        v-if="item.showType == 'BANNER'"
-      ></banner>
+    <scroll :data="blocks" :refreshDelay="1000">
+      <div class="blocks">
+        <div v-for="(item, index) in blocks" :key="index">
+          <banner
+            :ball="ball"
+            :list="item.extInfo.banners"
+            v-if="item.showType == 'BANNER'"
+          ></banner>
 
-      <whirligig
-        :list="item.creatives"
-        :uielement="item.uiElement"
-        v-if="item.showType == 'HOMEPAGE_SLIDE_PLAYLIST'"
-      ></whirligig>
-    </div>
-
+          <whirligig
+            :list="item.creatives"
+            :uielement="item.uiElement"
+            v-if="item.showType == 'HOMEPAGE_SLIDE_PLAYLIST'"
+          ></whirligig>
+        </div>
+      </div>
+    </scroll>
     <transition name="second">
       <router-view class="second"></router-view>
     </transition>
@@ -21,15 +24,17 @@
 </template>
 
 <script>
-import Tabbar from "@/components/tabbar";
-import Banner from "@/pages/discover/components/banner";
-import Whirligig from "@/pages/discover/components/whirligig";
-import Calendar from "@/pages/discover/components/calendar";
+import Scroll from "@/components/scroll";
+
+import Banner from "./components/banner";
+import Whirligig from "./components/whirligig";
+import Calendar from "./components/calendar";
 
 export default {
   name: "discover",
   components: {
-    Tabbar,
+    Scroll,
+
     Banner,
     Whirligig,
     Calendar,
@@ -59,26 +64,30 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .container {
-  z-index: $zIndex-M;
+  height: 100%;
+  .blocks {
+    z-index: $zIndex-M;
+  }
   .second {
+    // height: 100%;
     z-index: $zIndex-L;
+
     @include suspension;
-    padding-bottom: $safeDistance;
-  }
-  &.second-enter,
-  &.second-leave-to {
-    opacity: 0;
-    transform: translateY(1rem);
-  }
+    &.second-enter,
+    &.second-leave-to {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
 
-  &.second-enter-to,
-  &.second-leave {
-    opacity: 1;
-  }
+    &.second-enter-to,
+    &.second-leave {
+      opacity: 1;
+    }
 
-  &.second-enter-active,
-  &.second-leave-active {
-    transition: 0.5s;
+    &.second-enter-active,
+    &.second-leave-active {
+      transition: 0.5s;
+    }
   }
 }
 </style>

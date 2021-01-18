@@ -74,9 +74,8 @@ export default {
   }
 }
 .kid {
-  // @include suspension;
+  width: 100%;
   height: $safeDistance;
-  // top: auto;
   padding: 0 0.3rem;
   box-sizing: border-box;
   background-image: linear-gradient(#efefef, transparent);

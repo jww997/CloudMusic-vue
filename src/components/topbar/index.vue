@@ -1,5 +1,5 @@
 <template>
-  <div class="children">
+  <div class="kid">
     <div class="icon iconfont">&#xe70d;</div>
     <div class="frame">
       <van-icon name="search" />
@@ -18,7 +18,8 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-.children {
+.kid {
+  width: 100%;
   margin: 0.2rem 0;
   @include flexSpaceBetween;
   .icon,

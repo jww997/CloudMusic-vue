@@ -5,10 +5,12 @@
     </div>
 
     <div class="view">
+      <!-- <scroll :data="isShowBottomBar" :refreshDelay="500"> -->
       <keep-alive>
         <router-view v-if="$route.meta.isKeepAlive"></router-view>
       </keep-alive>
       <router-view v-if="!$route.meta.isKeepAlive"></router-view>
+      <!-- </scroll> -->
     </div>
     <div class="bottombar" v-if="isShowBottomBar">
       <bottombar></bottombar>
@@ -26,6 +28,7 @@ import Bottomlist from "@/components/bottomlist";
 import Bottombar from "@/components/bottombar";
 import Topbar from "@/components/topbar";
 import Tabbar from "@/components/tabbar";
+import Scroll from "@/components/scroll";
 import Music from "@/components/music";
 export default {
   name: "App",
@@ -34,6 +37,7 @@ export default {
     Bottombar,
     Topbar,
     Tabbar,
+    Scroll,
     Music,
   },
   computed: {
@@ -70,12 +74,12 @@ export default {
     console.log(`小程序版 https://github.com/jww997/CloudMusic-wx`);
     console.log(`VUE版 https://github.com/jww997/CloudMusic-vue`);
     console.log(formatDate(undefined, 2), formatTime()); // undefined还是有点用
-    console.log(`需求墙：1. 播放页加个分享功能`);
+    console.log(`需求墙：1. 播放页加个分享功能 2. 加个调音量`);
   },
   created: function () {
     const that = this;
     let top = ["discover"];
-    let bottom = ["player"];
+    let bottom = ["player", "mv"];
     that.$router.beforeEach((to, from, next) => {
       that.isShowTopBar = !!top.find((item) => {
         return item == to.name;
@@ -92,19 +96,24 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
+body,
 .app {
   height: 100vh;
+  overflow: hidden;
+}
+.app {
   display: flex;
   flex-direction: column;
   .view {
     flex-grow: 1;
     z-index: $zIndex-S;
-    overflow: scroll;
+    overflow: hidden;
   }
   .topbar,
   .bottombar {
     flex-shrink: 0;
     z-index: $zIndex-M;
+    display: flex;
   }
 }
 </style>

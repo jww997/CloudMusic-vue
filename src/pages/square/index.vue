@@ -1,5 +1,10 @@
 <template>
-  <scroll :data="[playlists]" :refreshDelay="1000">
+  <scroll
+    :data="playlists"
+    :refreshDelay="1000"
+    :pullup="true"
+    @scrollToEnd="scrollToEnd"
+  >
     <div class="container">
       <navbar :title="'歌单广场'" fixed black></navbar>
       <tags :list="tags" @toggleCat="toggleCat"></tags>
@@ -27,37 +32,59 @@ export default {
       playlists: [],
       tags: [],
       cat: "",
+      // total: -1,
     };
   },
   watch: {
     cat: function (val) {
       const that = this;
+      that._initData();
       that.getdata();
     },
   },
   methods: {
+    _initData() {
+      const that = this;
+      that.playlists = [];
+      that.total = -1;
+    },
     toggleCat: function (name) {
       const that = this;
       that.cat = name;
     },
+    scrollToEnd: function () {
+      const that = this;
+      // console.log(that.total == that.playlists.length);
+      // if (that.total == that.playlists.length) return false;
+      console.log("到底");
+      that.getdata();
+    },
     getdata: function () {
       const that = this;
+      if (that.total == that.playlists.length) return false;
       that.$api
         .getTopPlaylist({
-          limit: 50,
           cat: that.cat,
+          offset: that.playlists.length,
         })
         .then((res) => {
-          that.playlists = res.data.playlists;
+          let playlists = res.data.playlists;
+          that.total = res.data.total;
+          if (!that.playlists.length) {
+            that.playlists = playlists;
+          } else {
+            that.playlists = that.playlists.concat(playlists);
+          }
         });
     },
   },
   mounted: function () {
     const that = this;
+    that._initData();
+    that.getdata();
     that.$api.getPlaylistCatlist().then((res) => {
       that.tags = res.data.sub;
     });
-    that.getdata();
   },
 };
 </script>

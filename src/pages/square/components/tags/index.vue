@@ -86,7 +86,7 @@ export default {
   }
   .iconfont {
     flex-shrink: 0;
-    margin-left: $text-XS;
+    margin: 0 $text-XS;
   }
 }
 </style>

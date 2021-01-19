@@ -29,5 +29,6 @@ export default {
 
   playSequence: 0,        // 播放模式下标
   playMode: mode,         // 播放模式所有
+  playVolume: 60,         // 播放音量
 
 }

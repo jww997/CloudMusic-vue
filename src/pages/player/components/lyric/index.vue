@@ -1,35 +1,43 @@
 <template>
-  <div
-    class="children"
-    :style="{
-      transform: `translateY(-${lineHeight * lyric.curLine}rem)`,
-    }"
-  >
-    <!-- <div class="volume">
-      <van-slider
-        v-model="percentage"
-        :step="10"
-        button-size="10px"
-        active-color="#f00"
-        inactive-color="#494949"
-        @change="togglePercentage"
-      />
-    </div> -->
-    <div
-      :class="{
-        line: true,
-        active: index == lyric.curLine,
-      }"
-      :style="{
-        lineHeight: `${lineHeight}rem`,
-      }"
-      v-for="(item, index) in lyric.lines"
-      :key="index"
-      :data-time="item.time"
-    >
-      {{ item.txt }}
+  <div class="children">
+    <div class="volume">
+      <div class="iconfont">&#xe66d;</div>
+      <div class="slider">
+        <van-slider
+          v-model="playVolume"
+          :step="10"
+          button-size="10px"
+          active-color="#fff"
+          inactive-color="#494949"
+          @change="togglePlayVolume"
+        />
+      </div>
+      <div class="iconfont"></div>
     </div>
-    <div class="line active" v-if="!lyric.lines">暂无歌词</div>
+    <div class="wrap">
+      <div
+        class="lyric"
+        :style="{
+          transform: `translateY(-${lineHeight * lyric.curLine}rem)`,
+        }"
+      >
+        <div
+          :class="{
+            line: true,
+            active: index == lyric.curLine,
+          }"
+          :style="{
+            lineHeight: `${lineHeight}rem`,
+          }"
+          v-for="(item, index) in lyric.lines"
+          :key="index"
+          :data-time="item.time"
+        >
+          {{ item.txt }}
+        </div>
+        <div class="line active" v-if="!lyric.lines">暂无歌词</div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -49,7 +57,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["playState", "currentTime", "duration"]),
+    ...mapGetters(["playState", "playVolume", "currentTime", "duration"]),
   },
   watch: {
     playState: function (val) {
@@ -65,6 +73,15 @@ export default {
       } catch (error) {}
     },
   },
+  methods: {
+    togglePlayVolume: function (val) {
+      const that = this;
+      that.setPlayVolume(val);
+    },
+    ...mapMutations({
+      setPlayVolume: "SET_PLAY_VOLUME",
+    }),
+  },
 };
 </script>
 
@@ -73,24 +90,58 @@ export default {
 @import "~sass/varibles.scss";
 .children {
   height: 100%;
-  transition: 1s;
-  padding-top: 50%;
-  box-sizing: border-box;
-  transition: 1s;
-  // .volume {
-  //   // flex-grow: 1;
-  //   min-width: 6rem;
-  //   margin: 0.3rem;
-  // }
-  .line {
-    font-size: $text-S;
-    text-align: center;
-    transition: 1s;
-    color: #aaa;
-    &.active {
-      color: #fff;
+  display: flex;
+  flex-direction: column;
+  .volume {
+    flex-shrink: 0;
+    width: 100%;
+    margin: 0.3rem;
+    @include flexSpaceBetween;
+    .iconfont {
+      flex-shrink: 0;
+      width: 0.8rem;
+      height: 0.8rem;
       font-size: $text-M;
-      font-weight: bold;
+      color: $theme-WHITE;
+      @include flexCenter;
+    }
+    .slider {
+      flex-grow: 1;
+      margin: 0 0.3rem;
+    }
+  }
+  .wrap {
+    flex-grow: 1;
+    height: 100%;
+    margin-top: 0.3rem;
+    overflow: hidden;
+    mask-image: linear-gradient(
+      rgba(255, 255, 255, 0),
+      #fff 30%,
+      #fff 70%,
+      rgba(255, 255, 255, 0)
+    );
+    -webkit-mask-image: linear-gradient(
+      rgba(255, 255, 255, 0),
+      #fff 30%,
+      #fff 70%,
+      rgba(255, 255, 255, 0)
+    );
+    .lyric {
+      transition: 1s;
+      padding-top: 50%;
+      box-sizing: border-box;
+      .line {
+        font-size: $text-S;
+        text-align: center;
+        transition: 1s;
+        color: #aaa;
+        &.active {
+          color: #fff;
+          font-size: $text-M;
+          font-weight: bold;
+        }
+      }
     }
   }
 }

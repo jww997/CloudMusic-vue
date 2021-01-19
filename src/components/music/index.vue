@@ -26,6 +26,7 @@ export default {
       "playSequence",
       "playMode",
       "playDrag",
+      "playVolume",
 
       "currentSong",
       "currentTime",
@@ -47,6 +48,13 @@ export default {
       let text = that.playMode[val].text;
       console.log(`模式 => ${text}`);
       that.$vant.Toast({ type: "html", duration: 500, message: text });
+    },
+    playVolume: function (val) {
+      const that = this;
+      let audio = that.$refs.audio;
+      console.log(`当前音量 => ${val}`);
+      let volume = (audio.volume = val / 100);
+      val ? (audio.volume = volume) : "";
     },
 
     playId: function (val) {
@@ -75,6 +83,8 @@ export default {
       let audio = that.$refs.audio;
       that.setPlayState(true);
       audio.play();
+
+      that.setPlayVolume(audio.volume * 100);
     },
     ended: function () {
       console.log("结束 你的表演 ---------------------------------");
@@ -146,6 +156,7 @@ export default {
       setPlayIndex: "SET_PLAY_INDEX",
       setPlayId: "SET_PLAY_ID",
       setPlayDrag: "SET_PLAY_DRAG",
+      setPlayVolume: "SET_PLAY_VOLUME",
 
       setCurrentSong: "SET_CURRENTSONG",
       setCurrentTime: "SET_CURRENTTIME",

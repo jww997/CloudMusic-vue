@@ -31,6 +31,9 @@ export default {
   [types.SET_PLAY_LIST_TOAST](state, val) {
     state.playlistToast = val;
   },
+  [types.SET_PLAY_VOLUME](state, val) {
+    state.playVolume = val;
+  },
 
 
 

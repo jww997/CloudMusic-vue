@@ -12,6 +12,7 @@ export default {
     playlist: state => { return state.playlist },
     playSequence: state => { return state.playSequence },
     playMode: state => { return state.playMode },
+    playVolume: state => { return state.playVolume },
 
 
 

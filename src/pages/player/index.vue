@@ -1,7 +1,7 @@
 <template>
   <div class="container" :style="{ backgroundImage: 'url(' + picUrl + ')' }">
     <navbar :title="title" :subtitle="subtitle" :fixed="false"></navbar>
-    <div :class="{ song: true, lyric: isShowLyric }" @click="toggleShowLyric">
+    <div class="song" @click="toggleShowLyric">
       <lyric :lyric="lyric" v-show="isShowLyric"></lyric>
       <phonograph :picUrl="picUrl" v-show="!isShowLyric"></phonograph>
     </div>
@@ -152,21 +152,21 @@ export default {
     width: 100%;
     min-height: 5rem;
 
-    &.lyric {
-      overflow: hidden;
-      mask-image: linear-gradient(
-        rgba(255, 255, 255, 0),
-        #fff 40%,
-        #fff 60%,
-        rgba(255, 255, 255, 0)
-      );
-      -webkit-mask-image: linear-gradient(
-        rgba(255, 255, 255, 0),
-        #fff 40%,
-        #fff 60%,
-        rgba(255, 255, 255, 0)
-      );
-    }
+    // &.lyric {
+    // overflow: hidden;
+    // mask-image: linear-gradient(
+    //   rgba(255, 255, 255, 0),
+    //   #fff 40%,
+    //   #fff 60%,
+    //   rgba(255, 255, 255, 0)
+    // );
+    // -webkit-mask-image: linear-gradient(
+    //   rgba(255, 255, 255, 0),
+    //   #fff 40%,
+    //   #fff 60%,
+    //   rgba(255, 255, 255, 0)
+    // );
+    // }
 
     // &.fade-enter,
     // &.fade-leave-to {

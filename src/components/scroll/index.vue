@@ -155,13 +155,12 @@ export default {
     data() {
       const that = this;
       setTimeout(() => {
-        console.log("滚动刷新");
+        // console.log("滚动刷新");
         that.refresh();
       }, that.refreshDelay);
     },
     playId(val) {
       const that = this;
-      console.log(val);
       that.refresh();
     },
     $route: {

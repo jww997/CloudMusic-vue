@@ -74,7 +74,7 @@ export default {
     console.log(`小程序版 https://github.com/jww997/CloudMusic-wx`);
     console.log(`VUE版 https://github.com/jww997/CloudMusic-vue`);
     console.log(formatDate(undefined, 2), formatTime()); // undefined还是有点用
-    console.log(`需求墙：1. 播放页加个分享功能 2. 加个调音量`);
+    console.log(`需求墙：1. 播放页加个分享功能 2. 加个调音量(已完成)`);
   },
   created: function () {
     const that = this;

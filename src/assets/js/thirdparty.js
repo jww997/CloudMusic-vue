@@ -24,6 +24,7 @@ import {
   Popup, // 弹出层容器，用于展示弹窗、信息提示等内容，支持多个弹出层叠加展示。
   Icon, // 基于字体的图标集，可以通过 Icon 组件使用，也可以在其他组件中通过 icon 属性引用。
   Image as VanImage, // 增强版的 img 标签，提供多种图片填充模式，支持图片懒加载、加载中提示、加载失败提示。
+  Loading, // 加载图标，用于表示加载中的过渡状态。
 
   ImagePreview, // 图片放大预览，支持函数调用和组件调用两种方式。
   Dialog, // 弹出模态框，常用于消息提示、消息确认，或在当前页面内完成特定的交互操作。弹出框组件支持函数调用和组件调用两种方式。
@@ -43,6 +44,7 @@ Vue.use(Skeleton);
 Vue.use(Popup);
 Vue.use(Icon);
 Vue.use(VanImage);
+Vue.use(Loading);
 
 Vue.use(ImagePreview);
 Vue.use(Dialog);

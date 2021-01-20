@@ -9,6 +9,12 @@
       <navbar :title="'歌单广场'" fixed black></navbar>
       <tags :list="tags" @toggleCat="toggleCat"></tags>
       <list :list="playlists"></list>
+      <van-loading
+        class="loading"
+        size="24px"
+        v-if="isLoading && total != playlists.length"
+        >加载中...</van-loading
+      >
     </div>
   </scroll>
 </template>
@@ -32,7 +38,9 @@ export default {
       playlists: [],
       tags: [],
       cat: "",
-      // total: -1,
+      total: -1,
+
+      isLoading: false,
     };
   },
   watch: {
@@ -62,8 +70,10 @@ export default {
     getdata: function () {
       const that = this;
       if (that.total == that.playlists.length) return false;
+      that.isLoading = true;
       that.$api
         .getTopPlaylist({
+          limit: 18,
           cat: that.cat,
           offset: that.playlists.length,
         })
@@ -75,6 +85,7 @@ export default {
           } else {
             that.playlists = that.playlists.concat(playlists);
           }
+          that.isLoading = false;
         });
     },
   },
@@ -96,5 +107,9 @@ export default {
   @include suspension;
   box-sizing: border-box;
   padding-top: $safeDistance;
+  .loading {
+    padding: 0.5rem 0;
+    text-align: center;
+  }
 }
 </style>

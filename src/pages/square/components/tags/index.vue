@@ -45,6 +45,7 @@ export default {
 .children {
   @include flexSpaceBetween;
   padding: 0.3rem 0;
+  background-color: #fff;
   overflow: visible;
   .tags {
     flex-grow: 1;

@@ -2,8 +2,8 @@
   <div class="container" :style="{ backgroundImage: 'url(' + picUrl + ')' }">
     <navbar :title="title" :subtitle="subtitle" :fixed="false"></navbar>
     <div class="song" @click="toggleShowLyric">
-      <lyric :lyric="lyric" v-show="isShowLyric"></lyric>
-      <phonograph :picUrl="picUrl" v-show="!isShowLyric"></phonograph>
+      <lyric :lyric="lyric" v-if="isShowLyric"></lyric>
+      <phonograph :picUrl="picUrl" v-else></phonograph>
     </div>
     <handle :lyric="lyric"></handle>
   </div>
@@ -118,14 +118,14 @@ export default {
   @include flexSpaceBetween;
   flex-direction: column;
 
-  background: center no-repeat transparent;
+  background: center no-repeat #fff;
   background-size: 0;
   overflow: hidden;
-  // background-size: cover;
+  z-index: $zIndex-XXL;
+
+
   // -webkit-backdrop-filter: saturate(180%) blur(20px);
   // backdrop-filter: saturate(180%) blur(20px);
-  // position: relative;
-  // overflow: hidden;
 
   &::before,
   &::after {

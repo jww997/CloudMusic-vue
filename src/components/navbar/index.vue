@@ -20,9 +20,10 @@
         <div class="iconfont">&#xe690;</div> -->
       </div>
     </template>
+
     <template v-else>
       <div class="icon left">
-        <van-icon name="arrow-down" @click="back" />
+        <van-icon name="arrow-down" @click="hide" />
         <!-- <div class="iconfont" @click="back">&#xe614;</div> -->
       </div>
       <div class="center">
@@ -38,6 +39,7 @@
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   name: "navbar",
   props: {
@@ -64,6 +66,15 @@ export default {
       let router = that.$router;
       window.history.length > 1 ? router.go(-1) : router.push("/");
     },
+    hide() {
+      const that = this;
+      that.setPlayerShow(false);
+      that.setMvShow(false);
+    },
+    ...mapMutations({
+      setPlayerShow: "SET_PLAYER_SHOW",
+      setMvShow: "SET_MV_SHOW",
+    }),
   },
 };
 </script>

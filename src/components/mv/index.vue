@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <navbar :title="'视频'" fixed></navbar>
+    <navbar :title="'视频'" :fixed="false"></navbar>
     <video
       class="video"
       ref="video"
@@ -34,12 +34,13 @@ export default {
     };
   },
   computed: {
-    ...mapState(["playState"]),
+    ...mapState(["playState", "mvId"]),
   },
   methods: {
     getdata: function () {
       const that = this;
-      let id = that.$route.query.id;
+      // let id = that.$route.query.id;
+      let id = that.mvId;
       console.log(`mv = ${id}`);
       that.$api
         .getMvDetail({ mvid: id })
@@ -80,10 +81,12 @@ export default {
 .container {
   height: 100vh;
   @include suspension;
-  position: relative;
-  padding-top: $safeDistance;
+  background: center no-repeat #000;
+  background-size: 0;
+  overflow: hidden;
+  z-index: $zIndex-XXL;
+
   box-sizing: border-box;
-  background-color: #000;
   color: #fff;
   .video {
     margin-top: 1.5rem;

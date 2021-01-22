@@ -1,6 +1,12 @@
 <template>
-  <div class="kid" v-if="image">
-    <img class="image" :src="image" />
+  <div :class="{ kid: true, active: image }">
+    <van-image
+      class="image"
+      fit="contain"
+      :width="size"
+      :height="size"
+      :src="image"
+    />
     <span class="text" v-if="name">{{ name }}</span>
     <div class="count" v-if="count">
       <span class="iconfont">&#xe656;</span>
@@ -28,6 +34,11 @@ export default {
       default: 0,
     },
   },
+  data: function () {
+    return {
+      size: "100%",
+    };
+  },
   methods: {
     formatUnit,
   },
@@ -43,11 +54,9 @@ export default {
   display: flex;
   flex-direction: column;
   .image {
-    width: 100%;
-    // width: 2rem;
-    // height: 2rem;
     border-radius: 0.2rem;
     background-color: $theme-LIGHITGRAY;
+    overflow: hidden;
   }
   .text {
     @include omit;
@@ -75,7 +84,7 @@ export default {
       font-size: $text-XS;
     }
   }
-  &:after {
+  &.active:after {
     content: "";
     width: 90%;
     padding-bottom: 90%;

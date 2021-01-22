@@ -12,11 +12,18 @@
       <router-view v-if="!$route.meta.isKeepAlive"></router-view>
       <!-- </scroll> -->
     </div>
-    <div class="bottombar" v-if="isShowBottomBar">
-      <bottombar></bottombar>
-    </div>
+
+    <transition name="bottombar">
+      <bottombar class="bottombar" v-if="isShowBottomBar"></bottombar>
+    </transition>
+
+    <transition name="drawer">
+      <player class="drawer" v-if="playerShow"></player>
+      <mv class="drawer" v-if="mvShow"></mv>
+    </transition>
 
     <bottomlist :playlistToast="playlistToast"></bottomlist>
+
     <music></music>
   </div>
 </template>
@@ -30,6 +37,8 @@ import Topbar from "@/components/topbar";
 import Tabbar from "@/components/tabbar";
 import Scroll from "@/components/scroll";
 import Music from "@/components/music";
+import Player from "@/components/player";
+import Mv from "@/components/mv";
 export default {
   name: "App",
   components: {
@@ -39,6 +48,8 @@ export default {
     Tabbar,
     Scroll,
     Music,
+    Player,
+    Mv,
   },
   computed: {
     ...mapGetters([
@@ -55,9 +66,12 @@ export default {
       "playState",
       "playDrag",
       "playlistToast",
+      "playerShow",
 
       "playSequence",
       "playMode",
+
+      "mvShow",
     ]),
   },
   data: function () {
@@ -114,6 +128,40 @@ body,
     flex-shrink: 0;
     z-index: $zIndex-M;
     display: flex;
+  }
+
+  .bottombar {
+    &.bottombar-enter,
+    &.bottombar-leave-to {
+      color: #f00;
+    }
+
+    &.bottombar-enter-to,
+    &.bottombar-leave {
+      color: #f00;
+    }
+
+    &.bottombar-enter-active,
+    &.bottombar-leave-active {
+      transition: 0.5s;
+    }
+  }
+
+  .drawer {
+    &.drawer-enter,
+    &.drawer-leave-to {
+      top: 100%;
+    }
+
+    &.drawer-enter-to,
+    &.drawer-leave {
+      top: 0;
+    }
+
+    &.drawer-enter-active,
+    &.drawer-leave-active {
+      transition: 0.5s;
+    }
   }
 }
 </style>

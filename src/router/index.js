@@ -30,6 +30,14 @@ export default new Router({
       },
       children: [
         {
+          path: 'playlist/:id',
+          name: 'playlist',
+          component: _component("playlist"),
+          meta: {
+            isKeepAlive: true,
+          }
+        },
+        {
           path: 'dailyspecial',
           name: 'dailyspecial',
           component: _component("dailyspecial"),
@@ -43,15 +51,16 @@ export default new Router({
           component: _component("square"),
           meta: {
             isKeepAlive: true,
-          }
-        },
-        {
-          path: 'playlist/:id',
-          name: 'playlist',
-          component: _component("playlist"),
-          meta: {
-            isKeepAlive: true,
-          }
+          },
+          children: [
+            {
+              path: 'playlist/:id',
+              name: '/playlist',
+              component: _component("playlist"),
+              meta: {
+                isKeepAlive: true,
+              }
+            }],
         },
 
       ]
@@ -64,22 +73,15 @@ export default new Router({
         isKeepAlive: false,
       }
     },
-    {
-      path: '/player',
-      name: 'player',
-      component: _component("player"),
-      meta: {
-        isKeepAlive: false,
-      }
-    },
-    {
-      path: '/mv',
-      name: 'mv',
-      component: _component("mv"),
-      meta: {
-        isKeepAlive: false,
-      }
-    },
+
+    // {
+    //   path: '/mv',
+    //   name: 'mv',
+    //   component: _component("mv"),
+    //   meta: {
+    //     isKeepAlive: false,
+    //   }
+    // },
 
 
     {
@@ -87,6 +89,14 @@ export default new Router({
       name: 'mine',
       component: _component("mine"),
     },
+    // {
+    //   path: '/player',
+    //   name: 'player',
+    //   component: _component("player"),
+    //   meta: {
+    //     isKeepAlive: false,
+    //   }
+    // },
   ],
   scrollBehavior(to, from, savedPosition) {
     return { x: 0, y: 0 }

@@ -1,21 +1,23 @@
 <template>
   <div class="children">
     <div class="line guide">
-      <div class="playall">
+      <div class="playall" @click="togglePlayer(0)">
         <span class="iconfont front">&#xe674;</span>
         <span class="text">播放全部</span>
         <span class="total">({{ total ? total : 0 }})</span>
       </div>
-      <div class="iconfont">&#xe65b;</div>
-      <div class="iconfont">&#xe65a;</div>
+      <van-icon size="25" name="certificate" />
+      <!-- <div class="iconfont">&#xe65b;</div> -->
+      <!-- <div class="iconfont">&#xe65a;</div> -->
     </div>
     <div class="list">
       <div
         class="line song"
-        @click="toPages({ path: '/player', query: { id: item.id } }, index)"
+        @click="togglePlayer(index)"
         v-for="(item, index) in obj.tracks"
         :key="item.id"
       >
+        <!-- @click="toPages({ path: '/player', query: { id: item.id } }, index)" -->
         <div
           class="front iconfont index active"
           v-if="playState && item.id == currentSong.id"
@@ -36,12 +38,14 @@
         </div>
         <div
           class="iconfont mv"
-          @click.stop="toPages({ path: '/mv', query: { id: item.mv } })"
+          @click.stop="toggleMv(item.mv)"
           v-if="item.mv != 0"
         >
+          <!-- @click.stop="toPages({ path: '/mv', query: { id: item.mv } })" -->
           &#xe606;
         </div>
-        <div class="iconfont more">&#xe690;</div>
+        <van-icon size="25" name="ellipsis" class="more" />
+        <!-- <div class="iconfont more">&#xe690;</div> -->
       </div>
     </div>
     <div class="line collect">
@@ -83,6 +87,24 @@ export default {
   },
   methods: {
     formatArtists,
+    togglePlayer: function (index) {
+      const that = this;
+      that.setPlayerShow(true);
+      if (typeof index == "number") {
+        let list = that.obj.tracks;
+        let current = list[index];
+        that.setPlayId(current.id);
+        that.setPlayIndex(index);
+        that.setPlayList(list);
+        that.setCurrentSong(current);
+      }
+    },
+    toggleMv: function (id) {
+      const that = this;
+      console.log(id);
+      that.setMvId(id);
+      that.setMvShow(true);
+    },
     toPages: function (to, index = "") {
       const that = this;
       if (typeof index == "number") {
@@ -100,7 +122,11 @@ export default {
       setPlayIndex: "SET_PLAY_INDEX",
       setPlayId: "SET_PLAY_ID",
       setPlayState: "SET_PLAY_STATE",
+      setPlayerShow: "SET_PLAYER_SHOW",
       setCurrentSong: "SET_CURRENTSONG",
+
+      setMvId: "SET_MV_ID",
+      setMvShow: "SET_MV_SHOW",
     }),
   },
 };
@@ -187,6 +213,9 @@ export default {
         color: #666;
         margin-left: 0.3rem;
         font-size: $text-M;
+      }
+      .more {
+        transform: rotate(90deg);
       }
     }
   }

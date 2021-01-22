@@ -1,22 +1,22 @@
 <template>
   <div class="container">
-    <scroll :data="blocks" :refreshDelay="1000">
-      <div class="blocks">
-        <div v-for="(item, index) in blocks" :key="index">
-          <banner
-            :ball="ball"
-            :list="item.extInfo.banners"
-            v-if="item.showType == 'BANNER'"
-          ></banner>
+    <!-- <scroll :data="blocks" :refreshDelay="1000"> -->
+    <div class="blocks">
+      <div v-for="(item, index) in blocks" :key="index">
+        <banner
+          :ball="ball"
+          :list="item.extInfo.banners"
+          v-if="item.showType == 'BANNER'"
+        ></banner>
 
-          <whirligig
-            :list="item.creatives"
-            :uielement="item.uiElement"
-            v-if="item.showType == 'HOMEPAGE_SLIDE_PLAYLIST'"
-          ></whirligig>
-        </div>
+        <whirligig
+          :list="item.creatives"
+          :uielement="item.uiElement"
+          v-if="item.showType == 'HOMEPAGE_SLIDE_PLAYLIST'"
+        ></whirligig>
       </div>
-    </scroll>
+    </div>
+    <!-- </scroll> -->
     <transition name="second">
       <router-view class="second"></router-view>
     </transition>
@@ -65,14 +65,14 @@ export default {
 @import "~sass/varibles.scss";
 .container {
   height: 100%;
+  overflow: scroll;
   .blocks {
     z-index: $zIndex-M;
   }
   .second {
-    // height: 100%;
     z-index: $zIndex-L;
-
     @include suspension;
+
     &.second-enter,
     &.second-leave-to {
       opacity: 0;

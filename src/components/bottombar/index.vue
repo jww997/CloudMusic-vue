@@ -1,9 +1,6 @@
 <template>
-  <div
-    class="kid"
-    v-if="currentSong.id"
-    @click="toPages({ path: '/player', query: { id: currentSong.id } })"
-  >
+  <div class="kid" v-if="currentSong.id" @click="togglePlayer">
+    <!-- @click="toPages({ path: '/player', query: { id: currentSong.id } })" -->
     <div
       :class="{
         al: true,
@@ -54,9 +51,14 @@ export default {
       const that = this;
       that.setPlaylistToast(true);
     },
+    togglePlayer: function () {
+      const that = this;
+      that.setPlayerShow(true);
+    },
     ...mapMutations({
       setPlayState: "SET_PLAY_STATE",
       setPlaylistToast: "SET_PLAY_LIST_TOAST",
+      setPlayerShow: "SET_PLAYER_SHOW",
     }),
   },
 };

@@ -1,6 +1,13 @@
 <template>
   <div class="wrapper" ref="wrapper">
     <slot></slot>
+    <!-- <van-loading
+      class="loading"
+      size="24px"
+      v-if="isLoading && total != data.length"
+    >
+      加载中...
+    </van-loading> -->
   </div>
 </template>
 

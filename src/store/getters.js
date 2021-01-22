@@ -13,18 +13,18 @@ export default {
     playSequence: state => { return state.playSequence },
     playMode: state => { return state.playMode },
     playVolume: state => { return state.playVolume },
-
-
-
-
+    playerShow: state => { return state.playerShow },
+    
+    
     playDrag: state => { return state.playDrag },
     playlistToast: state => { return state.playlistToast },
-
-
-
-
+    
+    
     currentSong: state => { return state.currentSong },
     currentTime: state => { return state.currentTime },
     duration: state => { return state.duration },
+    
 
+    mvId: state => { return state.mvId },
+    mvShow: state => { return state.mvShow },
 }

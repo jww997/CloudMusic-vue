@@ -1,7 +1,8 @@
 <template>
   <div class="children">
     <div class="volume">
-      <div class="iconfont">&#xe66d;</div>
+      <!-- <div class="iconfont">&#xe66d;</div> -->
+      <van-icon size="22" color="#fff" name="volume-o" />
       <div class="slider">
         <van-slider
           v-model="playVolume"

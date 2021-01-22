@@ -9,9 +9,9 @@
       > -->
       <div
         class="item"
-        v-for="item in list"
-        :key="item.id"
-        @click="toPages({ name: 'playlist', params: { id: item.id } })"
+        v-for="(item, index) in list"
+        :key="index"
+        @click="toPages({ name: '/playlist', params: { id: item.id } })"
       >
         <cover
           class="cover"

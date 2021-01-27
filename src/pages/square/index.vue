@@ -109,8 +109,9 @@ export default {
 @import "~sass/varibles.scss";
 .container {
   @include suspension;
-  box-sizing: border-box;
   padding-top: $safeDistance;
+  box-sizing: border-box;
+  overflow: hidden;
   .wrapper {
     overflow: hidden;
   }

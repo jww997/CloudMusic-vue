@@ -101,6 +101,7 @@ export default {
     margin: -0.8rem 0.2rem 0 0;
     background-size: 100% 100%;
     position: relative;
+    overflow: visible;
     animation-duration: 20s;
     animation-name: turn;
     animation-timing-function: linear;

@@ -10,7 +10,10 @@
       autoplay
       loop
       v-if="info.cover"
-    ></video>
+      @timeupdate="timeupdate"
+    >
+      视频播放失败，请更换浏览器
+    </video>
     <info :info="info" :count="count"></info>
   </div>
 </template>
@@ -34,13 +37,48 @@ export default {
     };
   },
   computed: {
-    ...mapState(["playState", "mvId"]),
+    ...mapState(["playState", "mvId", "mv"]),
+  },
+  watch: {
+    mv: {
+      handler(newVal, oldVal) {
+        const that = this;
+        let video = that.$refs.video;
+        let mv = that.mv;
+        if (!newVal.isDraging) return false;
+        video.currentTime = newVal.currentTime;
+        mv.isDraging = false;
+        that.setMv(mv);
+      },
+      deep: true,
+    },
   },
   methods: {
+    // timeupdate: function () {
+    //   const that = this;
+    //   if (!that.playState || that.playDrag) return false;
+    //   let audio = that.$refs.audio;
+    //   that.currentTime != audio.currentTime &&
+    //     that.setCurrentTime(audio.currentTime);
+    //   that.duration != audio.duration && that.setDuration(audio.duration);
+    // },
+
+    timeupdate: function () {
+      const that = this;
+      let video = that.$refs.video;
+
+      console.log(1);
+
+      let mv = that.mv;
+      that.$set(mv, "currentTime", video.currentTime);
+      that.$set(mv, "duration", video.duration);
+      that.setMv(mv);
+    },
     getdata: function () {
       const that = this;
       // let id = that.$route.query.id;
-      let id = that.mvId;
+      // let id = that.mvId;
+      let id = that.mv.id;
       console.log(`mv = ${id}`);
       that.$api
         .getMvDetail({ mvid: id })
@@ -58,6 +96,8 @@ export default {
     },
     ...mapMutations({
       setPlayState: "SET_PLAY_STATE",
+
+      setMv: "SET_MV",
     }),
   },
   mounted: function () {

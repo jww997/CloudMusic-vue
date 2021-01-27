@@ -27,4 +27,10 @@ export default {
 
     mvId: state => { return state.mvId },
     mvShow: state => { return state.mvShow },
+
+
+
+
+
+    mv: state => { return state.mv },
 }

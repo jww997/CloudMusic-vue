@@ -60,4 +60,12 @@ export default {
     state.mvShow = val;
   },
 
+
+
+
+
+  [types.SET_MV](state, val) {
+    state.mv = val;
+  },
+
 }

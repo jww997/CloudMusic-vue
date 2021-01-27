@@ -83,7 +83,7 @@ export default {
       let tracks = that.obj.tracks;
       return tracks && tracks.length;
     },
-    ...mapGetters(["playId", "playState", "playIndex", "currentSong"]),
+    ...mapGetters(["playId", "playState", "playIndex", "currentSong", "mv"]),
   },
   methods: {
     formatArtists,
@@ -102,7 +102,10 @@ export default {
     toggleMv: function (id) {
       const that = this;
       console.log(id);
-      that.setMvId(id);
+      // that.setMvId(id);
+      let mv = that.mv;
+      mv.id = id;
+      that.setMv(mv);
       that.setMvShow(true);
     },
     toPages: function (to, index = "") {
@@ -127,6 +130,10 @@ export default {
 
       setMvId: "SET_MV_ID",
       setMvShow: "SET_MV_SHOW",
+
+
+
+      setMv: "SET_MV",
     }),
   },
 };

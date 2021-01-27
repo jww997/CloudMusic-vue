@@ -22,4 +22,11 @@ export default {
 
   SET_MV_ID: "SET_MV_ID",
   SET_MV_SHOW: "SET_MV_SHOW",
+
+
+
+
+
+
+  SET_MV: "SET_MV",
 }

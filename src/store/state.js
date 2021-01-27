@@ -32,6 +32,21 @@ export default {
   playMode: mode,         // 播放模式所有
   playVolume: 60,         // 播放音量
 
+
+
+
   mvId: -1,               // 视频标识号
   mvShow: false,          // 视频显示隐藏
+
+
+
+
+
+
+  mv: {
+    isDraging: false,   // 拖拽
+    currentTime: "",    // 当前时间
+    duration: "",       // 总时间
+    id: -1,             // 视频标识号
+  }
 }

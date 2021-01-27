@@ -42,13 +42,13 @@
     </div>
     <div class="strip">
       <van-slider
+        v-model="percentage"
         :step="10"
         button-size="10px"
         active-color="#f00"
         inactive-color="#494949"
+        @change="togglePercentage"
       />
-      <!-- v-model="percentage"
-        @change="togglePercentage" -->
     </div>
     <div class="bottom">
       <div
@@ -68,6 +68,7 @@
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { formatArtists } from "@/assets/js/filter.js";
 export default {
   name: "info",
@@ -79,15 +80,40 @@ export default {
     return {
       // isLike: true,
       isShowDesc: false,
+
+      percentage: 0,
     };
+  },
+  computed: {
+    ...mapState(["mv"]),
+  },
+  watch: {
+    mv: {
+      handler(newVal, oldVal) {
+        const that = this;
+        that.percentage =
+          Number.parseFloat(newVal.currentTime / newVal.duration) * 100;
+      },
+      deep: true,
+    },
   },
   methods: {
     formatArtists,
+    togglePercentage: function (val) {
+      const that = this;
+      let mv = that.mv;
+      mv.currentTime = mv.duration * (val / 100); // 根据选中百分比修改进度条
+      mv.isDraging = true;
+      that.setMv(mv);
+    },
     toggleDesc: function () {
       const that = this;
       if (!that.info.desc) return false;
       that.isShowDesc = !that.isShowDesc;
     },
+    ...mapMutations({
+      setMv: "SET_MV",
+    }),
   },
 };
 </script>

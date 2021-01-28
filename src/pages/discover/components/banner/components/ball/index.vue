@@ -48,7 +48,7 @@ export default {
           name = "square";
           break;
         case -3:
-          name = "";
+          name = "toplist";
           break;
         case -6:
           name = "";

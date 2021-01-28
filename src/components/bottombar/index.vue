@@ -102,6 +102,7 @@ export default {
     background-size: 100% 100%;
     position: relative;
     overflow: visible;
+    @include flexCenter;
     animation-duration: 20s;
     animation-name: turn;
     animation-timing-function: linear;

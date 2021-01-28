@@ -1,4 +1,6 @@
-const mode = [{
+
+
+const list = [{
   icon: "&#xe600;",
   text: "列表循环",
 }, {
@@ -27,7 +29,7 @@ export default {
 
 
   playSequence: 0,        // 播放模式下标
-  playMode: mode,         // 播放模式所有
+  playMode: list,         // 播放模式所有
   playVolume: 60,         // 播放音量
 
 
@@ -37,15 +39,20 @@ export default {
 
 
 
+  // 面向对象 方便管理
+  // player: {
+  //   id: -1,             // 标识
+  //   isShow: false,      // 显示
+  //   isPlaying: false,   // 状态
+  //   isDraging: false,   // 拖拽
+  //   currentTime: "",    // 当前时间
+  //   duration: "",       // 总时间
 
-  player: {
-    id: -1,             // 标识
-    isShow: false,      // 显示
-    isPlaying: false,   // 状态
-    isDraging: false,   // 拖拽
-    currentTime: "",    // 当前时间
-    duration: "",       // 总时间
-  },
+  //   // volume: 50,         // 音量
+
+  //   // modeIndex: -1,      // 模式下标
+  //   // modeList: list,     // 模式列表
+  // },
   mv: {
     id: -1,             // 标识
     isShow: false,      // 显示

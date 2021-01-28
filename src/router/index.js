@@ -29,14 +29,7 @@ export default new Router({
         isKeepAlive: true,
       },
       children: [
-        {
-          path: 'playlist/:id',
-          name: 'playlist',
-          component: _component("playlist"),
-          meta: {
-            isKeepAlive: true,
-          }
-        },
+
         {
           path: 'dailyspecial',
           name: 'dailyspecial',
@@ -45,6 +38,7 @@ export default new Router({
             isKeepAlive: true,
           }
         },
+
         {
           path: 'square',
           name: 'square',
@@ -55,16 +49,42 @@ export default new Router({
           children: [
             {
               path: 'playlist/:id',
-              name: '/playlist',
+              name: 'square/playlist',
               component: _component("playlist"),
               meta: {
                 isKeepAlive: true,
               }
             }],
+        }, {
+          path: 'toplist',
+          name: 'toplist',
+          component: _component("toplist"),
+          meta: {
+            isKeepAlive: true,
+          },
+          children: [
+            {
+              path: 'playlist/:id',
+              name: 'toplist/playlist',
+              component: _component("playlist"),
+              meta: {
+                isKeepAlive: true,
+              }
+            }],
+        }, {
+          path: 'playlist/:id',
+          name: 'playlist',
+          component: _component("playlist"),
+          meta: {
+            isKeepAlive: true,
+          }
         },
 
       ]
     },
+
+
+
     {
       path: '/comment/:id',
       name: 'comment',
@@ -74,29 +94,15 @@ export default new Router({
       }
     },
 
-    // {
-    //   path: '/mv',
-    //   name: 'mv',
-    //   component: _component("mv"),
-    //   meta: {
-    //     isKeepAlive: false,
-    //   }
-    // },
-
 
     {
       path: '/mine',
       name: 'mine',
       component: _component("mine"),
     },
-    // {
-    //   path: '/player',
-    //   name: 'player',
-    //   component: _component("player"),
-    //   meta: {
-    //     isKeepAlive: false,
-    //   }
-    // },
+
+
+
   ],
   scrollBehavior(to, from, savedPosition) {
     return { x: 0, y: 0 }

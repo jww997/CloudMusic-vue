@@ -17,8 +17,8 @@
       > -->
     </scroll>
 
-    <transition name="second">
-      <router-view class="second"></router-view>
+    <transition name="thirdly">
+      <router-view class="thirdly"></router-view>
     </transition>
   </div>
 </template>
@@ -121,23 +121,23 @@ export default {
     text-align: center;
   }
 
-  .second {
+  .thirdly {
     z-index: $zIndex-L;
     @include suspension;
 
-    &.second-enter,
-    &.second-leave-to {
+    &.thirdly-enter,
+    &.thirdly-leave-to {
       opacity: 0;
       transform: translateY(1rem);
     }
 
-    &.second-enter-to,
-    &.second-leave {
+    &.thirdly-enter-to,
+    &.thirdly-leave {
       opacity: 1;
     }
 
-    &.second-enter-active,
-    &.second-leave-active {
+    &.thirdly-enter-active,
+    &.thirdly-leave-active {
       transition: 0.5s;
     }
   }

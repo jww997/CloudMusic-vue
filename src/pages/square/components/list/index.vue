@@ -11,7 +11,7 @@
         class="item"
         v-for="(item, index) in list"
         :key="index"
-        @click="toPages({ name: '/playlist', params: { id: item.id } })"
+        @click="toPages({ name: 'square/playlist', params: { id: item.id } })"
       >
         <cover
           class="cover"

@@ -10,6 +10,7 @@
         ref="video"
         :src="url"
         :poster="info.cover"
+        :controls="false"
         loop
         v-if="info.cover"
         @timeupdate="timeupdate"
@@ -135,9 +136,12 @@ export default {
   box-sizing: border-box;
   color: #fff;
   .interaction {
-    margin-top: 1.5rem;
+    max-height: 40%;
+    margin-top: 1rem;
     position: relative;
-    background-color: $theme-BLACK;
+    background-color: #101010;
+    transition: $time-M;
+    overflow: hidden;
     display: flex;
     .video {
       width: 100%;
@@ -154,6 +158,7 @@ export default {
       opacity: $opacity-M;
     }
     &.active {
+      background-color: $theme-BLACK;
       .video {
         opacity: $opacity-S;
       }

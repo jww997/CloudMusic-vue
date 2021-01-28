@@ -522,7 +522,33 @@ export default {
 
 
 
-
+  getToplist: parameter => { // 所有榜单
+    return request("toplist", parameter);
+    /**
+     * 说明:调用此接口,可获取所有榜单接口地址:/toplist
+     */
+  },
+  getTopList: parameter => { // 排行榜详情
+    return request("top/list", parameter);
+    /**
+     * @param id 榜单id,通过所有榜单接口获取
+     * 说明:请使用歌单详情接口,传入排行榜id获取排行榜详情数据(排行榜也是歌单的一种)
+     * 说明:调用此接口,传入榜单id,可获取不同排行榜数据(v3.34.0之后不再支持idx参数)
+     */
+  },
+  getToplistDetail: parameter => { // 所有榜单内容摘要
+    return request("toplist/detail", parameter);
+    /**
+     * 说明:调用此接口,可获取所有榜单内容摘要
+     */
+  },
+  getToplistArtist: parameter => { // 歌手榜
+    return request("toplist/artist", parameter);
+    /**
+     * @param type (选)地区 1:华语 2:欧美 3:韩国 4:日本
+     * 说明:调用此接口,可获取排行榜中的歌手榜
+     */
+  },
 
 
 

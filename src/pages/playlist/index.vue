@@ -1,16 +1,21 @@
 <template>
-  <scroll :data="[playlist]" :refreshDelay="1000">
-    <div class="container">
-      <navbar :title="'歌单'" fixed></navbar>
-      <div @click="toggleCapplus">
-        <cap :obj="playlist"></cap>
-      </div>
-      <list :obj="playlist"></list>
-      <div @click="toggleCapplus" v-if="isShowCapplus">
-        <capplus :obj="playlist"></capplus>
-      </div>
+  <!-- <scroll :data="[playlist]" :refreshDelay="1000"> -->
+  <div class="playlist" ref="playlist">
+    <navbar
+      :title="'歌单'"
+      fixed
+      :black="!isTop"
+      :backgroundColor="!isTop ? '#fff' : ''"
+    ></navbar>
+    <div @click="toggleCapplus">
+      <cap :obj="playlist"></cap>
     </div>
-  </scroll>
+    <list :obj="playlist"></list>
+    <div @click="toggleCapplus" v-if="isShowCapplus">
+      <capplus :obj="playlist"></capplus>
+    </div>
+  </div>
+  <!-- </scroll> -->
 </template>
 
 <script>
@@ -37,12 +42,19 @@ export default {
       count: 0,
       data: [],
       // busy: false,
+
+      isTop: true,
     };
   },
   methods: {
     toggleCapplus: function () {
       const that = this;
       that.isShowCapplus = !that.isShowCapplus;
+    },
+    handleScroll: function (event) {
+      const that = this;
+      let scrollTop = event.target.scrollTop;
+      that.isTop = scrollTop == 0 ? true : false;
     },
     getdata: function () {
       const that = this;
@@ -51,6 +63,8 @@ export default {
       console.log(`id = ${id}`);
       that.$api.getPlaylistDetail({ id }).then((res) => {
         that.playlist = res.data.playlist;
+
+        that.$refs.playlist.addEventListener("scroll", that.handleScroll);
       });
     },
   },
@@ -64,9 +78,13 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-.container {
+.playlist {
+  height: 100%;
   @include suspension;
   padding-bottom: $safeDistance;
+  box-sizing: border-box;
+  overflow: scroll;
+
   // .capplus {
   //   transition: 0.5s;
   //   &.hide {

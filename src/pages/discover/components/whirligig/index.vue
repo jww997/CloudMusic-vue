@@ -95,6 +95,7 @@ export default {
     .swiper-item {
       margin-top: 0.3rem;
       padding-left: 0.2rem;
+      // padding: 0 0.2rem;
       box-sizing: border-box;
     }
   }

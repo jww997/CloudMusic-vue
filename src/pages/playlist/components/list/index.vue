@@ -152,6 +152,10 @@ export default {
     }
   }
   .guide {
+    position: sticky;
+    top: $safeDistance;
+    background-color: $theme-WHITE;
+    z-index: $zIndex-L;
     .playall {
       flex-grow: 1;
       @include flexCenter;

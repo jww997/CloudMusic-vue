@@ -7,7 +7,7 @@
       <div class="strip">
         <van-slider
           v-model="percentage"
-          :step="10"
+          :step="1"
           button-size="10px"
           active-color="#f00"
           inactive-color="#494949"

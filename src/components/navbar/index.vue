@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ kid: true, fixed, black }">
+  <div :class="{ kid: true, fixed, black }" :style="{backgroundColor}">
     <!-- <van-nav-bar
       left-arrow
       :title="title"
@@ -59,6 +59,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    backgroundColor: {
+      type: String,
+      default: "transparent",
+    },
   },
   computed: {
     ...mapState(["mv"]),
@@ -99,6 +103,8 @@ export default {
   z-index: $zIndex-M;
   @include flexSpaceBetween;
   transition: 0.5s;
+  // text-shadow: 0 0 20px $theme-BLACK;
+
   // .iconfont,
   >>> .van-icon {
     font-size: $text-XL;

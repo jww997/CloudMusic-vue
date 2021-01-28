@@ -50,7 +50,7 @@
         @change="togglePercentage"
       />
     </div>
-    <div class="bottom">
+    <div class="bottom" @click="togglePlayer">
       <div
         :class="{
           iconfont: true,
@@ -111,7 +111,28 @@ export default {
       if (!that.info.desc) return false;
       that.isShowDesc = !that.isShowDesc;
     },
+    togglePlayer: function () {
+      const that = this;
+      let info = that.info;
+      return false;
+      that.setPlayerShow(true);
+      if (typeof index == "number") {
+        let list = [info];
+        let current = info;
+        that.setPlayId(info.id);
+        that.setPlayIndex(0);
+        that.setPlayList(list);
+        that.setCurrentSong(current);
+      }
+    },
     ...mapMutations({
+      setPlayList: "SET_PLAY_LIST",
+      setPlayIndex: "SET_PLAY_INDEX",
+      setPlayId: "SET_PLAY_ID",
+      setPlayState: "SET_PLAY_STATE",
+      setPlayerShow: "SET_PLAYER_SHOW",
+      setCurrentSong: "SET_CURRENTSONG",
+
       setMv: "SET_MV",
     }),
   },
@@ -177,7 +198,7 @@ export default {
           font-size: $text-M;
         }
         .text {
-          font-size: $text-XS;
+          font-size: $text-XXS;
           margin-top: 0.2rem;
         }
       }

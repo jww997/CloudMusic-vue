@@ -8,7 +8,7 @@
             >{{ item.name }} /
           </span> -->
         </div>
-        <div class="name" @click="toggleDesc">
+        <div class="name" @click.stop="toggleDesc">
           <span>{{ info.name }}</span>
           <span
             :class="{
@@ -43,7 +43,7 @@
     <div class="strip">
       <van-slider
         v-model="percentage"
-        :step="10"
+        :step="1"
         button-size="10px"
         active-color="#f00"
         inactive-color="#494949"
@@ -128,6 +128,7 @@ export default {
   .top {
     @include flexSpaceBetween;
     align-items: flex-end;
+    opacity: $opacity-L;
     .left {
       padding: 0.3rem 0.5rem;
       line-height: $text-M;
@@ -173,7 +174,7 @@ export default {
         flex-direction: column;
         padding: 0.3rem;
         .iconfont {
-          font-size: $text-XL;
+          font-size: $text-M;
         }
         .text {
           font-size: $text-XS;

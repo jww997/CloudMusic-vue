@@ -53,13 +53,6 @@ export default {
     state.duration = val;
   },
 
-  [types.SET_MV_ID](state, val) {
-    state.mvId = val;
-  },
-  [types.SET_MV_SHOW](state, val) {
-    state.mvShow = val;
-  },
-
 
 
 

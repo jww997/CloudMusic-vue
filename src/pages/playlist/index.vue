@@ -66,7 +66,7 @@ export default {
 @import "~sass/varibles.scss";
 .container {
   @include suspension;
-  // padding-bottom: $safeDistance;
+  padding-bottom: $safeDistance;
   // .capplus {
   //   transition: 0.5s;
   //   &.hide {

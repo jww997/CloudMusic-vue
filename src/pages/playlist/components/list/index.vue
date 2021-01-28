@@ -102,11 +102,10 @@ export default {
     toggleMv: function (id) {
       const that = this;
       console.log(id);
-      // that.setMvId(id);
       let mv = that.mv;
       mv.id = id;
+      mv.isShow = true;
       that.setMv(mv);
-      that.setMvShow(true);
     },
     toPages: function (to, index = "") {
       const that = this;
@@ -127,10 +126,6 @@ export default {
       setPlayState: "SET_PLAY_STATE",
       setPlayerShow: "SET_PLAYER_SHOW",
       setCurrentSong: "SET_CURRENTSONG",
-
-      setMvId: "SET_MV_ID",
-      setMvShow: "SET_MV_SHOW",
-
 
 
       setMv: "SET_MV",

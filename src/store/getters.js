@@ -25,10 +25,6 @@ export default {
     duration: state => { return state.duration },
     
 
-    mvId: state => { return state.mvId },
-    mvShow: state => { return state.mvShow },
-
-
 
 
 

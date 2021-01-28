@@ -19,7 +19,7 @@
 
     <transition name="drawer">
       <player class="drawer" v-if="playerShow"></player>
-      <mv class="drawer" v-if="mvShow"></mv>
+      <mv class="drawer" v-if="mv.isShow"></mv>
     </transition>
 
     <bottomlist :playlistToast="playlistToast"></bottomlist>
@@ -71,7 +71,10 @@ export default {
       "playSequence",
       "playMode",
 
-      "mvShow",
+
+
+
+      "mv",
     ]),
   },
   data: function () {

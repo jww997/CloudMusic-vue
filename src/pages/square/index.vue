@@ -110,6 +110,7 @@ export default {
 .container {
   @include suspension;
   padding-top: $safeDistance;
+  padding-bottom: $safeDistance;
   box-sizing: border-box;
   overflow: hidden;
   .wrapper {

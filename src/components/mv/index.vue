@@ -1,19 +1,24 @@
 <template>
   <div class="container">
     <navbar :title="'视频'" :fixed="false"></navbar>
-    <video
-      class="video"
-      ref="video"
-      :src="url"
-      :poster="info.cover"
-      controls
-      autoplay
-      loop
-      v-if="info.cover"
-      @timeupdate="timeupdate"
+    <div
+      :class="{ interaction: true, active: !mv.isPlaying }"
+      @click="toggleMvPlaying"
     >
-      视频播放失败，请更换浏览器
-    </video>
+      <video
+        class="video"
+        ref="video"
+        :src="url"
+        :poster="info.cover"
+        loop
+        v-if="info.cover"
+        @timeupdate="timeupdate"
+        @canplay="canplay"
+      >
+        视频播放失败，请更换浏览器
+      </video>
+      <div class="iconfont" v-if="!mv.isPlaying">&#xe615;</div>
+    </div>
     <info :info="info" :count="count"></info>
   </div>
 </template>
@@ -37,7 +42,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["playState", "mvId", "mv"]),
+    ...mapState(["playState", "mv"]),
   },
   watch: {
     mv: {
@@ -45,6 +50,7 @@ export default {
         const that = this;
         let video = that.$refs.video;
         let mv = that.mv;
+        mv.isPlaying ? video.play() : video.pause();
         if (!newVal.isDraging) return false;
         video.currentTime = newVal.currentTime;
         mv.isDraging = false;
@@ -54,30 +60,30 @@ export default {
     },
   },
   methods: {
-    // timeupdate: function () {
-    //   const that = this;
-    //   if (!that.playState || that.playDrag) return false;
-    //   let audio = that.$refs.audio;
-    //   that.currentTime != audio.currentTime &&
-    //     that.setCurrentTime(audio.currentTime);
-    //   that.duration != audio.duration && that.setDuration(audio.duration);
-    // },
-
+    canplay: function () {
+      const that = this;
+      let mv = that.mv;
+      mv.isPlaying = true;
+      that.setMv(mv);
+    },
     timeupdate: function () {
       const that = this;
       let video = that.$refs.video;
-
-      console.log(1);
-
+      if (!video) return false;
       let mv = that.mv;
       that.$set(mv, "currentTime", video.currentTime);
       that.$set(mv, "duration", video.duration);
       that.setMv(mv);
     },
+    toggleMvPlaying: function () {
+      const that = this;
+      let mv = that.mv;
+      mv.isPlaying = !mv.isPlaying;
+      that.setMv(mv);
+    },
     getdata: function () {
       const that = this;
       // let id = that.$route.query.id;
-      // let id = that.mvId;
       let id = that.mv.id;
       console.log(`mv = ${id}`);
       that.$api
@@ -121,17 +127,37 @@ export default {
 .container {
   height: 100vh;
   @include suspension;
-  background: center no-repeat #000;
+  background: center no-repeat $theme-BLACK;
   background-size: 0;
   overflow: hidden;
   z-index: $zIndex-XXL;
 
   box-sizing: border-box;
   color: #fff;
-  .video {
+  .interaction {
     margin-top: 1.5rem;
-    width: 100%;
-    min-height: 5rem;
+    position: relative;
+    background-color: $theme-BLACK;
+    display: flex;
+    .video {
+      width: 100%;
+      min-height: 5rem;
+      transition: $time-M;
+    }
+    .iconfont {
+      width: 2.5rem;
+      height: 2.5rem;
+      font-size: 2rem;
+      text-shadow: 0 0 20px $theme-GRAY;
+      @include positionCenter;
+      @include flexCenter;
+      opacity: $opacity-M;
+    }
+    &.active {
+      .video {
+        opacity: $opacity-S;
+      }
+    }
   }
 }
 </style>

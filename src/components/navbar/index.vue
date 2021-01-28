@@ -60,6 +60,9 @@ export default {
       default: false,
     },
   },
+  computed: {
+    ...mapState(["mv"]),
+  },
   methods: {
     back() {
       const that = this;
@@ -69,11 +72,14 @@ export default {
     hide() {
       const that = this;
       that.setPlayerShow(false);
-      that.setMvShow(false);
+      let mv = that.mv;
+      mv.isShow = false;
+      that.setMv(mv);
     },
     ...mapMutations({
       setPlayerShow: "SET_PLAYER_SHOW",
-      setMvShow: "SET_MV_SHOW",
+
+      setMv: "SET_MV",
     }),
   },
 };

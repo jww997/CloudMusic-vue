@@ -15,6 +15,7 @@
             }"
             :alt="item.name"
           >
+            <!-- :class="{ icon: true, active: !item.id }" -->
             <!-- webkitMask: 'url(' + item.iconUrl + ')' -->
             <!-- <img :src="item.iconUrl" :alt="item.name" /> -->
           </div>
@@ -99,6 +100,10 @@ export default {
           background-color: $theme-RED;
           @include positionCenter;
         }
+
+        // &.active::after {
+        //   background-color: $theme-GRAY;
+        // }
 
         // mask-image: -webkit-gradient(
         //   linear,

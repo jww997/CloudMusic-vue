@@ -1,5 +1,3 @@
-
-
 const list = [{
   icon: "&#xe600;",
   text: "列表循环",

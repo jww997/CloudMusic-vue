@@ -18,7 +18,7 @@
             v-if="info.desc"
           ></span>
         </div>
-        <div class="desc" v-if="isShowDesc">{{ info.desc }}</div>
+        <div :class="{ desc: true, active: !isShowDesc }">{{ info.desc }}</div>
         <div class="playCount">{{ info.playCount }}次观看</div>
       </div>
       <div class="right">
@@ -181,8 +181,16 @@ export default {
         }
       }
       .desc {
+        height: 4rem;
+        max-height: 4rem;
         line-height: $text-S;
         font-size: $text-XS;
+        overflow: scroll;
+        transition: $time-M;
+        &.active {
+          height: 0;
+          margin-top: 0;
+        }
       }
       .playCount {
         font-size: $text-XS;

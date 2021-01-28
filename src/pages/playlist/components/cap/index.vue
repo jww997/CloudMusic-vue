@@ -72,6 +72,8 @@ export default {
 @import "~sass/varibles.scss";
 .children {
   width: 100%;
+  // height: 100%;
+  height: 6rem;
   margin-bottom: 0.7rem;
   padding: $safeDistance 0.3rem 0.9rem;
   box-sizing: border-box;
@@ -82,6 +84,7 @@ export default {
   .left {
     flex-shrink: 0;
     width: 3.2rem;
+    // margin-top: $text-XXS;
   }
   .right {
     flex-grow: 1;

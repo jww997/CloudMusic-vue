@@ -17,7 +17,7 @@
         @timeupdate="timeupdate"
         @canplay="canplay"
       >
-        视频播放失败，请更换浏览器
+        视频加载失败，请更换浏览器
       </video>
       <div class="iconfont" v-if="!mv.isPlaying">&#xe615;</div>
     </div>
@@ -138,9 +138,10 @@ export default {
   color: #fff;
   .interaction {
     max-height: 40%;
-    margin-top: 1rem;
+    // margin-top: 1rem;
     position: relative;
-    background-color: #101010;
+    background-color: $theme-BLACK;
+    // background-color: #101010;
     transition: $time-M;
     overflow: hidden;
     display: flex;

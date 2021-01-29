@@ -48,8 +48,6 @@ export default {
       const that = this;
       that.$api.getToplist().then((res) => {
         that.list = res.data.list;
-
-        console.log(that.list);
       });
       // that.$api.getToplistDetail().then((res) => {
       //   console.log(res);

@@ -1,17 +1,49 @@
 <template>
   <div class="kid">
-    <div class="icon iconfont">&#xe70d;</div>
+    <div class="left iconfont" is-link @click="showPopup">&#xe70d;</div>
     <div class="frame">
       <van-icon name="search" />
       <span class="text">搜索</span>
     </div>
-    <div class="icon iconfont">&#xe60a;</div>
+    <!-- <div class="right iconfont">&#xe60a;</div> -->
+
+    <van-popup
+      v-model="show"
+      position="left"
+      :style="{ width: '80%', height: '100%' }"
+    >
+      <setting :profile="profile"></setting>
+    </van-popup>
   </div>
 </template>
 
 <script>
+import Setting from "./components/setting";
 export default {
   name: "Search",
+  components: {
+    Setting,
+  },
+  data() {
+    return {
+      profile: {},
+      show: false,
+    };
+  },
+  methods: {
+    showPopup() {
+      const that = this;
+      that.show = true;
+    },
+  },
+  mounted: function () {
+    const that = this;
+
+    that.$api.getLoginStatus().then((res) => {
+      console.log(res.data.profile);
+      that.profile = res.data.profile;
+    });
+  },
 };
 </script>
 
@@ -19,31 +51,35 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .kid {
-  width: 100%;
-  margin: 0.2rem 0;
+  margin: $text-XS $text-XS 0;
   @include flexSpaceBetween;
-  .icon,
+  .left,
   >>> .van-icon {
     flex-shrink: 0;
-    margin: 0.3rem;
     font-size: $text-M;
+  }
+  .left,
+  .right,
+  .frame {
+    box-shadow: 0 0 2rem 0 #aaa;
+  }
+  .left {
+    margin-right: $text-XS;
+  }
+  .right {
+    margin-left: $text-XS;
   }
   .frame {
     flex-grow: 1;
-    box-shadow: 0 0 0.8rem 0 #ddd;
     border-radius: 3rem;
-    padding: 0 0.1rem;
+    padding: $text-XXS;
     overflow: hidden;
     color: #666;
     @include flexSpaceBetween;
-    >>> .van-icon {
-      margin: 0.25rem;
-    }
     .text {
       flex-grow: 1;
-      height: 0.7rem;
-      line-height: 0.7rem;
-      font-size: $text-S;
+      font-size: $text-XS;
+      margin-left: $text-XS;
     }
   }
 }

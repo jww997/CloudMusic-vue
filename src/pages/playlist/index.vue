@@ -10,7 +10,10 @@
     <div @click="toggleCapplus">
       <cap :obj="playlist"></cap>
     </div>
-    <list :obj="playlist"></list>
+    <!-- <list :obj="playlist"></list> -->
+    <list :list="playlist.tracks"></list>
+    <subscribers :list="playlist.subscribers"></subscribers>
+
     <div @click="toggleCapplus" v-if="isShowCapplus">
       <capplus :obj="playlist"></capplus>
     </div>
@@ -19,12 +22,14 @@
 </template>
 
 <script>
-import Scroll from "@/components/scroll";
+import List from "@/common/list";
 
+import Scroll from "@/components/scroll";
 import Navbar from "@/components/navbar";
 import Cap from "@/pages/playlist/components/cap";
 import Capplus from "@/pages/playlist/components/cappuls";
-import List from "@/pages/playlist/components/list";
+import Subscribers from "@/pages/playlist/components/subscribers";
+// import List from "@/pages/playlist/components/list";
 export default {
   name: "playlist",
   components: {
@@ -33,7 +38,9 @@ export default {
     Navbar,
     Cap,
     Capplus,
+
     List,
+    Subscribers,
   },
   data() {
     return {

@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <topbar></topbar>
     <!-- <scroll :data="blocks" :refreshDelay="1000"> -->
     <div class="blocks">
       <div v-for="(item, index) in blocks" :key="index">
@@ -30,10 +31,13 @@ import Banner from "./components/banner";
 import Whirligig from "./components/whirligig";
 import Calendar from "./components/calendar";
 
+import Topbar from "@/components/topbar";
+
 export default {
   name: "discover",
   components: {
     Scroll,
+    Topbar,
 
     Banner,
     Whirligig,

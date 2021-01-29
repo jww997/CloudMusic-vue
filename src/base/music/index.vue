@@ -1,5 +1,5 @@
 <template>
-  <div class="kid">
+  <div class="base">
     <audio
       ref="audio"
       :src="playUrl"

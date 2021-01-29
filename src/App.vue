@@ -36,7 +36,7 @@ import Bottombar from "@/components/bottombar";
 import Topbar from "@/components/topbar";
 import Tabbar from "@/components/tabbar";
 import Scroll from "@/components/scroll";
-import Music from "@/components/music";
+import Music from "@/base/music";
 import Player from "@/components/player";
 import Mv from "@/components/mv";
 export default {
@@ -70,9 +70,6 @@ export default {
 
       "playSequence",
       "playMode",
-
-
-
 
       "mv",
     ]),

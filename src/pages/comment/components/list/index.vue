@@ -46,14 +46,14 @@ export default {
 @import "~sass/varibles.scss";
 .children {
   .comments {
-    border-top: 0.2rem solid $theme-LIGHITGRAY;
+    border-top: 0.2rem solid $theme-LIGHTGRAY;
     .comment {
       min-height: 2rem;
       padding: 0.3rem;
       padding-left: 20%;
       // padding-right: 15%;
       box-sizing: border-box;
-      border-bottom: 1px solid $theme-LIGHITGRAY;
+      border-bottom: 1px solid $theme-LIGHTGRAY;
       position: relative;
       .left,
       .like {
@@ -69,7 +69,7 @@ export default {
           width: 1.3rem;
           height: 1.3rem;
           border-radius: 50%;
-          background-color: $theme-LIGHITGRAY;
+          background-color: $theme-LIGHTGRAY;
         }
       }
       .right {

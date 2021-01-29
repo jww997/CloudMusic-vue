@@ -1,66 +1,12 @@
 <template>
-  <div class="children">
-    <div class="line guide">
-      <div class="playall" @click="togglePlayer(0)">
-        <span class="iconfont front">&#xe674;</span>
-        <span class="text">播放全部</span>
-        <span class="total">({{ total ? total : 0 }})</span>
-      </div>
-      <van-icon size="25" name="certificate" />
-      <!-- <div class="iconfont">&#xe65b;</div> -->
-      <!-- <div class="iconfont">&#xe65a;</div> -->
-    </div>
-    <div class="list">
-      <div
-        class="line song"
-        @click="togglePlayer(index)"
-        v-for="(item, index) in obj.tracks"
-        :key="item.id"
-      >
-        <!-- @click="toPages({ path: '/player', query: { id: item.id } }, index)" -->
-        <div
-          class="front iconfont index active"
-          v-if="playState && item.id == currentSong.id"
-        >
-          &#xe604;
-        </div>
-        <div class="front index" v-else>{{ index + 1 }}</div>
-        <div class="name">
-          <p class="songname">
-            <span class="title">{{ item.name }}</span>
-            <span class="subtitle" v-if="formatArtists(item.alia)"
-              >({{ formatArtists(item.alia) }})</span
-            >
-          </p>
-          <p class="source">
-            {{ `${formatArtists(item.ar)} - ${item.al.name}` }}
-          </p>
-        </div>
-        <div
-          class="iconfont mv"
-          @click.stop="toggleMv(item.mv)"
-          v-if="item.mv != 0"
-        >
-          <!-- @click.stop="toPages({ path: '/mv', query: { id: item.mv } })" -->
-          &#xe606;
-        </div>
-        <van-icon size="25" name="ellipsis" class="more" />
-        <!-- <div class="iconfont more">&#xe690;</div> -->
-      </div>
-    </div>
+  <div class="children" v-if="list">
     <div class="line collect">
       <div class="portrait">
-        <div
-          class="image"
-          v-for="(item, index) in obj.subscribers"
-          :key="index"
-        >
+        <div class="image" v-for="(item, index) in list" :key="index">
           <img :src="item.avatarUrl" :alt="item.name" />
         </div>
       </div>
-      <div class="text" v-if="obj.subscribers">
-        {{ obj.subscribers.length }}人收藏
-      </div>
+      <div class="text" v-if="list.length">{{ list.length }}人收藏</div>
     </div>
   </div>
 </template>
@@ -70,20 +16,12 @@ import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { formatArtists } from "@/assets/js/filter.js";
 import { toPages } from "@/assets/js/skip.js";
 export default {
-  name: "List",
+  name: "Subscribers",
   props: {
-    obj: {
-      type: Object,
-      default: {},
+    list: {
+      type: Array,
+      value: [],
     },
-  },
-  computed: {
-    total: function () {
-      const that = this;
-      let tracks = that.obj.tracks;
-      return tracks && tracks.length;
-    },
-    ...mapGetters(["playId", "playState", "playIndex", "currentSong", "mv"]),
   },
   methods: {
     formatArtists,
@@ -106,18 +44,6 @@ export default {
       mv.id = id;
       mv.isShow = true;
       that.setMv(mv);
-    },
-    toPages: function (to, index = "") {
-      const that = this;
-      if (typeof index == "number") {
-        let list = that.obj.tracks;
-        let current = list[index];
-        that.setPlayId(current.id);
-        that.setPlayIndex(index);
-        that.setPlayList(list);
-        that.setCurrentSong(current);
-      }
-      toPages.call(that, to);
     },
     ...mapMutations({
       setPlayList: "SET_PLAY_LIST",

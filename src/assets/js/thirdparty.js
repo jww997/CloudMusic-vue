@@ -25,6 +25,7 @@ import {
   Icon, // 基于字体的图标集，可以通过 Icon 组件使用，也可以在其他组件中通过 icon 属性引用。
   Image as VanImage, // 增强版的 img 标签，提供多种图片填充模式，支持图片懒加载、加载中提示、加载失败提示。
   Loading, // 加载图标，用于表示加载中的过渡状态。
+  Lazyload, // Lazyload 是 Vue 指令，使用前需要对指令进行注册。
 
   ImagePreview, // 图片放大预览，支持函数调用和组件调用两种方式。
   Dialog, // 弹出模态框，常用于消息提示、消息确认，或在当前页面内完成特定的交互操作。弹出框组件支持函数调用和组件调用两种方式。
@@ -50,6 +51,7 @@ Vue.use(ImagePreview);
 Vue.use(Dialog);
 Vue.use(Notify);
 Vue.use(Toast);
+Vue.use(Lazyload);
 
 
 Vue.use(VueAxios, axios);
@@ -60,6 +62,7 @@ Vue.prototype.$vant.ImagePreview = ImagePreview;
 Vue.prototype.$vant.Dialog = Dialog;
 Vue.prototype.$vant.Notify = Notify;
 Vue.prototype.$vant.Toast = Toast;
+Vue.prototype.$vant.Lazyload = Lazyload;
 
 
 // Vue.config.devtools = true // 开发调试工具

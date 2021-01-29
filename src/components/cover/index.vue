@@ -6,6 +6,7 @@
       :width="size"
       :height="size"
       :src="image"
+      v-lazy="image"
     />
     <span class="text" v-if="name">{{ name }}</span>
     <div class="count" v-if="count">
@@ -55,7 +56,7 @@ export default {
   flex-direction: column;
   .image {
     border-radius: 0.2rem;
-    background-color: $theme-LIGHITGRAY;
+    background-color: $theme-LIGHTGRAY;
     overflow: hidden;
   }
   .text {
@@ -89,7 +90,7 @@ export default {
     width: 90%;
     padding-bottom: 90%;
     margin: -0.2rem auto;
-    background-color: $theme-LIGHITGRAY;
+    background-color: $theme-LIGHTGRAY;
     border-radius: 0.1rem;
     z-index: -1;
     position: absolute;

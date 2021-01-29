@@ -1,10 +1,10 @@
 /**
  * @Author: Gavin
  * @Begin: 2020-12-30 10:49:29
- * @Update: 2020-12-30 10:49:29
+ * @Update: 2021-1-29 11:21:49
  * @Update log: 接口整合
  */
-import axios from 'axios'
+import axios from 'axios';
 
 // axios.defaults.timeout = 5000; // 默认5s超时
 // axios.defaults.baseURL = 'http://49.234.76.196:3000/';
@@ -17,9 +17,19 @@ const api = "http://www.mikonchen.top:3000/";
 // let api = "http://localhost:3000/";
 
 
-function request(port, parameter = {}) {
+function request(
+  port,
+  parameter = {},
+  config = {  // 额外配置
+    isCookie: false, // 需要登录
+  }) {
   const that = this;
   port += `?timestamp=${Date.parse(new Date()) / 1000}`;
+
+
+  config.isCookie && (parameter.cookie = "MUSIC_U=64d65234a8d5b8547f2b23029b2392053b359e53d8326c3cc4ae38c90fa7c07f5cb0fcee37c101bd; Max-Age=1296000; Expires=Sat, 13 Feb 2021 03:10:39 GMT; Path=/;;__remember_me=true; Max-Age=1296000; Expires=Sat, 13 Feb 2021 03:10:39 GMT; Path=/;;__csrf=0160b6fd59753b106beb52de188463c6; Max-Age=1296010; Expires=Sat, 13 Feb 2021 03:10:49 GMT; Path=/;;NMTID=00OWxHtGX5BDk8cJ02pne6hsSg198gAAAF3TB8MlQ; Max-Age=315360000; Expires=Mon, 27 Jan 2031 03:10:39 GMT; Path=/;");
+
+
   return axios.post(api + port, parameter);
 }
 
@@ -40,7 +50,7 @@ export default {
   },
 
   getLoginStatus: parameter => { // 登录状态
-    return request("login/status", parameter);
+    return request("login/status", parameter, { isCookie: true });
     /**
      * 说明: 调用此接口, 可获取登录状态
      */
@@ -85,13 +95,13 @@ export default {
 
 
   getRecommendResource: parameter => { // 获取每日推荐歌单(需要登录)
-    return request("recommend/resource", parameter);
+    return request("recommend/resource", parameter, { isCookie: true });
     /**
      * 说明:调用此接口,可获得每日推荐歌单
      */
   },
   getRecommendSongs: parameter => { // 获取每日推荐歌曲(需要登录)
-    return request("recommend/songs", parameter);
+    return request("recommend/songs", parameter, { isCookie: true });
     /**
      * 说明:调用此接口,可获得每日推荐歌曲
      */

@@ -15,6 +15,9 @@
             }"
             :alt="item.name"
           >
+            <span class="date" v-if="item.id == -1">
+              {{ formatDate(undefined, 3).d }}
+            </span>
             <!-- :class="{ icon: true, active: !item.id }" -->
             <!-- webkitMask: 'url(' + item.iconUrl + ')' -->
             <!-- <img :src="item.iconUrl" :alt="item.name" /> -->
@@ -27,6 +30,7 @@
 </template>
 
 <script>
+import { formatDate } from "@/assets/js/filter.js";
 import { toPages } from "@/assets/js/skip.js";
 export default {
   name: "list",
@@ -37,6 +41,7 @@ export default {
     },
   },
   methods: {
+    formatDate,
     toPages,
     toPage: function (id) {
       const that = this;
@@ -92,6 +97,14 @@ export default {
         // filter: invert(100%);
         // background: #f00 no-repeat center;
         background-size: cover;
+
+        @include flexCenter;
+
+        .date {
+          color: $theme-RED;
+          font-size: $text-XS;
+          margin-bottom: -$text-XXXS;
+        }
 
         &::after {
           content: "";

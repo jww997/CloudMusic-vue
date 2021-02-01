@@ -44,9 +44,14 @@ export default {
 @import "~sass/varibles.scss";
 .children {
   @include flexSpaceBetween;
-  padding: 0.3rem 0;
+  height: 1rem;
+  // padding: 0.3rem 0;
+  box-sizing: border-box;
   background-color: #fff;
-  overflow: visible;
+  // overflow: visible;
+  @include positionCenter;
+  bottom: auto;
+  top: $safeDistance;
   .tags {
     flex-grow: 1;
     width: 3rem;

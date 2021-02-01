@@ -78,6 +78,7 @@ export default {
   padding: $safeDistance 0.3rem 0.9rem;
   box-sizing: border-box;
   position: relative;
+  border-radius: 0 0 40rem 40rem / 1rem;
   background-color: rgba(0, 0, 0, 0.3);
   color: #666;
   @include flexSpaceBetween;

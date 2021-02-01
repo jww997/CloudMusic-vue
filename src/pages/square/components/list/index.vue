@@ -7,6 +7,7 @@
           params: { id: item.id },
         }"
       > -->
+      <!-- <div class="wrap"> -->
       <div
         class="item"
         v-for="(item, index) in list"
@@ -19,8 +20,10 @@
           :name="item.name"
           :count="item.playCount"
         ></cover>
+        <!-- </div> -->
       </div>
       <!-- </router-link> -->
+      <van-loading class="loading" size="24px">加载中...</van-loading>
     </div>
   </div>
 </template>
@@ -49,13 +52,16 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .children {
+  height: 100%;
   padding-left: 2.5%;
   box-sizing: border-box;
   .list {
     width: 100%;
+    height: 100%;
     display: flex;
     flex-wrap: wrap;
-    overflow: hidden;
+    // overflow: hidden;
+    overflow: scroll;
     .item {
       width: 30%;
       margin-bottom: 4%;

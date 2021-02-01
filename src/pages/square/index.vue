@@ -1,21 +1,22 @@
 <template>
   <div class="container">
-    <navbar :title="'歌单广场'" fixed black></navbar>
-    <tags :list="tags" @toggleCat="toggleCat"></tags>
-    <scroll
+    <navbar :title="'歌单广场'" fixed black backgroundColor="#fff"></navbar>
+    <!-- <tags :list="tags" @toggleCat="toggleCat"></tags> -->
+
+    <matrix :list="playlists" destination="square/playlist" @scrollToEnd="scrollToEnd"></matrix>
+
+    <!-- <scroll
       :data="playlists"
       :refreshDelay="1000"
       :pullup="true"
       @scrollToEnd="scrollToEnd"
-    >
-      <list :list="playlists"></list>
-      <!-- <van-loading
-        class="loading"
-        size="24px"
-        v-if="isLoading && total != playlists.length"
-        >加载中...</van-loading
-      > -->
-    </scroll>
+    > -->
+
+    <!-- <list :list="playlists"></list> -->
+
+    <!-- <van-loading class="loading" size="24px">加载中...</van-loading> -->
+    <!-- v-if="isLoading && total != playlists.length" -->
+    <!-- </scroll> -->
 
     <transition name="thirdly">
       <router-view class="thirdly"></router-view>
@@ -24,18 +25,21 @@
 </template>
 
 <script>
-import Scroll from "@/components/scroll";
+import Matrix from "@/common/matrix";
+
 import Navbar from "@/components/navbar";
 import Tags from "./components/tags";
-import List from "./components/list";
+// import List from "./components/list";
 
 export default {
   name: "square",
   components: {
-    Scroll,
+    Matrix,
+
+    // Scroll,
     Navbar,
     Tags,
-    List,
+    // List,
   },
   data: function () {
     return {
@@ -66,9 +70,7 @@ export default {
     },
     scrollToEnd: function () {
       const that = this;
-      // console.log(that.total == that.playlists.length);
       if (that.total == that.playlists.length) return false;
-      console.log("到底");
       that.getdata();
     },
     getdata: function () {
@@ -77,7 +79,7 @@ export default {
       that.isLoading = true;
       that.$api
         .getTopPlaylist({
-          limit: 18,
+          limit: 30,
           cat: that.cat,
           offset: that.playlists.length,
         })
@@ -109,17 +111,15 @@ export default {
 @import "~sass/varibles.scss";
 .container {
   @include suspension;
-  padding-top: $safeDistance;
-  padding-bottom: $safeDistance;
+  // padding-top: $safeDistance + 1rem;
+  // padding-bottom: $safeDistance;
+  padding: $safeDistance 0;
   box-sizing: border-box;
-  overflow: hidden;
-  .wrapper {
-    overflow: hidden;
-  }
-  .loading {
-    padding: 0.5rem 0;
-    text-align: center;
-  }
+  //   overflow: hidden;
+  //   .loading {
+  //     padding: 0.5rem 0;
+  //     text-align: center;
+  //   }
 
   .thirdly {
     z-index: $zIndex-L;

@@ -81,6 +81,12 @@ function formatDate(num = new Date(), type = 1) {
     case 2:
       r = `${y}-${m}-${d}`;
       break;
+    case 3:
+      r = { y, m, d };
+      break;
+    case 4:
+      r = { y: _addZero(y), m: _addZero(m), d: _addZero(d) };
+      break;
   }
   return r;
 }

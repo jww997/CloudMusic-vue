@@ -1,8 +1,9 @@
 <template>
   <div class="container">
-    <navbar :title="'排行榜'" fixed black></navbar>
+    <navbar :title="'排行榜'" fixed black backgroundColor="#fff"></navbar>
 
-    <div class="list">
+    <matrix :list="list" destination="toplist/playlist"></matrix>
+    <!-- <div class="list">
       <div
         class="billboard"
         v-for="item in list"
@@ -15,7 +16,7 @@
           :count="item.playCount"
         ></cover>
       </div>
-    </div>
+    </div> -->
 
     <transition name="thirdly">
       <router-view class="thirdly"></router-view>
@@ -24,12 +25,16 @@
 </template>
 
 <script>
+import Matrix from "@/common/matrix";
+
 import Navbar from "@/components/navbar";
 import Cover from "@/components/cover";
 import { toPages } from "@/assets/js/skip.js";
 export default {
   name: "ranking",
   components: {
+    Matrix,
+
     Navbar,
     Cover,
   },

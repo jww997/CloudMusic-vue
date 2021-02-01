@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ kid: true, fixed, black }" :style="{backgroundColor}">
+  <div :class="{ kid: true, fixed, black }" :style="{ backgroundColor }">
     <!-- <van-nav-bar
       left-arrow
       :title="title"
@@ -63,6 +63,7 @@ export default {
       type: String,
       default: "transparent",
     },
+    // box: {},
   },
   computed: {
     ...mapState(["mv"]),
@@ -86,6 +87,17 @@ export default {
       setMv: "SET_MV",
     }),
   },
+  // mounted() {
+  //   const that = this;
+  //   try {
+  //     console.log(that.box);
+  //     setTimeout(() => {
+  //       that.box.addEventListener("scroll", function () {
+  //         console.log(1);
+  //       });
+  //     }, 1000);
+  //   } catch (error) {}
+  // },
 };
 </script>
 

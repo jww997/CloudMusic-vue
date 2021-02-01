@@ -1,12 +1,9 @@
 <template>
   <div class="container">
-    <navbar :title="'每日推荐'" fixed black></navbar>
+    <navbar :title="'每日推荐'" fixed backgroundColor="#EC4141"></navbar>
 
-    <!-- <div class="" v-for="item in recommend" :key="item.id">
-      {{ item.name }}
-    </div> -->
-
-    <list :list="dailySongs"></list>
+    <cap></cap>
+    <list :list="dailySongs" sorttype="2"></list>
   </div>
 </template>
 
@@ -14,11 +11,14 @@
 import List from "@/common/list";
 
 import Navbar from "@/components/navbar";
+import Cap from "./components/cap";
+
 export default {
   name: "dailyspecial",
   components: {
     Navbar,
     List,
+    Cap,
   },
   data() {
     return {

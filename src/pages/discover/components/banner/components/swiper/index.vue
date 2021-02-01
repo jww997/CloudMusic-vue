@@ -59,11 +59,13 @@ export default {
           height: 100%;
         }
         .text {
+          height: $text-L;
+          line-height: $text-L;
           font-size: $text-XXXS;
-          padding: 0.1rem 0.2rem;
-          border-radius: 0.15rem 0 0 0;
-          opacity: 0.8;
-          color: #fff;
+          padding: 0 $text-XXS;
+          border-radius: $text-XS 0 0 0;
+          opacity: $opacity-XXL;
+          color: $theme-WHITE;
           position: absolute;
           bottom: 0;
           right: 0;

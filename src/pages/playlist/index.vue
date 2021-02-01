@@ -33,13 +33,14 @@ import Subscribers from "@/pages/playlist/components/subscribers";
 export default {
   name: "playlist",
   components: {
+    List,
+
     Scroll,
 
     Navbar,
     Cap,
     Capplus,
 
-    List,
     Subscribers,
   },
   data() {

@@ -29,13 +29,13 @@
           v-if="playState && item.id == currentSong.id"
           v-html="'&#xe604;'"
         ></span>
+        <span class="serial" v-else-if="sorttype == 1">{{ index + 1 }}</span>
         <img
           class="image"
-          v-else-if="item.al.picUrl"
+          v-else-if="item.al.picUrl && sorttype == 2"
           :src="item.al.picUrl"
           v-lazy="item.al.picUrl"
         />
-        <span class="serial" v-else>{{ index + 1 }}</span>
       </div>
 
       <div class="center">
@@ -66,14 +66,18 @@
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { formatArtists } from "@/assets/js/filter.js";
+
 export default {
   name: "List",
   props: {
     list: {
       type: Array,
-      value: [],
+      default: ()=>[],
     },
-    // sortType: 1,
+    sorttype: {
+      type: String,
+      default: "1",
+    },
   },
   computed: {
     ...mapGetters(["playId", "playState", "playIndex", "currentSong", "mv"]),
@@ -137,16 +141,16 @@ export default {
         color: $theme-RED;
         font-size: $text-L;
       }
+      .serial {
+        font-size: $text-S;
+        color: #333;
+        @include flexCenter;
+      }
       .image {
         width: 100%;
         height: 100%;
         border-radius: 0.1rem;
         background-color: $theme-LIGHTGRAY;
-      }
-      .serial {
-        font-size: $text-S;
-        color: #333;
-        @include flexCenter;
       }
     }
 

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import Scroll from "@/components/scroll";
+import Scroll from "@/base/scroll";
 
 import Navbar from "@/components/navbar";
 import List from "./components/list";

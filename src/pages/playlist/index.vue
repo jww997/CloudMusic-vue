@@ -24,7 +24,7 @@
 <script>
 import List from "@/common/list";
 
-import Scroll from "@/components/scroll";
+import Scroll from "@/base/scroll";
 import Navbar from "@/components/navbar";
 import Cap from "@/pages/playlist/components/cap";
 import Capplus from "@/pages/playlist/components/cappuls";

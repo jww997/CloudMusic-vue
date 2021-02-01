@@ -35,7 +35,7 @@ import Bottomlist from "@/components/bottomlist";
 import Bottombar from "@/components/bottombar";
 import Topbar from "@/components/topbar";
 import Tabbar from "@/components/tabbar";
-import Scroll from "@/components/scroll";
+import Scroll from "@/base/scroll";
 import Music from "@/base/music";
 import Player from "@/components/player";
 import Mv from "@/components/mv";

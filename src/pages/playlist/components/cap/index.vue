@@ -74,7 +74,7 @@ export default {
   width: 100%;
   // height: 100%;
   height: 6rem;
-  margin-bottom: 0.7rem;
+  margin-bottom: 1rem;
   padding: $safeDistance 0.3rem 0.9rem;
   box-sizing: border-box;
   position: relative;

@@ -3,13 +3,15 @@
     <scroll
       class="scroll"
       :data="list"
+      :probeType="1"
       :pullup="true"
+      :click="true"
       @scrollToEnd="scrollToEnd"
     >
       <div class="boxs" v-if="list">
         <div
           class="box"
-          v-for="(item,index) in list"
+          v-for="(item, index) in list"
           :key="index"
           @click="toPages({ name: destination, params: { id: item.id } })"
         >
@@ -29,7 +31,7 @@
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { toPages } from "@/assets/js/skip.js";
 
-import Scroll from "@/components/scroll";
+import Scroll from "@/base/scroll";
 import Cover from "@/components/cover";
 
 export default {

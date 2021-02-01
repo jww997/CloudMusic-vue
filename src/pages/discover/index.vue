@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import Scroll from "@/components/scroll";
+import Scroll from "@/base/scroll";
 
 import Banner from "./components/banner";
 import Whirligig from "./components/whirligig";

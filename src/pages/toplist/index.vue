@@ -71,25 +71,25 @@ export default {
   padding-top: $safeDistance;
   padding-bottom: $safeDistance;
 
-  .list {
-    padding: 0 0.3rem;
-    @include flexCenter;
-    flex-wrap: wrap;
-    justify-content: flex-start;
+  // .list {
+  //   padding: 0 0.3rem;
+  //   @include flexCenter;
+  //   flex-wrap: wrap;
+  //   justify-content: flex-start;
 
-    .billboard {
-      flex-shrink: 0;
-      width: 31.5%;
-      margin-right: 2%;
-      margin-top: 0.3rem;
-      &:nth-child(3n) {
-        margin-right: 0;
-      }
-      & >>> .text {
-        height: 1rem;
-      }
-    }
-  }
+  //   .billboard {
+  //     flex-shrink: 0;
+  //     width: 31.5%;
+  //     margin-right: 2%;
+  //     margin-top: 0.3rem;
+  //     &:nth-child(3n) {
+  //       margin-right: 0;
+  //     }
+  //     & >>> .text {
+  //       height: 1rem;
+  //     }
+  //   }
+  // }
 
   .thirdly {
     z-index: $zIndex-L;

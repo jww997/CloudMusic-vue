@@ -48,7 +48,7 @@ export default {
       cat: "",
       total: -1,
 
-      isLoading: false,
+      // isLoading: false,
     };
   },
   watch: {
@@ -76,7 +76,7 @@ export default {
     getdata: function () {
       const that = this;
       if (that.total == that.playlists.length) return false;
-      that.isLoading = true;
+      // that.isLoading = true;
       that.$api
         .getTopPlaylist({
           limit: 30,
@@ -91,7 +91,7 @@ export default {
           } else {
             that.playlists = that.playlists.concat(playlists);
           }
-          that.isLoading = false;
+          // that.isLoading = false;
         });
     },
   },

@@ -1,6 +1,6 @@
 <template>
   <div class="children">
-    <div class="profile">
+    <div class="profile" @click.stop="toPages({ name: 'oneself' })">
       <img
         class="portrait"
         :src="profile.avatarUrl"
@@ -10,15 +10,18 @@
         {{ profile.nickname ? profile.nickname : "立即登录" }} &gt;
       </span>
     </div>
-    <!-- <div>123</div> -->
   </div>
 </template>
 
 <script>
+import { toPages } from "@/assets/js/skip.js";
 export default {
   name: "setting",
   props: {
     profile: {},
+  },
+  methods: {
+    toPages,
   },
 };
 </script>
@@ -28,6 +31,7 @@ export default {
 @import "~sass/varibles.scss";
 .children {
   padding: 0 $text-XS;
+  // z-index: $zIndex-XXXS;
   .profile {
     padding: $text-XS 0;
     @include flexCenter;

@@ -78,6 +78,13 @@ export default new Router({
           meta: {
             isKeepAlive: true,
           }
+        }, {
+          path: 'oneself',
+          name: 'oneself',
+          component: _component("oneself"),
+          meta: {
+            isKeepAlive: true,
+          }
         },
 
       ]

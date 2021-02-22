@@ -71,7 +71,6 @@ export default {
       console.log(`id = ${id}`);
       that.$api.getPlaylistDetail({ id }).then((res) => {
         that.playlist = res.data.playlist;
-
         that.$refs.playlist.addEventListener("scroll", that.handleScroll);
       });
     },

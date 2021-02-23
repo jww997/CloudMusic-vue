@@ -40,8 +40,12 @@ export default {
     const that = this;
 
     that.$api.getLoginStatus().then((res) => {
-      console.log(res.data.profile);
-      that.profile = res.data.profile;
+      let profile = res.data.profile;
+
+      that.profile = profile;
+      if (localStorage.length > 0) {
+        localStorage.profile = JSON.stringify(profile);
+      }
     });
   },
 };

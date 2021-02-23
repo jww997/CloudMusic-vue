@@ -1,19 +1,48 @@
 <template>
   <div class="oneself">
-    <navbar
-      fixed
-      :black="!isTop"
-      :backgroundColor="!isTop ? '#fff' : ''"
-    ></navbar>
+    <navbar fixed></navbar>
+
+    <card :level="level" :profile="profile"></card>
+
+    <box :playlist="playlist"></box>
   </div>
 </template>
 
 <script>
 import Navbar from "@/components/navbar";
+import Card from "./components/card";
+import Box from "./components/box";
 export default {
   name: "oneself",
   components: {
     Navbar,
+    Card,
+    Box,
+  },
+  data: function () {
+    return { level: 0, profile: {}, playlist: [] };
+  },
+  mounted: function () {
+    const that = this;
+    let profile = JSON.parse(localStorage.getItem("profile"));
+    if (!profile) return false;
+    that.$api
+      .getUserDetail({ uid: profile.userId })
+      .then((res) => {
+        that.level = res.data.level;
+        that.profile = res.data.profile;
+        // that.$api.getUserAccount();
+
+        return that.$api.getUserSubcount();
+      })
+      .then((res) => {
+        return that.$api.getUserPlaylist({
+          uid: profile.userId,
+        });
+      })
+      .then((res) => {
+        that.playlist = res.data.playlist;
+      });
   },
 };
 </script>
@@ -27,7 +56,5 @@ export default {
   padding-bottom: $safeDistance;
   box-sizing: border-box;
   overflow: scroll;
-
-  z-index: 20000;
 }
 </style>

@@ -8,14 +8,14 @@ export {
   toPages,
 }
 
-function toPages(to = {}) {
+function toPages(to = {}, success, fail, complete) {
   const that = this;
   console.log(`to = `, to);
   let {
     name,
     params,
     path,
-    query
+    query,
   } = to;
   try {
     if (typeof name == 'string') {
@@ -23,6 +23,8 @@ function toPages(to = {}) {
     } else {
       that.$router.push({ path, query });
     };
-  } catch (error) { }
+    success && success();
+  } catch (error) { fail && fail(); }
+  complete && complete();
 
 }

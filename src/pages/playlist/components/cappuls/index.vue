@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import Navbar from "@/components/navbar";
+import Navbar from "@/common/navbar";
 export default {
   name: "capplus",
   props: {

@@ -85,6 +85,13 @@ export default new Router({
           meta: {
             isKeepAlive: true,
           }
+        }, {
+          path: 'login',
+          name: 'login',
+          component: _component("login"),
+          meta: {
+            isKeepAlive: true,
+          }
         },
 
       ]

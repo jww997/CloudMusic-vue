@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ kid: true, fixed, black }" :style="{ backgroundColor }">
+  <div :class="{ common: true, fixed, black }" :style="{ backgroundColor }">
     <!-- <van-nav-bar
       left-arrow
       :title="title"
@@ -104,7 +104,7 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-.kid {
+.common {
   flex-shrink: 0;
   width: 100%;
   // height: 1rem;

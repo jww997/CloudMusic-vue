@@ -12,7 +12,7 @@
       position="left"
       :style="{ width: '80%', height: '100%' }"
     >
-      <setting :profile="profile"></setting>
+      <setting :profile="profile" @hide="hidePopup"></setting>
     </van-popup>
   </div>
 </template>
@@ -26,7 +26,9 @@ export default {
   },
   data() {
     return {
-      profile: {},
+      profile: {
+        nickname: "立即登录",
+      },
       show: false,
     };
   },
@@ -34,6 +36,10 @@ export default {
     showPopup() {
       const that = this;
       that.show = true;
+    },
+    hidePopup() {
+      const that = this;
+      that.show = false;
     },
   },
   mounted: function () {

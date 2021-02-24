@@ -13,7 +13,7 @@
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { formatLyric, formatArtists } from "@/assets/js/filter.js";
 import LyricParser from "lyric-parser"; // 歌词解析
-import Navbar from "@/components/navbar";
+import Navbar from "@/common/navbar";
 import Phonograph from "./components/phonograph";
 import Handle from "./components/handle";
 import Lyric from "./components/lyric";
@@ -122,7 +122,6 @@ export default {
   background-size: 0;
   overflow: hidden;
   z-index: $zIndex-XXL;
-
 
   // -webkit-backdrop-filter: saturate(180%) blur(20px);
   // backdrop-filter: saturate(180%) blur(20px);

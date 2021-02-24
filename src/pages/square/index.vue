@@ -27,7 +27,7 @@
 <script>
 import Matrix from "@/common/matrix";
 
-import Navbar from "@/components/navbar";
+import Navbar from "@/common/navbar";
 import Tags from "./components/tags";
 // import List from "./components/list";
 

@@ -27,7 +27,7 @@
 <script>
 import Matrix from "@/common/matrix";
 
-import Navbar from "@/components/navbar";
+import Navbar from "@/common/navbar";
 import Cover from "@/components/cover";
 import { toPages } from "@/assets/js/skip.js";
 export default {

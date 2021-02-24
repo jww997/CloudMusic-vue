@@ -11,7 +11,7 @@
 <script>
 import Scroll from "@/base/scroll";
 
-import Navbar from "@/components/navbar";
+import Navbar from "@/common/navbar";
 import List from "./components/list";
 export default {
   name: "comment",

@@ -10,7 +10,7 @@
 <script>
 import List from "@/common/list";
 
-import Navbar from "@/components/navbar";
+import Navbar from "@/common/navbar";
 import Cap from "./components/cap";
 
 export default {

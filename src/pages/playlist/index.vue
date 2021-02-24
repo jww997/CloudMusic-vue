@@ -25,7 +25,7 @@
 import List from "@/common/list";
 
 import Scroll from "@/base/scroll";
-import Navbar from "@/components/navbar";
+import Navbar from "@/common/navbar";
 import Cap from "@/pages/playlist/components/cap";
 import Capplus from "@/pages/playlist/components/cappuls";
 import Subscribers from "@/pages/playlist/components/subscribers";

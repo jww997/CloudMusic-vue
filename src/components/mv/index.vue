@@ -27,7 +27,7 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
-import Navbar from "@/components/navbar";
+import Navbar from "@/common/navbar";
 import Info from "./components/info";
 export default {
   name: "mv",

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import Navbar from "@/components/navbar";
+import Navbar from "@/common/navbar";
 import Card from "./components/card";
 import Box from "./components/box";
 export default {
@@ -56,5 +56,7 @@ export default {
   padding-bottom: $safeDistance;
   box-sizing: border-box;
   overflow: scroll;
+
+  background-color: $theme-LIGHTGRAY !important;
 }
 </style>

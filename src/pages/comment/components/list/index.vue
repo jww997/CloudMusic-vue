@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import Navbar from "@/components/navbar";
+import Navbar from "@/common/navbar";
 import { formatDate } from "@/assets/js/filter.js";
 export default {
   name: "list",

@@ -29,7 +29,7 @@ import Matrix from "@/common/matrix";
 
 import Navbar from "@/common/navbar";
 import Cover from "@/components/cover";
-import { toPages } from "@/assets/js/skip.js";
+import { toPages } from "@/assets/js/util.js";
 export default {
   name: "ranking",
   components: {

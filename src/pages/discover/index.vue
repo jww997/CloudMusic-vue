@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <topbar></topbar>
+    <div @click="refresh">刷新</div>
     <!-- <scroll :data="blocks" :refreshDelay="1000"> -->
     <div class="blocks">
       <div v-for="(item, index) in blocks" :key="index">
@@ -43,11 +44,19 @@ export default {
     Whirligig,
     Calendar,
   },
+  inject: ["reload"],
   data: function () {
     return {
       blocks: [],
       ball: [],
     };
+  },
+  methods: {
+    refresh: function () {
+      const that = this;
+      that.reload();
+      that.$vant.Toast.success("刷新成功");
+    },
   },
   mounted: function () {
     const that = this;

@@ -1,7 +1,6 @@
 <template>
   <div class="children">
     <swiper :list="list"></swiper>
-
     <ball :list="ball"></ball>
   </div>
 </template>
@@ -11,19 +10,19 @@ import Swiper from "./components/swiper";
 import Ball from "./components/ball";
 export default {
   name: "banner",
-  components: {
-    Swiper,
-    Ball,
-  },
   props: {
     ball: {
       type: Array,
-      default: [],
+      default: () => [],
     },
     list: {
       type: Array,
-      default: [],
+      default: () => [],
     },
+  },
+  components: {
+    Swiper,
+    Ball,
   },
 };
 </script>

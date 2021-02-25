@@ -15,7 +15,7 @@
     <div class="password">
       <input
         class="input"
-        type="text"
+        type="password"
         placeholder="请输入密码"
         v-model="password"
       />
@@ -27,19 +27,39 @@
 </template>
 
 <script>
+import { toPages } from "@/assets/js/util.js";
 export default {
   name: "phone",
   data() {
-    return { phone: "", password: "", ctcode: 86 };
+    return {
+      phone: "15812811722",
+      password: "MI15812811722",
+      ctcode: 86,
+    };
   },
   methods: {
     login: function () {
       const that = this;
       let phone = that.phone;
-      if (!phone) return false;
-      // that.$api.getCaptchaSent({
-      //   phone,
-      // });
+      let password = that.password;
+      if (!phone || !password) return false;
+      that.$api
+        .getLoginCellphone({
+          phone,
+          password,
+        })
+        .then((res) => {
+          that.$vant.Toast.success({
+            message: "登录成功",
+            forbidClick: true,
+          });
+
+          that.$cookie.getCookie("cookie")
+            ? that.$cookie.delCookie("cookie")
+            : "";
+          that.$cookie.setCookie("cookie", res.data.cookie);
+          // toPages({ name: "discover" });
+        });
     },
   },
 };

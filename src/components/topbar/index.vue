@@ -12,7 +12,7 @@
       position="left"
       :style="{ width: '80%', height: '100%' }"
     >
-      <setting :profile="profile" @hide="hidePopup"></setting>
+      <setting :profile="profile" @hide="hidePopup" @logout="logout"></setting>
     </van-popup>
   </div>
 </template>
@@ -40,6 +40,13 @@ export default {
     hidePopup() {
       const that = this;
       that.show = false;
+    },
+    logout() {
+      const that = this;
+      that.$api.getLogout();
+      that.$cookie.delCookie("cookie");
+      that.hidePopup();
+      that.$vant.Toast.success("退出登录成功");
     },
   },
   mounted: function () {

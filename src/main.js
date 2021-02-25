@@ -10,8 +10,8 @@ import 'css/border.css'
 import 'css/iconfont.css'
 
 import 'js/thirdparty.js' // 第三方整合
-import 'js/filter.js' // 格式化操作
-import 'js/skip.js' // 跳转操作
+import 'js/filter.js' // 过滤操作
+import 'js/util.js' // 工具箱
 
 /* eslint-disable no-new */
 new Vue({

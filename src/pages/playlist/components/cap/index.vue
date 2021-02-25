@@ -40,7 +40,7 @@
 <script>
 import Cover from "@/components/cover";
 import { formatUnit } from "@/assets/js/filter";
-import { toPages } from "@/assets/js/skip.js";
+import { toPages } from "@/assets/js/util.js";
 
 export default {
   name: "Cap",

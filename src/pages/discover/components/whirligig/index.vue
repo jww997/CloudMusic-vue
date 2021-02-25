@@ -35,7 +35,7 @@
 
 <script>
 import { formatUnit } from "@/assets/js/filter";
-import { toPages } from "@/assets/js/skip.js";
+import { toPages } from "@/assets/js/util.js";
 import Cover from "@/components/cover";
 
 export default {

@@ -29,7 +29,7 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
-import { toPages } from "@/assets/js/skip.js";
+import { toPages } from "@/assets/js/util.js";
 
 import Scroll from "@/base/scroll";
 import Cover from "@/components/cover";

@@ -35,7 +35,7 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
-import { toPages } from "@/assets/js/skip.js";
+import { toPages } from "@/assets/js/util.js";
 export default {
   name: "bottombar",
   computed: {

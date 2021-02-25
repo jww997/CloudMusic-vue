@@ -4,14 +4,17 @@
       <!-- <topbar></topbar> -->
     </div>
 
-    <div class="view">
-      <!-- <scroll :data="isShowBottomBar" :refreshDelay="500"> -->
+    <!-- <div class="view">
       <keep-alive>
-        <router-view v-if="$route.meta.isKeepAlive"></router-view>
+        <router-view
+          v-if="$route.meta.isKeepAlive && isRouterAlive"
+        ></router-view>
       </keep-alive>
-      <router-view v-if="!$route.meta.isKeepAlive"></router-view>
-      <!-- </scroll> -->
-    </div>
+      <router-view
+        v-if="!$route.meta.isKeepAlive && isRouterAlive"
+      ></router-view>
+    </div> -->
+    <router-view v-if="isRouterAlive"></router-view>
 
     <transition name="bottombar">
       <bottombar class="bottombar" v-if="isShowBottomBar"></bottombar>
@@ -74,11 +77,29 @@ export default {
       "mv",
     ]),
   },
+  provide() {
+    // 父组件中通过provide来提供变量，在子组件中通过inject来注入变量。
+    const that = this;
+    return {
+      reload: that.reload,
+    };
+  },
   data: function () {
     return {
       isShowTopBar: true,
       isShowBottomBar: true,
+
+      isRouterAlive: true, // 控制视图是否显示的变量
     };
+  },
+  methods: {
+    reload() {
+      const that = this;
+      that.isRouterAlive = false; // 先关闭
+      that.$nextTick(function () {
+        that.isRouterAlive = true; // 再打开
+      });
+    },
   },
   mounted: function () {
     const that = this;
@@ -163,7 +184,6 @@ body,
       transition: 0.5s;
     }
   }
-
 }
 </style>
 

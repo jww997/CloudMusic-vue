@@ -4,24 +4,23 @@
  * @Update: 2021-2-24 11:15:03
  * @Update log: 接口整合
  */
+import Vue from 'vue';
 import axios from 'axios';
 
 const api = "http://www.mikonchen.top";
 // const api = "http://49.234.76.196";
-
 const port = 3000;
 const limit = 20;
+
 function request(
   suffix, // 接口后缀
   parameter = {}, // 携带参数
   config = {  // 额外配置项
     isCookie: false, // 是否需要登录
   }) {
-  const that = this;
 
-
-  config.isCookie && (parameter.cookie = "MUSIC_U=64d65234a8d5b8547f2b23029b2392053b359e53d8326c3cc4ae38c90fa7c07f5cb0fcee37c101bd; Max-Age=1296000; Expires=Sat, 13 Feb 2021 03:10:39 GMT; Path=/;;__remember_me=true; Max-Age=1296000; Expires=Sat, 13 Feb 2021 03:10:39 GMT; Path=/;;__csrf=0160b6fd59753b106beb52de188463c6; Max-Age=1296010; Expires=Sat, 13 Feb 2021 03:10:49 GMT; Path=/;;NMTID=00OWxHtGX5BDk8cJ02pne6hsSg198gAAAF3TB8MlQ; Max-Age=315360000; Expires=Mon, 27 Jan 2031 03:10:39 GMT; Path=/;");
-
+  let cookie = Vue.prototype.$cookie.getCookie("cookie");
+  config.isCookie && cookie && (parameter.cookie = cookie);
 
   suffix += `?timestamp=${Date.parse(new Date()) / 1000}`; // POST请求url必须添加时间戳,使每次请求url不一样,不然请求会被缓存
   return axios.post(`${api}:${port}/${suffix}`, parameter);
@@ -707,14 +706,14 @@ export default {
   },
 
   getHomepageBlockPage: parameter => { // 首页-发现
-    return request("homepage/block/page", parameter);
+    return request("homepage/block/page", parameter, { isCookie: true });
     /**
      * @param refresh 是否刷新数据,默认为true
      * 说明:调用此接口,可获取APP首页信息
      */
   },
   getHomepageDragonBall: parameter => { // 首页-发现-圆形图标入口列表
-    return request("homepage/dragon/ball", parameter, false);
+    return request("homepage/dragon/ball", parameter);
     /**
      * 说明:调用此接口,可获取APP首页圆形图标入口列表
      */

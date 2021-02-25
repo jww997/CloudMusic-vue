@@ -9,18 +9,24 @@
       />
       <span class="name"> {{ profile.nickname }} &gt; </span>
     </div>
+    <div class="logout" @click="logout">退出登录/关闭</div>
   </div>
 </template>
 
 <script>
-import { toPages } from "@/assets/js/skip.js";
+import { toPages } from "@/assets/js/util.js";
 export default {
   name: "setting",
   props: {
     profile: {},
   },
+  // inject: ["reload"],
   methods: {
     toPages,
+    logout: function () {
+      const that = this;
+      that.$emit("logout");
+    },
     hide: function () {
       const that = this;
       that.$emit("hide");
@@ -33,11 +39,18 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .children {
-  padding: 0 $text-XS;
+  height: 100%;
+  // background-color: $theme-LIGHTGRAY;
+  background-image: linear-gradient($theme-WHITE, $theme-LIGHTGRAY 30%);
+  // .profile,
+  .logout {
+    background-color: $theme-WHITE;
+  }
   .profile {
-    padding: $text-XS 0;
+    padding: $text-XS;
     @include flexCenter;
     justify-content: flex-start;
+
     .portrait {
       width: 0.8rem;
       height: 0.8rem;
@@ -49,6 +62,15 @@ export default {
       font-size: $text-S;
       color: $theme-GRAY;
     }
+  }
+  .logout {
+    margin: $text-XS;
+    padding: $text-XS;
+    border-radius: $text-XXS;
+    font-size: $text-S;
+    text-align: center;
+    color: $theme-RED;
+    box-shadow: 0 5px 10px 2px $theme-LIGHTGRAY;
   }
 }
 </style>

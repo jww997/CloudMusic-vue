@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { toPages } from "@/assets/js/skip.js";
+import { toPages } from "@/assets/js/util.js";
 export default {
   name: "box",
   props: { playlist: { type: Array, default: () => [] } },

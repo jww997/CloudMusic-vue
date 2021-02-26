@@ -22,23 +22,26 @@
       <span class="forget">忘记密码？</span>
     </div>
     <!-- <button class="btn" @click="login">下一步</button> -->
-    <button class="btn" @click="login">登录</button>
+    <button class="btn" @click="submit">登录</button>
   </div>
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { toPages } from "@/assets/js/util.js";
 export default {
   name: "phone",
   data() {
     return {
-      phone: "15812811722",
-      password: "MI15812811722",
+      // phone: "15812811722",
+      // password: "MI15812811722",
+      phone: "",
+      password: "",
       ctcode: 86,
     };
   },
   methods: {
-    login: function () {
+    submit: function () {
       const that = this;
       let phone = that.phone;
       let password = that.password;
@@ -54,13 +57,12 @@ export default {
             forbidClick: true,
           });
 
-          that.$cookie.getCookie("cookie")
-            ? that.$cookie.delCookie("cookie")
-            : "";
-          that.$cookie.setCookie("cookie", res.data.cookie);
-          // toPages({ name: "discover" });
+          that.login({ cookie: res.data.cookie });
+          that.$router.push({ name: "discover" });
         });
     },
+
+    ...mapActions(["login"]),
   },
 };
 </script>

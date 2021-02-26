@@ -555,7 +555,7 @@ export default {
   },
 
   getSongUrl: parameter => { // 获取音乐地址
-    return request("song/url", parameter);
+    return request("song/url", parameter, { isCookie: true });
     /**
      * @param id 音乐id
      * @param br (选)码率,默认设置了 999000 即最大码率,如果要 320k 则可设置为 320000,其他类推

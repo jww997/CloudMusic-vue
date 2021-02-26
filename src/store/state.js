@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 const list = [{
   icon: "&#xe600;",
   text: "列表循环",
@@ -8,6 +10,9 @@ const list = [{
   icon: "&#xe60b;",
   text: "单曲循环",
 }];
+
+let cookie = Vue.prototype.$cookie.getCookie("cookie");
+cookie = cookie ? cookie : '';
 
 export default {
 
@@ -58,5 +63,9 @@ export default {
     isDraging: false,   // 拖拽
     currentTime: "",    // 当前时间
     duration: "",       // 总时间
+  },
+
+  login: {
+    cookie,
   }
 }

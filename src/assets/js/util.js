@@ -7,6 +7,9 @@
 import Vue from 'vue';
 export {
   toPages, // 页面跳转
+  setCookie, // 编辑Cookie
+  getCookie, // 获取Cookie
+  delCookie, // 删除Cookie
 }
 
 function toPages(to = {}, success, fail, complete) {
@@ -36,10 +39,8 @@ function setCookie(key, value, expire) {
   date.setSeconds(date.getSeconds() + expire);
   document.cookie = key + "=" + escape(value) + "; expires=" + date.toGMTString();
 
-
-
-  console.log(date.toGMTString());
-  console.log(document.cookie);
+  // console.log(date.toGMTString());
+  // console.log(document.cookie);
 }
 
 function getCookie(key) {

@@ -29,4 +29,5 @@ export default {
 
 
   SET_MV: "SET_MV",
+  SET_LOGIN: "SET_LOGIN",
 }

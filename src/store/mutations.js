@@ -60,5 +60,8 @@ export default {
   [types.SET_MV](state, val) {
     state.mv = val;
   },
+  [types.SET_LOGIN](state, val) {
+    state.login = val;
+  },
 
 }

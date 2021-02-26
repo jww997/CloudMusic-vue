@@ -119,6 +119,9 @@ export default {
   destroyed: function () {
     const that = this;
     if (that.isPlaying) that.setPlayState(true);
+    let mv = that.mv;
+    mv.isPlaying = false;
+    that.setMv(mv);
   },
 };
 </script>

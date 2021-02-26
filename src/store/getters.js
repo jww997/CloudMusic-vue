@@ -14,19 +14,20 @@ export default {
     playMode: state => { return state.playMode },
     playVolume: state => { return state.playVolume },
     playerShow: state => { return state.playerShow },
-    
-    
+
+
     playDrag: state => { return state.playDrag },
     playlistToast: state => { return state.playlistToast },
-    
-    
+
+
     currentSong: state => { return state.currentSong },
     currentTime: state => { return state.currentTime },
     duration: state => { return state.duration },
-    
+
 
 
 
 
     mv: state => { return state.mv },
+    login: state => { return state.login },
 }

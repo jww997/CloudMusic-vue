@@ -12,12 +12,13 @@
       position="left"
       :style="{ width: '80%', height: '100%' }"
     >
-      <setting :profile="profile" @hide="hidePopup" @logout="logout"></setting>
+      <setting :profile="profile" @hide="hidePopup" @quit="quit"></setting>
     </van-popup>
   </div>
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import Setting from "./components/setting";
 export default {
   name: "Search",
@@ -41,13 +42,15 @@ export default {
       const that = this;
       that.show = false;
     },
-    logout() {
+    quit() {
       const that = this;
       that.$api.getLogout();
-      that.$cookie.delCookie("cookie");
       that.hidePopup();
+
+      that.logout();
       that.$vant.Toast.success("退出登录成功");
     },
+    ...mapActions(["logout"]),
   },
   mounted: function () {
     const that = this;

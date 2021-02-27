@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { formatUnit } from "@/assets/js/filter";
 import { toPages } from "@/assets/js/util.js";
 import Cover from "@/components/cover";

@@ -43,7 +43,7 @@ export default {
       "playState",
       "playUrl",
       "playIndex",
-      "playId",
+      // "playId",
       "playlist",
 
       "currentSong",
@@ -90,7 +90,6 @@ export default {
       that.$set(that.lyric, "curLine", lineNum); // 歌词实时下标
       console.log(`lineNum = ${lineNum}, txt = ${txt}`);
     },
-    ...mapMutations({ setPlayUrl: "SET_PLAY_URL" }),
   },
   mounted: function () {
     const that = this;

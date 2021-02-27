@@ -57,7 +57,7 @@ function getCookie(key) {
       return unescape(document.cookie.substring(c_start, c_end));
     };
   };
-  return false;
+  return "";
 }
 
 function delCookie(key) {

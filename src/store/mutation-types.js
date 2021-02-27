@@ -28,6 +28,7 @@ export default {
 
 
 
+  SET_MUSIC: "SET_MUSIC",
   SET_MV: "SET_MV",
   SET_LOGIN: "SET_LOGIN",
 }

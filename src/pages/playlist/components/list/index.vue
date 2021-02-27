@@ -13,14 +13,15 @@
     <div class="list">
       <div
         class="line song"
-        @click="togglePlayer(index)"
         v-for="(item, index) in obj.tracks"
         :key="item.id"
+        @click="getMusic(item.id)"
       >
+        <!-- @click="togglePlayer(index)" -->
         <!-- @click="toPages({ path: '/player', query: { id: item.id } }, index)" -->
         <div
           class="front iconfont index active"
-          v-if="playState && item.id == currentSong.id"
+          v-if="music.isPlaying && item.id == music.id"
         >
           &#xe604;
         </div>
@@ -83,22 +84,36 @@ export default {
       let tracks = that.obj.tracks;
       return tracks && tracks.length;
     },
-    ...mapGetters(["playId", "playState", "playIndex", "currentSong", "mv"]),
+    ...mapGetters([
+      "playId",
+      "playState",
+      "playIndex",
+      "currentSong",
+
+      "music",
+      "mv",
+    ]),
   },
   methods: {
     formatArtists,
-    togglePlayer: function (index) {
-      const that = this;
-      that.setPlayerShow(true);
-      if (typeof index == "number") {
-        let list = that.obj.tracks;
-        let current = list[index];
-        that.setPlayId(current.id);
-        that.setPlayIndex(index);
-        that.setPlayList(list);
-        that.setCurrentSong(current);
-      }
-    },
+    // togglePlayer: function (index) {
+    //   const that = this;
+    //   that.setPlayerShow(true);
+    //   if (typeof index == "number") {
+    //     let list = that.obj.tracks;
+    //     let current = list[index];
+
+    //     // let music = that.music;
+    //     // console.log(music);
+    //     // music.id = current.id;
+    //     // that.setMusic(music);
+
+    //     // that.setPlayId(current.id);
+    //     that.setPlayIndex(index);
+    //     that.setPlayList(list);
+    //     that.setCurrentSong(current);
+    //   }
+    // },
     toggleMv: function (id) {
       const that = this;
       console.log(id);
@@ -107,18 +122,23 @@ export default {
       mv.isShow = true;
       that.setMv(mv);
     },
-    toPages: function (to, index = "") {
-      const that = this;
-      if (typeof index == "number") {
-        let list = that.obj.tracks;
-        let current = list[index];
-        that.setPlayId(current.id);
-        that.setPlayIndex(index);
-        that.setPlayList(list);
-        that.setCurrentSong(current);
-      }
-      toPages.call(that, to);
-    },
+    // toPages: function (to, index = "") {
+    //   const that = this;
+    //   if (typeof index == "number") {
+    //     let list = that.obj.tracks;
+    //     let current = list[index];
+
+    //     // let music = that.music;
+    //     // music.id = current.id;
+    //     // that.setMusic(music);
+
+    //     that.setPlayId(current.id);
+    //     that.setPlayIndex(index);
+    //     that.setPlayList(list);
+    //     that.setCurrentSong(current);
+    //   }
+    //   toPages.call(that, to);
+    // },
     ...mapMutations({
       setPlayList: "SET_PLAY_LIST",
       setPlayIndex: "SET_PLAY_INDEX",
@@ -127,8 +147,10 @@ export default {
       setPlayerShow: "SET_PLAYER_SHOW",
       setCurrentSong: "SET_CURRENTSONG",
 
+      setMusic: "SET_MUSIC",
       setMv: "SET_MV",
     }),
+    ...mapActions(["getMusic"]),
   },
 };
 </script>

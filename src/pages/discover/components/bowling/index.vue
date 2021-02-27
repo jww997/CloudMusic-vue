@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { formatDate } from "@/assets/js/filter.js";
 import { toPages } from "@/assets/js/util.js";
 export default {

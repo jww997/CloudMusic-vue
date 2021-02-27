@@ -16,16 +16,16 @@
     </div> -->
     <router-view v-if="isRouterAlive"></router-view>
 
-    <transition name="bottombar">
+    <!-- <transition name="bottombar">
       <bottombar class="bottombar" v-if="isShowBottomBar"></bottombar>
-    </transition>
+    </transition> -->
 
     <transition name="drawer">
       <player class="drawer" v-if="playerShow"></player>
       <mv class="drawer" v-if="mv.isShow"></mv>
     </transition>
 
-    <bottomlist :playlistToast="playlistToast"></bottomlist>
+    <!-- <bottomlist :playlistToast="playlistToast"></bottomlist> -->
 
     <music></music>
   </div>
@@ -56,11 +56,11 @@ export default {
   },
   computed: {
     ...mapGetters([
-      "currentSong",
-      "currentTime",
-      "duration",
+      // "currentSong",
+      // "currentTime",
+      // "duration",
 
-      "playId",
+      // "playId",
       "playIndex",
 
       "playlist",

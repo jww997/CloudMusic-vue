@@ -44,7 +44,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["playState", "mv"]),
+    ...mapState(["music", "mv"]),
   },
   watch: {
     mv: {
@@ -103,22 +103,27 @@ export default {
         });
     },
     ...mapMutations({
-      setPlayState: "SET_PLAY_STATE",
-
+      setMusic: "SET_MUSIC",
       setMv: "SET_MV",
     }),
   },
   mounted: function () {
     const that = this;
-    if (that.playState) {
-      that.setPlayState(false);
+    let music = that.music;
+    if (music.isPlaying) {
+      music.isPlaying = false;
+      that.setMusic(music);
       that.isPlaying = true;
     }
     that.getdata();
   },
   destroyed: function () {
     const that = this;
-    if (that.isPlaying) that.setPlayState(true);
+    let music = that.music;
+    if (that.isPlaying) {
+      music.isPlaying = true;
+      that.setMusic(music);
+    }
     let mv = that.mv;
     mv.isPlaying = false;
     that.setMv(mv);

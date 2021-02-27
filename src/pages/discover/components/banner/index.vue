@@ -1,20 +1,21 @@
 <template>
   <div class="children">
     <swiper :list="list"></swiper>
-    <ball :list="ball"></ball>
+    <!-- <ball :list="ball"></ball> -->
   </div>
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import Swiper from "./components/swiper";
-import Ball from "./components/ball";
+// import Ball from "./components/ball";
 export default {
   name: "banner",
   props: {
-    ball: {
-      type: Array,
-      default: () => [],
-    },
+    // ball: {
+    //   type: Array,
+    //   default: () => [],
+    // },
     list: {
       type: Array,
       default: () => [],
@@ -22,7 +23,7 @@ export default {
   },
   components: {
     Swiper,
-    Ball,
+    // Ball,
   },
 };
 </script>

@@ -25,13 +25,14 @@
       </template>
 
       <div v-for="(item, index) in blocks" :key="index">
-        <bowling v-if="index == 0"></bowling>
-
-        <!-- <banner
-          :ball="ball"
+        <!-- :ball="ball" -->
+        <banner
           :list="item.extInfo.banners"
           v-if="item.showType == 'BANNER'"
-        ></banner> -->
+        ></banner>
+
+
+        <bowling v-if="index == 0"></bowling>
 
         <whirligig
           :list="item.creatives"
@@ -39,8 +40,7 @@
           v-if="item.showType == 'HOMEPAGE_SLIDE_PLAYLIST'"
         ></whirligig>
 
-        <!-- :creatives="item.creatives"
-          :uielement="item.uiElement" -->
+
         <slide-songlist-align
           v-if="item.showType == 'HOMEPAGE_SLIDE_SONGLIST_ALIGN'"
           :content="item"
@@ -124,9 +124,9 @@ export default {
   // min-height: 100vh;
   overflow: scroll;
 
-  >>> .van-pull-refresh {
-    height: 100%;
-  }
+  // >>> .van-pull-refresh {
+  //   height: 100%;
+  // }
 
   .blocks {
     z-index: $zIndex-M;

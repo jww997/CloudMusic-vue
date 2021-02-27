@@ -3,7 +3,11 @@
     <navbar :title="'歌单广场'" fixed black backgroundColor="#fff"></navbar>
     <!-- <tags :list="tags" @toggleCat="toggleCat"></tags> -->
 
-    <matrix :list="playlists" destination="square/playlist" @scrollToEnd="scrollToEnd"></matrix>
+    <matrix
+      :list="playlists"
+      destination="square/playlist"
+      @scrollToEnd="scrollToEnd"
+    ></matrix>
 
     <!-- <scroll
       :data="playlists"

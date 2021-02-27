@@ -1,4 +1,5 @@
-import types from "./mutation-types.js"
+import types from "./mutation-types.js";
+
 export default {
 
   [types.SET_PLAY_STATE](state, val) {
@@ -56,7 +57,9 @@ export default {
 
 
 
-
+  [types.SET_MUSIC](state, val) {
+    state.music = val;
+  },
   [types.SET_MV](state, val) {
     state.mv = val;
   },

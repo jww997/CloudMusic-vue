@@ -1,8 +1,3 @@
-// import { formatTime, formatLyric } from "@/assets/js/filter.js";
-
-// export const playUrl = state => state.playUrl;
-// export const playState = state => state.playState;
-
 export default {
 
     playState: state => { return state.playState },
@@ -28,6 +23,7 @@ export default {
 
 
 
+    music: state => { return state.music },
     mv: state => { return state.mv },
     login: state => { return state.login },
 }

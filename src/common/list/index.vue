@@ -1,10 +1,12 @@
 <template>
   <div class="common" v-if="list">
     <div class="line all">
-      <div class="left" @click="togglePlayer(0)">
+      <div class="left" @click="getMusic(list[0].id)">
+        <!-- @click="togglePlayer(0)" -->
         <span class="iconfont active" v-html="'&#xe674;'"></span>
       </div>
-      <div class="center" @click="togglePlayer(0)">
+      <div class="center" @click="getMusic(list[0].id)">
+        <!-- @click="togglePlayer(0)" -->
         <p class="songname">
           <span class="title">播放全部</span>
           <span class="subtitle" v-if="list.length">({{ list.length }})</span>
@@ -17,16 +19,17 @@
     </div>
     <div
       class="line"
-      @click="togglePlayer(index)"
       v-for="(item, index) in list"
+      :key="item.id"
+      @click="getMusic(item.id)"
       @mouseenter="mouseenter"
       @mouseleave="mouseleave"
-      :key="item.id"
     >
+      <!-- @click="togglePlayer(index)" -->
       <div class="left">
         <span
           class="active iconfont"
-          v-if="playState && item.id == currentSong.id"
+          v-if="music.isPlaying && item.id == music.id"
           v-html="'&#xe604;'"
         ></span>
         <span class="serial" v-else-if="sorttype == 1">{{ index + 1 }}</span>
@@ -80,7 +83,15 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["playId", "playState", "playIndex", "currentSong", "mv"]),
+    ...mapGetters([
+      // "playId",
+      // "playState",
+      // "playIndex",
+      // "currentSong",
+
+      "music",
+      "mv",
+    ]),
   },
   methods: {
     formatArtists,
@@ -90,18 +101,19 @@ export default {
     mouseleave: function (index) {
       const that = this;
     },
-    togglePlayer: function (index) {
-      const that = this;
-      that.setPlayerShow(true);
-      if (typeof index == "number") {
-        let list = that.list;
-        let current = list[index];
-        that.setPlayId(current.id);
-        that.setPlayIndex(index);
-        that.setPlayList(list);
-        that.setCurrentSong(current);
-      }
-    },
+    // togglePlayer: function (index) {
+    //   const that = this;
+    //   that.setPlayerShow(true);
+    //   if (typeof index == "number") {
+    //     let list = that.list;
+    //     let current = list[index];
+
+    //     that.setPlayId(current.id);
+    //     that.setPlayIndex(index);
+    //     that.setPlayList(list);
+    // that.setCurrentSong(current);
+    //   }
+    // },
     toggleMv: function (id) {
       const that = this;
       console.log(id);
@@ -111,15 +123,16 @@ export default {
       that.setMv(mv);
     },
     ...mapMutations({
-      setPlayList: "SET_PLAY_LIST",
-      setPlayIndex: "SET_PLAY_INDEX",
-      setPlayId: "SET_PLAY_ID",
-      setPlayState: "SET_PLAY_STATE",
-      setPlayerShow: "SET_PLAYER_SHOW",
-      setCurrentSong: "SET_CURRENTSONG",
+      // setPlayList: "SET_PLAY_LIST",
+      // setPlayIndex: "SET_PLAY_INDEX",
+      // setPlayId: "SET_PLAY_ID",
+      // setPlayState: "SET_PLAY_STATE",
+      // setPlayerShow: "SET_PLAYER_SHOW",
+      // // setCurrentSong: "SET_CURRENTSONG",
 
       setMv: "SET_MV",
     }),
+    ...mapActions(["getMusic"]),
   },
 };
 </script>

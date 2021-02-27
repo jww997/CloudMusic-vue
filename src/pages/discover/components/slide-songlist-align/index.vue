@@ -13,16 +13,22 @@
             class="resources"
             v-for="(item, index) in item.resources"
             :key="index"
+            @click="getMusic(item.resourceId)"
           >
-            <!-- @click.stop="
-              toPages({ name: 'playlist', params: { id: item.resourceId } })
-            " -->
-            <img class="image" :src="item.uiElement.image.imageUrl" />
+            <div class="left">
+              <img class="image" :src="item.uiElement.image.imageUrl" />
+              <van-icon
+                class="icon"
+                name="pause"
+                v-if="music.id == item.resourceId && music.isPlaying"
+              />
+              <van-icon class="icon" name="play" v-else />
+            </div>
             <div class="right">
               <div class="mainTitle">
                 {{ item.uiElement.mainTitle.title }}
               </div>
-              <div class="subTitle">
+              <div class="subTitle" v-if="item.uiElement.subTitle">
                 {{ item.uiElement.subTitle.title }}
               </div>
             </div>
@@ -34,6 +40,7 @@
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { toPages } from "@/assets/js/util.js";
 export default {
   name: "slideSonglistAlign",
@@ -43,8 +50,12 @@ export default {
       default: () => {},
     },
   },
+  computed: {
+    ...mapState(["music"]),
+  },
   methods: {
     toPages,
+    ...mapActions(["getMusic"]),
   },
 };
 </script>
@@ -60,17 +71,29 @@ export default {
     margin-top: $text-XS;
     box-sizing: border-box;
     position: relative;
-    padding-left: $text-XS + 1.8rem;
+    padding-left: $text-XS + 1.5rem;
     padding-right: $text-S;
-    .image {
-      width: 1.5rem;
-      border-radius: 0.2rem;
+    .left {
+      width: 1.2rem;
+      height: 1.2rem;
+      border-radius: $text-XXXS;
       @include positionCenter;
       left: $text-XS;
       right: auto;
+      overflow: hidden;
+      .image {
+        width: inherit;
+      }
+      .icon {
+        @include positionCenter;
+        @include flexCenter;
+        font-size: $text-L;
+        color: $theme-WHITE;
+      }
     }
     .right {
       height: 100%;
+      border-bottom: 1px solid $theme-LIGHTGRAY;
       @include flexCenter;
       flex-direction: column;
       align-items: flex-start;
@@ -79,7 +102,7 @@ export default {
       }
       .subTitle {
         margin-top: $text-XXS;
-        font-size: $text-XXS;
+        font-size: $text-XS;
       }
     }
   }

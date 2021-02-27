@@ -48,7 +48,7 @@ export default {
     ...mapMutations({
       setPlayList: "SET_PLAY_LIST",
       setPlayIndex: "SET_PLAY_INDEX",
-      setPlayId: "SET_PLAY_ID",
+      // setPlayId: "SET_PLAY_ID",
       setPlayState: "SET_PLAY_STATE",
       setPlayerShow: "SET_PLAYER_SHOW",
       setCurrentSong: "SET_CURRENTSONG",

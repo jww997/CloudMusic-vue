@@ -86,9 +86,9 @@ export default {
       default: 20,
     },
   },
-  computed: {
-    ...mapGetters(["playId"]),
-  },
+  // computed: {
+  //   ...mapGetters(["playId"]),
+  // },
   methods: {
     disable() {
       const that = this;

@@ -1,11 +1,11 @@
 <template>
   <div class="common" v-if="list">
     <div class="line all">
-      <div class="left" @click="getMusic(list[0].id)">
+      <div class="left" @click="toggleMusic(list[0].id, 0)">
         <!-- @click="togglePlayer(0)" -->
         <span class="iconfont active" v-html="'&#xe674;'"></span>
       </div>
-      <div class="center" @click="getMusic(list[0].id)">
+      <div class="center" @click="toggleMusic(list[0].id, 0)">
         <!-- @click="togglePlayer(0)" -->
         <p class="songname">
           <span class="title">播放全部</span>
@@ -21,7 +21,7 @@
       class="line"
       v-for="(item, index) in list"
       :key="item.id"
-      @click="getMusic(item.id)"
+      @click="toggleMusic(item.id, index)"
       @mouseenter="mouseenter"
       @mouseleave="mouseleave"
     >
@@ -69,6 +69,7 @@
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { formatArtists } from "@/assets/js/filter.js";
+import { toPages } from "@/assets/js/util.js";
 
 export default {
   name: "List",
@@ -83,15 +84,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters([
-      // "playId",
-      // "playState",
-      // "playIndex",
-      // "currentSong",
-
-      "music",
-      "mv",
-    ]),
+    ...mapGetters(["music", "mv"]),
   },
   methods: {
     formatArtists,
@@ -101,38 +94,29 @@ export default {
     mouseleave: function (index) {
       const that = this;
     },
-    // togglePlayer: function (index) {
-    //   const that = this;
-    //   that.setPlayerShow(true);
-    //   if (typeof index == "number") {
-    //     let list = that.list;
-    //     let current = list[index];
 
-    //     that.setPlayId(current.id);
-    //     that.setPlayIndex(index);
-    //     that.setPlayList(list);
-    // that.setCurrentSong(current);
-    //   }
-    // },
+    toggleMusic(id, index) {
+      const that = this;
+      if (that.music.id == id) {
+        // toPages({
+        //   name: "/player",
+        // });
+        that.amendStateObjValue({ key: "isShow", value: true });
+      } else {
+        that.amendStateObjValue({ key: "id", value: id });
+        that.amendStateObjValue({ key: "currentList", value: that.list });
+        that.amendStateObjValue({ key: "currentIndex", value: index });
+      }
+    },
     toggleMv: function (id) {
       const that = this;
-      console.log(id);
-      let mv = that.mv;
-      mv.id = id;
-      mv.isShow = true;
-      that.setMv(mv);
+      that.amendStateObjValue({ name: "mv", key: "id", value: id });
+      that.amendStateObjValue({ name: "mv", key: "isShow", value: true });
     },
     ...mapMutations({
-      // setPlayList: "SET_PLAY_LIST",
-      // setPlayIndex: "SET_PLAY_INDEX",
-      // setPlayId: "SET_PLAY_ID",
-      // setPlayState: "SET_PLAY_STATE",
-      // setPlayerShow: "SET_PLAYER_SHOW",
-      // // setCurrentSong: "SET_CURRENTSONG",
-
       setMv: "SET_MV",
     }),
-    ...mapActions(["getMusic"]),
+    ...mapActions(["amendStateObjValue"]),
   },
 };
 </script>

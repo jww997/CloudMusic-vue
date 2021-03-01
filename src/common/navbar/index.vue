@@ -66,7 +66,7 @@ export default {
     // box: {},
   },
   computed: {
-    ...mapState(["mv"]),
+    ...mapState(["music", "mv"]),
   },
   methods: {
     back() {
@@ -76,14 +76,18 @@ export default {
     },
     hide() {
       const that = this;
-      that.setPlayerShow(false);
+      // that.setPlayerShow(false);
       let mv = that.mv;
+      let music = that.music;
+      music.isShow = false;
       mv.isShow = false;
+      that.setMusic(music);
       that.setMv(mv);
     },
     ...mapMutations({
-      setPlayerShow: "SET_PLAYER_SHOW",
+      // setPlayerShow: "SET_PLAYER_SHOW",
 
+      setMusic: "SET_MUSIC",
       setMv: "SET_MV",
     }),
   },

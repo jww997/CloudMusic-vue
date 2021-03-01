@@ -13,7 +13,7 @@
             class="resources"
             v-for="(item, index) in item.resources"
             :key="index"
-            @click="getMusic(item.resourceId)"
+            @click="toggleMusic(item.resourceId, item)"
           >
             <div class="left">
               <img class="image" :src="item.uiElement.image.imageUrl" />
@@ -55,6 +55,18 @@ export default {
   },
   methods: {
     toPages,
+    toggleMusic(id, current) {
+      const that = this;
+      let music = that.music;
+      music.current = current;
+      music.currentIndex = 0;
+      music.currentList = [current];
+      that.setMusic(music);
+      that.getMusic(id);
+    },
+    ...mapMutations({
+      setMusic: "SET_MUSIC",
+    }),
     ...mapActions(["getMusic"]),
   },
 };

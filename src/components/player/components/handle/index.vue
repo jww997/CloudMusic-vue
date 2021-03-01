@@ -2,7 +2,7 @@
   <div class="children">
     <div class="progress">
       <div class="text">
-        {{ formatTime(currentTime * 1000, 2) }}
+        {{ formatTime(music.currentTime * 1000, 2) }}
       </div>
       <div class="strip">
         <van-slider
@@ -15,27 +15,27 @@
         />
       </div>
       <div class="text">
-        {{ formatTime(duration * 1000, 2) }}
+        {{ formatTime(music.duration * 1000, 2) }}
       </div>
     </div>
     <div class="bottom">
       <span
         class="iconfont"
         @click="toggleSequence"
-        v-html="playMode[playSequence].icon"
+        v-html="music.modeList[music.modeIndex].icon"
       ></span>
       <span class="iconfont" @click="prev">&#xe663;</span>
       <div class="center" @click.stop="toggleStatus">
-        <van-icon name="pause-circle-o" v-if="playState" />
+        <van-icon name="pause-circle-o" v-if="music.isPlaying" />
         <van-icon name="play-circle-o" v-else />
       </div>
       <!-- <span
         :class="{
           'iconfont center': true,
-          playing: playState,
+          playing: music.isPlaying,
         }"
         @click="toggleStatus"
-        >{{ playState ? "&#xe665;" : "&#xe666;" }}
+        >{{ music.isPlaying ? "&#xe665;" : "&#xe666;" }}
       </span> -->
       <span class="iconfont" @click="next">&#xe668;</span>
       <span class="iconfont" @click="togglePlaylistToast">&#xe664;</span>
@@ -60,9 +60,13 @@ export default {
     };
   },
   computed: {
+    currentTime(val, oldVal) {
+      const that = this;
+      return that.music.currentTime;
+    },
     ...mapGetters([
-      "playState",
-      "playIndex",
+      // "playState",
+      // "playIndex",
       "playlist",
 
       "playlistToast",
@@ -70,15 +74,17 @@ export default {
       "playSequence",
       "playMode",
       "currentSong",
-      "currentTime",
-      "duration",
+      // "currentTime",
+      // "duration",
+
+      "music",
     ]),
   },
   watch: {
     currentTime: function (val) {
       const that = this;
-      that.percentage =
-        Number.parseFloat(that.currentTime / that.duration) * 100;
+      let music = that.music;
+      that.percentage = Number.parseFloat(val / music.duration) * 100;
     },
   },
   methods: {
@@ -86,34 +92,39 @@ export default {
     prev: function () {
       console.log("上一首");
       const that = this;
-      let playIndex = that.playIndex;
-
-      if (playIndex == 0) {
-        that.setPlayIndex(that.playlist.length - 1);
-      } else if (playIndex - 1 <= that.playlist.length) {
-        that.setPlayIndex(playIndex - 1);
+      let music = that.music;
+      if (music.currentIndex == 0) {
+        music.currentIndex = music.currentList.length - 1;
+      } else if (music.currentIndex - 1 <= music.currentList.length) {
+        music.currentIndex = music.currentIndex - 1;
       }
+      that.setMusic(music);
     },
     next: function () {
       console.log("下一首");
       const that = this;
-      let playIndex = that.playIndex;
-
-      if (playIndex >= that.playlist.length - 1) {
-        that.setPlayIndex(0);
-      } else if (playIndex + 1 <= that.playlist.length) {
-        that.setPlayIndex(playIndex + 1);
+      let music = that.music;
+      if (music.currentIndex >= music.currentList.length - 1) {
+        music.currentIndex = 0;
+      } else if (music.currentIndex + 1 <= music.currentList.length) {
+        music.currentIndex = music.currentIndex + 1;
       }
+      that.setMusic(music);
     },
     togglePercentage: function (val) {
       const that = this;
-      let i = that.duration * (val / 100); // 根据选中百分比修改进度条
-      that.setPlayDrag(true);
-      that.setCurrentTime(i); // 接收秒数，要处理下
+      let music = that.music;
+      let i = music.duration * (val / 100); // 根据选中百分比修改进度条
+      music.isDrag = true;
+      music.currentTime = i; // 接收秒数，要处理下
+      that.setMusic(music);
     },
     toggleStatus: function () {
       const that = this;
-      that.setPlayState(!that.playState);
+      let music = that.music;
+      music.isPlaying = !music.isPlaying;
+      that.setMusic(music);
+      // that.setPlayState(!that.playState);
     },
     togglePlaylistToast: function () {
       const that = this;
@@ -129,12 +140,14 @@ export default {
       that.setPlaySequence(i);
     },
     ...mapMutations({
-      setPlayState: "SET_PLAY_STATE",
-      setPlayIndex: "SET_PLAY_INDEX",
+      // setPlayState: "SET_PLAY_STATE",
+      // setPlayIndex: "SET_PLAY_INDEX",
       setPlaylistToast: "SET_PLAY_LIST_TOAST",
       setPlaySequence: "SET_PLAY_SEQUENCE",
-      setPlayDrag: "SET_PLAY_DRAG",
-      setCurrentTime: "SET_CURRENTTIME",
+      // setPlayDrag: "SET_PLAY_DRAG",
+      // setCurrentTime: "SET_CURRENTTIME",
+
+      setMusic: "SET_MUSIC",
     }),
   },
 };

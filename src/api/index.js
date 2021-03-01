@@ -539,7 +539,7 @@ export default {
      */
   },
   getPlaylistDetail: parameter => { // 获取歌单详情
-    return request("playlist/detail", parameter);
+    return request("playlist/detail", parameter, { isCookie: true });
     /**
      * @param id 歌单id
      * @param s (选)歌单最近的s个收藏者,默认为8

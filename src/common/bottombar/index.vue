@@ -1,33 +1,33 @@
 <template>
-  <div class="kid" v-if="currentSong.id" @click="togglePlayer">
-    <!-- @click="toPages({ path: '/player', query: { id: currentSong.id } })" -->
+  <div class="kid" v-if="music.current.id" @click="togglePlayer">
+    <!-- @click="toPages({ path: '/player', query: { id: music.current.id } })" -->
     <div
       :class="{
         al: true,
-        active: playState,
+        active: music.isPlaying,
       }"
       :style="{
         backgroundImage: 'url(' + require('@/assets/images/chassis.png') + ')',
       }"
     >
-      <img class="cover" :src="currentSong.al.picUrl" />
+      <img class="cover" :src="music.current.al.picUrl" />
       <img class="light" :src="require('@/assets/images/light.png')" />
     </div>
     <div class="monicker">
-      <span class="name">{{ currentSong.name }}</span>
-      <span class="ar">{{ currentSong.ar[0].name }}</span>
+      <span class="name">{{ music.current.name }}</span>
+      <span class="ar">{{ music.current.ar[0].name }}</span>
     </div>
     <div class="state" @click.stop="toggleStatus">
-      <van-icon name="pause-circle-o" v-if="playState" />
+      <van-icon name="pause-circle-o" v-if="music.isPlaying" />
       <van-icon name="play-circle-o" v-else />
     </div>
     <!-- <span
       :class="{
         'iconfont center': true,
-        playing: playState,
+        playing: music.isPlaying,
       }"
       @click.stop="toggleStatus"
-      >{{ playState ? "&#xe665;" : "&#xe666;" }} 
+      >{{ music.isPlaying ? "&#xe665;" : "&#xe666;" }} 
     </span>-->
     <span class="iconfont" @click.stop="togglePlaylistToast">&#xe664;</span>
   </div>
@@ -39,13 +39,15 @@ import { toPages } from "@/assets/js/util.js";
 export default {
   name: "bottombar",
   computed: {
-    ...mapGetters(["playState", "currentSong"]),
+    ...mapGetters(["music"]),
   },
   methods: {
     toPages,
     toggleStatus: function () {
       const that = this;
-      that.setPlayState(!that.playState);
+      let music = that.music;
+      music.isPlaying = !music.isPlaying;
+      that.setMusic(music);
     },
     togglePlaylistToast: function () {
       const that = this;
@@ -53,12 +55,16 @@ export default {
     },
     togglePlayer: function () {
       const that = this;
-      that.setPlayerShow(true);
+      let music = that.music;
+      music.isShow = true;
+      that.setMusic(music);
     },
     ...mapMutations({
-      setPlayState: "SET_PLAY_STATE",
-      setPlaylistToast: "SET_PLAY_LIST_TOAST",
-      setPlayerShow: "SET_PLAYER_SHOW",
+      // setPlayState: "SET_PLAY_STATE",
+      // setPlaylistToast: "SET_PLAY_LIST_TOAST",
+      // setPlayerShow: "SET_PLAYER_SHOW",
+
+      setMusic: "SET_MUSIC",
     }),
   },
 };

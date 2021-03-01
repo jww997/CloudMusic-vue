@@ -5,12 +5,12 @@
       <van-icon size="22" color="#fff" name="volume-o" />
       <div class="slider">
         <van-slider
-          v-model="playVolume"
+          v-model="music.volume"
           :step="10"
           button-size="10px"
           active-color="#fff"
           inactive-color="#494949"
-          @change="togglePlayVolume"
+          @change="toggleMusicVolume"
         />
       </div>
       <div class="iconfont"></div>
@@ -58,10 +58,18 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["playState", "playVolume", "currentTime", "duration"]),
+    isPlaying() {
+      const that = this;
+      return that.music.isPlaying;
+    },
+    currentTime() {
+      const that = this;
+      return that.music.currentTime;
+    },
+    ...mapGetters(["music"]),
   },
   watch: {
-    playState: function (val) {
+    isPlaying: function (val) {
       const that = this;
       try {
         that.lyric.togglePlay();
@@ -75,13 +83,11 @@ export default {
     },
   },
   methods: {
-    togglePlayVolume: function (val) {
+    toggleMusicVolume(val) {
       const that = this;
-      that.setPlayVolume(val);
+      that.amendStateObjValue({ key: "volume", value: val });
     },
-    ...mapMutations({
-      setPlayVolume: "SET_PLAY_VOLUME",
-    }),
+    ...mapActions(["amendStateObjValue"]),
   },
 };
 </script>

@@ -39,24 +39,28 @@ export default {
     };
   },
   computed: {
+    current() {
+      const that = this;
+      return that.music.current;
+    },
     ...mapGetters([
-      "playState",
-      "playUrl",
-      "playIndex",
+      // "playState",
+      // "playUrl",
+      // "playIndex",
       // "playId",
-      "playlist",
+      // "playlist",
 
       "currentSong",
-      "currentTime",
-      "duration",
+      // "currentTime",
+      // "duration",
+
+      "music",
     ]),
   },
   watch: {
-    playId: function (val) {
+    current(val, oldVal) {
       const that = this;
-      that.picUrl = that.currentSong.al.picUrl;
-      that.title = that.currentSong.name;
-      that.subtitle = that.formatArtists(that.currentSong.ar);
+      that.update(val);
       that.getLyric();
     },
   },
@@ -69,7 +73,7 @@ export default {
     },
     getLyric: function () {
       const that = this;
-      let id = that.currentSong.id;
+      let id = that.music.current.id;
       if (!that.isShowLyric) return false;
       if (that.lastId == id) return false;
       that.$api.getLyric({ id }).then((res) => {
@@ -90,13 +94,18 @@ export default {
       that.$set(that.lyric, "curLine", lineNum); // 歌词实时下标
       console.log(`lineNum = ${lineNum}, txt = ${txt}`);
     },
+
+    update(val) {
+      const that = this;
+      that.picUrl = val.al.picUrl;
+      that.title = val.name;
+      that.subtitle = that.formatArtists(val.ar);
+    },
   },
   mounted: function () {
     const that = this;
     try {
-      that.picUrl = that.currentSong.al.picUrl;
-      that.title = that.currentSong.name;
-      that.subtitle = that.formatArtists(that.currentSong.ar);
+      that.update(that.music.current);
     } catch (error) {}
   },
   destroyed: function () {

@@ -16,12 +16,12 @@
     </div> -->
     <router-view v-if="isRouterAlive"></router-view>
 
-    <!-- <transition name="bottombar">
+    <transition name="bottombar">
       <bottombar class="bottombar" v-if="isShowBottomBar"></bottombar>
-    </transition> -->
+    </transition>
 
     <transition name="drawer">
-      <player class="drawer" v-if="playerShow"></player>
+      <player class="drawer" v-if="music.isShow"></player>
       <mv class="drawer" v-if="mv.isShow"></mv>
     </transition>
 
@@ -34,8 +34,10 @@
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { formatTime, formatDate } from "@/assets/js/filter.js";
+
+import Bottombar from "@/common/bottombar";
+
 import Bottomlist from "@/components/bottomlist";
-import Bottombar from "@/components/bottombar";
 import Topbar from "@/components/topbar";
 import Tabbar from "@/components/tabbar";
 import Scroll from "@/base/scroll";
@@ -74,6 +76,7 @@ export default {
       "playSequence",
       "playMode",
 
+      "music",
       "mv",
     ]),
   },

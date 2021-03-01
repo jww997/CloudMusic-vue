@@ -1,6 +1,6 @@
 <template>
   <div class="children">
-    <div :class="{ phonograph: true, active: playState }">
+    <div :class="{ phonograph: true, active: music.isPlaying }">
       <div
         class="disc"
         :style="{
@@ -11,7 +11,7 @@
         @touchmove="touchmove"
         @touchend="touchend"
       >
-        <img class="cover" :src="picUrl" v-if="picUrl" />
+        <img class="cover" :src="picUrl" v-if="picUrl" v-lazy="picUrl" />
         <!-- <img class="lid" :src="require('@/assets/images/lid.png')" /> -->
         <img class="light" :src="require('@/assets/images/light.png')" />
       </div>
@@ -49,7 +49,7 @@ export default {
       let al = that.phonograph && that.phonograph.al;
       return al && al.picUrl;
     },
-    ...mapGetters(["playState"]),
+    ...mapGetters(["music"]),
   },
   methods: {
     touchstart: function () {

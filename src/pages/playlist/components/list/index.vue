@@ -15,7 +15,7 @@
         class="line song"
         v-for="(item, index) in obj.tracks"
         :key="item.id"
-        @click="getMusic(item.id)"
+        @click="toggleMusic(item.id, index)"
       >
         <!-- @click="togglePlayer(index)" -->
         <!-- @click="toPages({ path: '/player', query: { id: item.id } }, index)" -->
@@ -96,6 +96,16 @@ export default {
   },
   methods: {
     formatArtists,
+    toggleMusic(id, index) {
+      const that = this;
+      let music = that.music;
+      let list = that.obj.tracks;
+      music.currentIndex = index;
+      music.currentList = list;
+      that.setMusic(music);
+      that.getMusic(id);
+    },
+
     // togglePlayer: function (index) {
     //   const that = this;
     //   that.setPlayerShow(true);

@@ -28,15 +28,21 @@ export default {
   },
   mounted: function () {
     const that = this;
-
-    // that.$api.getRecommendResource().then((res) => {
-    //   console.log(res);
-
-    //   that.recommend = res.data.recommend;
-    // });
-    that.$api.getRecommendSongs().then((res) => {
-      that.dailySongs = res.data.data.dailySongs;
-    });
+    that.$api
+      .getRecommendSongs()
+      .then((res) => {
+        that.dailySongs = res.data.data.dailySongs;
+      })
+      .catch((err) => {
+        that.$vant.Toast.fail({
+          message: "需要登录",
+          forbidClick: true,
+        });
+        setTimeout(() => {
+          let router = that.$router;
+          window.history.length > 1 ? router.go(-1) : router.push("/");
+        }, 1000);
+      });
   },
 };
 </script>

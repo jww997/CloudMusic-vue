@@ -38,7 +38,7 @@
         >{{ music.isPlaying ? "&#xe665;" : "&#xe666;" }}
       </span> -->
       <span class="iconfont" @click="next">&#xe668;</span>
-      <span class="iconfont" @click="togglePlaylistToast">&#xe664;</span>
+      <span class="iconfont" @click="toggleDrawerShow">&#xe664;</span>
     </div>
   </div>
 </template>
@@ -128,9 +128,9 @@ export default {
       that.amendStateObjValue({ key: "modeIndex", value: i });
     },
 
-    togglePlaylistToast: function () {
+    toggleDrawerShow: function () {
       const that = this;
-      that.setPlaylistToast(true);
+      that.amendStateObjValue({ key: "isShowDrawer", value: true });
     },
     ...mapMutations({
       setPlaylistToast: "SET_PLAY_LIST_TOAST",

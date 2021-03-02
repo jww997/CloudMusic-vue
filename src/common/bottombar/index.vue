@@ -1,6 +1,6 @@
 <template>
-  <div class="kid" v-if="music.current.id" @click="togglePlayer">
-    <!-- @click="toPages({ path: '/player', query: { id: music.current.id } })" -->
+  <div class="kid" v-if="current.id" @click="togglePlayer">
+    <!-- @click="toPages({ path: '/player', query: { id: current.id } })" -->
     <div
       :class="{
         al: true,
@@ -10,12 +10,12 @@
         backgroundImage: 'url(' + require('@/assets/images/chassis.png') + ')',
       }"
     >
-      <!-- <img class="cover" :src="music.current.al.picUrl" /> -->
+      <img class="cover" :src="current.al.picUrl" v-lazy="current.al.picUrl" />
       <img class="light" :src="require('@/assets/images/light.png')" />
     </div>
     <div class="monicker">
-      <span class="name">{{ music.current.name }}</span>
-      <!-- <span class="ar">{{ music.current.ar[0].name }}</span> -->
+      <span class="name">{{ current.name }}</span>
+      <span class="ar">{{ current.ar[0].name }}</span>
     </div>
     <div class="state" @click.stop="toggleStatus">
       <van-icon name="pause-circle-o" v-if="music.isPlaying" />
@@ -29,7 +29,7 @@
       @click.stop="toggleStatus"
       >{{ music.isPlaying ? "&#xe665;" : "&#xe666;" }} 
     </span>-->
-    <span class="iconfont" @click.stop="togglePlaylistToast">&#xe664;</span>
+    <span class="iconfont" @click.stop="toggleDrawerShow">&#xe664;</span>
   </div>
 </template>
 
@@ -39,6 +39,10 @@ import { toPages } from "@/assets/js/util.js";
 export default {
   name: "bottombar",
   computed: {
+    current() {
+      const that = this;
+      return that.music.current;
+    },
     ...mapGetters(["music"]),
   },
   methods: {
@@ -49,9 +53,9 @@ export default {
       music.isPlaying = !music.isPlaying;
       that.setMusic(music);
     },
-    togglePlaylistToast: function () {
+    toggleDrawerShow: function () {
       const that = this;
-      that.setPlaylistToast(true);
+      that.amendStateObjValue({ key: "isShowDrawer", value: true });
     },
     togglePlayer: function () {
       const that = this;
@@ -62,6 +66,7 @@ export default {
     ...mapMutations({
       setMusic: "SET_MUSIC",
     }),
+    ...mapActions(["amendStateObjValue"]),
   },
 };
 </script>

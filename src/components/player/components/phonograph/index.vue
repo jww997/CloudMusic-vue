@@ -11,7 +11,7 @@
         @touchmove="touchmove"
         @touchend="touchend"
       >
-        <img class="cover" :src="picUrl" v-if="picUrl" v-lazy="picUrl" />
+        <img class="cover" :src="picUrl" />
         <!-- <img class="lid" :src="require('@/assets/images/lid.png')" /> -->
         <img class="light" :src="require('@/assets/images/light.png')" />
       </div>

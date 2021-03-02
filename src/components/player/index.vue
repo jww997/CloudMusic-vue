@@ -43,9 +43,7 @@ export default {
       const that = this;
       return that.music.current;
     },
-    ...mapGetters([
-      "music",
-    ]),
+    ...mapGetters(["music"]),
   },
   watch: {
     current(val, oldVal) {

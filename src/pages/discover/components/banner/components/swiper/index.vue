@@ -1,6 +1,6 @@
 <template>
   <div class="grandson">
-    <van-swipe class="swiper" :autoplay="3000" indicator-color="white">
+    <van-swipe class="swiper" :autoplay="5000" indicator-color="white">
       <van-swipe-item
         class="swiper-item"
         v-for="(item, index) in list"

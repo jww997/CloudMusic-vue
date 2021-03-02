@@ -103,18 +103,22 @@ export default {
       that.$vant.Toast.success("刷新成功");
       that.isLoading = false;
     },
+    getdata() {
+      const that = this;
+      that.$api
+        .getHomepageBlockPage({ refresh: true })
+        .then((res) => {
+          that.blocks = res.data.data.blocks;
+          return that.$api.getBanner();
+        })
+        .then((res) => {
+          that.banners = res.data.banners;
+        });
+    },
   },
   mounted: function () {
     const that = this;
-    that.$api
-      .getHomepageBlockPage()
-      .then((res) => {
-        that.blocks = res.data.data.blocks;
-        return that.$api.getBanner();
-      })
-      .then((res) => {
-        that.banners = res.data.banners;
-      });
+    that.getdata();
   },
 };
 </script>
@@ -143,7 +147,7 @@ export default {
     &.second-enter,
     &.second-leave-to {
       opacity: 0;
-      transform: translateY(1rem);
+      transform: translateX(2rem);
     }
 
     &.second-enter-to,

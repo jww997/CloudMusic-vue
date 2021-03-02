@@ -4,38 +4,40 @@
       round
       lock-scroll
       position="bottom"
-      v-model="playlistToast"
+      v-model="isShow"
       safe-area-inset-bottom
       :style="{ height: '60%' }"
-      @close="close"
+      @close="toggleDrawerHide"
     >
       <div class="list">
         <div class="top">
           <div class="title">
             <span class="left">当前播放</span>
-            <span class="length">({{ playlist.length }})</span>
+            <span class="length">({{ music.currentList.length }})</span>
           </div>
           <div class="operation">
-            <div class="module" @click="toggleSequence">
+            <div class="module" @click="toggleModeIndex">
               <span
                 class="iconfont"
-                v-html="playMode[playSequence].icon"
+                v-html="music.modeList[music.modeIndex].icon"
               ></span>
-              <span class="text">{{ playMode[playSequence].text }}</span>
+              <span class="text">{{
+                music.modeList[music.modeIndex].text
+              }}</span>
             </div>
             <div class="module">
               <span class="iconfont">&#xe61d;</span>
               <span class="text">收藏全部</span>
             </div>
-            <div class="iconfont clear">&#xe632;</div>
+            <div class="iconfont clear" @click="clear">&#xe632;</div>
           </div>
         </div>
         <div class="songs">
           <div
-            v-for="(item, index) in playlist"
+            v-for="(item, index) in music.currentList"
             :key="item.id"
-            :class="{ song: true, active: item.id == currentSong.id }"
-            @click="setPlayIndex(index)"
+            :class="{ song: true, active: item.id == music.id }"
+            @click="toggleMusic(item.id, index)"
           >
             <div class="iconfont playing">&#xe604;</div>
             <div class="monicker">
@@ -54,43 +56,56 @@
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   name: "bottomlist",
-  computed: {
-    ...mapGetters([
-      "currentSong",
-      "playMode",
-      "playlist",
-      // "playlistToast",
-      "playSequence",
-    ]),
+  data() {
+    return { isShow: false };
   },
-  props: {
-    playlistToast: {
-      type: Boolean,
-      default: false,
+  computed: {
+    isShowDrawer() {
+      const that = this;
+      return that.music.isShowDrawer;
+    },
+    ...mapGetters(["music"]),
+  },
+  watch: {
+    isShowDrawer(val, oldVal) {
+      const that = this;
+      that.isShow = val;
     },
   },
   methods: {
-    toggleSequence: function () {
+    toggleModeIndex: function () {
       const that = this;
-      let i = that.playSequence + 1;
+      let i = that.music.modeIndex + 1;
       let min = 0;
       let max = 2;
       i > max ? (i = min) : "";
       i < min ? (i = max) : "";
-      that.setPlaySequence(i);
+      that.amendStateObjValue({ key: "modeIndex", value: i });
     },
-    close: function () {
+    toggleDrawerHide: function () {
       const that = this;
-      that.setPlaylistToast(false);
+      that.amendStateObjValue({ key: "isShowDrawer", value: false });
     },
-    ...mapMutations({
-      setPlayState: "SET_PLAY_STATE",
-      setPlayIndex: "SET_PLAY_INDEX",
-      setPlaylistToast: "SET_PLAY_LIST_TOAST",
-      setPlaySequence: "SET_PLAY_SEQUENCE",
-      setPlayDrag: "SET_PLAY_DRAG",
-      setCurrentTime: "SET_CURRENTTIME",
-    }),
+    toggleMusic(id, index) {
+      const that = this;
+      if (that.music.id == id) {
+        // toPages({
+        //   name: "/player",
+        // });
+        // that.amendStateObjValue({ key: "isShow", value: true });
+      } else {
+        that.amendStateObjValue({ key: "id", value: id });
+        that.amendStateObjValue({ key: "currentIndex", value: index });
+      }
+    },
+    clear() {
+      const that = this;
+      that.$vant.Toast.success("清理成功");
+      // that.amendStateObjValue({ key: "currentId", value: -1 });
+      that.amendStateObjValue({ key: "currentIndex", value: -1 });
+      that.amendStateObjValue({ key: "currentList", value: [] });
+    },
+    ...mapActions(["amendStateObjValue"]),
   },
 };
 </script>

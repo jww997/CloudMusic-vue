@@ -1304,50 +1304,37 @@ export default {
      */
   },
 
-
-  //云盘
-  //说明:登录后调用此接口,可获取云盘数据,获取的数据没有对应url,需要再调用一次/song/url获取url
-
-  //可选参数:
-
-  //limit:返回数量,默认为200
-
-  //offset:偏移数量，用于分页,如:(页数-1)*200,其中200为limit的值,默认为0
-
-  //接口地址:/user/cloud
-
-  //调用例子:/user/cloud
-
-  //云盘数据详情
-  //说明:登录后调用此接口,传入云盘歌曲id，可获取云盘数据详情
-
-  //必选参数:id:歌曲id,可多个,用逗号隔开
-
-  //接口地址:/user/cloud/detail
-
-  //调用例子:/user/cloud/detail?id=5374627
-
-  //云盘歌曲删除
-  //说明:登录后调用此接口,可删除云盘歌曲
-
-  //必选参数:id:歌曲id,可多个,用逗号隔开
-
-  //接口地址:/user/cloud/del
-
-  //调用例子:/user/cloud/del
-
-  //云盘上传
-  //说明:登录后调用此接口,使用'Content-Type':'multipart/form-data'上传mp3formData(name为'songFile'),可上传歌曲到云盘
-
-  //参考:https://github.com/Binaryify/NeteaseCloudMusicApi/blob/master/public/cloud.html
-
-  //访问地址:http://localhost:3000/cloud.html)
-
-  //支持命令行调用,参考module_example目录下song_upload.js
-
-  //接口地址:/cloud
-
-  //调用例子:/cloud
+  getUserCloud: parameter => { // 云盘
+    return request("user/cloud", parameter);
+    /**
+     * @param limit (选)返回数量,默认为200
+     * @param offset (选)偏移数量，用于分页,如:(页数-1)*200,其中200为limit的值,默认为0
+     * 说明:登录后调用此接口,可获取云盘数据,获取的数据没有对应url,需要再调用一次/song/url获取url
+     */
+  },
+  getUserCloudDetail: parameter => { // 云盘数据详情
+    return request("user/cloud/detail", parameter);
+    /**
+     * @param id 歌曲id,可多个,用逗号隔开
+     * 说明:登录后调用此接口,传入云盘歌曲id，可获取云盘数据详情
+     */
+  },
+  getUserCloudDel: parameter => { // 云盘歌曲删除
+    return request("user/cloud/del", parameter);
+    /**
+     * @param id 歌曲id,可多个,用逗号隔开
+     * 说明:登录后调用此接口,可删除云盘歌曲
+     */
+  },
+  getCloud: parameter => { // 云盘上传
+    return request("cloud", parameter);
+    /**
+     * 说明:登录后调用此接口,使用'Content-Type':'multipart/form-data'上传mp3formData(name为'songFile'),可上传歌曲到云盘
+     * 参考:https://github.com/Binaryify/NeteaseCloudMusicApi/blob/master/public/cloud.html
+     * 访问地址:http://localhost:3000/cloud.html)
+     * 支持命令行调用,参考module_example目录下song_upload.js
+     */
+  },
 
 
 
@@ -1602,204 +1589,143 @@ export default {
 
   //调用例子:/dj/program/detail?id=1367665101
 
-  //通知-私信
-  //说明:登录后调用此接口,可获取私信
 
-  //可选参数:
-
-  //limit:返回数量,默认为30
-
-  //offset:偏移数量，用于分页,如:(页数-1)*30,其中30为limit的值,默认为0
-
-  //接口地址:/msg/private
-
-  //调用例子:/msg/private?limit=3
-
-  //发送私信
-  //说明:登录后调用此接口,传入用户id和要发送的信息,可以发送私信,返回内容为历史私信,包含带歌单的私信信息(注:不能发送私信给自己)
-
-  //必选参数:
-
-  //user_ids:用户id,多个需用逗号隔开
-
-  //msg:要发送的信息
-
-  //接口地址:/send/text
-
-  //调用例子:/send/text?user_ids=32953014&msg=test,/send/text?user_ids=32953014,475625142&msg=test
-
-  //发送私信音乐
-  //说明:登录后调用此接口,传入用户id和要发送的信息,音乐id,可以发送音乐私信,返回内容为历史私信
-
-  //必选参数:
-
-  //user_ids:用户id,多个需用逗号隔开
-
-  //msg:要发送的信息
-
-  //接口地址:/send/song
-
-  //调用例子:/send/song?user_ids=1&id=351318&msg=测试
-
-  //发送私信(带歌单)
-  //说明:登录后调用此接口,传入用户id和要发送的信息和歌单id,可以发送带歌单的私信(注:不能发送重复的歌单)
-
-  //必选参数:
-
-  //user_ids:用户id,多个需用逗号隔开
-
-  //msg:要发送的信息
-
-  //接口地址:/send/playlist
-
-  //调用例子:/send/playlist?msg=test&user_ids=475625142&playlist=705123491,/send/playlist?msg=test2&user_ids=475625142,32953014&playlist=705123493
-
-  //最近联系人
-  //说明:登录后调用此接口,可获取最接近联系人
-
-  //接口地址:/msg/recentcontact
-
-  //调用例子:/msg/recentcontact
-
-  //私信内容
-  //说明:登录后调用此接口,可获取私信内容
-
-  //必选参数:uid:用户id
-
-  //可选参数:limit:返回数量,默认为30
-
-  //before:分页参数,取上一页最后一项的time获取下一页数据
-
-  //接口地址:/msg/private/history
-
-  //调用例子:/msg/private/history?uid=9003(云音乐小秘书)
-
-  //通知-评论
-  //说明:登录后调用此接口,可获取评论
-
-  //必选参数:uid:用户的id，只能和登录账号的id一致
-
-  //可选参数:
-
-  //limit:返回数量,默认为30
-
-  //before:分页参数,取上一页最后一个歌单的updateTime获取下一页数据
-
-  //接口地址:/msg/comments
-
-  //调用例子:/msg/comments?uid=32953014
-
-  //通知-@我
-  //说明:登录后调用此接口,可获取@我数据
-
-  //可选参数:
-
-  //limit:返回数量,默认为30
-
-  //offset:偏移数量，用于分页,如:(页数-1)*30,其中30为limit的值,默认为0
-
-  //接口地址:/msg/forwards
-
-  //调用例子:/msg/forwards?limit=3
-
-  //通知-通知
-  //说明:登录后调用此接口,可获取通知
-
-  //可选参数:
-
-  //limit:返回数量,默认为30
-
-  //lasttime:返回数据的time,默认-1,传入上一次返回结果的time,将会返回下一页的数据
-
-  //接口地址:/msg/notices
-
-  //调用例子:/msg/notices?limit=3
-
-  //设置
-  //说明:登录后调用此接口,可获取用户设置
-
-  //接口地址:/setting
-
-  //调用例子:/setting
-
-  //数字专辑-新碟上架
-  //说明:调用此接口,可获取数字专辑-新碟上架
-
-  //可选参数:
-
-  //limit:返回数量,默认为30
-
-  //offset:偏移数量，用于分页,如:(页数-1)*30,其中30为limit的值,默认为0
-  //接口地址:/album/list
-
-  //调用例子:/album/list?limit=10
-
-  //数字专辑&数字单曲-榜单
-  //说明:调用此接口,可获取数字专辑&数字单曲-榜单
-
-  //可选参数:
-
-  //limit:返回数量,默认为30
-
-  //offset:偏移数量，用于分页,如:(页数-1)*30,其中30为limit的值,默认为0
-
-  //albumType:为数字专辑,1为数字单曲
-
-  //type:daily:日榜,week:周榜,year:年榜,total:总榜
-
-  //接口地址:/album_songsaleboard
-
-  //调用例子:/album/songsaleboard?type=year&year=2020&albumType=0
-
-  //数字专辑-语种风格馆
-  //说明:调用此接口,可获取语种风格馆数字专辑列表
-
-  //可选参数:
-
-  //limit:返回数量,默认为30
-
-  //offset:偏移数量，用于分页,如:(页数-1)*30,其中30为limit的值,默认为0
-
-  //area地区Z_H:华语,E_A:欧美,KR:韩国,JP:日本
-
-  //接口地址:/album/list/style
-
-  //调用例子:/album/list/style?area=Z_H&offset=2
-
-  //数字专辑详情
-  //说明:调用此接口,传入数字专辑id可获取数字专辑详情(和歌单详情有差异)
-
-  //接口地址:/album/detail
-
-  //调用例子:/album/detail?id=84547195
-
-  //我的数字专辑
-  //说明:登录后调用此接口,可获取我的数字专辑
-
-  //接口地址:/digitalAlbum/purchased
-
-  //调用例子:/digitalAlbum/purchased?limit=10
-
-  //购买数字专辑
-  //说明:登录后调用此接口,可获取购买数字专辑的地址,把地址生成二维码后,可扫描购买专辑
-
-  //必选参数:
-
-  //id:专辑的id
-
-  //payment:支付方式，0为支付宝3为微信
-
-  //quantity:购买的数量
-
-  //接口地址:/digitalAlbum/ordering
-
-  //调用例子:/digitalAlbum/ordering?id=86286082&payment=3&quantity=1
+  getMsgPrivate: parameter => { // 通知-私信
+    returnrequest("msg/private", parameter);
+    /**
+     * @param limit (选)返回数量,默认为30
+     * @param offset (选)偏移数量，用于分页,如:(页数-1)*30,其中30为limit的值,默认为0
+     * 说明:登录后调用此接口,可获取私信
+     */
+  },
+  getSendText: parameter => { // 发送私信
+    returnrequest("send/text", parameter);
+    /**
+     * @param user_ids 用户id,多个需用逗号隔开
+     * @param msg 要发送的信息
+     * 说明:登录后调用此接口,传入用户id和要发送的信息,可以发送私信,返回内容为历史私信,包含带歌单的私信信息(注:不能发送私信给自己)
+     * 调用例子:/send/text?user_ids=32953014&msg=test,/send/text?user_ids=32953014,475625142&msg=test
+     */
+  },
+  getSendSong: parameter => { // 发送私信音乐
+    returnrequest("send/song", parameter);
+    /**
+     * @param user_ids 用户id,多个需用逗号隔开
+     * @param msg 要发送的信息
+     * 说明:登录后调用此接口,传入用户id和要发送的信息,音乐id,可以发送音乐私信,返回内容为历史私信
+     * 调用例子:/send/song?user_ids=1&id=351318&msg=测试
+     */
+  },
+  getSendPlaylist: parameter => { // 发送私信(带歌单)
+    returnrequest("send/playlist", parameter);
+    /**
+     * @param user_ids 用户id,多个需用逗号隔开
+     * @param msg 要发送的信息
+     * 说明:登录后调用此接口,传入用户id和要发送的信息和歌单id,可以发送带歌单的私信(注:不能发送重复的歌单)
+     * 调用例子:/send/playlist?msg=test&user_ids=475625142&playlist=705123491,/send/playlist?msg=test2&user_ids=475625142,32953014&playlist=705123493
+     */
+  },
+  getMsgRecentcontact: parameter => { // 最近联系人
+    returnrequest("msg/recentcontact", parameter);
+    /**
+     * 说明:登录后调用此接口,可获取最接近联系人
+     */
+  },
+  getMsgPrivateHistory: parameter => { // 私信内容
+    returnrequest("msg/private/history", parameter);
+    /**
+     * @param uid 用户id
+     * @param limit (选)返回数量,默认为30
+     * @param before (选)分页参数,取上一页最后一项的time获取下一页数据
+     * 说明:登录后调用此接口,可获取私信内容
+     */
+  },
+  getMsgComments: parameter => { // 通知-评论
+    returnrequest("msg/comments", parameter);
+    /**
+     * @param uid 用户的id，只能和登录账号的id一致
+     * @param limit (选)返回数量,默认为30
+     * @param before (选)分页参数,取上一页最后一个歌单的updateTime获取下一页数据
+     * 说明:登录后调用此接口,可获取评论
+     */
+  },
+  getMsgForwards: parameter => { // 通知-@我
+    returnrequest("msg/forwards", parameter);
+    /**
+     * @param limit (选)返回数量,默认为30
+     * @param offset (选)偏移数量，用于分页,如:(页数-1)*30,其中30为limit的值,默认为0
+     * 说明:登录后调用此接口,可获取 @ 我数据
+     */
+  },
+  getMsgNotices: parameter => { // 通知-通知
+    returnrequest("msg/notices", parameter);
+    /**
+     * @param limit (选)返回数量,默认为30
+     * @param lasttime (选)返回数据的time,默认-1,传入上一次返回结果的time,将会返回下一页的数据
+     * 说明:登录后调用此接口,可获取通知
+     */
+  },
+  getSetting: parameter => { // 设置
+    returnrequest("setting", parameter);
+    /**
+     * 说明:登录后调用此接口,可获取用户设置
+     */
+  },
+  getAlbumList: parameter => { // 数字专辑-新碟上架
+    returnrequest("album/list", parameter);
+    /**
+     * @param limit (选)返回数量,默认为30
+     * @param offset (选)偏移数量，用于分页,如:(页数-1)*30,其中30为limit的值,默认为0
+     * 说明:调用此接口,可获取数字专辑-新碟上架
+     */
+  },
+  getAlbum_songsaleboard: parameter => { // 数字专辑&数字单曲-榜单
+    returnrequest("album_songsaleboard", parameter);
+    /**
+     * @param limit (选)返回数量,默认为30
+     * @param offset (选)偏移数量，用于分页,如:(页数-1)*30,其中30为limit的值,默认为0
+     * @param albumType (选)为数字专辑,1为数字单曲
+     * @param type (选)daily:日榜,week:周榜,year:年榜,total:总榜
+     * 说明:调用此接口,可获取数字专辑&数字单曲-榜单
+     */
+  },
+  getAlbumListStyle: parameter => { // 数字专辑-语种风格馆
+    returnrequest("album/list/style", parameter);
+    /**
+     * @param limit (选)返回数量,默认为30
+     * @param offset (选)偏移数量，用于分页,如:(页数-1)*30,其中30为limit的值,默认为0
+     * @param area地区Z_H (选)华语,E_A:欧美,KR:韩国,JP:日本
+     * 说明:调用此接口,可获取语种风格馆数字专辑列表
+     * 调用例子:/album/list/style?area=Z_H&offset=2
+     */
+  },
+  getAlbumDetail: parameter => { // 数字专辑详情
+    returnrequest("album/detail", parameter);
+    /**
+     * 说明:调用此接口,传入数字专辑id可获取数字专辑详情(和歌单详情有差异)
+     */
+  },
+  getDigitalAlbumPurchased: parameter => { // 我的数字专辑
+    returnrequest("digitalAlbum/purchased", parameter);
+    /**
+     * 说明:登录后调用此接口,可获取我的数字专辑
+     */
+  },
+  getDigitalAlbumOrdering: parameter => { // 购买数字专辑
+    returnrequest("digitalAlbum/ordering", parameter);
+    /**
+     * @param id 专辑的id
+     * @param payment 支付方式，0为支付宝3为微信
+     * @param quantity 购买的数量
+     * 说明:登录后调用此接口,可获取购买数字专辑的地址,把地址生成二维码后,可扫描购买专辑
+     */
+  },
 
   getCalendar: parameter => { // 音乐日历(需要登录)
     returnrequest("calendar", parameter);
     /**
-     * @paramstartTime
-     * @paramendTime
+     * @param startTime
+     * @param endTime
      * 说明:登录后调用此接口, 传入开始和结束时间, 可获取音乐日历
      * 调用例子: /calendar?startTime=1606752000000&endTime=1609430399999
      */

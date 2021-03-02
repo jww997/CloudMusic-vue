@@ -25,7 +25,7 @@
       <mv class="drawer" v-if="mv.isShow"></mv>
     </transition>
 
-    <!-- <bottomlist :playlistToast="playlistToast"></bottomlist> -->
+    <bottomlist></bottomlist>
 
     <music></music>
   </div>
@@ -36,8 +36,8 @@ import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { formatTime, formatDate } from "@/assets/js/filter.js";
 
 import Bottombar from "@/common/bottombar";
+import Bottomlist from "@/common/bottomlist";
 
-import Bottomlist from "@/components/bottomlist";
 import Topbar from "@/components/topbar";
 import Tabbar from "@/components/tabbar";
 import Scroll from "@/base/scroll";
@@ -57,7 +57,7 @@ export default {
     Mv,
   },
   computed: {
-    ...mapGetters(["playlistToast", "music", "mv"]),
+    ...mapGetters(["music", "mv"]),
   },
   provide() {
     // 父组件中通过provide来提供变量，在子组件中通过inject来注入变量。

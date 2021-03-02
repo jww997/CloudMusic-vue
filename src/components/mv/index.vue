@@ -37,51 +37,65 @@ export default {
   },
   data: function () {
     return {
-      isPlaying: false, // 记录音乐播放状态
+      isMusicPlaying: false, // 记录音乐播放状态
       url: "",
       info: {},
       count: {},
     };
   },
   computed: {
+    isPlaying() {
+      const that = this;
+      return that.mv.isPlaying;
+    },
+    currentTime() {
+      const that = this;
+      return that.mv.currentTime;
+    },
     ...mapState(["music", "mv"]),
   },
   watch: {
-    mv: {
-      handler(newVal, oldVal) {
-        const that = this;
-        let video = that.$refs.video;
-        let mv = that.mv;
-        mv.isPlaying ? video.play() : video.pause();
-        if (!newVal.isDraging) return false;
-        video.currentTime = newVal.currentTime;
-        mv.isDraging = false;
-        that.setMv(mv);
-      },
-      deep: true,
+    isPlaying(val, oldVal) {
+      const that = this;
+      let video = that.$refs.video;
+      if (!video) return false;
+      val ? video.play() : video.pause();
+    },
+    currentTime(val, oldVal) {
+      const that = this;
+      if (!that.mv.isDraging) return false;
+      let video = that.$refs.video;
+      video.currentTime = val;
+      that.amendStateObjValue({ name: "mv", key: "isDraging", value: false });
     },
   },
   methods: {
     canplay: function () {
       const that = this;
-      let mv = that.mv;
-      mv.isPlaying = true;
-      that.setMv(mv);
+      that.amendStateObjValue({ name: "mv", key: "isPlaying", value: true });
     },
     timeupdate: function () {
       const that = this;
       let video = that.$refs.video;
       if (!video) return false;
-      let mv = that.mv;
-      that.$set(mv, "currentTime", video.currentTime);
-      that.$set(mv, "duration", video.duration);
-      that.setMv(mv);
+      that.amendStateObjValue({
+        name: "mv",
+        key: "currentTime",
+        value: video.currentTime,
+      });
+      that.amendStateObjValue({
+        name: "mv",
+        key: "duration",
+        value: video.duration,
+      });
     },
     toggleMvPlaying: function () {
       const that = this;
-      let mv = that.mv;
-      mv.isPlaying = !mv.isPlaying;
-      that.setMv(mv);
+      that.amendStateObjValue({
+        name: "mv",
+        key: "isPlaying",
+        value: !that.mv.isPlaying,
+      });
     },
     getdata: function () {
       const that = this;
@@ -103,30 +117,24 @@ export default {
         });
     },
     ...mapMutations({
-      setMusic: "SET_MUSIC",
       setMv: "SET_MV",
     }),
+    ...mapActions(["amendStateObjValue"]),
   },
   mounted: function () {
     const that = this;
-    let music = that.music;
-    if (music.isPlaying) {
-      music.isPlaying = false;
-      that.setMusic(music);
-      that.isPlaying = true;
+    if (that.music.isPlaying) {
+      that.amendStateObjValue({ key: "isPlaying", value: false });
+      that.isMusicPlaying = true;
     }
     that.getdata();
   },
   destroyed: function () {
     const that = this;
-    let music = that.music;
-    if (that.isPlaying) {
-      music.isPlaying = true;
-      that.setMusic(music);
+    if (that.isMusicPlaying) {
+      that.amendStateObjValue({ key: "isPlaying", value: true });
     }
-    let mv = that.mv;
-    mv.isPlaying = false;
-    that.setMv(mv);
+    //   that.amendStateObjValue({ name: "mv", key: "isPlaying", value: false });
   },
 };
 </script>

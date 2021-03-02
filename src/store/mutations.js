@@ -12,9 +12,9 @@ export default {
   [types.SET_PLAY_INDEX](state, val) {
     state.playIndex = val;
   },
-  [types.SET_PLAY_ID](state, val) {
-    state.playId = val;
-  },
+  // [types.SET_PLAY_ID](state, val) {
+  //   state.playId = val;
+  // },
 
   [types.SET_PLAY_LIST](state, val) {
     state.playlist = val;

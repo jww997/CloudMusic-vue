@@ -26,11 +26,9 @@
 
       <div v-for="(item, index) in blocks" :key="index">
         <!-- :ball="ball" -->
-        <banner
-          :list="item.extInfo.banners"
-          v-if="item.showType == 'BANNER'"
-        ></banner>
-
+        <!-- :list="item.extInfo.banners" -->
+        <!-- v-if="item.showType == 'BANNER'" -->
+        <banner :list="banners" v-if="index == 0"></banner>
 
         <bowling v-if="index == 0"></bowling>
 
@@ -39,7 +37,6 @@
           :uielement="item.uiElement"
           v-if="item.showType == 'HOMEPAGE_SLIDE_PLAYLIST'"
         ></whirligig>
-
 
         <slide-songlist-align
           v-if="item.showType == 'HOMEPAGE_SLIDE_SONGLIST_ALIGN'"
@@ -82,6 +79,7 @@ export default {
   data: function () {
     return {
       blocks: [],
+      banners: [],
 
       isLoading: false,
     };
@@ -108,9 +106,15 @@ export default {
   },
   mounted: function () {
     const that = this;
-    that.$api.getHomepageBlockPage().then((res) => {
-      that.blocks = res.data.data.blocks;
-    });
+    that.$api
+      .getHomepageBlockPage()
+      .then((res) => {
+        that.blocks = res.data.data.blocks;
+        return that.$api.getBanner();
+      })
+      .then((res) => {
+        that.banners = res.data.banners;
+      });
   },
 };
 </script>
@@ -124,9 +128,10 @@ export default {
   // min-height: 100vh;
   overflow: scroll;
 
-  // >>> .van-pull-refresh {
-  //   height: 100%;
-  // }
+  >>> .van-pull-refresh {
+    // height: 100%;
+    overflow: scroll;
+  }
 
   .blocks {
     z-index: $zIndex-M;

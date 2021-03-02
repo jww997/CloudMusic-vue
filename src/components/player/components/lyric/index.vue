@@ -2,15 +2,16 @@
   <div class="children">
     <div class="volume">
       <!-- <div class="iconfont">&#xe66d;</div> -->
-      <van-icon size="22" color="#fff" name="volume-o" />
+      <van-icon size="22" color="#fff" name="volume-o" v-if="isMute" />
+      <van-icon size="22" color="#fff" name="volume" v-else />
       <div class="slider">
         <van-slider
           v-model="music.volume"
-          :step="10"
+          step="1"
           button-size="10px"
           active-color="#fff"
           inactive-color="#494949"
-          @change="toggleMusicVolume"
+          @input="toggleMusicVolume"
         />
       </div>
       <div class="iconfont"></div>
@@ -55,6 +56,7 @@ export default {
   data: function () {
     return {
       lineHeight: 0.9,
+      isMute: false,
     };
   },
   computed: {
@@ -65,6 +67,10 @@ export default {
     currentTime() {
       const that = this;
       return that.music.currentTime;
+    },
+    volume() {
+      const that = this;
+      return that.music.volume;
     },
     ...mapGetters(["music"]),
   },
@@ -80,6 +86,10 @@ export default {
       try {
         that.lyric.seek(val * 1000);
       } catch (error) {}
+    },
+    volume: function (val) {
+      const that = this;
+      that.isMute = val == 0 ? true : false;
     },
   },
   methods: {

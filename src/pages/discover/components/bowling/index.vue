@@ -57,7 +57,15 @@ export default {
           name = "toplist";
           break;
         case -6:
-          name = "";
+          that.amendStateObjValue({ key: "currentIndex", value: -1 });
+          that.$api.getPersonalFm().then((res) => {
+            that.amendStateObjValue({
+              key: "currentList",
+              value: res.data.data,
+            });
+            that.amendStateObjValue({ key: "currentIndex", value: 0 });
+            that.amendStateObjValue({ key: "isShow", value: true });
+          });
           break;
       }
       if (!name) {
@@ -66,6 +74,7 @@ export default {
       }
       that.toPages({ name, params: {} });
     },
+    ...mapActions(["amendStateObjValue"]),
   },
   mounted() {
     const that = this;

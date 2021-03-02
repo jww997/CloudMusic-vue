@@ -13,8 +13,6 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
-import { formatArtists } from "@/assets/js/filter.js";
-import { toPages } from "@/assets/js/util.js";
 export default {
   name: "Subscribers",
   props: {
@@ -22,39 +20,6 @@ export default {
       type: Array,
       value: [],
     },
-  },
-  methods: {
-    formatArtists,
-    togglePlayer: function (index) {
-      const that = this;
-      that.setPlayerShow(true);
-      if (typeof index == "number") {
-        let list = that.obj.tracks;
-        let current = list[index];
-        that.setPlayId(current.id);
-        that.setPlayIndex(index);
-        that.setPlayList(list);
-        that.setCurrentSong(current);
-      }
-    },
-    toggleMv: function (id) {
-      const that = this;
-      console.log(id);
-      let mv = that.mv;
-      mv.id = id;
-      mv.isShow = true;
-      that.setMv(mv);
-    },
-    ...mapMutations({
-      setPlayList: "SET_PLAY_LIST",
-      setPlayIndex: "SET_PLAY_INDEX",
-      // setPlayId: "SET_PLAY_ID",
-      setPlayState: "SET_PLAY_STATE",
-      setPlayerShow: "SET_PLAYER_SHOW",
-      setCurrentSong: "SET_CURRENTSONG",
-
-      setMv: "SET_MV",
-    }),
   },
 };
 </script>

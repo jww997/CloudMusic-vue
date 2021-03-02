@@ -7,11 +7,11 @@
       <div class="strip">
         <van-slider
           v-model="percentage"
-          :step="1"
+          step="1"
           button-size="10px"
           active-color="#f00"
           inactive-color="#494949"
-          @change="togglePercentage"
+          @input="togglePercentage"
         />
       </div>
       <div class="text">
@@ -21,7 +21,7 @@
     <div class="bottom">
       <span
         class="iconfont"
-        @click="toggleSequence"
+        @click="toggleModeIndex"
         v-html="music.modeList[music.modeIndex].icon"
       ></span>
       <span class="iconfont" @click="prev">&#xe663;</span>
@@ -64,27 +64,12 @@ export default {
       const that = this;
       return that.music.currentTime;
     },
-    ...mapGetters([
-      // "playState",
-      // "playIndex",
-      "playlist",
-
-      "playlistToast",
-
-      "playSequence",
-      "playMode",
-      "currentSong",
-      // "currentTime",
-      // "duration",
-
-      "music",
-    ]),
+    ...mapGetters(["playlistToast", "music"]),
   },
   watch: {
     currentTime: function (val) {
       const that = this;
-      let music = that.music;
-      that.percentage = Number.parseFloat(val / music.duration) * 100;
+      that.percentage = Number.parseFloat(val / that.music.duration) * 100;
     },
   },
   methods: {
@@ -92,63 +77,65 @@ export default {
     prev: function () {
       console.log("上一首");
       const that = this;
-      let music = that.music;
-      if (music.currentIndex == 0) {
-        music.currentIndex = music.currentList.length - 1;
-      } else if (music.currentIndex - 1 <= music.currentList.length) {
-        music.currentIndex = music.currentIndex - 1;
+      let currentIndex = that.music.currentIndex;
+      let currentList = that.music.currentList;
+      if (currentIndex == 0) {
+        that.amendStateObjValue({
+          key: "currentIndex",
+          value: currentList.length - 1,
+        });
+      } else if (currentIndex - 1 <= currentList.length) {
+        that.amendStateObjValue({
+          key: "currentIndex",
+          value: currentIndex - 1,
+        });
       }
-      that.setMusic(music);
     },
     next: function () {
       console.log("下一首");
       const that = this;
-      let music = that.music;
-      if (music.currentIndex >= music.currentList.length - 1) {
-        music.currentIndex = 0;
-      } else if (music.currentIndex + 1 <= music.currentList.length) {
-        music.currentIndex = music.currentIndex + 1;
+      let currentIndex = that.music.currentIndex;
+      let currentList = that.music.currentList;
+      if (currentIndex >= currentList.length - 1) {
+        that.amendStateObjValue({ key: "currentIndex", value: 0 });
+      } else if (currentIndex + 1 <= currentList.length) {
+        that.amendStateObjValue({
+          key: "currentIndex",
+          value: currentIndex + 1,
+        });
       }
-      that.setMusic(music);
     },
     togglePercentage: function (val) {
       const that = this;
-      let music = that.music;
-      let i = music.duration * (val / 100); // 根据选中百分比修改进度条
-      music.isDrag = true;
-      music.currentTime = i; // 接收秒数，要处理下
-      that.setMusic(music);
+      let i = that.music.duration * (val / 100); // 根据选中百分比修改进度条
+      that.amendStateObjValue({ key: "isDraging", value: true });
+      that.amendStateObjValue({ key: "currentTime", value: i }); // 接收秒数，要处理下
     },
     toggleStatus: function () {
       const that = this;
-      let music = that.music;
-      music.isPlaying = !music.isPlaying;
-      that.setMusic(music);
-      // that.setPlayState(!that.playState);
+      that.amendStateObjValue({
+        key: "isPlaying",
+        value: !that.music.isPlaying,
+      });
     },
-    togglePlaylistToast: function () {
+    toggleModeIndex: function () {
       const that = this;
-      that.setPlaylistToast(true);
-    },
-    toggleSequence: function () {
-      const that = this;
-      let i = that.playSequence + 1;
+      let i = that.music.modeIndex + 1;
       let min = 0;
       let max = 2;
       i > max ? (i = min) : "";
       i < min ? (i = max) : "";
-      that.setPlaySequence(i);
+      that.amendStateObjValue({ key: "modeIndex", value: i });
+    },
+
+    togglePlaylistToast: function () {
+      const that = this;
+      that.setPlaylistToast(true);
     },
     ...mapMutations({
-      // setPlayState: "SET_PLAY_STATE",
-      // setPlayIndex: "SET_PLAY_INDEX",
       setPlaylistToast: "SET_PLAY_LIST_TOAST",
-      setPlaySequence: "SET_PLAY_SEQUENCE",
-      // setPlayDrag: "SET_PLAY_DRAG",
-      // setCurrentTime: "SET_CURRENTTIME",
-
-      setMusic: "SET_MUSIC",
     }),
+    ...mapActions(["amendStateObjValue"]),
   },
 };
 </script>

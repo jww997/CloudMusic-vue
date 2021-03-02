@@ -21,6 +21,10 @@ export default {
       const that = this;
       return that.music.isPlaying;
     },
+    isDraging() {
+      const that = this;
+      return that.music.isDraging;
+    },
     id() {
       const that = this;
       return that.music.id;
@@ -29,27 +33,19 @@ export default {
       const that = this;
       return that.music.currentIndex;
     },
+    modeIndex() {
+      const that = this;
+      return that.music.modeIndex;
+    },
     volume() {
       const that = this;
       return that.music.volume;
     },
-    ...mapGetters([
-      // "playUrl",
-      // "playState",
-      // "playIndex",
-      // "playId",
-      // "playlist",
-      "playSequence",
-      "playMode",
-      "playDrag",
-      // "playVolume",
-
-      // "currentSong",
-      // "currentTime",
-      // "duration",
-
-      "music",
-    ]),
+    isMvShow() {
+      const that = this;
+      return that.mv.isShow;
+    },
+    ...mapGetters(["music", "mv"]),
   },
   watch: {
     isPlaying(val, oldval) {
@@ -57,6 +53,14 @@ export default {
       let audio = that.$refs.audio;
       if (!audio) return false;
       val ? audio.play() : audio.pause();
+    },
+    isDraging(val, oldval) {
+      const that = this;
+      let audio = that.$refs.audio;
+      if (val) {
+        audio.currentTime = that.music.currentTime;
+        that.amendStateObjValue({ key: "isDraging", value: false });
+      }
     },
     id(val, oldval) {
       const that = this;
@@ -68,6 +72,12 @@ export default {
       that.amendStateObjValue({ key: "current", value: current });
       that.amendStateObjValue({ key: "id", value: current.id });
     },
+    modeIndex(val, oldval) {
+      const that = this;
+      let text = that.music.modeList[val].text;
+      console.log(`模式 => ${text}`);
+      that.$vant.Toast({ type: "html", duration: 500, message: text });
+    },
     volume(val, oldval) {
       const that = this;
       let audio = that.$refs.audio;
@@ -75,72 +85,39 @@ export default {
       that.amendStateObjValue({ key: "volume", value: val });
       audio.volume = val / 100;
     },
-
-    music: {
-      handler(val, oldval) {
-        const that = this;
-
-        if (val.modeIndex != oldval.modeIndex) {
-          let text = val.modeList[val.modeIndex].text;
-          console.log(`模式 => ${text}`);
-          that.$vant.Toast({ type: "html", duration: 500, message: text });
-        }
-      },
-      deep: true,
-    },
-
-    // playSequence: function (val) {
+    // isMvShow(val, oldVal) {
     //   const that = this;
-    //   let text = that.playMode[val].text;
-    //   console.log(`模式 => ${text}`);
-    //   that.$vant.Toast({ type: "html", duration: 500, message: text });
+    //   console.log(val);
+    //   // if (!val) return false;
+    //   that.amendStateObjValue({ key: "isPlaying", value: !val });
     // },
-
-    // playIndex: function (val) {
-    //   const that = this;
-    //   let current = that.playlist[val];
-    //   that.setPlayId(current.id);
-    //   that.setCurrentSong(current);
-    // },
-    playDrag: function (val) {
-      const that = this;
-      if (val) {
-        let audio = that.$refs.audio;
-        audio.currentTime = that.music.currentTime;
-        that.setPlayDrag(false);
-      }
-    },
   },
   methods: {
     canplay: function () {
       console.log("开始 你的表演 ---------------------------------");
       const that = this;
       let audio = that.$refs.audio;
-      let music = that.music;
-      music.isPlaying = true;
-      music.volume = audio.volume * 100;
-      that.setMusic(music);
+      that.amendStateObjValue({ key: "isPlaying", value: true });
+      that.amendStateObjValue({ key: "volume", value: audio.volume * 100 });
       audio.play();
     },
     ended: function () {
       console.log("结束 你的表演 ---------------------------------");
       const that = this;
-      let audio = that.$refs.audio;
-      let music = that.music;
-      music.isPlaying = false;
-      that.setMusic(music);
-      audio.pause();
+      that.amendStateObjValue({ key: "isPlaying", value: false });
       that.next();
     },
     timeupdate: function () {
       const that = this;
-      let music = that.music;
       // if (!music.isPlaying || music.isDraging) return false;
       let audio = that.$refs.audio;
-      music.currentTime != audio.currentTime &&
-        (music.currentTime = audio.currentTime);
-      music.duration != audio.duration && (music.duration = audio.duration);
-      that.setMusic(music);
+      that.music.currentTime != audio.currentTime &&
+        that.amendStateObjValue({
+          key: "currentTime",
+          value: audio.currentTime,
+        });
+      that.music.duration != audio.duration &&
+        that.amendStateObjValue({ key: "duration", value: audio.duration });
     },
     error: function () {
       console.log("翻车啦  --------------------------------------");
@@ -151,32 +128,30 @@ export default {
       const that = this;
       let music = that.music;
       let currentIndex = music.currentIndex;
-      let length = that.playlist.length;
+      let length = music.currentList.length;
       let audio = that.$refs.audio;
-      switch (that.playSequence) {
+      switch (music.modeIndex) {
         case 0: // 顺序循环
           if (currentIndex <= length - 1) {
             currentIndex = currentIndex + 1;
-            music.currentIndex = currentIndex;
-            that.setMusic(music);
+            that.amendStateObjValue({
+              key: "currentIndex",
+              value: currentIndex,
+            });
           }
           break;
         case 1: // 随机播放
           let random = Math.random();
-          music.currentIndex = Math.round(length * random);
-          that.setMusic(music);
+          that.amendStateObjValue({
+            key: "currentIndex",
+            value: Math.round(length * random),
+          });
           break;
         case 2: // 单曲循环
           audio.load();
           break;
       }
     },
-    ...mapMutations({
-      setPlayDrag: "SET_PLAY_DRAG",
-      setPlayVolume: "SET_PLAY_VOLUME",
-
-      setMusic: "SET_MUSIC",
-    }),
     ...mapActions(["getMusic", "amendStateObjValue"]),
   },
 };
@@ -185,6 +160,4 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-.base {
-}
 </style>

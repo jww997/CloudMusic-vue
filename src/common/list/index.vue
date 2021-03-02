@@ -1,5 +1,5 @@
 <template>
-  <div class="common" v-if="list">
+  <div class="common" v-if="list.length">
     <div class="line all">
       <div class="left" @click="toggleMusic(list[0].id, 0)">
         <!-- @click="togglePlayer(0)" -->
@@ -113,9 +113,6 @@ export default {
       that.amendStateObjValue({ name: "mv", key: "id", value: id });
       that.amendStateObjValue({ name: "mv", key: "isShow", value: true });
     },
-    ...mapMutations({
-      setMv: "SET_MV",
-    }),
     ...mapActions(["amendStateObjValue"]),
   },
 };

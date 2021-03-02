@@ -44,16 +44,6 @@ export default {
       return that.music.current;
     },
     ...mapGetters([
-      // "playState",
-      // "playUrl",
-      // "playIndex",
-      // "playId",
-      // "playlist",
-
-      "currentSong",
-      // "currentTime",
-      // "duration",
-
       "music",
     ]),
   },

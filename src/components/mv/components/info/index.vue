@@ -43,14 +43,14 @@
     <div class="strip">
       <van-slider
         v-model="percentage"
-        :step="1"
+        step="1"
         button-size="10px"
         active-color="#f00"
         inactive-color="#494949"
-        @change="togglePercentage"
+        @input="togglePercentage"
       />
     </div>
-    <div class="bottom" @click="togglePlayer">
+    <div class="bottom">
       <div
         :class="{
           iconfont: true,
@@ -85,56 +85,35 @@ export default {
     };
   },
   computed: {
+    currentTime() {
+      const that = this;
+      return that.mv.currentTime;
+    },
     ...mapState(["mv"]),
   },
   watch: {
-    mv: {
-      handler(newVal, oldVal) {
-        const that = this;
-        that.percentage =
-          Number.parseFloat(newVal.currentTime / newVal.duration) * 100;
-      },
-      deep: true,
+    currentTime(newVal, oldVal) {
+      const that = this;
+      that.percentage = Number.parseFloat(newVal / that.mv.duration) * 100;
     },
   },
   methods: {
     formatArtists,
     togglePercentage: function (val) {
       const that = this;
-      let mv = that.mv;
-      mv.currentTime = mv.duration * (val / 100); // 根据选中百分比修改进度条
-      mv.isDraging = true;
-      that.setMv(mv);
+      that.amendStateObjValue({ name: "mv", key: "isDraging", value: true });
+      that.amendStateObjValue({
+        name: "mv",
+        key: "currentTime",
+        value: that.mv.duration * (val / 100),
+      }); // 根据选中百分比修改进度条
     },
     toggleDesc: function () {
       const that = this;
       if (!that.info.desc) return false;
       that.isShowDesc = !that.isShowDesc;
     },
-    togglePlayer: function () {
-      const that = this;
-      let info = that.info;
-      return false;
-      that.setPlayerShow(true);
-      if (typeof index == "number") {
-        let list = [info];
-        let current = info;
-        that.setPlayId(info.id);
-        that.setPlayIndex(0);
-        that.setPlayList(list);
-        that.setCurrentSong(current);
-      }
-    },
-    ...mapMutations({
-      setPlayList: "SET_PLAY_LIST",
-      setPlayIndex: "SET_PLAY_INDEX",
-      // setPlayId: "SET_PLAY_ID",
-      setPlayState: "SET_PLAY_STATE",
-      setPlayerShow: "SET_PLAYER_SHOW",
-      setCurrentSong: "SET_CURRENTSONG",
-
-      setMv: "SET_MV",
-    }),
+    ...mapActions(["amendStateObjValue"]),
   },
 };
 </script>

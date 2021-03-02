@@ -14,30 +14,31 @@ const list = [{
 export default {
 
   music: {
-    id: -1,             // 标识号
-    isShow: false,      // 显示
-    isPlaying: false,   // 状态
-    isDraging: false,   // 拖拽
-    duration: "",       // 总时间
-    currentTime: "",    // 当前时间
+    id: -1,               // 标识号
+    isShow: false,        // 显示
+    isPlaying: false,     // 状态
+    isDraging: false,     // 拖拽
+    duration: "",         // 总时间
+    currentTime: "",      // 当前时间
 
-    currentIndex: -1,   // 播放下标
-    currentList: [],    // 播放列表
-    current: {},        // 播放当前
-    url: "",            // 播放地址
+    currentIndex: -1,     // 播放下标
+    currentList: [],      // 播放列表
+    current: {},          // 播放当前
+    url: "",              // 播放地址
 
-    modeIndex: 0,       // 模式下标
-    modeList: list,     // 模式列表
+    modeIndex: 0,         // 模式下标
+    modeList: list,       // 模式列表
+    volume: 60,           // 音量
 
-    volume: 60,         // 音量
+    isShowDrawer: false,  // 抽屉列表
   },
   mv: {
-    id: -1,             // 标识号
-    isShow: false,      // 显示
-    isPlaying: false,   // 状态
-    isDraging: false,   // 拖拽
-    duration: "",       // 总时间
-    currentTime: "",    // 当前时间
+    id: -1,               // 标识号
+    isShow: false,        // 显示
+    isPlaying: false,     // 状态
+    isDraging: false,     // 拖拽
+    duration: "",         // 总时间
+    currentTime: "",      // 当前时间
   },
 
   login: {

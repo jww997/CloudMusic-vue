@@ -3,7 +3,7 @@ export default {
     playState: state => { return state.playState },
     playUrl: state => { return state.playUrl },
     playIndex: state => { return state.playIndex },
-    playId: state => { return state.playId },
+    // playId: state => { return state.playId },
     playlist: state => { return state.playlist },
     playSequence: state => { return state.playSequence },
     playMode: state => { return state.playMode },

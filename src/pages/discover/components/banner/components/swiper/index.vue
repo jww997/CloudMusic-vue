@@ -7,7 +7,8 @@
         :key="index"
       >
         <div class="box" :data-url="item.url" :data-video="item.video">
-          <img class="image" :src="item.pic" />
+          <!-- <img class="image" :src="item.pic" /> -->
+          <img class="image" :src="item.imageUrl" />
           <span
             class="text"
             :style="{ backgroundColor: item.titleColor }"

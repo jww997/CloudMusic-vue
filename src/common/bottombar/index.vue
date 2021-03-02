@@ -10,12 +10,12 @@
         backgroundImage: 'url(' + require('@/assets/images/chassis.png') + ')',
       }"
     >
-      <img class="cover" :src="music.current.al.picUrl" />
+      <!-- <img class="cover" :src="music.current.al.picUrl" /> -->
       <img class="light" :src="require('@/assets/images/light.png')" />
     </div>
     <div class="monicker">
       <span class="name">{{ music.current.name }}</span>
-      <span class="ar">{{ music.current.ar[0].name }}</span>
+      <!-- <span class="ar">{{ music.current.ar[0].name }}</span> -->
     </div>
     <div class="state" @click.stop="toggleStatus">
       <van-icon name="pause-circle-o" v-if="music.isPlaying" />
@@ -60,10 +60,6 @@ export default {
       that.setMusic(music);
     },
     ...mapMutations({
-      // setPlayState: "SET_PLAY_STATE",
-      // setPlaylistToast: "SET_PLAY_LIST_TOAST",
-      // setPlayerShow: "SET_PLAYER_SHOW",
-
       setMusic: "SET_MUSIC",
     }),
   },

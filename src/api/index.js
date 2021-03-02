@@ -871,7 +871,7 @@ export default {
      */
   },
   getBanner: parameter => { // banner
-    return request("banner", parameter);
+    return request("banner", parameter, { isCookie: true });
     /**
      * @param type (选)资源类型,0PC, 1android, 2iphone, 3ipad
      */

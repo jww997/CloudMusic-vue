@@ -1,7 +1,7 @@
 <template>
   <div class="kid">
     <div class="left iconfont" is-link @click="showPopup">&#xe70d;</div>
-    <div class="frame">
+    <div class="frame" @click="toPages({ name: 'search' })">
       <van-icon name="search" />
       <span class="text">搜索</span>
     </div>
@@ -19,6 +19,7 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
+import { toPages } from "@/assets/js/util.js";
 import Setting from "./components/setting";
 export default {
   name: "Search",
@@ -34,6 +35,7 @@ export default {
     };
   },
   methods: {
+    toPages,
     showPopup() {
       const that = this;
       that.show = true;

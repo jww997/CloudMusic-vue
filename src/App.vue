@@ -57,28 +57,7 @@ export default {
     Mv,
   },
   computed: {
-    ...mapGetters([
-      // "currentSong",
-      // "currentTime",
-      // "duration",
-
-      // "playId",
-      "playIndex",
-
-      "playlist",
-      "playUrl",
-
-      "playState",
-      "playDrag",
-      "playlistToast",
-      "playerShow",
-
-      "playSequence",
-      "playMode",
-
-      "music",
-      "mv",
-    ]),
+    ...mapGetters(["playlistToast", "music", "mv"]),
   },
   provide() {
     // 父组件中通过provide来提供变量，在子组件中通过inject来注入变量。
@@ -138,8 +117,6 @@ body,
 .app {
   height: 100vh;
   overflow: hidden;
-}
-.app {
   display: flex;
   flex-direction: column;
   .view {

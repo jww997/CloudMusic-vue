@@ -86,9 +86,6 @@ export default {
       default: 20,
     },
   },
-  // computed: {
-  //   ...mapGetters(["playId"]),
-  // },
   methods: {
     disable() {
       const that = this;
@@ -187,10 +184,6 @@ export default {
         that.refresh();
       }, that.refreshDelay);
     },
-    // playId(val) {
-    //   const that = this;
-    //   that.refresh();
-    // },
     // $route: {
     //   handler(val, oldval) {
     //     const that = this;

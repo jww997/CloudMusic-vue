@@ -116,6 +116,9 @@ export default {
     position: relative;
     padding-left: $text-XS + 1.5rem;
     padding-right: $text-S;
+    &:first-child {
+      margin-top: 0;
+    }
     .left {
       width: 1.2rem;
       height: 1.2rem;

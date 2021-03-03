@@ -4,7 +4,11 @@
     <!-- <scroll :data="blocks" :refreshDelay="1000"> -->
 
     <!-- class="blocks" -->
-    <van-pull-refresh v-model="isLoading" @refresh="refresh" :head-height="80">
+    <van-pull-refresh
+      v-model="isLoading"
+      head-height="80"
+      @refresh.stop="refresh"
+    >
       <!-- 下拉提示，通过 scale 实现一个缩放效果 -->
       <template #pulling="props">
         <img
@@ -147,7 +151,7 @@ export default {
     &.second-enter,
     &.second-leave-to {
       opacity: 0;
-      transform: translateX(2rem);
+      transform: scale(1.5) translateY(2rem);
     }
 
     &.second-enter-to,

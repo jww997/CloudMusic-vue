@@ -10,7 +10,7 @@
           }"
           >{{ index + 1 }}</span
         >
-        <span>{{ item.searchWord }}</span>
+        <span class="title">{{ item.searchWord }}</span>
         <img class="icon" :src="item.iconUrl" v-if="item.iconUrl" />
       </div>
     </div>
@@ -48,12 +48,19 @@ export default {
       box-sizing: border-box;
       @include flexCenter;
       justify-content: flex-start;
+      .subscript,
+      .icon {
+        flex-shrink: 0;
+      }
       .subscript {
         width: $text-XL;
         color: $theme-GRAY;
         &.special {
           color: $theme-RED;
         }
+      }
+      .title {
+        @include omit;
       }
       .icon {
         margin-left: $text-XXS;

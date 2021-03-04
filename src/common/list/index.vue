@@ -98,6 +98,7 @@ export default {
 
     toggleMusic(id, index) {
       const that = this;
+      that.amendStateObjValue({ key: "currentIndex", value: -1 });
       if (that.music.id == id) {
         that.toPages({ name: "player" });
         // that.amendStateObjValue({ key: "isShow", value: true });

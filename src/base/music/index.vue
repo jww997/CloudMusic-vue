@@ -65,11 +65,18 @@ export default {
     id(val, oldval) {
       const that = this;
       that.getMusic(val);
+
+      let currentList = that.music.currentList;
+      let currentIndex = that.music.currentIndex;
+      if (!currentList.length) return false;
+      let current = currentList[currentIndex];
+      console.log(current);
+      that.amendStateObjValue({ key: "current", value: current });
     },
     currentIndex(val, oldval) {
       const that = this;
       let current = that.music.currentList[val];
-      that.amendStateObjValue({ key: "current", value: current });
+      //   that.amendStateObjValue({ key: "current", value: current });
       that.amendStateObjValue({ key: "id", value: current.id });
     },
     modeIndex(val, oldval) {

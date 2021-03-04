@@ -18,13 +18,14 @@
       </div>
     </div> -->
 
-    <transition name="thirdly">
-      <router-view class="thirdly"></router-view>
+    <transition :name="transition">
+      <router-view></router-view>
     </transition>
   </div>
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import Matrix from "@/common/matrix";
 
 import Navbar from "@/common/navbar";
@@ -42,6 +43,9 @@ export default {
     return {
       list: [],
     };
+  },
+  computed: {
+    ...mapGetters(["transition"]),
   },
   mounted: function () {
     const that = this;
@@ -90,26 +94,5 @@ export default {
   //     }
   //   }
   // }
-
-  .thirdly {
-    z-index: $zIndex-L;
-    @include suspension;
-
-    &.thirdly-enter,
-    &.thirdly-leave-to {
-      opacity: 0;
-      transform: translateY(1rem);
-    }
-
-    &.thirdly-enter-to,
-    &.thirdly-leave {
-      opacity: 1;
-    }
-
-    &.thirdly-enter-active,
-    &.thirdly-leave-active {
-      transition: 0.5s;
-    }
-  }
 }
 </style>

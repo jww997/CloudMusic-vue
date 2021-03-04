@@ -49,14 +49,17 @@
       </div>
     </van-pull-refresh>
     <!-- </scroll> -->
-    <transition name="second">
-      <router-view class="second"></router-view>
+
+    <transition :name="transition">
+      <router-view></router-view>
     </transition>
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
+
+// import pageSecond from "@/base/page-second";
 
 import Bowling from "./components/bowling";
 import Whirligig from "./components/whirligig";
@@ -78,6 +81,7 @@ export default {
     Topbar,
     Banner,
     Calendar,
+    // pageSecond,
   },
   inject: ["reload"],
   data: function () {
@@ -86,10 +90,11 @@ export default {
       banners: [],
 
       isLoading: false,
+
     };
   },
   computed: {
-    ...mapState(["login"]),
+    ...mapGetters(["login", "transition"]),
   },
   watch: {
     login: {
@@ -141,29 +146,10 @@ export default {
     overflow: scroll;
   }
 
-  .blocks {
-    z-index: $zIndex-M;
-  }
-  .second {
-    z-index: $zIndex-L;
-    @include suspension;
+  // .blocks {
+  //   z-index: $zIndex-M;
+  // }
 
-    &.second-enter,
-    &.second-leave-to {
-      opacity: 0;
-      transform: scale(1.5) translateY(2rem);
-    }
-
-    &.second-enter-to,
-    &.second-leave {
-      opacity: 1;
-    }
-
-    &.second-enter-active,
-    &.second-leave-active {
-      transition: 0.5s;
-    }
-  }
   .doge {
     width: 140px;
     height: 72px;

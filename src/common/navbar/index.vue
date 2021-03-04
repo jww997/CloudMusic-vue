@@ -23,7 +23,7 @@
 
     <template v-else>
       <div class="icon left">
-        <van-icon name="arrow-down" @click="hide" />
+        <van-icon name="arrow-down" @click="back" />
         <!-- <div class="iconfont" @click="back">&#xe614;</div> -->
       </div>
       <div class="center">
@@ -64,6 +64,11 @@ export default {
       default: "transparent",
     },
     // box: {},
+
+    type: {
+      type: Number,
+      default: 0,
+    },
   },
   computed: {
     ...mapState(["music", "mv"]),
@@ -116,7 +121,7 @@ export default {
   padding: 0 0.3rem;
   box-sizing: border-box;
   color: #fff;
-  z-index: $zIndex-M;
+  z-index: 1;
   @include flexSpaceBetween;
   transition: 0.5s;
   // text-shadow: 0 0 20px $theme-BLACK;

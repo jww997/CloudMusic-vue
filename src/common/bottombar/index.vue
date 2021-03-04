@@ -1,6 +1,6 @@
 <template>
-  <div class="kid" v-if="current.id" @click="togglePlayer">
-    <!-- @click="toPages({ path: '/player', query: { id: current.id } })" -->
+  <div class="kid" v-if="current.id" @click.stop="toPages({ name: 'player' })">
+    <!-- @click="togglePlayer" -->
     <div
       :class="{
         al: true,
@@ -59,9 +59,7 @@ export default {
     },
     togglePlayer: function () {
       const that = this;
-      let music = that.music;
-      music.isShow = true;
-      that.setMusic(music);
+      that.amendStateObjValue({ key: "isShow", value: true });
     },
     ...mapMutations({
       setMusic: "SET_MUSIC",
@@ -92,6 +90,7 @@ export default {
   @include flexSpaceBetween;
   transition: 0.5s;
   overflow: visible;
+  z-index: 1;
   .al,
   .cover {
     border-radius: 50%;

@@ -87,6 +87,7 @@ export default {
     ...mapGetters(["music", "mv"]),
   },
   methods: {
+    toPages,
     formatArtists,
     mouseenter: function (index) {
       const that = this;
@@ -98,10 +99,8 @@ export default {
     toggleMusic(id, index) {
       const that = this;
       if (that.music.id == id) {
-        // toPages({
-        //   name: "/player",
-        // });
-        that.amendStateObjValue({ key: "isShow", value: true });
+        that.toPages({ name: "player" });
+        // that.amendStateObjValue({ key: "isShow", value: true });
       } else {
         that.amendStateObjValue({ key: "id", value: id });
         that.amendStateObjValue({ key: "currentList", value: that.list });
@@ -110,8 +109,9 @@ export default {
     },
     toggleMv: function (id) {
       const that = this;
+      that.toPages({ name: "mv" });
       that.amendStateObjValue({ name: "mv", key: "id", value: id });
-      that.amendStateObjValue({ name: "mv", key: "isShow", value: true });
+      // that.amendStateObjValue({ name: "mv", key: "isShow", value: true });
     },
     ...mapActions(["amendStateObjValue"]),
   },

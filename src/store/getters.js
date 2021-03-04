@@ -26,4 +26,6 @@ export default {
     music: state => { return state.music },
     mv: state => { return state.mv },
     login: state => { return state.login },
+
+    transition: state => { return state.transition },
 }

@@ -8,12 +8,13 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 Vue.use(Router);
-// // 获取原型对象上的push函数
-// const originalPush = Router.prototype.push;
-// // 修改原型对象中的push方法
-// Router.prototype.push = function push(location) {
-//   return originalPush.call(this, location).catch(err => err)
-// }
+// 获取原型对象上的push函数
+const originalPush = Router.prototype.push;
+// 修改原型对象中的push方法
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 export default new Router({
   mode: 'history',
   routes: [
@@ -24,107 +25,109 @@ export default new Router({
     {
       path: '/discover',
       name: 'discover',
-      component: _component("discover"),
-      meta: {
-        isKeepAlive: true,
-      },
+      component: _component('discover'),
       children: [
+
+
+
+        {
+          path: 'player',
+          name: 'player',
+          component: _component('player'),
+        },
+        {
+          path: 'mv',
+          name: 'mv',
+          component: _component('mv'),
+        },
+
+
+
+        {
+          path: 'playlist/:id',
+          name: 'playlist',
+          component: _component('playlist'),
+          // children: [
+          //   {
+          //     path: 'player',
+          //     name: 'player',
+          //     component: _component('player'),
+          //   }
+          // ]
+        },
 
         {
           path: 'dailyspecial',
           name: 'dailyspecial',
-          component: _component("dailyspecial"),
-          meta: {
-            isKeepAlive: true,
-          }
+          component: _component('dailyspecial'),
+        },
+        {
+          path: 'square',
+          name: 'square',
+          component: _component('square'),
+          children: [{
+            path: 'playlist/:id',
+            name: 'square/playlist',
+            component: _component('playlist'),
+          }]
+        },
+        {
+          path: 'toplist',
+          name: 'toplist',
+          component: _component('toplist'),
+          children: [{
+            path: 'playlist/:id',
+            name: 'toplist/playlist',
+            component: _component('playlist'),
+          }]
         },
 
 
+
+        {
+          path: 'comment',
+          name: 'comment',
+          component: _component('comment'),
+        },
 
         {
           path: 'search',
           name: 'search',
-          component: _component("search"),
-          meta: {
-            isKeepAlive: true,
-          }
+          component: _component('search'),
         },
-
         {
-          path: 'square',
-          name: 'square',
-          component: _component("square"),
-          meta: {
-            isKeepAlive: true,
-          },
-          children: [
-            {
-              path: 'playlist/:id',
-              name: 'square/playlist',
-              component: _component("playlist"),
-              meta: {
-                isKeepAlive: true,
-              }
-            }],
-        }, {
-          path: 'toplist',
-          name: 'toplist',
-          component: _component("toplist"),
-          meta: {
-            isKeepAlive: true,
-          },
-          children: [
-            {
-              path: 'playlist/:id',
-              name: 'toplist/playlist',
-              component: _component("playlist"),
-              meta: {
-                isKeepAlive: true,
-              }
-            }],
-        }, {
-          path: 'playlist/:id',
-          name: 'playlist',
-          component: _component("playlist"),
-          meta: {
-            isKeepAlive: true,
-          }
-        }, {
-          path: 'oneself',
-          name: 'oneself',
-          component: _component("oneself"),
-          meta: {
-            isKeepAlive: true,
-          }
-        }, {
           path: 'login',
           name: 'login',
-          component: _component("login"),
-          meta: {
-            isKeepAlive: true,
-          }
+          component: _component('login'),
         },
-
+        {
+          path: 'oneself',
+          name: 'oneself',
+          component: _component('oneself'),
+        }
       ]
     },
 
 
 
-    {
-      path: '/comment/:id',
-      name: 'comment',
-      component: _component("comment"),
-      meta: {
-        isKeepAlive: false,
-      }
-    },
 
 
-    {
-      path: '/mine',
-      name: 'mine',
-      component: _component("mine"),
-    },
+
+
+
+
+
+
+
+
+
+
+
+    // {
+    //   path: '/mine',
+    //   name: 'mine',
+    //   component: _component("mine"),
+    // },
 
 
 
@@ -134,13 +137,9 @@ export default new Router({
   }
 });
 
+
 function _component(name) {
-  return (resolve) => {
-    import(`@/pages/${name}`)
-      .then((module) => {
-        resolve(module)
-      })
-  }
+  return resolve => require([`@/pages/${name}`], resolve);
 }
 
 
@@ -155,6 +154,40 @@ function _component(name) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function _component(name) {
+//   return (resolve) => {
+//     import(name)
+//       .then((module) => {
+//         resolve(module)
+//       })
+//   }
+// }
 
 
 

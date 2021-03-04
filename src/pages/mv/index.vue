@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="mv">
     <navbar :title="'视频'" :fixed="false"></navbar>
     <div
       :class="{ interaction: true, active: !mv.isPlaying }"
@@ -142,13 +142,13 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-.container {
+.mv {
   height: 100vh;
   @include suspension;
   background: center no-repeat $theme-BLACK;
   background-size: 0;
   overflow: hidden;
-  z-index: $zIndex-XXL;
+  z-index: $zIndex-XL;
 
   box-sizing: border-box;
   color: #fff;

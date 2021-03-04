@@ -1,11 +1,11 @@
 <template>
-  <scroll :data="[comments]" :refreshDelay="1000">
+  <!-- <scroll :data="[comments]" :refreshDelay="1000"> -->
     <div class="container">
       <navbar :title="`评论(${comments.length})`" fixed black></navbar>
 
       <list :comments="comments"></list>
     </div>
-  </scroll>
+  <!-- </scroll> -->
 </template>
 
 <script>

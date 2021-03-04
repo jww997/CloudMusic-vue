@@ -2,7 +2,12 @@
   <div class="children">
     <div class="title">热搜榜</div>
     <div class="words">
-      <div class="word" v-for="(item, index) in list" :key="item.score">
+      <div
+        class="word"
+        v-for="(item, index) in list"
+        :key="item.score"
+        @click="getHotSearch(item.searchWord)"
+      >
         <span
           :class="{
             subscript: true,
@@ -22,6 +27,12 @@ export default {
   name: "hot",
   data() {
     return { list: [] };
+  },
+  methods: {
+    getHotSearch(val) {
+      const that = this;
+      that.$emit("getHotSearch", val);
+    },
   },
   mounted() {
     const that = this;

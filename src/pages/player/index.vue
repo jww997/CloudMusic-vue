@@ -1,5 +1,5 @@
 <template>
-  <div class="container" :style="{ backgroundImage: 'url(' + picUrl + ')' }">
+  <div class="player" :style="{ backgroundImage: 'url(' + picUrl + ')' }">
     <navbar :title="title" :subtitle="subtitle" :fixed="false"></navbar>
     <div class="song" @click="toggleShowLyric">
       <lyric :lyric="lyric" v-if="isShowLyric"></lyric>
@@ -108,7 +108,7 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-.container {
+.player {
   height: 100vh;
   @include suspension;
   @include flexSpaceBetween;

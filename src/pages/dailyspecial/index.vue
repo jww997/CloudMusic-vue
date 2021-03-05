@@ -3,7 +3,7 @@
     <navbar :title="'每日推荐'" fixed backgroundColor="#EC4141"></navbar>
 
     <cap></cap>
-    <list :list="dailySongs" sorttype="2"></list>
+    <list :list="dailySongs" sorttype="2" allTop="1.5rem"></list>
   </div>
 </template>
 

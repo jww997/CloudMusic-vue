@@ -1,6 +1,6 @@
 <template>
   <div class="common" v-if="list.length">
-    <div class="line all">
+    <div class="line all" :style="{ top: allTop }">
       <div class="left" @click="toggleMusic(list[0].id, 0)">
         <!-- @click="togglePlayer(0)" -->
         <span class="iconfont active" v-html="'&#xe674;'"></span>
@@ -81,6 +81,10 @@ export default {
     sorttype: {
       type: String,
       default: "1",
+    },
+    allTop: {
+      type: String,
+      default: "0",
     },
   },
   computed: {
@@ -188,7 +192,7 @@ export default {
 
     &.all {
       position: sticky;
-      top: $safeDistance;
+      // top: $safeDistance;
       background-color: $theme-WHITE;
       z-index: $zIndex-L;
 

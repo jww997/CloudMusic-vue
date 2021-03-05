@@ -1,41 +1,36 @@
 <template>
   <div :class="{ common: true, fixed, black }" :style="{ backgroundColor }">
-    <!-- <van-nav-bar
+    <div class="left">
+      <van-icon name="arrow-left" @click="back" />
+    </div>
+    <div class="right">
+      <div class="name" v-if="title">
+        <p class="title">{{ title }}</p>
+        <p class="subtitle" v-if="subtitle">{{ subtitle }}</p>
+      </div>
+      <div class="solt" v-else>
+        <slot></slot>
+      </div>
+    </div>
+
+    <!-- <div class="center">
+      <p class="title" v-if="title">{{ title }}</p>
+      <p class="subtitle" v-if="subtitle">{{ subtitle }}</p>
+    </div> -->
+  </div>
+
+  <!-- <van-nav-bar
       left-arrow
       :title="title"
+      :fixed="fixed"
+      :border="false"
       :safe-area-inset-top="true"
       @click-left="back"
-    /> -->
-    <template v-if="fixed">
-      <div class="icon left">
-        <van-icon name="arrow-left" @click="back" />
-        <!-- <div class="iconfont" @click="back">&#xe65e;</div> -->
-      </div>
-      <div class="center">
-        <p class="title">{{ title }}</p>
-      </div>
-      <div class="icon right">
-        <!-- <div class="iconfont">&#xe607;</div>
-        <van-icon name="search" />
-        <div class="iconfont">&#xe690;</div> -->
-      </div>
-    </template>
-
-    <template v-else>
-      <div class="icon left">
-        <van-icon name="arrow-down" @click="back" />
-        <!-- <div class="iconfont" @click="back">&#xe614;</div> -->
-      </div>
-      <div class="center">
-        <p class="title">{{ title }}</p>
-        <p class="subtitle">{{ subtitle }}</p>
-      </div>
-      <div class="icon right">
-        <!-- <div class="iconfont">&#xe65c;</div>
-        <van-icon name="search" /> -->
-      </div>
-    </template>
-  </div>
+    >
+      <template #right>
+        <slot></slot>
+      </template>
+    </van-nav-bar> -->
 </template>
 
 <script>
@@ -63,7 +58,6 @@ export default {
       type: String,
       default: "transparent",
     },
-    // box: {},
 
     type: {
       type: Number,
@@ -81,7 +75,6 @@ export default {
     },
     hide() {
       const that = this;
-      // that.setPlayerShow(false);
       let mv = that.mv;
       let music = that.music;
       music.isShow = false;
@@ -90,23 +83,42 @@ export default {
       that.setMv(mv);
     },
     ...mapMutations({
-      // setPlayerShow: "SET_PLAYER_SHOW",
-
       setMusic: "SET_MUSIC",
       setMv: "SET_MV",
     }),
   },
-  // mounted() {
-  //   const that = this;
-  //   try {
-  //     console.log(that.box);
-  //     setTimeout(() => {
-  //       that.box.addEventListener("scroll", function () {
-  //         console.log(1);
-  //       });
-  //     }, 1000);
-  //   } catch (error) {}
-  // },
+
+  // <div :class="{ common: true, fixed, black }" :style="{ backgroundColor }">
+  //   <template v-if="fixed">
+  //     <div class="icon left">
+  //       <van-icon name="arrow-left" @click="back" />
+  //       <!-- <div class="iconfont" @click="back">&#xe65e;</div> -->
+  //     </div>
+  //     <div class="right"></div>
+
+  //     <div class="center" v-if="title || subtitle">
+  //       <p class="title" v-if="title">{{ title }}</p>
+  //       <p class="subtitle" v-if="subtitle">{{ subtitle }}</p>
+  //     </div>
+  //     <slot wx:else></slot>
+  //     <!-- <div class="icon right">
+  //       <van-icon name="search" />
+  //     </div> -->
+  //   </template>
+
+  //   <!-- <template v-else>
+  //     <div class="icon left">
+  //       <van-icon name="arrow-down" @click="back" />
+  //     </div>
+  //     <div class="center">
+  //       <p class="title">{{ title }}</p>
+  //       <p class="subtitle">{{ subtitle }}</p>
+  //     </div>
+  //     <div class="icon right">
+  //       <van-icon name="search" />
+  //       </div>
+  //     </template> -->
+  // </div>
 };
 </script>
 
@@ -114,82 +126,60 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .common {
-  flex-shrink: 0;
   width: 100%;
-  // height: 1rem;
-  height: $safeDistance; // 准备使用插槽solt
-  padding: 0 0.3rem;
-  box-sizing: border-box;
-  color: #fff;
+  height: $safeDistance;
+  position: relative;
   z-index: 1;
-  @include flexSpaceBetween;
-  transition: 0.5s;
-  // text-shadow: 0 0 20px $theme-BLACK;
-
-  // .iconfont,
-  >>> .van-icon {
-    font-size: $text-XL;
+  color: #fff;
+  .left {
+    width: $safeDistance;
+    @include positionCenter;
+    @include flexCenter;
+    right: auto;
+    >>> .van-icon {
+      font-size: $text-XL;
+    }
   }
-  .center {
-    flex-grow: 1;
-    max-width: 7.5rem;
+  .right {
     height: 100%;
-    margin: 0 0.3rem;
-    text-align: center;
-    @include flexCenter;
-    flex-direction: column;
-    .title,
-    .subtitle {
-      width: 100%;
-      @include omit;
+    .name,
+    .solt {
+      height: 100%;
+      margin-left: $safeDistance;
+      @include flexCenter;
     }
-    .title {
-      line-height: $text-L;
-      font-size: $text-M;
-      font-weight: bold;
-    }
-    .subtitle {
-      margin-top: 0.1rem;
-      line-height: $text-S;
-      font-size: $text-XS;
-      color: #efefef;
-    }
-  }
-  .icon {
-    flex: 0.5;
-    @include flexCenter;
-    .iconfont {
-      margin-left: 0.3rem;
-      &:first-child {
-        margin-left: 0;
+    .name {
+      flex-direction: column;
+      margin-right: $safeDistance;
+      .title,
+      .subtitle {
+        max-width: 100%;
+        @include omit;
+      }
+      .title {
+        line-height: $text-L;
+        font-size: $text-M;
+        font-weight: bold;
+      }
+      .subtitle {
+        margin-top: 0.1rem;
+        line-height: $text-S;
+        font-size: $text-XS;
+        color: #efefef;
       }
     }
-    &.left {
+    .solt {
       justify-content: flex-start;
-    }
-    &.right {
-      justify-content: flex-end;
     }
   }
   &.fixed {
-    // -webkit-backdrop-filter: saturate(180%) blur(20px);
-    // backdrop-filter: saturate(180%) blur(20px);
     position: fixed;
-    right: 0;
-    left: 0;
     top: 0;
-    .center {
-      align-items: flex-start;
-    }
-    .icon.left {
-      flex: 0.1;
-    }
-    .center {
-      text-align: left;
-    }
   }
   &.black {
     color: #000;
   }
 }
+// -webkit-backdrop-filter: saturate(180%) blur(20px);
+// backdrop-filter: saturate(180%) blur(20px);
 </style>

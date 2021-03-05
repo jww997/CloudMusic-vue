@@ -1,14 +1,14 @@
 <template>
   <div class="search">
-    <navbar fixed black title="搜索" backgroundColor="white"></navbar>
-
-    <input
-      class="input"
-      type="text"
-      placeholder="请输入搜索内容"
-      v-model="keywords"
-      @change="getSearch"
-    />
+    <navbar fixed black backgroundColor="white">
+      <input
+        class="input"
+        type="text"
+        placeholder="请输入搜索内容"
+        v-model="keywords"
+        @change="getSearch"
+      />
+    </navbar>
 
     <!-- <history></history> -->
     <hot @getHotSearch="getHotSearch" v-if="!list.length"></hot>
@@ -80,13 +80,14 @@ export default {
 .search {
   height: 100%;
   @include suspension;
-  padding-top: $safeDistance;
+  padding: $safeDistance 0;
   box-sizing: border-box;
   overflow: scroll;
 
   .input {
-    height: 1rem;
-    margin: 0 $text-S 1rem;
+    width: 100%;
+    height: $text-XXL;
+    margin-right: $text-XS;
     font-size: $text-S;
     border-bottom: 1px solid $theme-GRAY;
   }

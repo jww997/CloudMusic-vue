@@ -11,7 +11,7 @@
       <cap :obj="playlist"></cap>
     </div>
     <!-- <list :obj="playlist"></list> -->
-    <list :list="playlist.tracks"></list>
+    <list :list="playlist.tracks" allTop="1.5rem"></list>
     <subscribers :list="playlist.subscribers"></subscribers>
 
     <div @click="toggleCapplus" v-if="isShowCapplus">
@@ -93,6 +93,5 @@ export default {
   overflow: scroll;
 
   z-index: $zIndex-XL;
-
 }
 </style>

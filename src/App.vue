@@ -1,5 +1,8 @@
 <template>
   <div class="app" id="app">
+    <!-- 开启顶部安全区适配 -->
+    <!-- <van-nav-bar safe-area-inset-top /> -->
+
     <!-- <div class="topbar" v-if="isShowTopBar"> -->
     <!-- <topbar></topbar> -->
     <!-- </div> -->
@@ -26,6 +29,9 @@
     <bottomlist></bottomlist>
 
     <music></music>
+
+    <!-- 开启底部安全区适配 -->
+    <van-number-keyboard safe-area-inset-bottom />
   </div>
 </template>
 

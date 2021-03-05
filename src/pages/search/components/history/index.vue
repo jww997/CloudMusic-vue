@@ -1,5 +1,5 @@
 <template>
-  <div class="children">123</div>
+  <div class="children">历史记录</div>
 </template>
 
 <script>

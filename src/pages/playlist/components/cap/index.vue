@@ -109,17 +109,20 @@ export default {
         column-count: 2;
       }
       .creator {
-        height: 0.4rem;
+        height: $text-L;
         margin-top: 0.2rem;
         @include flexSpaceBetween;
         justify-content: flex-start;
         .avatarUrl {
+          flex-shrink: 0;
           height: 100%;
           border-radius: 50%;
+          background-color: $theme-LIGHTGRAY;
         }
         .nickname {
-          font-size: $text-S;
+          font-size: $text-XS;
           margin-left: 0.1rem;
+          @include omit;
         }
       }
     }

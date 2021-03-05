@@ -1,7 +1,7 @@
 <template>
   <div :class="{ common: true, fixed, black }" :style="{ backgroundColor }">
     <div class="left">
-      <van-icon name="arrow-left" @click="back" />
+      <van-icon :name="iconLeft" @click="back" />
     </div>
     <div class="right">
       <div class="name" v-if="title">
@@ -57,6 +57,10 @@ export default {
     backgroundColor: {
       type: String,
       default: "transparent",
+    },
+    iconLeft: {
+      type: String,
+      default: "arrow-left",
     },
 
     type: {
@@ -126,6 +130,7 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .common {
+  flex-shrink: 0;
   width: 100%;
   height: $safeDistance;
   position: relative;

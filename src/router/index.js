@@ -35,11 +35,11 @@ export default new Router({
           name: 'player',
           component: _component('player'),
         },
-        {
-          path: 'mv',
-          name: 'mv',
-          component: _component('mv'),
-        },
+        // {
+        //   path: 'mv',
+        //   name: 'mv',
+        //   component: _component('mv'),
+        // },
 
 
 
@@ -50,8 +50,18 @@ export default new Router({
           // children: [
           //   {
           //     path: 'player',
-          //     name: 'player',
+          //     name: 'playlist/player',
           //     component: _component('player'),
+          //   },
+          //   {
+          //     path: 'comment',
+          //     name: 'playlist/comment',
+          //     component: _component('comment'),
+          //   },
+          //   {
+          //     path: 'mv',
+          //     name: 'playlist/mv',
+          //     component: _component('mv'),
           //   }
           // ]
         },

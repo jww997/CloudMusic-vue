@@ -34,7 +34,7 @@ export default {
       api.getSongUrl({ id }).then((res) => {
         let url = res.data.data[0].url;
         if (!url) {
-          vant.Toast({
+          this.$vant.Toast({
             duration: 3000,
             message: "没有版权 / VIP专享",
           });

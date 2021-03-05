@@ -1,10 +1,10 @@
 <template>
   <!-- <scroll :data="[comments]" :refreshDelay="1000"> -->
-    <div class="container">
-      <navbar :title="`评论(${comments.length})`" fixed black></navbar>
+  <div class="container">
+    <navbar :title="`评论(${comments.length})`" fixed black></navbar>
 
-      <list :comments="comments"></list>
-    </div>
+    <list :comments="comments"></list>
+  </div>
   <!-- </scroll> -->
 </template>
 
@@ -48,8 +48,10 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .container {
+  height: 100%;
   @include suspension;
   box-sizing: border-box;
   padding-top: $safeDistance;
+  z-index: $zIndex-XXXL;
 }
 </style>

@@ -56,8 +56,10 @@ export default {
             message: "登录成功",
             forbidClick: true,
           });
-
-          that.login({ cookie: res.data.cookie });
+          that.login({
+            cookie: res.data.cookie,
+            profile: res.data.profile,
+          });
           that.$router.push({ name: "discover" });
         });
     },

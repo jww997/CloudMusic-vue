@@ -1,6 +1,6 @@
 <template>
   <div class="player" :style="{ backgroundImage: 'url(' + picUrl + ')' }">
-    <navbar :title="title" :subtitle="subtitle" :fixed="false"></navbar>
+    <navbar :title="title" :subtitle="subtitle" :fixed="false" iconLeft="arrow-down"></navbar>
     <div class="song" @click="toggleShowLyric">
       <lyric :lyric="lyric" v-if="isShowLyric"></lyric>
       <phonograph :picUrl="picUrl" v-else></phonograph>
@@ -163,24 +163,6 @@ export default {
     // );
     // }
 
-    // &.fade-enter,
-    // &.fade-leave-to {
-    //   opacity: 0;
-    //   // transform: translateY(100%);
-    //   // top: 100%;
-    // }
-
-    // &.fade-enter-to,
-    // &.fade-leave {
-    //   opacity: 1;
-    //   // top: 0;
-    //   // bottom: 0;
-    // }
-
-    // &.fade-enter-active,
-    // &.fade-leave-active {
-    //   transition: 0.5s;
-    // }
   }
 }
 </style>

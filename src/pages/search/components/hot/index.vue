@@ -1,12 +1,14 @@
 <template>
   <div class="children">
-    <div class="title">热搜榜</div>
+    <div class="header">
+      <div class="title">热搜榜</div>
+    </div>
     <div class="words">
       <div
         class="word"
         v-for="(item, index) in list"
         :key="item.score"
-        @click="getHotSearch(item.searchWord)"
+        @click="getSearch(item.searchWord)"
       >
         <span
           :class="{
@@ -29,9 +31,9 @@ export default {
     return { list: [] };
   },
   methods: {
-    getHotSearch(val) {
+    getSearch(val) {
       const that = this;
-      that.$emit("getHotSearch", val);
+      that.$emit("getSearch", val);
     },
   },
   mounted() {
@@ -47,12 +49,35 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .children {
+  .header {
+    margin: $text-XS $text-XS 0;
+    @include flexSpaceBetween;
+    border-bottom: 1px solid $theme-LIGHTGRAY;
+    .title {
+      line-height: $text-XL;
+      font-size: $text-S;
+      font-weight: bold;
+      @include omit;
+    }
+    .more {
+      flex-shrink: 0;
+      line-height: $text-L;
+      font-size: $text-XS;
+      font-weight: bold;
+      margin-left: 0.2rem;
+      padding: 0 0.3rem;
+      border: 1px solid #eee;
+      border-radius: 2rem;
+      @include flexCenter;
+    }
+  }
   .words {
     @include flexCenter;
     flex-wrap: wrap;
     justify-content: flex-start;
     .word {
       width: 50%;
+      line-height: $text-M;
       font-size: $text-S;
       margin-top: $text-S;
       padding: 0 $text-XS;

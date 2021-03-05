@@ -17,11 +17,16 @@
     <div @click="toggleCapplus" v-if="isShowCapplus">
       <capplus :obj="playlist"></capplus>
     </div>
+
+    <transition :name="transition">
+      <router-view></router-view>
+    </transition>
   </div>
   <!-- </scroll> -->
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import List from "@/common/list";
 
 import Scroll from "@/base/scroll";
@@ -53,6 +58,9 @@ export default {
 
       isTop: true,
     };
+  },
+  computed: {
+    ...mapGetters(["transition"]),
   },
   methods: {
     toggleCapplus: function () {

@@ -24,7 +24,9 @@
       </div>
       <div
         class="item"
-        @click.stop="toPages({ name: 'comment', params: { id: obj.id } })"
+        @click.stop="
+          toPages({ name: 'comment', params: { id: obj.id } })
+        "
       >
         <span class="iconfont">&#xe65d;</span>
         <span class="text" v-html="formatUnit(obj.commentCount)">评论</span>

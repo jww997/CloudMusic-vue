@@ -1,17 +1,32 @@
 <template>
   <div class="search">
     <navbar fixed black backgroundColor="white">
-      <input
-        class="input"
-        type="text"
-        placeholder="请输入搜索内容"
-        v-model="keywords"
-        @change="getSearch"
-      />
+      <div class="seek">
+        <input
+          class="input"
+          type="text"
+          autofocus
+          :placeholder="searchDefault.showKeyword"
+          v-model="keywords"
+          @change="getdata()"
+        />
+        <!-- @keydown="getSearch(keywords || searchDefault.realkeyword)" -->
+        <van-icon
+          class="clear"
+          name="cross"
+          @click="clearKeywords"
+          v-if="keywords"
+        />
+      </div>
     </navbar>
 
-    <!-- <history></history> -->
-    <hot @getHotSearch="getHotSearch" v-if="!list.length"></hot>
+    <history
+      :list="history"
+      @getSearch="getSearch"
+      @clearHistory="clearHistory"
+      v-if="history.length"
+    ></history>
+    <hot @getSearch="getSearch" v-if="!list.length"></hot>
     <list :list="list" v-else></list>
   </div>
 </template>
@@ -33,20 +48,35 @@ export default {
     List,
   },
   data() {
-    return { keywords: "", list: [], count: 0 };
+    return {
+      keywords: null,
+      history: [],
+
+      list: [],
+      count: 0,
+
+      searchDefault: {},
+    };
   },
   watch: {
     keywords(val, oldVal) {
       const that = this;
-      if (!val) {
-        that._reset();
-      }
+      console.log(val);
+      if (!val) that.clearList();
     },
   },
   methods: {
-    getSearch() {
+    getSearch(val) {
       const that = this;
-      if (!that.keywords) return false;
+
+      if (that.keywords == val) return false;
+      that.keywords = val;
+      that.getdata();
+    },
+    getdata() {
+      const that = this;
+
+      // if (that.keywords == null) that.keywords = that.searchDefault.realkeyword;
       that.$api
         .getCloudSearch({
           keywords: that.keywords,
@@ -54,14 +84,22 @@ export default {
         .then((res) => {
           that.list = res.data.result.songs;
           that.count = res.data.result.songCount;
+
+          let history = that.history;
+          if (history.indexOf(that.keywords) == -1) history.push(val);
+          history.reverse();
         });
     },
-    getHotSearch(val) {
+
+    clearKeywords() {
       const that = this;
-      that.keywords = val;
-      that.getSearch();
+      that.keywords = null;
     },
-    _reset() {
+    clearHistory() {
+      const that = this;
+      that.history = [];
+    },
+    clearList() {
       const that = this;
       that.list = [];
       that.count = 0;
@@ -69,7 +107,18 @@ export default {
   },
   mounted() {
     const that = this;
-    that._reset();
+    that.clearKeywords();
+    that.clearHistory();
+    that.clearList();
+
+    that.$api
+      .getSearchDefault()
+      .then((res) => {
+        that.searchDefault = res.data.data;
+      })
+      .catch((res) => {
+        that.searchDefault = { showKeyword: "请输入搜索内容" };
+      });
   },
 };
 </script>
@@ -84,12 +133,24 @@ export default {
   box-sizing: border-box;
   overflow: scroll;
 
-  .input {
+  .seek {
     width: 100%;
     height: $text-XXL;
     margin-right: $text-XS;
+    @include flexSpaceBetween;
     font-size: $text-S;
-    border-bottom: 1px solid $theme-GRAY;
+    position: relative;
+    .input {
+      width: 100%;
+      border-bottom: 1px solid $theme-GRAY;
+    }
+    .clear {
+      width: $text-L;
+      height: $text-L;
+      @include positionCenter;
+      @include flexCenter;
+      left: auto;
+    }
   }
 }
 </style>

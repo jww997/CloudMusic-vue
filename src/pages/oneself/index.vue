@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import Navbar from "@/common/navbar";
 import Card from "./components/card";
 import Box from "./components/box";
@@ -22,9 +23,14 @@ export default {
   data: function () {
     return { level: 0, profile: {}, playlist: [] };
   },
+  computed: {
+    ...mapGetters(["login"]),
+  },
   mounted: function () {
     const that = this;
-    let profile = JSON.parse(localStorage.getItem("profile"));
+    let profile = that.login.profile;
+
+    // let profile = JSON.parse(localStorage.getItem("profile"));
     if (!profile) return false;
     that.$api
       .getUserDetail({ uid: profile.userId })

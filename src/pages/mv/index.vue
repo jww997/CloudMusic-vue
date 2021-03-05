@@ -1,6 +1,6 @@
 <template>
   <div class="mv">
-    <navbar :title="'视频'" :fixed="false"></navbar>
+    <navbar :title="'视频'" :fixed="false" iconLeft="arrow-down"></navbar>
     <div
       :class="{ interaction: true, active: !mv.isPlaying }"
       @click="toggleMvPlaying"

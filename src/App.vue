@@ -26,8 +26,8 @@
     <router-view v-if="isRouterAlive"></router-view>
 
     <bottombar v-if="isShowBottomBar"></bottombar>
-    <bottomlist></bottomlist>
 
+    <bottomlist></bottomlist>
     <music></music>
 
     <!-- 开启底部安全区适配 -->

@@ -18,6 +18,8 @@
       </div>
     </div> -->
 
+    <bottombar></bottombar>
+
     <transition :name="transition">
       <router-view></router-view>
     </transition>
@@ -28,13 +30,15 @@
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import Matrix from "@/common/matrix";
 
+import Bottombar from "@/common/bottombar";
+
 import Navbar from "@/common/navbar";
 import Cover from "@/components/cover";
 import { toPages } from "@/assets/js/util.js";
 export default {
   name: "ranking",
   components: {
-    Matrix,
+    Matrix,Bottombar,
 
     Navbar,
     Cover,
@@ -71,28 +75,7 @@ export default {
 @import "~sass/varibles.scss";
 .toplist {
   @include suspension;
-  box-sizing: border-box;
-  padding-top: $safeDistance;
-  padding-bottom: $safeDistance;
-
-  // .list {
-  //   padding: 0 0.3rem;
-  //   @include flexCenter;
-  //   flex-wrap: wrap;
-  //   justify-content: flex-start;
-
-  //   .billboard {
-  //     flex-shrink: 0;
-  //     width: 31.5%;
-  //     margin-right: 2%;
-  //     margin-top: 0.3rem;
-  //     &:nth-child(3n) {
-  //       margin-right: 0;
-  //     }
-  //     & >>> .text {
-  //       height: 1rem;
-  //     }
-  //   }
-  // }
+  padding: $safeDistance 0;
+  z-index: $zIndex-M;
 }
 </style>

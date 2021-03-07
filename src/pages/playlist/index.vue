@@ -18,6 +18,8 @@
       <capplus :obj="playlist"></capplus>
     </div>
 
+    <bottombar></bottombar>
+
     <transition :name="transition">
       <router-view></router-view>
     </transition>
@@ -34,6 +36,8 @@ import Navbar from "@/common/navbar";
 import Cap from "@/pages/playlist/components/cap";
 import Capplus from "@/pages/playlist/components/cappuls";
 import Subscribers from "@/pages/playlist/components/subscribers";
+
+import Bottombar from "@/common/bottombar";
 // import List from "@/pages/playlist/components/list";
 export default {
   name: "playlist",
@@ -47,6 +51,8 @@ export default {
     Capplus,
 
     Subscribers,
+
+    Bottombar,
   },
   data() {
     return {
@@ -94,12 +100,8 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .playlist {
-  height: 100%;
   @include suspension;
   padding-bottom: $safeDistance;
-  box-sizing: border-box;
-  overflow: scroll;
-
-  z-index: $zIndex-XL;
+  z-index: $zIndex-S;
 }
 </style>

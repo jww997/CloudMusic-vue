@@ -1,39 +1,14 @@
 <template>
   <div class="discover">
     <topbar></topbar>
-    <!-- <scroll :data="blocks" :refreshDelay="1000"> -->
 
-    <!-- class="blocks" -->
-    <van-pull-refresh
-      v-model="isLoading"
-      head-height="80"
-      @refresh.stop="refresh"
-    >
-      <!-- 下拉提示，通过 scale 实现一个缩放效果 -->
-      <template #pulling="props">
-        <img
-          class="doge"
-          src="https://img01.yzcdn.cn/vant/doge.png"
-          :style="{ transform: `scale(${props.distance / 80})` }"
-        />
-      </template>
-
-      <!-- 释放提示 -->
-      <template #loosing>
-        <img class="doge" src="https://img01.yzcdn.cn/vant/doge.png" />
-      </template>
-
-      <!-- 加载提示 -->
-      <template #loading>
-        <img class="doge" src="https://img01.yzcdn.cn/vant/doge-fire.jpg" />
-      </template>
-
+    <refresh :isLoading="isLoading" @refresh="refresh">
       <div v-for="(item, index) in blocks" :key="index">
         <!-- :ball="ball" -->
         <!-- :list="item.extInfo.banners" -->
         <!-- v-if="item.showType == 'BANNER'" -->
-        <banner :list="banners" v-if="index == 0"></banner>
 
+        <banner :list="banners" v-if="index == 0"></banner>
         <bowling v-if="index == 0"></bowling>
 
         <whirligig
@@ -47,8 +22,9 @@
           :content="item"
         ></slide-songlist-align>
       </div>
-    </van-pull-refresh>
-    <!-- </scroll> -->
+    </refresh>
+
+    <bottombar></bottombar>
 
     <transition :name="transition">
       <router-view></router-view>
@@ -59,11 +35,13 @@
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 
-// import pageSecond from "@/base/page-second";
+import Refresh from "@/common/refresh";
 
 import Bowling from "./components/bowling";
 import Whirligig from "./components/whirligig";
 import slideSonglistAlign from "./components/slide-songlist-align";
+
+import Bottombar from "@/common/bottombar";
 
 import Scroll from "@/base/scroll";
 import Banner from "./components/banner";
@@ -77,11 +55,13 @@ export default {
     Whirligig,
     slideSonglistAlign,
 
+    Bottombar,
+
     Scroll,
     Topbar,
     Banner,
     Calendar,
-    // pageSecond,
+    Refresh,
   },
   inject: ["reload"],
   data: function () {
@@ -90,7 +70,6 @@ export default {
       banners: [],
 
       isLoading: false,
-
     };
   },
   computed: {
@@ -138,23 +117,9 @@ export default {
 .discover {
   height: 100%;
   position: relative;
-  // min-height: 100vh;
   overflow: scroll;
+  padding: $safeDistance 0;
 
-  >>> .van-pull-refresh {
-    // height: 100%;
-    overflow: scroll;
-  }
-
-  // .blocks {
-  //   z-index: $zIndex-M;
-  // }
-
-  .doge {
-    width: 140px;
-    height: 72px;
-    margin-top: 8px;
-    border-radius: 4px;
-  }
+  z-index: $zIndex-S;
 }
 </style>

@@ -37,7 +37,7 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .grandson {
-  padding-top: 0.3rem;
+  // padding-top: 0.3rem;
   >>> .van-swipe__indicators {
     bottom: 6px;
     .van-swipe__indicator {

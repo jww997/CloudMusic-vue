@@ -22,6 +22,8 @@
     <!-- v-if="isLoading && total != playlists.length" -->
     <!-- </scroll> -->
 
+    <bottombar></bottombar>
+
     <transition :name="transition">
       <router-view></router-view>
     </transition>
@@ -32,6 +34,8 @@
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import Matrix from "@/common/matrix";
 
+import Bottombar from "@/common/bottombar";
+
 import Navbar from "@/common/navbar";
 import Tags from "./components/tags";
 // import List from "./components/list";
@@ -40,7 +44,7 @@ export default {
   name: "square",
   components: {
     Matrix,
-
+Bottombar,
     // Scroll,
     Navbar,
     Tags,
@@ -119,14 +123,7 @@ export default {
 @import "~sass/varibles.scss";
 .square {
   @include suspension;
-  // padding-top: $safeDistance + 1rem;
-  // padding-bottom: $safeDistance;
   padding: $safeDistance 0;
-  box-sizing: border-box;
-  //   overflow: hidden;
-  //   .loading {
-  //     padding: 0.5rem 0;
-  //     text-align: center;
-  //   }
+  z-index: $zIndex-M;
 }
 </style>

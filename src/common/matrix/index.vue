@@ -68,7 +68,7 @@ export default {
   .scroll {
     height: 100%;
     .boxs {
-      padding: 0 0.3rem;
+      padding: 0 $text-XS $safeDistance;
       @include flexCenter;
       justify-content: flex-start;
       flex-wrap: wrap;
@@ -76,7 +76,7 @@ export default {
       .box {
         width: 31.5%;
         margin-right: 2%;
-        margin-top: 0.3rem;
+        margin-top: $text-XS;
         &:nth-child(3n) {
           margin-right: 0;
         }

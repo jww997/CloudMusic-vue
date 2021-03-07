@@ -5,6 +5,8 @@
     <card :level="level" :profile="profile"></card>
 
     <box :playlist="playlist"></box>
+
+    <bottombar></bottombar>
   </div>
 </template>
 
@@ -13,11 +15,14 @@ import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import Navbar from "@/common/navbar";
 import Card from "./components/card";
 import Box from "./components/box";
+
+import Bottombar from "@/common/bottombar";
 export default {
   name: "oneself",
   components: {
     Navbar,
     Card,
+    Bottombar,
     Box,
   },
   data: function () {
@@ -57,11 +62,9 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .oneself {
-  height: 100%;
   @include suspension;
   padding-bottom: $safeDistance;
-  box-sizing: border-box;
-  overflow: scroll;
+  z-index: $zIndex-M;
 
   background-color: $theme-LIGHTGRAY !important;
 }

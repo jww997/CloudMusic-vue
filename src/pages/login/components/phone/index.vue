@@ -53,9 +53,16 @@ export default {
         })
         .then((res) => {
           that.$vant.Toast.success({
-            message: "登录成功",
+            message: res.data.message,
             forbidClick: true,
           });
+          if (res.data.code == 502) {
+            return false;
+          }
+          // that.$vant.Toast.success({
+          //   message: "登录成功",
+          //   forbidClick: true,
+          // });
           that.login({
             cookie: res.data.cookie,
             profile: res.data.profile,

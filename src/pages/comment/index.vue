@@ -1,9 +1,16 @@
 <template>
   <!-- <scroll :data="[comments]" :refreshDelay="1000"> -->
   <div class="comment">
-    <navbar :title="`评论(${comments.length})`" fixed black></navbar>
+    <navbar
+      :title="`评论(${comments.length})`"
+      fixed
+      black
+      backgroundColor="#fff"
+    ></navbar>
 
     <list :comments="comments"></list>
+
+    <bottombar></bottombar>
   </div>
   <!-- </scroll> -->
 </template>
@@ -11,12 +18,15 @@
 <script>
 import Scroll from "@/base/scroll";
 
+import Bottombar from "@/common/bottombar";
+
 import Navbar from "@/common/navbar";
 import List from "./components/list";
 export default {
   name: "comment",
   components: {
     Scroll,
+    Bottombar,
 
     Navbar,
     List,
@@ -48,10 +58,8 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .comment {
-  height: 100%;
   @include suspension;
-  box-sizing: border-box;
-  padding-top: $safeDistance;
-  z-index: $zIndex-XXXL;
+  padding: $safeDistance 0;
+  z-index: $zIndex-M;
 }
 </style>

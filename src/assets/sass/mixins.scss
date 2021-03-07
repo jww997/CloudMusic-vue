@@ -4,6 +4,26 @@
   text-overflow: ellipsis;
 }
 
+@mixin suspension {
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  box-sizing: border-box;
+  background-color: #fff;
+  
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+}
+
+
+
+
+
+
+
 @mixin positionCenter {
   margin: auto;
   position: absolute;
@@ -31,26 +51,6 @@
   align-items: center;
 }
 
-@mixin suspension {
-  width: 100vw;
-  // height: 100vh;
-  // overflow: auto;
-  background-color: #fff;
-  position: fixed;
-  // bottom: 0;
-  right: 0;
-  left: 0;
-  top: 0;
-}
 
 
 
-
-
-
-
-
-
-@mixin test {
-  border: 1px solid #f00;
-}

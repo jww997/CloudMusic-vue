@@ -72,8 +72,17 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .kid {
-  margin: $text-XS $text-XS 0;
+  height: $safeDistance;
+  padding: 0 $text-XS;
+  box-sizing: border-box;
   @include flexSpaceBetween;
+  background-color: #fff;
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+
+  z-index: 1;
   .left,
   >>> .van-icon {
     flex-shrink: 0;

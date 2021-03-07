@@ -19,11 +19,8 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .login {
-  height: 100%;
   @include suspension;
-  padding-bottom: $safeDistance;
-  padding-top: $safeDistance;
-  box-sizing: border-box;
-  overflow: scroll;
+  padding: $safeDistance 0;
+  z-index: $zIndex-M;
 }
 </style>

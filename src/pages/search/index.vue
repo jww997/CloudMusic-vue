@@ -35,6 +35,8 @@
 import Navbar from "@/common/navbar";
 import List from "@/common/list";
 
+import Bottombar from "@/common/bottombar";
+
 import History from "./components/history";
 import Hot from "./components/hot";
 
@@ -43,6 +45,7 @@ export default {
   components: {
     Navbar,
     History,
+    Bottombar,
     Hot,
 
     List,
@@ -127,12 +130,9 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .search {
-  height: 100%;
   @include suspension;
   padding: $safeDistance 0;
-  box-sizing: border-box;
-  overflow: scroll;
-
+  z-index: $zIndex-M;
   .seek {
     width: 100%;
     height: $text-XXL;

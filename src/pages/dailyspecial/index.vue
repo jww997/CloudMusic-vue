@@ -4,11 +4,16 @@
 
     <cap></cap>
     <list :list="dailySongs" sorttype="2" allTop="1.5rem"></list>
+
+    <bottombar></bottombar>
   </div>
 </template>
 
 <script>
 import List from "@/common/list";
+
+
+import Bottombar from "@/common/bottombar";
 
 import Navbar from "@/common/navbar";
 import Cap from "./components/cap";
@@ -16,7 +21,7 @@ import Cap from "./components/cap";
 export default {
   name: "dailyspecial",
   components: {
-    Navbar,
+    Navbar,Bottombar,
     List,
     Cap,
   },
@@ -53,6 +58,6 @@ export default {
 .dailspecial {
   @include suspension;
   padding-bottom: $safeDistance;
-  box-sizing: border-box;
+  z-index: $zIndex-M;
 }
 </style>

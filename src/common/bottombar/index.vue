@@ -90,6 +90,8 @@ export default {
   @include flexSpaceBetween;
   transition: 0.5s;
   overflow: visible;
+  position: fixed;
+  bottom: 0;
   z-index: 1;
   .al,
   .cover {

@@ -46,6 +46,7 @@ export default {
 @import "~sass/varibles.scss";
 .children {
   .comments {
+    height: 100%;
     border-top: 0.2rem solid $theme-LIGHTGRAY;
     .comment {
       min-height: 2rem;

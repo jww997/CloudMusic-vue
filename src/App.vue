@@ -25,7 +25,7 @@
 
     <router-view v-if="isRouterAlive"></router-view>
 
-    <bottombar v-if="isShowBottomBar"></bottombar>
+    <!-- <bottombar v-if="isShowBottomBar"></bottombar> -->
 
     <bottomlist></bottomlist>
     <music></music>
@@ -39,7 +39,7 @@
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { formatTime, formatDate } from "@/assets/js/filter.js";
 
-import Bottombar from "@/common/bottombar";
+// import Bottombar from "@/common/bottombar";
 import Bottomlist from "@/common/bottomlist";
 
 import Topbar from "@/components/topbar";
@@ -52,7 +52,7 @@ export default {
   name: "App",
   components: {
     Bottomlist,
-    Bottombar,
+    // Bottombar,
     Topbar,
     Tabbar,
     Scroll,

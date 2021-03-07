@@ -1,4 +1,4 @@
-import { getCookie, setCookie, delCookie } from "@/assets/js/util.js";
+import { getCookie, setCookie, delCookie, getLocalStorage } from "@/assets/js/util.js";
 
 const list = [{
   icon: "&#xe600;",
@@ -43,6 +43,7 @@ export default {
 
   login: {
     cookie: getCookie("cookie"),
+    profile: getLocalStorage("profile"),    // 个人信息
   },
 
 

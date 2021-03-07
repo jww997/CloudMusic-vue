@@ -52,6 +52,7 @@ export default {
   @include positionCenter;
   bottom: auto;
   top: $safeDistance;
+  z-index: 1;
   .tags {
     flex-grow: 1;
     width: 3rem;

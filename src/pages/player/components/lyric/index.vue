@@ -3,7 +3,13 @@
     <div class="volume">
       <!-- <div class="iconfont">&#xe66d;</div> -->
       <van-icon size="22" color="#fff" name="volume-o" v-if="isMute" />
-      <van-icon size="22" color="#fff" name="volume" v-else />
+      <van-icon
+        size="22"
+        color="#fff"
+        name="volume"
+        @click.stop="toggleMusicVolume(0)"
+        v-else
+      />
       <div class="slider">
         <van-slider
           v-model="music.volume"
@@ -56,7 +62,7 @@ export default {
   data: function () {
     return {
       lineHeight: 0.9,
-      isMute: false,
+      // isMute: false,
     };
   },
   computed: {
@@ -71,6 +77,10 @@ export default {
     volume() {
       const that = this;
       return that.music.volume;
+    },
+    isMute() {
+      const that = this;
+      return that.music.volume == 0;
     },
     ...mapGetters(["music"]),
   },

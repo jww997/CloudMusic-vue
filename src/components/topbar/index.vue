@@ -12,7 +12,7 @@
       position="left"
       :style="{ width: '80%', height: '100%' }"
     >
-      <setting :profile="profile" @hide="hidePopup" @quit="quit"></setting>
+      <setting @hide="hidePopup" @quit="quit"></setting>
     </van-popup>
   </div>
 </template>
@@ -28,11 +28,18 @@ export default {
   },
   data() {
     return {
-      profile: {
-        nickname: "立即登录",
-      },
+      // profile: {
+      //   nickname: "立即登录",
+      // },
       show: false,
     };
+  },
+  computed: {
+    // profile() {
+    //   const that = this;
+    //   return that.login.profile;
+    // },
+    ...mapGetters(["login"]),
   },
   methods: {
     toPages,
@@ -59,10 +66,9 @@ export default {
 
     that.$api.getLoginStatus().then((res) => {
       let profile = res.data.profile;
-      that.profile = profile;
-      if (localStorage.length > 0) {
+      // that.profile = profile;
+      if (localStorage.length > 0)
         localStorage.profile = JSON.stringify(profile);
-      }
     });
   },
 };

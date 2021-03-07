@@ -52,7 +52,7 @@ export default {
           password,
         })
         .then((res) => {
-          that.$vant.Toast.success({
+          that.$vant.Toast({
             message: res.data.message,
             forbidClick: true,
           });

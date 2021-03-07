@@ -1,6 +1,4 @@
-import { getCookie, setCookie, delCookie } from "@/assets/js/util.js";
-import vant from "@/assets/js/vant.js";
-import api from "@/api";
+import { getCookie, setCookie, delCookie, delLocalStorage } from "@/assets/js/util.js";
 
 export default {
 
@@ -25,20 +23,21 @@ export default {
 
 
 
-  getMusic({ state, commit }, id) {
+  getMusic({ state, commit, actions }, id) {
     const that = this;
     console.log(`id = ${id}`);
     let music = state.music;
     // if (music.id == id) return false;
     try {
-      api.getSongUrl({ id }).then((res) => {
+      that._vm.$api.getSongUrl({ id }).then((res) => {
         let url = res.data.data[0].url;
         if (!url) {
-          this.$vant.Toast({
-            duration: 3000,
-            message: "没有版权 / VIP专享",
-          });
+          that._vm.$vant.Toast("没有版权 / VIP专享");
+          return false;
         } else {
+          // that.amendStateObjValue({ key: "id", value: id });
+          // that.amendStateObjValue({ key: "url", value: url });
+          // that.amendStateObjValue({ key: "isPlaying", value: true });
           music.id = id;
           music.url = url;
           music.isPlaying = true;
@@ -59,10 +58,9 @@ export default {
   },
   logout({ state, commit }) {
     const that = this;
-    let login = state.login;
-    login.cookie = "";
     delCookie("cookie");
-    commit("SET_LOGIN", login);
+    delLocalStorage("profile");
+    commit("SET_LOGIN", {});
   },
 
 }

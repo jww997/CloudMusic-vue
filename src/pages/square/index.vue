@@ -1,7 +1,8 @@
 <template>
   <div class="square">
     <navbar :title="'歌单广场'" fixed black backgroundColor="#fff"></navbar>
-    <!-- <tags :list="tags" @toggleCat="toggleCat"></tags> -->
+
+    <tags :list="tags" @toggleCat="toggleCat"></tags>
 
     <matrix
       :list="playlists"
@@ -44,7 +45,7 @@ export default {
   name: "square",
   components: {
     Matrix,
-Bottombar,
+    Bottombar,
     // Scroll,
     Navbar,
     Tags,
@@ -123,7 +124,7 @@ Bottombar,
 @import "~sass/varibles.scss";
 .square {
   @include suspension;
-  padding: $safeDistance 0;
+  padding: $safeDistance + 1rem 0 $safeDistance;
   z-index: $zIndex-M;
 }
 </style>

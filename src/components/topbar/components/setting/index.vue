@@ -1,18 +1,14 @@
 <template>
-  <div class="children" v-if="profile">
+  <div class="children">
     <!-- <div class="profile" @click.stop="toPages({ name: 'oneself' }, hide)"> -->
     <div
       class="profile"
-      @click.stop="toPages({ name: login.cookie ? 'oneself' : 'login' }, hide)"
+      @click.stop="toPages({ name: cookie ? 'oneself' : 'login' }, hide)"
     >
-      <img
-        class="portrait"
-        :src="profile.avatarUrl"
-        v-lazy="profile.avatarUrl"
-      />
-      <span class="name"> {{ profile.nickname }} &gt; </span>
+      <img class="portrait" :src="avatarUrl" v-lazy="avatarUrl" />
+      <span class="name"> {{ nickname || "立即登录" }} &gt; </span>
     </div>
-    <div class="logout" @click="quit" v-if="login.cookie">退出登录/关闭</div>
+    <div class="logout" @click="quit" v-if="cookie">退出登录/关闭</div>
   </div>
 </template>
 
@@ -21,10 +17,24 @@ import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { toPages } from "@/assets/js/util.js";
 export default {
   name: "setting",
-  props: {
-    profile: {},
-  },
+  // props: {
+  //   profile: {},
+  // },
   computed: {
+    cookie() {
+      const that = this;
+      return that.login.cookie;
+    },
+    avatarUrl() {
+      const that = this;
+      let profile = that.login.profile;
+      return profile && profile.avatarUrl;
+    },
+    nickname() {
+      const that = this;
+      let profile = that.login.profile;
+      return profile && profile.nickname;
+    },
     ...mapState(["login"]),
   },
   // inject: ["reload"],

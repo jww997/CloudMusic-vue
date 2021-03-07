@@ -10,6 +10,10 @@ export {
   setCookie, // 编辑Cookie
   getCookie, // 获取Cookie
   delCookie, // 删除Cookie
+
+  getLocalStorage, // 编辑LocalStorage
+  setLocalStorage, // 获取LocalStorage
+  delLocalStorage, // 删除LocalStorage
 }
 
 function toPages(to = {}, success, fail, complete) {
@@ -62,6 +66,23 @@ function getCookie(key) {
 
 function delCookie(key) {
   setCookie(key, "", -1);
+}
+
+
+
+function getLocalStorage(key) {
+  const that = this;
+  return JSON.parse(localStorage.getItem(key));
+}
+
+function setLocalStorage(key, value) {
+  const that = this;
+  return localStorage.setItem(key, value);
+}
+
+function delLocalStorage(key, value) {
+  const that = this;
+  return localStorage.removeItem(key);
 }
 
 Vue.prototype.$cookie = {

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="toplist">
     <navbar :title="'排行榜'" fixed black backgroundColor="#fff"></navbar>
 
     <matrix :list="list" destination="toplist/playlist"></matrix>
@@ -69,7 +69,7 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-.container {
+.toplist {
   @include suspension;
   box-sizing: border-box;
   padding-top: $safeDistance;

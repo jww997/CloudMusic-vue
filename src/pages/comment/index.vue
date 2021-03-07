@@ -1,6 +1,6 @@
 <template>
   <!-- <scroll :data="[comments]" :refreshDelay="1000"> -->
-  <div class="container">
+  <div class="comment">
     <navbar :title="`评论(${comments.length})`" fixed black></navbar>
 
     <list :comments="comments"></list>
@@ -47,7 +47,7 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-.container {
+.comment {
   height: 100%;
   @include suspension;
   box-sizing: border-box;

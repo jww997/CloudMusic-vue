@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="square">
     <navbar :title="'歌单广场'" fixed black backgroundColor="#fff"></navbar>
     <!-- <tags :list="tags" @toggleCat="toggleCat"></tags> -->
 
@@ -117,7 +117,7 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-.container {
+.square {
   @include suspension;
   // padding-top: $safeDistance + 1rem;
   // padding-bottom: $safeDistance;

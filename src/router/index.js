@@ -35,11 +35,11 @@ export default new Router({
           name: 'player',
           component: _component('player'),
         },
-        // {
-        //   path: 'mv',
-        //   name: 'mv',
-        //   component: _component('mv'),
-        // },
+        {
+          path: 'mv',
+          name: 'mv',
+          component: _component('mv'),
+        },
 
 
 

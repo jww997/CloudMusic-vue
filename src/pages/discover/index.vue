@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="discover">
     <topbar></topbar>
     <!-- <scroll :data="blocks" :refreshDelay="1000"> -->
 
@@ -135,7 +135,7 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-.container {
+.discover {
   height: 100%;
   position: relative;
   // min-height: 100vh;

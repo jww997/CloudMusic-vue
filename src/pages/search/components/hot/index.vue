@@ -5,7 +5,7 @@
     </div>
     <div class="words">
       <div
-        class="word"
+        :class="{ word: true, special: index < 3 }"
         v-for="(item, index) in list"
         :key="item.score"
         @click="getSearch(item.searchWord)"
@@ -13,10 +13,10 @@
         <span
           :class="{
             subscript: true,
-            special: index < 3,
           }"
           >{{ index + 1 }}</span
         >
+        <!-- special: index < 3, -->
         <span class="title">{{ item.searchWord }}</span>
         <img class="icon" :src="item.iconUrl" v-if="item.iconUrl" />
       </div>
@@ -91,12 +91,17 @@ export default {
       .subscript {
         width: $text-XL;
         color: $theme-GRAY;
-        &.special {
-          color: $theme-RED;
-        }
       }
       .title {
         @include omit;
+      }
+      &.special {
+        .subscript {
+          color: $theme-RED;
+        }
+        .title {
+          font-weight: bold;
+        }
       }
       .icon {
         margin-left: $text-XXS;

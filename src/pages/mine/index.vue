@@ -1,5 +1,5 @@
 <template>
-  <div class="conatiner">
+  <div class="mine">
     <profile :profile="profile" :level="level"></profile>
     <application></application>
 

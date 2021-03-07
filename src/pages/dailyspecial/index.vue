@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="dailspecial">
     <navbar :title="'每日推荐'" fixed backgroundColor="#EC4141"></navbar>
 
     <cap></cap>
@@ -50,7 +50,7 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-.container {
+.dailspecial {
   @include suspension;
   padding-bottom: $safeDistance;
   box-sizing: border-box;

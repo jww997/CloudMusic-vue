@@ -8,7 +8,7 @@
           autofocus
           :placeholder="searchDefault.showKeyword"
           v-model="keywords"
-          @change="getdata()"
+          @change="getdata"
         />
         <!-- @keydown="getSearch(keywords || searchDefault.realkeyword)" -->
         <van-icon
@@ -20,18 +20,23 @@
       </div>
     </navbar>
 
-    <history
-      :list="history"
-      @getSearch="getSearch"
-      @clearHistory="clearHistory"
-      v-if="history.length"
-    ></history>
+    <!-- :list="history" -->
+    <!-- v-if="history.length" -->
+    <history @getSearch="getSearch"></history>
     <hot @getSearch="getSearch" v-if="!list.length"></hot>
     <list :list="list" v-else></list>
+
+    <bottombar></bottombar>
   </div>
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
+import {
+  getLocalStorage,
+  setLocalStorage,
+  delLocalStorage,
+} from "@/assets/js/util.js";
 import Navbar from "@/common/navbar";
 import List from "@/common/list";
 
@@ -53,7 +58,6 @@ export default {
   data() {
     return {
       keywords: null,
-      history: [],
 
       list: [],
       count: 0,
@@ -61,10 +65,16 @@ export default {
       searchDefault: {},
     };
   },
+  computed: {
+    history() {
+      const that = this;
+      return that.login.history;
+    },
+    ...mapGetters(["login"]),
+  },
   watch: {
     keywords(val, oldVal) {
       const that = this;
-      console.log(val);
       if (!val) that.clearList();
     },
   },
@@ -78,19 +88,19 @@ export default {
     },
     getdata() {
       const that = this;
-
-      // if (that.keywords == null) that.keywords = that.searchDefault.realkeyword;
+      let keywords = that.keywords;
+      let history = that.history;
       that.$api
         .getCloudSearch({
-          keywords: that.keywords,
+          keywords,
         })
         .then((res) => {
           that.list = res.data.result.songs;
           that.count = res.data.result.songCount;
-
-          let history = that.history;
-          if (history.indexOf(that.keywords) == -1) history.push(val);
-          history.reverse();
+          let index = history.indexOf(keywords);
+          if (index != -1) history.splice(index, 1);
+          history.unshift(keywords);
+          setLocalStorage("history", history);
         });
     },
 
@@ -98,10 +108,10 @@ export default {
       const that = this;
       that.keywords = null;
     },
-    clearHistory() {
-      const that = this;
-      that.history = [];
-    },
+    // clearHistory() {
+    //   const that = this;
+    //   that.history = [];
+    // },
     clearList() {
       const that = this;
       that.list = [];
@@ -111,7 +121,7 @@ export default {
   mounted() {
     const that = this;
     that.clearKeywords();
-    that.clearHistory();
+    // that.clearHistory();
     that.clearList();
 
     that.$api

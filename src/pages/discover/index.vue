@@ -73,15 +73,16 @@ export default {
     };
   },
   computed: {
+    cookie() {
+      const that = this;
+      return that.login.cookie;
+    },
     ...mapGetters(["login", "transition"]),
   },
   watch: {
-    login: {
-      handler(newVal, oldVal) {
-        const that = this;
-        that.refresh();
-      },
-      deep: true,
+    cookie(newVal, oldVal) {
+      const that = this;
+      that.refresh();
     },
   },
   methods: {

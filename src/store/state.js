@@ -44,6 +44,7 @@ export default {
   login: {
     cookie: getCookie("cookie"),
     profile: getLocalStorage("profile"),    // 个人信息
+    history: getLocalStorage("history"),    // 搜索历史
   },
 
 

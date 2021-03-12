@@ -7,7 +7,7 @@
       <div
         :class="{ word: true, special: index < 3 }"
         v-for="(item, index) in list"
-        :key="item.score"
+        :key="index"
         @click="getSearch(item.searchWord)"
       >
         <span

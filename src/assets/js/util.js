@@ -11,8 +11,8 @@ export {
   getCookie, // 获取Cookie
   delCookie, // 删除Cookie
 
-  getLocalStorage, // 编辑LocalStorage
-  setLocalStorage, // 获取LocalStorage
+  setLocalStorage, // 编辑LocalStorage
+  getLocalStorage, // 获取LocalStorage
   delLocalStorage, // 删除LocalStorage
 }
 
@@ -39,12 +39,8 @@ function toPages(to = {}, success, fail, complete) {
 
 function setCookie(key, value, expire) {
   const date = new Date();
-
   date.setSeconds(date.getSeconds() + expire);
   document.cookie = key + "=" + escape(value) + "; expires=" + date.toGMTString();
-
-  // console.log(date.toGMTString());
-  // console.log(document.cookie);
 }
 
 function getCookie(key) {
@@ -77,7 +73,7 @@ function getLocalStorage(key) {
 
 function setLocalStorage(key, value) {
   const that = this;
-  return localStorage.setItem(key, value);
+  return localStorage.setItem(key, JSON.stringify(value));
 }
 
 function delLocalStorage(key, value) {

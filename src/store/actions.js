@@ -51,13 +51,11 @@ export default {
 
 
   login({ state, commit }, val = {}) {
-    const that = this;
     let cookie = val.cookie;
     setCookie("cookie", cookie);
     commit("SET_LOGIN", val);
   },
   logout({ state, commit }) {
-    const that = this;
     delCookie("cookie");
     delLocalStorage("profile");
     commit("SET_LOGIN", {});

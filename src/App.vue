@@ -37,6 +37,11 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
+import {
+  getLocalStorage,
+  setLocalStorage,
+  delLocalStorage,
+} from "@/assets/js/util.js";
 import { formatTime, formatDate } from "@/assets/js/filter.js";
 
 // import Bottombar from "@/common/bottombar";
@@ -118,6 +123,8 @@ export default {
     console.log(`VUE版 https://github.com/jww997/CloudMusic-vue`);
     console.log(formatDate(undefined, 2), formatTime()); // undefined还是有点用
     console.log(`需求墙：1. 播放页加个分享功能 2. 加个调音量(已完成)`);
+
+    if (!getLocalStorage("history")) setLocalStorage("history", []);
   },
   // created: function () {
   //   const that = this;

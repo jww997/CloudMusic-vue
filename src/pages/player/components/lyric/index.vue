@@ -62,7 +62,7 @@ export default {
   data: function () {
     return {
       lineHeight: 0.9,
-      // isMute: false,
+      isMute: false,
     };
   },
   computed: {

@@ -88,7 +88,22 @@ export default {
     },
   },
   computed: {
+    id() {
+      const that = this;
+      return that.music.id;
+    },
     ...mapGetters(["music", "mv"]),
+  },
+  watch: {
+    id(val, oldVal) {
+      const that = this;
+      let currentList = that.music.currentList;
+      let currentIndex = that.music.currentIndex;
+      if (!currentList.length) return false;
+      let current = currentList[currentIndex];
+      that.amendStateObjValue({ key: "current", value: current });
+      that.amendStateObjValue({ key: "currentIndex", value: currentIndex });
+    },
   },
   methods: {
     toPages,
@@ -105,7 +120,6 @@ export default {
       that.amendStateObjValue({ key: "currentIndex", value: -1 });
       if (that.music.id == id) {
         that.toPages({ name: "player" });
-        // that.amendStateObjValue({ key: "isShow", value: true });
       } else {
         that.amendStateObjValue({ key: "id", value: id });
         that.amendStateObjValue({ key: "currentList", value: that.list });

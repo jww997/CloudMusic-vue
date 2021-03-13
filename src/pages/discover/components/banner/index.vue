@@ -1,29 +1,52 @@
 <template>
   <div class="children">
-    <swiper :list="list"></swiper>
-    <!-- <ball :list="ball"></ball> -->
+    <van-swipe class="swiper" :autoplay="5000" indicator-color="white">
+      <van-swipe-item
+        class="swiper-item"
+        v-for="(item, index) in list"
+        :key="index"
+        @click="bannerHandle(item)"
+      >
+        <div class="box" :data-url="item.url" :data-video="item.video">
+          <img class="image" :src="item.imageUrl" />
+          <span
+            class="text"
+            :style="{ backgroundColor: item.titleColor }"
+            v-if="item.typeTitle"
+            >{{ item.typeTitle }}</span
+          >
+        </div>
+      </van-swipe-item>
+    </van-swipe>
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
-import Swiper from "./components/swiper";
-// import Ball from "./components/ball";
+import { toPages } from "@/assets/js/util.js";
 export default {
   name: "banner",
   props: {
-    // ball: {
-    //   type: Array,
-    //   default: () => [],
-    // },
     list: {
       type: Array,
       default: () => [],
     },
   },
-  components: {
-    Swiper,
-    // Ball,
+  methods: {
+    toPages,
+    bannerHandle(val) {
+      const that = this;
+      switch (val.targetType) {
+        case 3000: // 数字单曲
+          window.location.href = val.url;
+          break;
+        case 1: // 新歌首发
+          that.amendStateObjValue({ key: "id", value: val.encodeId });
+          that.toPages({ name: "player" });
+          break;
+      }
+    },
+    ...mapActions(["amendStateObjValue"]),
   },
 };
 </script>
@@ -47,6 +70,7 @@ export default {
         // width: 7rem;
         width: 94%;
         border-radius: 0.2rem;
+        background-color: $theme-LIGHTGRAY;
         position: relative;
         overflow: hidden;
         .image {

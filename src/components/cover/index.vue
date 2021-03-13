@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ kid: true, active: image }">
+  <div :class="{ kid: true, active: isLoad }">
     <van-image
       class="image"
       fit="contain"
@@ -7,6 +7,7 @@
       :height="size"
       :src="image"
       v-lazy="image"
+      @load="load"
     />
     <span class="text" v-if="name">{{ name }}</span>
     <div class="count" v-if="count">
@@ -38,10 +39,15 @@ export default {
   data: function () {
     return {
       size: "100%",
+      isLoad: false,
     };
   },
   methods: {
     formatUnit,
+    load() {
+      const that = this;
+      that.isLoad = true;
+    },
   },
 };
 </script>
@@ -55,9 +61,12 @@ export default {
   display: flex;
   flex-direction: column;
   .image {
+    width: 2.5rem;
+    height: 2.5rem;
     border-radius: 0.2rem;
     background-color: $theme-LIGHTGRAY;
     overflow: hidden;
+    transition: 1s;
   }
   .text {
     @include omit;

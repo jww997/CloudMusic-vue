@@ -12,15 +12,16 @@ export {
   formatTime,    // 处理时间
 }
 
-function formatUnit(num) {
+function formatUnit(num = 0) {
 
   if (typeof num == 'number') {
-    if (!num) {
-      num = 0;
-    } else if (num > 10e8 * 3) {
-      num = `${(num / 10e8).toFixed(0)}亿`;
-    } else if (num >= 10e8) {
-      num = `${(num / 10e8).toFixed(1)}亿`;
+    if (num >= 10e8) {
+      num = `${(num / 10e7).toFixed(1)}亿`;
+    } else if (num >= 10e7) {
+      num = `${(num / 10e7).toFixed(0)}亿`;
+
+    } else if (num >= 10e4) {
+      num = `${(num / 10e3).toFixed(0)}万`;
     } else if (num >= 10e3) {
       num = `${(num / 10e3).toFixed(1)}万`;
     };

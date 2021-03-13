@@ -28,8 +28,9 @@ export default {
     console.log(`id = ${id}`);
     let music = state.music;
     // if (music.id == id) return false;
+    let api = that._vm.$api;
     try {
-      that._vm.$api.getSongUrl({ id }).then((res) => {
+      api.getSongUrl({ id }).then((res) => {
         let url = res.data.data[0].url;
         if (!url) {
           that._vm.$vant.Toast("没有版权 / VIP专享");
@@ -44,8 +45,19 @@ export default {
           console.log(`源 => ${url}`);
           commit("SET_MUSIC", music);
         }
-      });
-    } catch (error) { }
+
+        // if (!music.current) {
+        api.getSongDetail({ ids: id }).then(res => {
+          let songs = res.data.songs;
+          music.current = songs[0];
+          music.currentList = songs;
+          commit("SET_MUSIC", music);
+        })
+        // };
+      })
+    } catch (error) {
+      that.amendStateObjValue({ key: "current", value: {} });
+    }
   },
 
 

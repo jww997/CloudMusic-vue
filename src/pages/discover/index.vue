@@ -2,9 +2,9 @@
   <div class="discover">
     <topbar></topbar>
 
+    <height-clear />
     <refresh :isLoading="isLoading" @refresh="refresh">
       <div v-for="(item, index) in blocks" :key="index">
-        <!-- :ball="ball" -->
         <!-- :list="item.extInfo.banners" -->
         <!-- v-if="item.showType == 'BANNER'" -->
 
@@ -22,6 +22,7 @@
           :content="item"
         ></slide-songlist-align>
       </div>
+      <height-clear />
     </refresh>
 
     <bottombar></bottombar>
@@ -34,6 +35,7 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
+import heightClear from "@/base/height-clear";
 
 import Refresh from "@/common/refresh";
 
@@ -51,6 +53,8 @@ import Topbar from "@/components/topbar";
 export default {
   name: "discover",
   components: {
+    heightClear,
+
     Bowling,
     Whirligig,
     slideSonglistAlign,
@@ -119,7 +123,6 @@ export default {
   height: 100%;
   position: relative;
   overflow: scroll;
-  padding: $safeDistance 0;
 
   z-index: $zIndex-S;
 }

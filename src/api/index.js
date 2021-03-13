@@ -894,7 +894,7 @@ export default {
      */
   },
   getSongDetail: parameter => { // 获取歌曲详情
-    return request("song/detail", parameter);
+    return request("song/detail", parameter, { isCookie: true });
     /**
      * @param ids 音乐id,如ids=347230
      * 说明:调用此接口,传入音乐id(支持多个id,用,隔开),可获得歌曲详情(注意:歌曲封面现在需要通过专辑内容接口获取)

@@ -134,8 +134,10 @@ export default {
   width: 100%;
   height: $safeDistance;
   position: relative;
-  z-index: 1;
   color: #fff;
+  position: fixed;
+  top: 0;
+  z-index: 1;
   .left {
     width: $safeDistance;
     @include positionCenter;
@@ -177,10 +179,10 @@ export default {
       justify-content: flex-start;
     }
   }
-  &.fixed {
-    position: fixed;
-    top: 0;
-  }
+  // &.fixed {
+  //   position: fixed;
+  //   top: 0;
+  // }
   &.black {
     color: #000;
   }

@@ -32,7 +32,7 @@
             <div class="iconfont clear" @click="clear">&#xe632;</div>
           </div>
         </div>
-        <div class="songs">
+        <div class="songs" v-if="music.currentList.length">
           <div
             v-for="(item, index) in music.currentList"
             :key="item.id"
@@ -42,7 +42,7 @@
             <div class="iconfont playing">&#xe604;</div>
             <div class="monicker">
               <span class="name">{{ item.name }}</span>
-              <span class="ar">{{ item.ar[0].name }}</span>
+              <span class="ar" v-if="item.ar">{{ item.ar[0].name }}</span>
             </div>
             <div class="iconfont delete">&#xe626;</div>
           </div>

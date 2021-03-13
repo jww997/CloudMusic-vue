@@ -3,6 +3,7 @@
     class="children"
     :style="{ backgroundImage: `url(${obj.backgroundCoverUrl})` }"
   >
+    <height-clear />
     <div class="general" v-if="!obj.titleImageUrl">
       <div class="left" @click.stop="imagePreview">
         <cover :image="obj.coverImgUrl" :count="obj.playCount"></cover>
@@ -23,11 +24,12 @@
       </div>
     </div>
     <div class="official" v-else>
-      <div
-        class="titleImage"
-        :style="{ backgroundImage: `url(${obj.titleImageUrl})` }"
-      ></div>
-      <!-- <img class="titleImage" :src="obj.titleImageUrl" /> -->
+      <div class="title">
+        <!-- :style="{
+          backgroundImage: `url(${obj.titleImageUrl})`,
+        }" -->
+        <img class="titleImage" :src="obj.titleImageUrl" />
+      </div>
       <span class="updateFrequency">{{ obj.updateFrequency }}</span>
     </div>
     <div class="operation">
@@ -51,6 +53,8 @@
 </template>
 
 <script>
+import heightClear from "@/base/height-clear";
+
 import Cover from "@/components/cover";
 import { formatUnit } from "@/assets/js/filter";
 import { toPages } from "@/assets/js/util.js";
@@ -58,6 +62,8 @@ import { toPages } from "@/assets/js/util.js";
 export default {
   name: "Cap",
   components: {
+    heightClear,
+
     Cover,
   },
   props: {
@@ -85,9 +91,9 @@ export default {
 @import "~sass/varibles.scss";
 .children {
   width: 100%;
-  height: 6rem;
+  height: 6.5rem;
   margin-bottom: 1rem;
-  padding: $safeDistance 0.3rem 0.9rem;
+  // padding: 0 0.3rem 0.9rem;
   box-sizing: border-box;
   position: relative;
   border-radius: 0 0 40rem 40rem / 1rem;
@@ -95,8 +101,11 @@ export default {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  // @include flexCenter;
+  // flex-direction: column;
   .general {
     @include flexSpaceBetween;
+    padding: $text-S;
     color: #666;
     .left {
       flex-shrink: 0;
@@ -152,21 +161,33 @@ export default {
     }
   }
   .official {
-    height: 100%;
+    margin-top: 2.2rem;
     @include flexCenter;
     flex-direction: column;
-    justify-content: flex-end;
-    .titleImage {
+    .title {
       width: 6rem;
       height: 1rem;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-blend-mode: color;
-      background-size: 100%;
+      margin-bottom: $text-XS;
+      position: relative;
+
+      // background-position: 0 120px;
+      // background-repeat: no-repeat;
+      // overflow: hidden;
+      // display: block;
+      // width: 125px;
+      // height: 40px;
+      // text-indent: -999px;
+
+      .titleImage {
+        max-width: 100%;
+        @include positionCenter;
+        // clip: rect(0px, 130px, 30px, 0px);
+        // overflow: hidden;
+      }
     }
     .updateFrequency {
       font-size: $text-XS;
-      color: #999;
+      color: $theme-LIGHTGRAY;
     }
   }
   .operation {

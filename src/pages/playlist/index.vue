@@ -18,7 +18,8 @@
       <capplus :obj="playlist"></capplus>
     </div>
 
-    <bottombar></bottombar>
+    <height-clear/>
+    <bottombar/>
 
     <transition :name="transition">
       <router-view></router-view>
@@ -29,6 +30,8 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
+import heightClear from "@/base/height-clear";
+
 import List from "@/common/list";
 
 import Scroll from "@/base/scroll";
@@ -42,6 +45,8 @@ import Bottombar from "@/common/bottombar";
 export default {
   name: "playlist",
   components: {
+    heightClear,
+
     List,
 
     Scroll,
@@ -101,7 +106,7 @@ export default {
 @import "~sass/varibles.scss";
 .playlist {
   @include suspension;
-  padding-bottom: $safeDistance;
+  // padding-bottom: $safeDistance;
   z-index: $zIndex-S;
 }
 </style>

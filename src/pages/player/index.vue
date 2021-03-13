@@ -1,6 +1,12 @@
 <template>
   <div class="player" :style="{ backgroundImage: 'url(' + picUrl + ')' }">
-    <navbar :title="title" :subtitle="subtitle" :fixed="false" iconLeft="arrow-down"></navbar>
+    <navbar
+      :title="title"
+      :subtitle="subtitle"
+      :fixed="false"
+      iconLeft="arrow-down"
+    ></navbar>
+    <height-clear />
     <div class="song" @click="toggleShowLyric">
       <lyric :lyric="lyric" v-if="isShowLyric"></lyric>
       <phonograph :picUrl="picUrl" v-else></phonograph>
@@ -13,6 +19,7 @@
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { formatLyric, formatArtists } from "@/assets/js/filter.js";
 import LyricParser from "lyric-parser"; // 歌词解析
+import heightClear from "@/base/height-clear";
 import Navbar from "@/common/navbar";
 import Phonograph from "./components/phonograph";
 import Handle from "./components/handle";
@@ -20,6 +27,7 @@ import Lyric from "./components/lyric";
 export default {
   name: "player",
   components: {
+    heightClear,
     Navbar,
     Phonograph,
     Handle,
@@ -162,7 +170,6 @@ export default {
     //   rgba(255, 255, 255, 0)
     // );
     // }
-
   }
 }
 </style>

@@ -1,21 +1,34 @@
 <template>
-  <div class="children">
-    <div class="left" @click.stop="imagePreview">
-      <cover :image="obj.coverImgUrl" :count="obj.playCount"></cover>
+  <div
+    class="children"
+    :style="{ backgroundImage: `url(${obj.backgroundCoverUrl})` }"
+  >
+    <div class="general" v-if="!obj.titleImageUrl">
+      <div class="left" @click.stop="imagePreview">
+        <cover :image="obj.coverImgUrl" :count="obj.playCount"></cover>
+      </div>
+      <div class="right">
+        <div class="top">
+          <div class="name">{{ obj.name }}</div>
+          <div class="creator" v-if="obj.creator">
+            <img class="avatarUrl" :src="obj.creator.avatarUrl" />
+            <span class="nickname">{{ obj.creator.nickname }}</span>
+          </div>
+        </div>
+        <div class="bottom">
+          <div class="signature" v-if="obj.creator">
+            {{ obj.creator.signature }}
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="right">
-      <div class="top">
-        <div class="name">{{ obj.name }}</div>
-        <div class="creator" v-if="obj.creator">
-          <img class="avatarUrl" :src="obj.creator.avatarUrl" />
-          <span class="nickname">{{ obj.creator.nickname }}</span>
-        </div>
-      </div>
-      <div class="bottom">
-        <div class="signature" v-if="obj.creator">
-          {{ obj.creator.signature }}
-        </div>
-      </div>
+    <div class="official" v-else>
+      <div
+        class="titleImage"
+        :style="{ backgroundImage: `url(${obj.titleImageUrl})` }"
+      ></div>
+      <!-- <img class="titleImage" :src="obj.titleImageUrl" /> -->
+      <span class="updateFrequency">{{ obj.updateFrequency }}</span>
     </div>
     <div class="operation">
       <div class="item">
@@ -24,9 +37,7 @@
       </div>
       <div
         class="item"
-        @click.stop="
-          toPages({ name: 'comment', params: { id: obj.id } })
-        "
+        @click.stop="toPages({ name: 'comment', params: { id: obj.id } })"
       >
         <span class="iconfont">&#xe65d;</span>
         <span class="text" v-html="formatUnit(obj.commentCount)">评论</span>
@@ -74,7 +85,6 @@ export default {
 @import "~sass/varibles.scss";
 .children {
   width: 100%;
-  // height: 100%;
   height: 6rem;
   margin-bottom: 1rem;
   padding: $safeDistance 0.3rem 0.9rem;
@@ -82,59 +92,81 @@ export default {
   position: relative;
   border-radius: 0 0 40rem 40rem / 1rem;
   background-color: rgba(0, 0, 0, 0.3);
-  color: #666;
-  @include flexSpaceBetween;
-  .left {
-    flex-shrink: 0;
-    width: 3.2rem;
-    // margin-top: $text-XXS;
-  }
-  .right {
-    flex-grow: 1;
-    min-width: 3rem;
-    height: 3.2rem;
-    line-height: 0.65rem;
-    margin-left: 0.3rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  .general {
     @include flexSpaceBetween;
-    align-items: flex-start;
-    flex-direction: column;
-    .top {
-      width: 100%;
-      .name {
+    color: #666;
+    .left {
+      flex-shrink: 0;
+      width: 3.2rem;
+    }
+    .right {
+      flex-grow: 1;
+      min-width: 3rem;
+      height: 3.2rem;
+      line-height: 0.65rem;
+      margin-left: 0.3rem;
+      @include flexSpaceBetween;
+      align-items: flex-start;
+      flex-direction: column;
+      .top {
         width: 100%;
-        color: #fff;
-        font-size: $text-M;
-        @include omit;
-        display: -webkit-box;
-        white-space: normal;
-        -webkit-column-count: 2;
-        column-count: 2;
-      }
-      .creator {
-        height: $text-L;
-        margin-top: 0.2rem;
-        @include flexSpaceBetween;
-        justify-content: flex-start;
-        .avatarUrl {
-          flex-shrink: 0;
-          height: 100%;
-          border-radius: 50%;
-          background-color: $theme-LIGHTGRAY;
+        .name {
+          width: 100%;
+          color: #fff;
+          font-size: $text-M;
+          @include omit;
+          display: -webkit-box;
+          white-space: normal;
+          -webkit-column-count: 2;
+          column-count: 2;
         }
-        .nickname {
+        .creator {
+          height: $text-L;
+          margin-top: 0.2rem;
+          @include flexSpaceBetween;
+          justify-content: flex-start;
+          .avatarUrl {
+            flex-shrink: 0;
+            height: 100%;
+            border-radius: 50%;
+            background-color: $theme-LIGHTGRAY;
+          }
+          .nickname {
+            font-size: $text-XS;
+            margin-left: 0.1rem;
+            @include omit;
+          }
+        }
+      }
+      .bottom {
+        width: 100%;
+        .signature {
+          width: 100%;
           font-size: $text-XS;
-          margin-left: 0.1rem;
           @include omit;
         }
       }
     }
-    .bottom {
-      width: 100%;
-      .signature {
-        width: 100%;
-        font-size: $text-XS;
-        @include omit;
-      }
+  }
+  .official {
+    height: 100%;
+    @include flexCenter;
+    flex-direction: column;
+    justify-content: flex-end;
+    .titleImage {
+      width: 6rem;
+      height: 1rem;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-blend-mode: color;
+      background-size: 100%;
+    }
+    .updateFrequency {
+      font-size: $text-XS;
+      color: #999;
     }
   }
   .operation {
@@ -145,7 +177,7 @@ export default {
     font-size: $text-XS;
     border-radius: 2rem;
     background-color: #fff;
-    box-shadow: 0 0 10px 0 #ccc;
+    box-shadow: 0 5px 10px 0 #cfcfcf;
     @include flexCenter;
     position: absolute;
     bottom: 0;

@@ -21,8 +21,8 @@ function formatUnit(num) {
       num = `${(num / 10e8).toFixed(0)}亿`;
     } else if (num >= 10e8) {
       num = `${(num / 10e8).toFixed(1)}亿`;
-    } else if (num >= 10e5) {
-      num = `${(num / 10e5).toFixed(0)}万`;
+    } else if (num >= 10e3) {
+      num = `${(num / 10e3).toFixed(1)}万`;
     };
   }
   return num;

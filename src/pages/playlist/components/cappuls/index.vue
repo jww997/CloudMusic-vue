@@ -80,6 +80,7 @@ export default {
     margin-top: 0.3rem;
     text-align: justify;
     text-align-last: left;
+    white-space: pre-wrap;
   }
   .close,
   >>> .van-icon {

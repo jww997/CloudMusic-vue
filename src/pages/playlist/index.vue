@@ -18,8 +18,8 @@
       <capplus :obj="playlist"></capplus>
     </div>
 
-    <height-clear/>
-    <bottombar/>
+    <height-clear v-if="music.isPlaying" />
+    <bottombar />
 
     <transition :name="transition">
       <router-view></router-view>
@@ -71,7 +71,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["transition"]),
+    ...mapGetters(["music", "transition"]),
   },
   methods: {
     toggleCapplus: function () {

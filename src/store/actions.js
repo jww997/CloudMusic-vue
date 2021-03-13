@@ -52,6 +52,9 @@ export default {
           music.current = songs[0];
           music.currentList = songs;
           commit("SET_MUSIC", music);
+        }).catch(err => {
+          // music.current = {};
+          // commit("SET_MUSIC", music);
         })
         // };
       })

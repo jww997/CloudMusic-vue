@@ -1,5 +1,6 @@
 <template>
   <div class="children">
+    <height-clear />
     <div class="time">
       <span class="date">{{ formatDate(undefined, 4).d }}</span>
       <span class="month">{{ formatDate(undefined, 4).m }}</span>
@@ -8,9 +9,14 @@
 </template>
 
 <script>
+import heightClear from "@/base/height-clear";
+
 import { formatDate } from "@/assets/js/filter.js";
 export default {
   name: "cap",
+  components: {
+    heightClear,
+  },
   methods: {
     formatDate,
   },
@@ -22,7 +28,7 @@ export default {
 @import "~sass/varibles.scss";
 .children {
   height: 4rem;
-  padding: $safeDistance 0.3rem 0.2rem;
+  padding: 0 0.3rem 0.2rem;
   background-color: $theme-RED;
   color: $theme-WHITE;
   border-radius: 0 0 30rem 30rem / 1rem;

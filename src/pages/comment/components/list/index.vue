@@ -20,20 +20,18 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
-import Navbar from "@/common/navbar";
 import { formatDate } from "@/assets/js/filter.js";
 export default {
   name: "list",
-  components: {
-    Navbar,
-  },
   props: {
-    comments: { type: Array, default: [] },
+    comments: {
+      type: Array,
+      default: [],
+    },
   },
   methods: {
     formatDate,

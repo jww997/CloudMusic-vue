@@ -5,23 +5,27 @@
     <cap></cap>
     <list :list="dailySongs" sorttype="2" allTop="1.5rem"></list>
 
+    <height-clear v-if="music.isPlaying" />
     <bottombar></bottombar>
   </div>
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
+import heightClear from "@/base/height-clear";
+
 import List from "@/common/list";
-
-
 import Bottombar from "@/common/bottombar";
-
 import Navbar from "@/common/navbar";
 import Cap from "./components/cap";
 
 export default {
   name: "dailyspecial",
   components: {
-    Navbar,Bottombar,
+    heightClear,
+
+    Navbar,
+    Bottombar,
     List,
     Cap,
   },
@@ -30,6 +34,9 @@ export default {
       recommend: [],
       dailySongs: [],
     };
+  },
+  computed: {
+    ...mapGetters(["music"]),
   },
   mounted: function () {
     const that = this;
@@ -57,7 +64,6 @@ export default {
 @import "~sass/varibles.scss";
 .dailspecial {
   @include suspension;
-  padding-bottom: $safeDistance;
   z-index: $zIndex-M;
 }
 </style>

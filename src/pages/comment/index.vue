@@ -1,30 +1,35 @@
 <template>
   <!-- <scroll :data="[comments]" :refreshDelay="1000"> -->
   <div class="comment">
+    <height-clear />
     <navbar
       :title="`评论(${comments.length})`"
       fixed
       black
       backgroundColor="#fff"
     ></navbar>
-
     <list :comments="comments"></list>
 
+    <height-clear v-if="music.isPlaying" />
     <bottombar></bottombar>
   </div>
   <!-- </scroll> -->
 </template>
 
 <script>
-import Scroll from "@/base/scroll";
+import heightClear from "@/base/height-clear";
 
+import Scroll from "@/base/scroll";
 import Bottombar from "@/common/bottombar";
 
 import Navbar from "@/common/navbar";
 import List from "./components/list";
+import { mapGetters } from "vuex";
 export default {
   name: "comment",
   components: {
+    heightClear,
+
     Scroll,
     Bottombar,
 
@@ -35,6 +40,9 @@ export default {
     return {
       comments: [],
     };
+  },
+  computed: {
+    ...mapGetters(["music"]),
   },
   methods: {
     getdata() {
@@ -59,7 +67,6 @@ export default {
 @import "~sass/varibles.scss";
 .comment {
   @include suspension;
-  padding: $safeDistance 0;
   z-index: $zIndex-M;
 }
 </style>

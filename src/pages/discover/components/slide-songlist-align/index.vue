@@ -63,17 +63,18 @@ export default {
     toPages,
     toggleMusic(id, current) {
       const that = this;
-      let music = that.music;
-      music.current = current;
-      music.currentIndex = 0;
-      music.currentList = [current];
-      that.setMusic(music);
-      that.getMusic(id);
+      if (that.music.id != id) {
+        that.amendStateObjValue({ key: "id", value: id });
+        that.amendStateObjValue({ key: "current", value: current });
+        that.amendStateObjValue({ key: "currentIndex", value: 0 });
+        that.amendStateObjValue({ key: "currentList", value: [current] });
+      }
+      that.amendStateObjValue({
+        key: "isPlaying",
+        value: !that.music.isPlaying,
+      });
     },
-    ...mapMutations({
-      setMusic: "SET_MUSIC",
-    }),
-    ...mapActions(["getMusic"]),
+    ...mapActions(["amendStateObjValue"]),
   },
 };
 </script>

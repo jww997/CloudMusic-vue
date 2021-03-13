@@ -22,7 +22,7 @@
           :content="item"
         ></slide-songlist-align>
       </div>
-      <height-clear />
+      <height-clear v-if="music.isPlaying" />
     </refresh>
 
     <bottombar></bottombar>
@@ -81,7 +81,7 @@ export default {
       const that = this;
       return that.login.cookie;
     },
-    ...mapGetters(["login", "transition"]),
+    ...mapGetters(["music", "login", "transition"]),
   },
   watch: {
     cookie(newVal, oldVal) {

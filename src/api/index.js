@@ -7,6 +7,7 @@
 import Vue from 'vue';
 import axios from 'axios';
 
+// const api = "https://www.mikonchen.top";
 const api = "http://www.mikonchen.top";
 // const api = "http://49.234.76.196";
 const port = 3000;
@@ -1337,257 +1338,186 @@ export default {
   },
 
 
-
-  //电台banner
-  //说明:调用此接口,可获取电台banner
-
-  //接口地址:/dj/banner
-
-  //调用例子:/dj/banner
-
-  //电台个性推荐
-  //说明:调用此接口,可获取电台个性推荐列表可选参数:
-
-  //limit:返回数量,默认为6,总条数最多6条
-
-  //接口地址:/dj/personalize/recommend
-
-  //调用例子:/dj/personalize/recommend?limit=5
-
-  //电台订阅者列表
-  //说明:调用此接口,可获取电台订阅者列表必选参数:id:电台id
-
-  //可选参数:time:分页参数,默认-1,传入上一次返回结果的time,将会返回下一页的数据
-
-  //limit:返回数量,默认为20
-
-  //接口地址:/dj/subscriber
-
-  //调用例子:/dj/subscriber?id=335425050,/dj/subscriber?id=335425050&time=1602761825390
-
-  //用户电台
-  //说明:调用此接口,传入用户id可获取用户创建的电台
-
-  //必选参数:uid:用户id
-
-  //接口地址:/user/audio
-
-  //调用例子:/user/audio?uid=32953014
-
-  //热门电台
-  //说明:调用此接口,可获取热门电台
-
-  //可选参数:
-
-  //limit:返回数量,默认为30
-
-  //offset:偏移数量，用于分页,如:(页数-1)*30,其中30为limit的值,默认为0接口地址:/dj/hot
-
-  //调用例子:/dj/hot
-
-  //电台-节目榜
-  //说明:登录后调用此接口,可获得电台节目榜
-
-  //可选参数:
-
-  //limit:返回数量,默认为100
-
-  //offset:偏移数量，用于分页,如:(页数-1)*100,其中100为limit的值,默认为0
-
-  //接口地址:/dj/program/toplist
-
-  //调用例子:/dj/program/toplist?limit=1
-
-  //电台-付费精品
-  //说明:调用此接口,可获取付费精品电台
-
-  //可选参数:
-
-  //limit:返回数量,默认为100(不支持offset)
-
-  //接口地址:/dj/toplist/pay
-
-  //调用例子:/dj/toplist/pay?limit=30
-
-  //电台-24小时节目榜
-  //说明:调用此接口,可获取24小时节目榜
-
-  //可选参数:
-
-  //limit:返回数量,默认为100(不支持offset)
-
-  //接口地址:/dj/program/toplist/hours
-
-  //调用例子:/dj/program/toplist/hours?limit=1
-
-  //电台-24小时主播榜
-  //说明:调用此接口,可获取24小时主播榜
-
-  //可选参数:
-
-  //limit:返回数量,默认为100(不支持offset)
-
-  //接口地址:/dj/toplist/hours
-
-  //调用例子:/dj/toplist/hours?limit=30
-
-  //电台-主播新人榜
-  //说明:调用此接口,可获取主播新人榜
-
-  //可选参数:
-
-  //limit:返回数量,默认为100(不支持offset)
-
-  //接口地址:/dj/toplist/newcomer
-
-  //调用例子:/dj/toplist/newcomer?limit=30
-
-  //电台-最热主播榜
-  //说明:调用此接口,可获取最热主播榜
-
-  //可选参数:
-
-  //limit:返回数量,默认为100(不支持offset)
-
-  //接口地址:/dj/toplist/popular
-
-  //调用例子:/dj/toplist/popular?limit=30
-
-  //电台-新晋电台榜/热门电台榜
-  //说明:登录后调用此接口,可获得新晋电台榜/热门电台榜
-
-  //可选参数:
-
-  //limit:返回数量,默认为100
-
-  //offset:偏移数量，用于分页,如:(页数-1)*100,其中100为limit的值,默认为0
-
-  //type:榜单类型,new为新晋电台榜,hot为热门电台榜
-
-  //接口地址:/dj/toplist
-
-  //调用例子:/dj/toplist?type=hot/dj/toplist?type=new&limit=1
-
-  //电台-类别热门电台
-  //可选参数:
-
-  //limit:返回数量,默认为30
-
-  //offset:偏移数量，用于分页,如:(页数-1)*30,其中30为limit的值,默认为0
-
-  //cateId:类别id,可通过/dj/category/recommend接口获取
-
-  //接口地址:/dj/radio/hot
-
-  //调用例子:/dj/radio/hot?cateId=2001(创作|翻唱)/dj/radio/hot?cateId=10002(3D|电子)
-
-  //电台-推荐
-  //说明:登录后调用此接口,可获得推荐电台
-
-  //接口地址:/dj/recommend
-
-  //调用例子:/dj/recommend
-
-  //电台-分类
-  //说明:登录后调用此接口,可获得电台类型
-
-  //接口地址:/dj/catelist
-
-  //调用例子:/dj/catelist
-
-  //电台-分类推荐
-  //说明:登录后调用此接口,传入分类,可获得对应类型电台列表
-
-  //必选参数:type:电台类型,数字,可通过/dj/catelist获取,对应关系为id对应此接口的type,name对应类型
-
-  //接口地址:/dj/recommend/type
-
-  //调用例子:/dj/recommend/type?type=1(明星做主播)/dj/recommend/type?type=2001(创作|翻唱)
-
-  //电台-订阅
-  //说明:登录后调用此接口,传入rid,可订阅dj,dj的rid可通过搜索指定type='1009'获取其id,如/search?keywords=代码时间&type=1009
-
-  //必选参数:rid:电台的id
-
-  //接口地址:/dj/sub
-
-  //调用例子:/dj/sub?rid=336355127&t=1(对应关注'代码时间')/dj/sub?rid=336355127&t=0(对应取消关注'代码时间')
-
-  //电台的订阅列表
-  //说明:登录后调用此接口,可获取订阅的电台列表
-
-  //接口地址:/dj/sublist
-
-  //调用例子:/dj/sublist
-
-  //电台-付费精选
-  //说明:可以获取付费精选的电台列表,传入limit和offset可以进行分页
-
-  //可选参数:
-
-  //limit:返回数量,默认为30
-
-  //offset:偏移数量，用于分页,如:(页数-1)*30,其中30为limit的值,默认为0
-
-  //接口地址:/dj/paygift
-
-  //调用例子:/dj/paygift?limit=10&offset=20
-
-  //电台-非热门类型
-  //说明:登录后调用此接口,可获得电台非热门类型
-
-  //接口地址:/dj/category/excludehot
-
-  //调用例子:/dj/category/excludehot
-
-  //电台-推荐类型
-  //说明:登录后调用此接口,可获得电台推荐类型
-
-  //接口地址:/dj/category/recommend
-
-  //调用例子:/dj/category/recommend
-
-  //电台-今日优选
-  //说明:登录后调用此接口,可获得电台今日优选
-
-  //接口地址:/dj/today/perfered
-
-  //调用例子:/dj/today/perfered
-
-  //电台-详情
-  //说明:登录后调用此接口,传入rid,可获得对应电台的详情介绍
-
-  //必选参数:rid:电台的id
-
-  //接口地址:/dj/detail
-
-  //调用例子:/dj/detail?rid=336355127(对应'代码时间'的详情介绍)
-
-  //电台-节目
-  //说明:登录后调用此接口,传入rid,可查看对应电台的电台节目以及对应的id,需要注意的是这个接口返回的mp3Url已经无效,都为null,但是通过调用/song/url这个接口,传入节目id仍然能获取到节目音频,如/song/url?id=478446370获取代码时间的一个节目的音频
-
-  //必选参数:rid:电台的id
-
-  //可选参数:
-
-  //limit:返回数量,默认为30
-
-  //offset:偏移数量，用于分页,如:(页数-1)*30,其中30为limit的值,默认为0
-
-  //asc:排序方式,默认为false(新=>老)设置true可改为老=>新
-
-  //接口地址:/dj/program
-
-  //调用例子:/dj/program?rid=336355127&limit=40(对应'代码时间'的节目列表)
-
-  //电台-节目详情
-  //说明:调用此接口传入电台节目id,可获得电台节目详情
-
-  //必选参数:id:电台节目的id
-
-  //接口地址:/dj/program/detail
-
-  //调用例子:/dj/program/detail?id=1367665101
+  getDjBanner: parameter => { // 电台banner
+    return request("dj/banner", parameter);
+    /**
+     * 说明:调用此接口,可获取电台banner
+     */
+  },
+  getDjPersonalizeRecommend: parameter => { // 电台个性推荐
+    return request("dj/personalize/recommend", parameter);
+    /**
+     * @param limit (选)返回数量,默认为6,总条数最多6条
+     * 说明:调用此接口,可获取电台个性推荐列表
+     */
+  },
+  getDjSubscriber: parameter => { // 电台订阅者列表
+    return request("dj/subscriber", parameter);
+    /**
+     * @param time (选)分页参数,默认-1,传入上一次返回结果的time,将会返回下一页的数据
+     * @param limit (选)返回数量,默认为20
+     * 说明:调用此接口,可获取电台订阅者列表必选参数:id:电台id
+     */
+  },
+  getUserAudior: parameter => { // 用户电台
+    return request("user/audio", parameter);
+    /**
+     * @param uid (选)用户id
+     * @param limit (选)返回数量,默认为20
+     * 说明:调用此接口,传入用户id可获取用户创建的电台
+     */
+  },
+  getDjHot: parameter => { // 热门电台
+    return request("dj/hot", parameter);
+    /**
+     * @param limit (选)返回数量,默认为30
+     * @param offset (选)偏移数量，用于分页,如:(页数-1)*30,其中30为limit的值,默认为0接口地址:/dj/hot
+     * 说明:调用此接口,可获取热门电台
+     */
+  },
+  getDjProgramToplist: parameter => { // 电台-节目榜
+    return request("dj/program/toplist", parameter);
+    /**
+     * @param limit (选)返回数量,默认为100
+     * @param offset (选)偏移数量，用于分页,如:(页数-1)*100,其中100为limit的值,默认为0
+     * 说明:登录后调用此接口,可获得电台节目榜
+     */
+  },
+  getDjToplistPay: parameter => { // 电台-付费精品
+    return request("dj/toplist/pay", parameter);
+    /**
+     * @param limit (选)返回数量,默认为100(不支持offset)
+     * 说明:调用此接口,可获取付费精品电台
+     */
+  },
+  getDjProgramToplistHours: parameter => { // 电台-24小时节目榜
+    return request("dj/program/toplist/hours", parameter);
+    /**
+     * @param limit (选)返回数量,默认为100(不支持offset)
+     * 说明:调用此接口,可获取24小时节目榜
+     */
+  },
+  getDjToplistHours: parameter => { // 电台-24小时主播榜
+    return request("dj/toplist/hours", parameter);
+    /**
+     * @param limit (选)返回数量,默认为100(不支持offset)
+     * 说明:调用此接口,可获取24小时主播榜
+     */
+  },
+  getDjToplistNewcomer: parameter => { // 电台-主播新人榜
+    return request("dj/toplist/newcomer", parameter);
+    /**
+     * @param limit (选)返回数量,默认为100(不支持offset)
+     * 说明:调用此接口,可获取主播新人榜
+     */
+  },
+  getDjToplistPopular: parameter => { // 电台-最热主播榜
+    return request("dj/toplist/popular", parameter);
+    /**
+     * @param limit (选)返回数量,默认为100(不支持offset)
+     * 说明:调用此接口,可获取最热主播榜
+     */
+  },
+  getDjToplist: parameter => { // 电台-新晋电台榜/热门电台榜
+    return request("dj/toplist", parameter);
+    /**
+     * @param limit (选)返回数量,默认为100
+     * @param offset (选)偏移数量，用于分页,如:(页数-1)*100,其中100为limit的值,默认为0
+     * @param type (选)榜单类型,new为新晋电台榜,hot为热门电台榜
+     * 说明:登录后调用此接口,可获得新晋电台榜/热门电台榜
+     */
+  },
+  getDjRadioHot: parameter => { // 电台-类别热门电台
+    return request("dj/radio/hot", parameter);
+    /**
+     * @param limit (选)返回数量,默认为30
+     * @param offset (选)偏移数量，用于分页,如:(页数-1)*30,其中30为limit的值,默认为0
+     * @param cateId (选)类别id
+     * 说明:登录后调用此接口,可获得新晋电台榜/热门电台榜
+     */
+  },
+  getDjRecommend: parameter => { // 电台-推荐
+    return request("dj/recommend", parameter);
+    /**
+     * 说明:登录后调用此接口,可获得推荐电台
+     */
+  },
+  getDjCatelist: parameter => { // 电台-分类
+    return request("dj/catelist", parameter);
+    /**
+     * 说明:登录后调用此接口,可获得电台类型
+     */
+  },
+  getDjRecommendType: parameter => { // 电台-分类推荐
+    return request("dj/recommend/type", parameter);
+    /**
+     * @param type 电台类型,数字,可通过/dj/catelist获取,对应关系为id对应此接口的type,name对应类型
+     * 说明:登录后调用此接口,传入分类,可获得对应类型电台列表
+     */
+  },
+  getDjSub: parameter => { // 电台-订阅
+    return request("dj/sub", parameter);
+    /**
+     * @param rid 电台的id
+     * 说明:登录后调用此接口,传入rid,可订阅dj,dj的rid可通过搜索指定type='1009'获取其id,如/search?keywords=代码时间&type=1009
+     */
+  },
+  getDjSublist: parameter => { // 电台的订阅列表
+    return request("dj/sublist", parameter);
+    /**
+     * 说明:登录后调用此接口,可获取订阅的电台列表
+     */
+  },
+  getDjPaygift: parameter => { // 电台-付费精选
+    return request("dj/paygift", parameter);
+    /**
+     * @param limit (选)返回数量,默认为30
+     * @param offset (选)偏移数量，用于分页,如:(页数-1)*30,其中30为limit的值,默认为0
+     * 说明:可以获取付费精选的电台列表,传入limit和offset可以进行分页
+     */
+  },
+  getDjCategoryExcludehot: parameter => { // 电台-非热门类型
+    return request("dj/category/excludehot", parameter);
+    /**
+     * 说明:登录后调用此接口,可获得电台非热门类型
+     */
+  },
+  getDjCategoryRecommend: parameter => { // 电台-推荐类型
+    return request("dj/category/recommend", parameter);
+    /**
+     * 说明:登录后调用此接口,可获得电台推荐类型
+     */
+  },
+  getDjTodayPerfered: parameter => { // 电台-今日优选
+    return request("dj/today/perfered", parameter);
+    /**
+     * 说明:登录后调用此接口,可获得电台今日优选
+     */
+  },
+  getDjDetail: parameter => { // 电台-详情
+    return request("dj/detail", parameter);
+    /**
+     * @param rid 电台的id
+     * 说明:登录后调用此接口,传入rid,可获得对应电台的详情介绍
+     */
+  },
+  getDjProgram: parameter => { // 电台-节目
+    return request("dj/program", parameter);
+    /**
+     * @param rid 电台的id
+     * @param limit (选)返回数量,默认为30
+     * @param offset (选)偏移数量，用于分页,如:(页数-1)*30,其中30为limit的值,默认为0
+     * @param asc (选)排序方式,默认为false(新=>老)设置true可改为老=>新
+     * 说明:登录后调用此接口,传入rid,可查看对应电台的电台节目以及对应的id,需要注意的是这个接口返回的mp3Url已经无效,都为null,但是通过调用/song/url这个接口,传入节目id仍然能获取到节目音频,如/song/url?id=478446370获取代码时间的一个节目的音频
+     */
+  },
+  getDjProgramDetail: parameter => { // 电台-节目详情
+    return request("dj/program/detail", parameter);
+    /**
+     * @param id 电台节目的id
+     * 说明:调用此接口传入电台节目id,可获得电台节目详情
+     */
+  },
 
 
   getMsgPrivate: parameter => { // 通知-私信

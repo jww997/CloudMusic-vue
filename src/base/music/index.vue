@@ -70,7 +70,7 @@ export default {
       const that = this;
       let current = that.music.currentList[val];
       if (!current) return false;
-          that.amendStateObjValue({ key: "current", value: current });
+      that.amendStateObjValue({ key: "current", value: current });
       that.amendStateObjValue({ key: "id", value: current.id });
     },
     modeIndex(val, oldval) {

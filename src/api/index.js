@@ -10,6 +10,7 @@ import axios from 'axios';
 // const api = "https://www.mikonchen.top";
 const api = "http://www.mikonchen.top";
 // const api = "http://49.234.76.196";
+// const api = "http://localhost";
 const port = 3000;
 const limit = 20;
 

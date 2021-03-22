@@ -17,7 +17,7 @@ Router.prototype.push = function push(location) {
 
 export default new Router({
   mode: 'history',
-  base: '/dist/', // 加上这一行
+  base: '/CloudMusic/',
   routes: [
     {
       path: '*',

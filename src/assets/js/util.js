@@ -68,7 +68,9 @@ function delCookie(key) {
 
 function getLocalStorage(key) {
   const that = this;
-  return JSON.parse(localStorage.getItem(key));
+  let value = localStorage.getItem(key);
+  if (value == "undefined") return false;
+  return JSON.parse(value);
 }
 
 function setLocalStorage(key, value) {

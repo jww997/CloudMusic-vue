@@ -49,8 +49,9 @@ export default {
   box-sizing: border-box;
   background-color: #fff;
   // overflow: visible;
-  @include positionCenter;
-  bottom: auto;
+  position: sticky;
+  // @include positionCenter;
+  // bottom: auto;
   top: $safeDistance;
   z-index: 1;
   .tags {

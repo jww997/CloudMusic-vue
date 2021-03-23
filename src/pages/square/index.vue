@@ -2,13 +2,14 @@
   <div class="square">
     <navbar :title="'歌单广场'" fixed black backgroundColor="#fff"></navbar>
 
+    <height-clear />
     <tags :list="tags" @toggleCat="toggleCat"></tags>
-
     <matrix
       :list="playlists"
       destination="square/playlist"
       @scrollToEnd="scrollToEnd"
     ></matrix>
+    <height-clear v-if="music.isPlaying" />
 
     <!-- <scroll
       :data="playlists"
@@ -23,7 +24,7 @@
     <!-- v-if="isLoading && total != playlists.length" -->
     <!-- </scroll> -->
 
-    <bottombar></bottombar>
+    <!-- <bottombar></bottombar> -->
 
     <transition :name="transition">
       <router-view></router-view>
@@ -33,6 +34,8 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
+import heightClear from "@/base/height-clear";
+
 import Matrix from "@/common/matrix";
 
 import Bottombar from "@/common/bottombar";
@@ -44,6 +47,8 @@ import Tags from "./components/tags";
 export default {
   name: "square",
   components: {
+    heightClear,
+
     Matrix,
     Bottombar,
     // Scroll,
@@ -62,7 +67,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["transition"]),
+    ...mapGetters(["music", "transition"]),
   },
   watch: {
     cat: function (val) {
@@ -124,7 +129,7 @@ export default {
 @import "~sass/varibles.scss";
 .square {
   @include suspension;
-  padding: $safeDistance + 1rem 0 $safeDistance;
+  // padding: $safeDistance + 1rem 0 $safeDistance;
   z-index: $zIndex-M;
 }
 </style>

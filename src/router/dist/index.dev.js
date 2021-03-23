@@ -30,6 +30,7 @@ _vueRouter["default"].prototype.push = function push(location) {
 
 var _default = new _vueRouter["default"]({
   mode: 'history',
+  // base: '/dist/',
   base: '/CloudMusic/',
   routes: [{
     path: '*',

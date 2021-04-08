@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "amfe-flexible": "^2.2.1",
+    "ant-design-vue": "^1.7.4",
     "axios": "^0.21.0",
     "better-scroll": "^2.1.1",
     "element-ui": "^2.14.1",
@@ -21,7 +22,8 @@
     "vue-axios": "^3.2.0",
     "vue-infinite-scroll": "^2.0.2",
     "vue-router": "^3.0.1",
-    "vuex": "^3.6.0"
+    "vuex": "^3.6.0",
+    "webpack-dev-server": "^2.9.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -61,7 +63,6 @@
     "vue-template-compiler": "^2.5.2",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
-    "webpack-dev-server": "^2.9.1",
     "webpack-merge": "^4.1.0"
   },
   "engines": {

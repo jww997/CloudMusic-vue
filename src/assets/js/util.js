@@ -27,12 +27,20 @@ function toPages(to = {}, success, fail, complete) {
   } = to;
   try {
     if (typeof name == 'string') {
-      that.$router.push({ name, params });
+      that.$router.push({
+        name,
+        params
+      });
     } else {
-      that.$router.push({ path, query });
+      that.$router.push({
+        path,
+        query
+      });
     };
     success && success();
-  } catch (error) { fail && fail(); }
+  } catch (error) {
+    fail && fail();
+  }
   complete && complete();
 
 }

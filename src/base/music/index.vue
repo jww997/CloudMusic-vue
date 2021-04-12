@@ -120,8 +120,8 @@ export default {
       that.music.duration != audio.duration &&
         that.amendStateObjValue({ key: "duration", value: audio.duration });
     },
-    error: function () {
-      console.log("翻车啦  --------------------------------------");
+    error: function (event) {
+      console.log("翻车啦  --------------------------------------", event);
       const that = this;
     },
     next: function () {

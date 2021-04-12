@@ -59,10 +59,10 @@ export default {
       default: {},
     },
   },
-  data: function () {
+  data() {
     return {
       lineHeight: 0.9,
-      isMute: false,
+      // isMute: false,
     };
   },
   computed: {
@@ -80,7 +80,7 @@ export default {
     },
     isMute() {
       const that = this;
-      return that.music.volume == 0;
+      return that.volume == 0;
     },
     ...mapGetters(["music"]),
   },

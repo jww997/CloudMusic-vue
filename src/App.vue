@@ -1,5 +1,15 @@
 <template>
   <div class="app" id="app">
+
+    <!-- fade淡出淡入 drawer抽屉  -->
+    <transition name="fade">
+      <router-view />
+    </transition>
+    <music />
+
+
+    
+
     <!-- 开启顶部安全区适配 -->
     <!-- <van-nav-bar safe-area-inset-top /> -->
 
@@ -23,15 +33,15 @@
       <mv class="drawer" v-if="mv.isShow"></mv>
     </transition> -->
 
-    <router-view v-if="isRouterAlive"></router-view>
+    <!-- <router-view v-if="isRouterAlive"></router-view> -->
 
     <!-- <bottombar v-if="isShowBottomBar"></bottombar> -->
 
-    <bottomlist></bottomlist>
-    <music></music>
+    <!-- <bottomlist></bottomlist>
+    <music></music> -->
 
     <!-- 开启底部安全区适配 -->
-    <van-number-keyboard safe-area-inset-bottom />
+    <!-- <van-number-keyboard safe-area-inset-bottom /> -->
   </div>
 </template>
 

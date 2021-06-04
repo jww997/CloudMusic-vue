@@ -3,33 +3,36 @@
     <topbar></topbar>
 
     <height-clear />
-    <refresh :isLoading="isLoading" @refresh="refresh">
-      <div v-for="(item, index) in blocks" :key="index">
-        <!-- :list="item.extInfo.banners" -->
-        <!-- v-if="item.showType == 'BANNER'" -->
+    <!-- <refresh :isLoading="isLoading" @refresh="refresh"> -->
 
-        <banner :list="banners" v-if="index == 0"></banner>
-        <bowling v-if="index == 0"></bowling>
-
+    <div v-for="(item, index) in blocks" :key="index">
+      <template v-if="item.showType == 'BANNER'">
+        <!-- 轮播图 -->
+        <banner :list="banners"></banner>
+        <!-- 保龄球 -->
+        <bowling></bowling>
+      </template>
+      <template v-else-if="item.showType == 'HOMEPAGE_SLIDE_PLAYLIST'">
+        <!-- 旋转木马1 -->
         <whirligig
           :list="item.creatives"
           :uielement="item.uiElement"
-          v-if="item.showType == 'HOMEPAGE_SLIDE_PLAYLIST'"
         ></whirligig>
+      </template>
+      <template v-else-if="item.showType == 'HOMEPAGE_SLIDE_SONGLIST_ALIGN'">
+        <!-- 旋转木马2 -->
+        111
+      </template>
+      <template v-else>
+        <!-- 其他 -->
+        <div>{{item.showType}}</div>
+      </template>
+    </div>
 
-        <slide-songlist-align
-          v-if="item.showType == 'HOMEPAGE_SLIDE_SONGLIST_ALIGN'"
-          :content="item"
-        ></slide-songlist-align>
-      </div>
-      <height-clear v-if="music.isPlaying" />
-    </refresh>
+    <height-clear v-if="music.isPlaying" />
+    <!-- </refresh> -->
 
     <bottombar></bottombar>
-
-    <transition :name="transition">
-      <router-view></router-view>
-    </transition>
   </div>
 </template>
 
@@ -119,11 +122,4 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-.discover {
-  height: 100%;
-  position: relative;
-  overflow: scroll;
-
-  z-index: $zIndex-S;
-}
 </style>

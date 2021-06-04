@@ -62,10 +62,6 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .oneself {
-  @include suspension;
-  padding-bottom: $safeDistance;
-  z-index: $zIndex-M;
-
   background-color: $theme-LIGHTGRAY !important;
 }
 </style>

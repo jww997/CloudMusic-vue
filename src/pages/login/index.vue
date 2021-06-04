@@ -18,9 +18,4 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-.login {
-  @include suspension;
-  padding: $safeDistance 0;
-  z-index: $zIndex-M;
-}
 </style>

@@ -1,5 +1,8 @@
 <template>
   <div class="children">
+
+
+    123
     <div class="header">
       <div class="title">{{ content.uiElement.mainTitle.title }}</div>
       <!-- <div class="more" @click="toPages({ name: 'square' })">

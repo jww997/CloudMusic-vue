@@ -2,7 +2,7 @@
   <div id="app" class="app">
     <!-- 动画效果 fade-淡出淡入 drawer-抽屉 -->
     <transition name="fade">
-      <router-view />
+      <router-view style="height: 100%" />
     </transition>
     <music />
   </div>

@@ -20,6 +20,10 @@
         <!-- 旋转木马2 -->
         <whirligig2 :block="item"></whirligig2>
       </template>
+      <template v-else-if="item.showType == 'SHUFFLE_MUSIC_CALENDAR'">
+        <!-- 音乐日历 -->
+        <calendar :block="item"></calendar>
+      </template>
       <template v-else>
         <!-- 其他 -->
         <div style="background-color: #eee; font-size: 14px">
@@ -37,16 +41,16 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
-import Banner from "./components/banner";
-import Bowling from "./components/bowling";
-import Whirligig from "./components/whirligig";
-import Whirligig2 from "./components/whirligig2";
+import Banner from "./banner.vue";
+import Bowling from "./bowling.vue";
+import Whirligig from "./whirligig.vue";
+import Whirligig2 from "./whirligig2.vue";
+import Calendar from "./calendar.vue";
 
 import heightClear from "@/base/height-clear";
 import Refresh from "@/common/refresh";
 import Bottombar from "@/common/bottombar";
 import Scroll from "@/base/scroll";
-import Calendar from "./components/calendar";
 import Topbar from "@/components/topbar";
 
 export default {
@@ -56,12 +60,12 @@ export default {
     Bowling,
     Whirligig,
     Whirligig2,
+    Calendar,
 
     Bottombar,
     heightClear,
     Scroll,
     Topbar,
-    Calendar,
     Refresh,
   },
   inject: ["reload"],

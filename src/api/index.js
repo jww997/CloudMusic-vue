@@ -18,11 +18,11 @@ function request(
   suffix, // 接口后缀
   parameter = {}, // 携带参数
   config = {  // 额外配置项
-    isCookie: false, // 是否需要登录
+    isNeedLogin: false, // 是否需要登录
   }) {
 
   let cookie = Vue.prototype.$cookie.getCookie("cookie");
-  config.isCookie && cookie && (parameter.cookie = cookie);
+  config.isNeedLogin && cookie && (parameter.cookie = cookie);
 
   suffix += `?timestamp=${Date.parse(new Date()) / 1000}`; // POST请求url必须添加时间戳,使每次请求url不一样,不然请求会被缓存
   return axios.post(`${api}:${port}/${suffix}`, parameter);
@@ -147,7 +147,7 @@ export default {
   },
 
   getLoginStatus: parameter => { // 登录状态
-    return request("login/status", parameter, { isCookie: true });
+    return request("login/status", parameter, { isNeedLogin: true });
     /**
      * 说明: 调用此接口, 可获取登录状态
      */
@@ -160,13 +160,13 @@ export default {
      */
   },
   getUserAccount: parameter => { // 获取账号信息
-    return request("user/account", parameter, { isCookie: true });
+    return request("user/account", parameter, { isNeedLogin: true });
     /**
      * 说明:登录后调用此接口,可获取用户账号信息
      */
   },
   getUserSubcount: parameter => { // 获取用户信息,歌单,收藏,mv,dj数量
-    return request("user/subcount", parameter, { isCookie: true });
+    return request("user/subcount", parameter, { isNeedLogin: true });
     /**
      * 说明:登录后调用此接口,可获取用户账号信息
      */
@@ -541,7 +541,7 @@ export default {
      */
   },
   getPlaylistDetail: parameter => { // 获取歌单详情
-    return request("playlist/detail", parameter, { isCookie: true });
+    return request("playlist/detail", parameter, { isNeedLogin: true });
     /**
      * @param id 歌单id
      * @param s (选)歌单最近的s个收藏者,默认为8
@@ -557,7 +557,7 @@ export default {
   },
 
   getSongUrl: parameter => { // 获取音乐地址
-    return request("song/url", parameter, { isCookie: true });
+    return request("song/url", parameter, { isNeedLogin: true });
     /**
      * @param id 音乐id
      * @param br (选)码率,默认设置了 999000 即最大码率,如果要 320k 则可设置为 320000,其他类推
@@ -708,7 +708,7 @@ export default {
   },
 
   getHomepageBlockPage: parameter => { // 首页-发现
-    return request("homepage/block/page", parameter, { isCookie: true });
+    return request("homepage/block/page", parameter, { isNeedLogin: true });
     /**
      * @param refresh 是否刷新数据,默认为true
      * 说明:调用此接口,可获取APP首页信息
@@ -873,7 +873,7 @@ export default {
      */
   },
   getBanner: parameter => { // banner
-    return request("banner", parameter, { isCookie: true });
+    return request("banner", parameter, { isNeedLogin: true });
     /**
      * @param type (选)资源类型,0PC, 1android, 2iphone, 3ipad
      */
@@ -896,7 +896,7 @@ export default {
      */
   },
   getSongDetail: parameter => { // 获取歌曲详情
-    return request("song/detail", parameter, { isCookie: true });
+    return request("song/detail", parameter, { isNeedLogin: true });
     /**
      * @param ids 音乐id,如ids=347230
      * 说明:调用此接口,传入音乐id(支持多个id,用,隔开),可获得歌曲详情(注意:歌曲封面现在需要通过专辑内容接口获取)
@@ -1009,39 +1009,39 @@ export default {
   },
 
   getRecommendResource: parameter => { // 获取每日推荐歌单(需要登录)
-    return request("recommend/resource", parameter, { isCookie: true });
+    return request("recommend/resource", parameter, { isNeedLogin: true });
     /**
      * 说明:调用此接口,可获得每日推荐歌单
      */
   },
   getRecommendSongs: parameter => { // 获取每日推荐歌曲(需要登录)
-    return request("recommend/songs", parameter, { isCookie: true });
+    return request("recommend/songs", parameter, { isNeedLogin: true });
     /**
      * 说明:调用此接口,可获得每日推荐歌曲
      */
   },
 
   getHistoryRecommendSongs: parameter => { // 获取历史日推可用日期列表
-    return request("history/recommend/songs", parameter, { isCookie: true });
+    return request("history/recommend/songs", parameter, { isNeedLogin: true });
     /**
      * 说明:调用此接口,可获得历史日推可用日期列表
      */
   },
   getHistoryRecommendSongsDetail: parameter => { // 获取历史日推详情数据
-    return request("history/recommend/songs/detail", parameter, { isCookie: true });
+    return request("history/recommend/songs/detail", parameter, { isNeedLogin: true });
     /**
      * @param date 日期,通过历史日推可用日期列表接口获取,不能任意日期
      * 说明:调用此接口,传入当日日期,可获得当日历史日推数据
      */
   },
   getPersonalFm: parameter => { // 私人FM
-    return request("personal_fm", parameter, { isCookie: true });
+    return request("personal_fm", parameter, { isNeedLogin: true });
     /**
      * 说明:私人FM(需要登录)
      */
   },
   getDailySignin: parameter => { // 签到
-    return request("daily_signin", parameter, { isCookie: true });
+    return request("daily_signin", parameter, { isNeedLogin: true });
     /**
      * @param type (选)签到类型,默认0,其中0为安卓端签到,1为web/PC签到
      * 说明:调用此接口,传入签到类型(可不传,默认安卓端签到),可签到(需要登录),其中安卓端签到可获得3点经验,web/PC端签到可获得2点经验

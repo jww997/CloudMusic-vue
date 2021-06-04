@@ -2,10 +2,10 @@
   <div class="children">
     <!-- <van-skeleton title animate :row="1" /> -->
     <div class="header">
-      <div class="title">{{ uielement.subTitle.title }}</div>
-      <!-- <div class="more" @click="toPages({ name: 'square' })">
-        {{ uielement.button.text }} &gt;
-      </div> -->
+      <div class="title">{{ title }}</div>
+      <div class="more" @click="toPages({ name: 'square' })">
+        {{ btnText }} &gt;
+      </div>
     </div>
     <van-swipe
       class="swiper"
@@ -44,22 +44,44 @@ export default {
   components: {
     Cover,
   },
-  props: {
-    uielement: {
-      type: Object,
-      default: {},
+  props: ["block"],
+  computed: {
+    title() {
+      try {
+        const {
+          uiElement: {
+            subTitle: { title },
+          },
+        } = this.$props.block;
+        return title;
+      } catch (err) {
+        return "";
+      }
     },
-    list: {
-      type: Array,
-      default: [],
+    btnText() {
+      try {
+        const {
+          uiElement: {
+            button: { text },
+          },
+        } = this.$props.block;
+        return text;
+      } catch (err) {
+        return "";
+      }
+    },
+    list() {
+      try {
+        const { creatives } = this.$props.block;
+        return creatives;
+      } catch (err) {
+        return [];
+      }
     },
   },
   methods: {
     formatUnit,
     toPages,
-  },
-  mounted: function () {
-    const that = this;
   },
 };
 </script>

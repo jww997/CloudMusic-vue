@@ -14,18 +14,25 @@
       </template>
       <template v-else-if="item.showType == 'HOMEPAGE_SLIDE_PLAYLIST'">
         <!-- 旋转木马1 -->
-        <whirligig
-          :list="item.creatives"
-          :uielement="item.uiElement"
-        ></whirligig>
+        <whirligig :block="item"></whirligig>
       </template>
       <template v-else-if="item.showType == 'HOMEPAGE_SLIDE_SONGLIST_ALIGN'">
         <!-- 旋转木马2 -->
-        111
+        <whirligig :block="item2"></whirligig>
+
+
+
+
+
+        <div style="background-color: #eee; font-size: 14px">
+          {{ index }} - {{ item.showType }}
+        </div>
       </template>
       <template v-else>
         <!-- 其他 -->
-        <div>{{item.showType}}</div>
+        <div style="background-color: #eee; font-size: 14px">
+          {{ index }} - {{ item.showType }}
+        </div>
       </template>
     </div>
 
@@ -38,35 +45,30 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
-import heightClear from "@/base/height-clear";
-
-import Refresh from "@/common/refresh";
-
+import Banner from "./components/banner";
 import Bowling from "./components/bowling";
 import Whirligig from "./components/whirligig";
-import slideSonglistAlign from "./components/slide-songlist-align";
+import Whirligig2 from "./components/whirligig2";
 
+import heightClear from "@/base/height-clear";
+import Refresh from "@/common/refresh";
 import Bottombar from "@/common/bottombar";
-
 import Scroll from "@/base/scroll";
-import Banner from "./components/banner";
 import Calendar from "./components/calendar";
 import Topbar from "@/components/topbar";
 
 export default {
   name: "discover",
   components: {
-    heightClear,
-
+    Banner,
     Bowling,
     Whirligig,
-    slideSonglistAlign,
+    Whirligig2,
 
     Bottombar,
-
+    heightClear,
     Scroll,
     Topbar,
-    Banner,
     Calendar,
     Refresh,
   },

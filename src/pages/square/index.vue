@@ -6,7 +6,7 @@
     <tags :list="tags" @toggleCat="toggleCat"></tags>
     <matrix
       :list="playlists"
-      destination="square/playlist"
+      destination="playlist"
       @scrollToEnd="scrollToEnd"
     ></matrix>
     <height-clear v-if="music.isPlaying" />

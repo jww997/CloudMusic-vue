@@ -2,7 +2,7 @@
   <div class="toplist">
     <navbar :title="'排行榜'" fixed black backgroundColor="#fff"></navbar>
 
-    <matrix :list="list" destination="toplist/playlist"></matrix>
+    <matrix :list="list" destination="playlist"></matrix>
     <!-- <div class="list">
       <div
         class="billboard"

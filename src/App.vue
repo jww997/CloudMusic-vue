@@ -1,47 +1,10 @@
 <template>
-  <div class="app" id="app">
-
-    <!-- fade淡出淡入 drawer抽屉  -->
+  <div id="app" class="app">
+    <!-- 动画效果 fade-淡出淡入 drawer-抽屉 -->
     <transition name="fade">
       <router-view />
     </transition>
     <music />
-
-
-    
-
-    <!-- 开启顶部安全区适配 -->
-    <!-- <van-nav-bar safe-area-inset-top /> -->
-
-    <!-- <div class="topbar" v-if="isShowTopBar"> -->
-    <!-- <topbar></topbar> -->
-    <!-- </div> -->
-
-    <!-- <div class="view">
-      <keep-alive>
-        <router-view
-          v-if="$route.meta.isKeepAlive && isRouterAlive"
-        ></router-view>
-      </keep-alive>
-      <router-view
-        v-if="!$route.meta.isKeepAlive && isRouterAlive"
-      ></router-view>
-    </div> -->
-
-    <!-- <transition name="drawer">
-      <player class="drawer" v-if="music.isShow"></player>
-      <mv class="drawer" v-if="mv.isShow"></mv>
-    </transition> -->
-
-    <!-- <router-view v-if="isRouterAlive"></router-view> -->
-
-    <!-- <bottombar v-if="isShowBottomBar"></bottombar> -->
-
-    <!-- <bottomlist></bottomlist>
-    <music></music> -->
-
-    <!-- 开启底部安全区适配 -->
-    <!-- <van-number-keyboard safe-area-inset-bottom /> -->
   </div>
 </template>
 
@@ -54,29 +17,11 @@ import {
 } from "@/assets/js/util.js";
 import { formatTime, formatDate } from "@/assets/js/filter.js";
 
-// import Bottombar from "@/common/bottombar";
-import Bottomlist from "@/common/bottomlist";
-
-import Topbar from "@/components/topbar";
-import Tabbar from "@/components/tabbar";
-import Scroll from "@/base/scroll";
 import Music from "@/base/music";
-// import Player from "@/pages/player";
-// import Mv from "@/pages/mv";
 export default {
   name: "App",
   components: {
-    Bottomlist,
-    // Bottombar,
-    Topbar,
-    Tabbar,
-    Scroll,
     Music,
-    // Player,
-    // Mv,
-  },
-  computed: {
-    ...mapGetters(["music", "mv"]),
   },
   provide() {
     // 父组件中通过provide来提供变量，在子组件中通过inject来注入变量。
@@ -136,69 +81,30 @@ export default {
 
     if (!getLocalStorage("history")) setLocalStorage("history", []);
   },
-  // created: function () {
-  //   const that = this;
-  // let top = ["discover"];
-  // let bottom = ["player", "mv"];
-  // that.$router.beforeEach((to, from, next) => {
-  //   // that.isShowTopBar = !!top.find((item) => {
-  //   //   return item == to.name;
-  //   // });
-  //   that.isShowBottomBar = !bottom.find((item) => {
-  //     console.log(item);
-  //     // that.setTranstion(toDepth == 3 ? "drawer" : "fade");
-
-  //     return item == to.name;
-  //   });
-  //   next();
-  // });
-  // },
 };
 </script>
 
 <style lang="scss">
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-body,
 .app {
   height: 100vh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  .view {
-    flex-grow: 1;
-    z-index: $zIndex-M;
-    overflow: hidden;
-  }
-  .topbar,
-  .bottombar {
-    flex-shrink: 0;
-    z-index: $zIndex-L;
-    display: flex;
-  }
 
-  // 全局动画
-  .fade-enter,
-  .fade-leave-to {
-    transform: scale(1.5) translateY(2rem);
-    opacity: 0;
-  }
-
-  .drawer-enter,
-  .drawer-leave-to {
-    transform: translateY(100%);
-  }
-
-  .drawer-enter-to,
-  .drawer-leave {
-    transform: translateY(0);
-  }
-
+  // 动画
   .fade-enter-active,
   .fade-leave-active,
   .drawer-enter-active,
   .drawer-leave-active {
     transition: 0.5s;
+  }
+  .fade-enter,
+  .fade-leave-to {
+    transform: scale(1.5) translateY(2rem);
+    opacity: 0;
+  }
+  .drawer-enter,
+  .drawer-leave-to {
+    transform: translateY(100%);
   }
 }
 </style>

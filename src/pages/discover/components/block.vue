@@ -1,8 +1,8 @@
 <template>
   <div class="block">
-    <div class="header">
+    <div class="block-top">
       <div class="title">{{ title }}</div>
-      <div class="more" @click="toPages({ name: 'square' })">
+      <div class="btn" @click="toPages({ name: 'square' })">
         {{ btnText }} &gt;
       </div>
     </div>
@@ -47,7 +47,7 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .block {
-  .header {
+  .block-top {
     margin: 0.2rem 0.2rem 0.15rem;
     @include flexSpaceBetween;
     .title {
@@ -56,7 +56,7 @@ export default {
       font-weight: bold;
       @include omit;
     }
-    .more {
+    .btn {
       flex-shrink: 0;
       line-height: $text-L;
       font-size: $text-XS;

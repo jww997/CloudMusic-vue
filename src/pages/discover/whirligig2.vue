@@ -1,81 +1,57 @@
 <template>
-  <div class="children">
-    <div class="header">
-      <div class="title">{{ title }}</div>
-      <div class="more" @click="toPages({ name: 'square' })">
-        {{ btnText }} &gt;
-      </div>
-    </div>
-    <van-swipe
-      class="swiper"
-      indicator-color="white"
-      width="355"
-      :show-indicators="false"
-      :loop="false"
-    >
-      <div v-for="(item, index) in list" :key="index">
-        <van-swipe-item class="swiper-item">
-          <div
-            class="resources"
-            v-for="(item, index) in item.resources"
-            :key="index"
-            @click="toggleMusic(item.resourceId, item)"
-          >
-            <div class="left">
-              <img class="image" :src="item.uiElement.image.imageUrl" />
-              <van-icon
-                class="icon"
-                name="pause"
-                v-if="music.id == item.resourceId && music.isPlaying"
-              />
-              <van-icon class="icon" name="play" v-else />
-            </div>
-            <div class="right">
-              <div class="mainTitle">
-                {{ item.uiElement.mainTitle.title }}
+  <div class="whirligig2">
+    <block :block="block">
+      <van-swipe
+        class="swiper"
+        indicator-color="white"
+        width="355"
+        :show-indicators="false"
+        :loop="false"
+      >
+        <div v-for="(item, index) in list" :key="index">
+          <van-swipe-item class="swiper-item">
+            <div
+              class="resources"
+              v-for="(item, index) in item.resources"
+              :key="index"
+              @click="toggleMusic(item.resourceId, item)"
+            >
+              <div class="left">
+                <img class="image" :src="item.uiElement.image.imageUrl" />
+                <van-icon
+                  class="icon"
+                  name="pause"
+                  v-if="music.id == item.resourceId && music.isPlaying"
+                />
+                <van-icon class="icon" name="play" v-else />
               </div>
-              <div class="subTitle" v-if="item.uiElement.subTitle">
-                {{ item.uiElement.subTitle.title }}
+              <div class="right">
+                <div class="mainTitle">
+                  {{ item.uiElement.mainTitle.title }}
+                </div>
+                <div class="subTitle" v-if="item.uiElement.subTitle">
+                  {{ item.uiElement.subTitle.title }}
+                </div>
               </div>
             </div>
-          </div>
-        </van-swipe-item>
-      </div>
-    </van-swipe>
+          </van-swipe-item>
+        </div>
+      </van-swipe>
+    </block>
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { toPages } from "@/assets/js/util.js";
+import Block from "./components/block.vue";
 export default {
   name: "slideSonglistAlign",
   props: ["block"],
+  components: {
+    Block,
+  },
   computed: {
-    title() {
-      try {
-        const {
-          uiElement: {
-            subTitle: { title },
-          },
-        } = this.$props.block;
-        return title;
-      } catch (err) {
-        return "";
-      }
-    },
-    btnText() {
-      try {
-        const {
-          uiElement: {
-            button: { text },
-          },
-        } = this.$props.block;
-        return text;
-      } catch (err) {
-        return "";
-      }
-    },
     list() {
       try {
         const { creatives } = this.$props.block;
@@ -109,30 +85,10 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-.children {
+.whirligig2 {
   padding: $text-XXXS 0;
   border-top: 0.15rem solid #eee;
-  .header {
-    margin: 0.2rem 0.2rem 0.15rem;
-    @include flexSpaceBetween;
-    .title {
-      line-height: $text-XL;
-      font-size: $text-M;
-      font-weight: bold;
-      @include omit;
-    }
-    .more {
-      flex-shrink: 0;
-      line-height: $text-L;
-      font-size: $text-XS;
-      font-weight: bold;
-      margin-left: 0.2rem;
-      padding: 0 0.3rem;
-      border: 1px solid #eee;
-      border-radius: 2rem;
-      @include flexCenter;
-    }
-  }
+
   // .swiper-item {
   //   padding-left: 0.3rem;
   //   box-sizing: border-box;

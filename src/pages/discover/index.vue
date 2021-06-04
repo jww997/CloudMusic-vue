@@ -18,15 +18,7 @@
       </template>
       <template v-else-if="item.showType == 'HOMEPAGE_SLIDE_SONGLIST_ALIGN'">
         <!-- 旋转木马2 -->
-        <whirligig :block="item2"></whirligig>
-
-
-
-
-
-        <div style="background-color: #eee; font-size: 14px">
-          {{ index }} - {{ item.showType }}
-        </div>
+        <whirligig2 :block="item"></whirligig2>
       </template>
       <template v-else>
         <!-- 其他 -->

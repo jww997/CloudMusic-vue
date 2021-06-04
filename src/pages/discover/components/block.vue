@@ -1,18 +1,18 @@
 <template>
-  <div class="children">
+  <div class="block">
     <div class="header">
       <div class="title">{{ title }}</div>
       <div class="more" @click="toPages({ name: 'square' })">
         {{ btnText }} &gt;
       </div>
     </div>
+    <slot />
   </div>
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 export default {
-  name: "calendar",
+  name: "block",
   props: ["block"],
   computed: {
     title() {
@@ -39,14 +39,6 @@ export default {
         return "";
       }
     },
-    list() {
-      try {
-        const { creatives } = this.$props.block;
-        return creatives;
-      } catch (err) {
-        return [];
-      }
-    },
   },
 };
 </script>
@@ -54,4 +46,27 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
+.block {
+  .header {
+    margin: 0.2rem 0.2rem 0.15rem;
+    @include flexSpaceBetween;
+    .title {
+      line-height: $text-XL;
+      font-size: $text-M;
+      font-weight: bold;
+      @include omit;
+    }
+    .more {
+      flex-shrink: 0;
+      line-height: $text-L;
+      font-size: $text-XS;
+      font-weight: bold;
+      margin-left: 0.2rem;
+      padding: 0 0.3rem;
+      border: 1px solid #eee;
+      border-radius: 2rem;
+      @include flexCenter;
+    }
+  }
+}
 </style>

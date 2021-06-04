@@ -1,35 +1,37 @@
 <template>
   <div class="children">
     <!-- <van-skeleton title animate :row="1" /> -->
-    <div class="header">
+    <!-- <div class="header">
       <div class="title">{{ title }}</div>
       <div class="more" @click="toPages({ name: 'square' })">
         {{ btnText }} &gt;
       </div>
-    </div>
-    <van-swipe
-      class="swiper"
-      indicator-color="white"
-      width="118"
-      :show-indicators="false"
-      :loop="false"
-    >
-      <div v-for="(item, index) in list" :key="index">
-        <van-swipe-item
-          class="swiper-item"
-          v-if="index < 6"
-          @click.stop="
-            toPages({ name: 'playlist', params: { id: item.creativeId } })
-          "
-        >
-          <cover
-            :image="item.uiElement.image.imageUrl"
-            :name="item.uiElement.mainTitle.title"
-            :count="item.resources[0].resourceExtInfo.playCount"
-          ></cover>
-        </van-swipe-item>
-      </div>
-    </van-swipe>
+    </div> -->
+    <block :block="block">
+      <van-swipe
+        class="swiper"
+        indicator-color="white"
+        width="118"
+        :show-indicators="false"
+        :loop="false"
+      >
+        <div v-for="(item, index) in list" :key="index">
+          <van-swipe-item
+            class="swiper-item"
+            v-if="index < 6"
+            @click.stop="
+              toPages({ name: 'playlist', params: { id: item.creativeId } })
+            "
+          >
+            <cover
+              :image="item.uiElement.image.imageUrl"
+              :name="item.uiElement.mainTitle.title"
+              :count="item.resources[0].resourceExtInfo.playCount"
+            ></cover>
+          </van-swipe-item>
+        </div>
+      </van-swipe>
+    </block>
   </div>
 </template>
 
@@ -38,11 +40,13 @@ import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { formatUnit } from "@/assets/js/filter";
 import { toPages } from "@/assets/js/util.js";
 import Cover from "@/components/cover";
+import Block from "./components/block";
 
 export default {
   name: "whirligig",
   components: {
     Cover,
+    Block,
   },
   props: ["block"],
   computed: {

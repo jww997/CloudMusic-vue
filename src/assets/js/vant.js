@@ -82,6 +82,10 @@ import {
 
 } from "vant";
 
+// import "vant/lib/index.css"; // 定制主题
+// import "vant/lib/index.less"; // 定制主题
+// import "../../assets/less/var.less"; // 定制主题
+
 // 基础组件
 Vue.use(Button); // 按钮
 Vue.use(Cell); // 单元格

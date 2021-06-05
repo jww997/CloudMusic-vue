@@ -2,8 +2,8 @@
   <div class="slide">
     <van-swipe
       :width="width"
+      :loop="loop"
       :autoplay="autoplay"
-      :loop="isLoop"
       :indicator-color="indicatorsColor"
       :show-indicators="isShowIndicators"
     >
@@ -23,7 +23,7 @@ export default {
   name: "slide",
   props: ["width", "autoplay", "indicatorsColor", "list", "handleClick"],
   computed: {
-    isLoop() {
+    loop() {
       return !!this.$props.autoplay;
     },
     isShowIndicators() {

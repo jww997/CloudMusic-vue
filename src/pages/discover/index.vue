@@ -6,31 +6,24 @@
     <!-- <refresh :isLoading="isLoading" @refresh="refresh"> -->
 
     <div v-for="(item, index) in blocks" :key="index">
-      <div style="border: 1px solid #f00; font-size: 14px">
+      <!-- <div style="border: 1px solid #f00; font-size: 14px">
         {{ index }} - {{ item.showType }}
-      </div>
-      <template v-if="['BANNER'].includes(item.showType)">
+      </div> -->
+      <template v-if="banner.includes(item.showType)">
         <!-- 轮播图 -->
         <banner :list="banners"></banner>
         <!-- 保龄球 -->
         <bowling></bowling>
       </template>
-      <template v-else-if="['HOMEPAGE_SLIDE_PLAYLIST'].includes(item.showType)">
+      <template v-else-if="whirligig.includes(item.showType)">
         <!-- 旋转木马1 -->
-        <!-- <whirligig :block="item"></whirligig> -->
+        <whirligig :block="item"></whirligig>
       </template>
-      <template
-        v-else-if="
-          [
-            'HOMEPAGE_SLIDE_SONGLIST_ALIGN',
-            'HOMEPAGE_NEW_SONG_NEW_ALBUM',
-          ].includes(item.showType)
-        "
-      >
+      <template v-else-if="whirligig2.includes(item.showType)">
         <!-- 旋转木马2 -->
         <whirligig2 :block="item"></whirligig2>
       </template>
-      <template v-else-if="['SHUFFLE_MUSIC_CALENDAR'].includes(item.showType)">
+      <template v-else-if="calendar.includes(item.showType)">
         <!-- 音乐日历 -->
         <calendar :block="item"></calendar>
       </template>
@@ -80,8 +73,15 @@ export default {
     return {
       blocks: [],
       banners: [],
-
       isLoading: false,
+
+      banner: ["BANNER"],
+      whirligig: ["HOMEPAGE_SLIDE_PLAYLIST"],
+      whirligig2: [
+        "HOMEPAGE_SLIDE_SONGLIST_ALIGN",
+        "HOMEPAGE_NEW_SONG_NEW_ALBUM",
+      ],
+      calendar: ["SHUFFLE_MUSIC_CALENDAR"],
     };
   },
   computed: {

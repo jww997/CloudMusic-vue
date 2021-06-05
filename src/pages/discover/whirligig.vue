@@ -56,7 +56,7 @@ export default {
 @import "~sass/varibles.scss";
 .whirligig {
   .cover {
-    margin-top: 0.3rem;
+    margin: 0.3rem 0;
     padding-left: 0.2rem;
     box-sizing: border-box;
   }

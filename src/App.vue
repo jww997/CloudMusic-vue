@@ -85,17 +85,18 @@ export default {
 </script>
 
 <style lang="scss">
+@import "~sass/var.scss";
 @import "~sass/mixins.scss";
-@import "~sass/varibles.scss";
 .app {
   height: 100vh;
+  font-family: $base-font-family;
 
   // 动画
   .fade-enter-active,
   .fade-leave-active,
   .drawer-enter-active,
   .drawer-leave-active {
-    transition: 0.5s;
+    transition: $animation-duration-base;
   }
   .fade-enter,
   .fade-leave-to {

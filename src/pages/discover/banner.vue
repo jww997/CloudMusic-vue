@@ -52,14 +52,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~sass/var.scss";
 @import "~sass/mixins.scss";
-@import "~sass/varibles.scss";
 .banner {
-  background-color: #fff;
+  background-color: $white;
   .banner-box {
     margin: 0 3%;
     border-radius: 0.2rem;
-    background-color: $theme-LIGHTGRAY;
+    background-color: $background-color;
+    border: 1px solid $red;
     position: relative;
     overflow: hidden;
     .image {
@@ -67,11 +68,11 @@ export default {
       height: 100%;
     }
     .text {
-      font-size: $text-XXXS;
+      // font-size: $text-XXXS;
       padding: 0.1rem 0.2rem;
       border-radius: 0.15rem 0 0 0;
       opacity: 0.8;
-      color: #fff;
+      color: $white;
       position: absolute;
       bottom: 0;
       right: 0;

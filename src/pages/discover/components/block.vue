@@ -47,6 +47,8 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .block {
+  padding-bottom: 0.2rem;
+  border-top: 0.15rem solid #eee;
   .block-top {
     margin: 0.2rem 0.2rem 0.15rem;
     @include flexSpaceBetween;

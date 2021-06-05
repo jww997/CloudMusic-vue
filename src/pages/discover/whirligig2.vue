@@ -86,13 +86,6 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .whirligig2 {
-  padding: $text-XXXS 0;
-  border-top: 0.15rem solid #eee;
-
-  // .swiper-item {
-  //   padding-left: 0.3rem;
-  //   box-sizing: border-box;
-  // }
   .resources {
     height: 1.5rem;
     margin-top: $text-XS;

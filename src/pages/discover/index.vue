@@ -6,33 +6,41 @@
     <!-- <refresh :isLoading="isLoading" @refresh="refresh"> -->
 
     <div v-for="(item, index) in blocks" :key="index">
-      <template v-if="item.showType == 'BANNER'">
+      <div style="background-color: #eee; font-size: 14px">
+        {{ index }} - {{ item.showType }}
+      </div>
+      <template v-if="['BANNER'].includes(item.showType)">
         <!-- 轮播图 -->
         <banner :list="banners"></banner>
         <!-- 保龄球 -->
         <bowling></bowling>
       </template>
-      <template v-else-if="item.showType == 'HOMEPAGE_SLIDE_PLAYLIST'">
+      <template v-else-if="['HOMEPAGE_SLIDE_PLAYLIST'].includes(item.showType)">
         <!-- 旋转木马1 -->
         <whirligig :block="item"></whirligig>
       </template>
-      <template v-else-if="item.showType == 'HOMEPAGE_SLIDE_SONGLIST_ALIGN'">
+      <template
+        v-else-if="
+          [
+            'HOMEPAGE_SLIDE_SONGLIST_ALIGN',
+            'HOMEPAGE_NEW_SONG_NEW_ALBUM',
+          ].includes(item.showType)
+        "
+      >
         <!-- 旋转木马2 -->
         <whirligig2 :block="item"></whirligig2>
       </template>
-      <template v-else-if="item.showType == 'SHUFFLE_MUSIC_CALENDAR'">
+      <template v-else-if="['SHUFFLE_MUSIC_CALENDAR'].includes(item.showType)">
         <!-- 音乐日历 -->
         <calendar :block="item"></calendar>
       </template>
       <template v-else>
         <!-- 其他 -->
-        <div style="background-color: #eee; font-size: 14px">
-          {{ index }} - {{ item.showType }}
-        </div>
       </template>
     </div>
 
-    <height-clear v-if="music.isPlaying" />
+    <!-- <height-clear v-if="music.isPlaying" /> -->
+    <height-clear />
     <!-- </refresh> -->
 
     <bottombar></bottombar>

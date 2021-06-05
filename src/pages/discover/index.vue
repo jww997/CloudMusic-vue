@@ -6,9 +6,9 @@
     <!-- <refresh :isLoading="isLoading" @refresh="refresh"> -->
 
     <div v-for="(item, index) in blocks" :key="index">
-      <!-- <div style="border: 1px solid #f00; font-size: 14px">
+      <div style="border: 1px solid #f00; font-size: 14px">
         {{ index }} - {{ item.showType }}
-      </div> -->
+      </div>
       <template v-if="banner.includes(item.showType)">
         <!-- 轮播图 -->
         <banner :list="banners"></banner>

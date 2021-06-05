@@ -3,12 +3,12 @@
     <block :block="block">
       <slide :width="118" :list="list" @handleClick="toSonglist">
         <template slot="box" slot-scope="{ item }">
-          <cover
-            class="cover"
+          <playlist
+            class="playlist"
             :image="item.uiElement.image.imageUrl"
             :name="item.uiElement.mainTitle.title"
             :count="item.resources[0].resourceExtInfo.playCount"
-          ></cover>
+          ></playlist>
         </template>
       </slide>
     </block>
@@ -20,14 +20,14 @@ import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { toPages } from "@/assets/js/util.js";
 import Block from "./components/block";
 import Slide from "./components/slide";
-import Cover from "@/components/cover";
+import playlist from "./components/playlist";
 
 export default {
   name: "whirligig",
   components: {
     Block,
     Slide,
-    Cover,
+    playlist,
   },
   props: ["block"],
   computed: {
@@ -55,7 +55,7 @@ export default {
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .whirligig {
-  .cover {
+  .playlist {
     margin: 0.3rem 0;
     padding-left: 0.2rem;
     box-sizing: border-box;

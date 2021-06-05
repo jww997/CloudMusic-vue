@@ -1,12 +1,8 @@
 <template>
   <div class="bowling">
-    <van-swipe class="swiper" width="70" :loop="false" :show-indicators="false">
-      <van-swipe-item
-        class="swiper-item"
-        v-for="(item, index) in list"
-        :key="index"
-      >
-        <div class="item" @click="toPage(item.id)">
+    <slide :width="70" :list="list">
+      <template slot="box" slot-scope="{ item }">
+        <div class="box" @click="toPage(item.id)">
           <!-- <div class="iconfont" v-html="item.icon"></div> -->
           <div
             class="icon"
@@ -22,8 +18,8 @@
           </div>
           <span class="text">{{ item.name }}</span>
         </div>
-      </van-swipe-item>
-    </van-swipe>
+      </template>
+    </slide>
   </div>
 </template>
 
@@ -31,8 +27,13 @@
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { formatDate } from "@/assets/js/filter.js";
 import { toPages } from "@/assets/js/util.js";
+import Slide from "./components/slide.vue";
+
 export default {
   name: "list",
+  components: {
+    Slide,
+  },
   data() {
     return { list: [] };
   },
@@ -91,74 +92,45 @@ export default {
 .bowling {
   background-color: #fff;
   padding: 0.3rem 0;
-  .swiper-item {
-    // padding-left: 0.35rem;
-    .item {
-      // width: 100%;
-      box-sizing: content-box;
+  .box {
+    // width: 100%;
+    box-sizing: content-box;
+    @include flexCenter;
+    flex-direction: column;
+    .icon,
+    .text {
+      flex-shrink: 0;
+    }
+    .icon {
+      width: 1rem;
+      height: 1rem;
+      position: relative;
+      margin-bottom: 0.2rem;
+      border-radius: 50%;
+      overflow: hidden;
+
+      // filter: invert(100%);
+      // background: #f00 no-repeat center;
+      background-size: cover;
+
       @include flexCenter;
-      flex-direction: column;
-      .icon,
-      .text {
-        flex-shrink: 0;
-      }
-      .icon {
-        width: 1rem;
-        height: 1rem;
-        position: relative;
-        margin-bottom: 0.2rem;
-        border-radius: 50%;
-        overflow: hidden;
 
-        // filter: invert(100%);
-        // background: #f00 no-repeat center;
-        background-size: cover;
-
-        @include flexCenter;
-
-        .date {
-          color: $theme-RED;
-          font-size: $text-XS;
-          margin-bottom: -$text-XXXS;
-        }
-
-        &::after {
-          content: "";
-          z-index: -1;
-          // background-color: $theme-PICK;
-          background-color: $theme-RED;
-          @include positionCenter;
-        }
-
-        // &.active::after {
-        //   background-color: $theme-GRAY;
-        // }
-
-        // mask-image: -webkit-gradient(
-        //   linear,
-        //   right top,
-        //   0 bottom,
-        //   from(rgba(0, 0, 255, 0.3)),
-        //   to(yellow)
-        // );
-        // -webkit-mask-image: -webkit-gradient(
-        //   linear,
-        //   right top,
-        //   0 bottom,
-        //   from(rgba(0, 0, 255, 0.3)),
-        //   to(yellow)
-        // );
-        // -webkit-background-clip: text;
-        // -webkit-text-fill-color: transparent;
-        // background: -moz-linear-gradient(45deg, #003366 30%, #0099cc);
-        // background: -webkit-linear-gradient(45deg, #003366 30%, #0099cc);
-        // filter: Alpha(Opacity=60);
-        // opacity: 0.6;
-      }
-      .text {
+      .date {
+        color: $theme-RED;
         font-size: $text-XS;
-        color: $theme-BLACK;
+        margin-bottom: -$text-XXXS;
       }
+
+      &::after {
+        content: "";
+        z-index: -1;
+        background-color: $theme-RED;
+        @include positionCenter;
+      }
+    }
+    .text {
+      font-size: $text-XS;
+      color: $theme-BLACK;
     }
   }
 }

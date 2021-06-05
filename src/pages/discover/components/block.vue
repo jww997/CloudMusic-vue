@@ -48,9 +48,10 @@ export default {
 @import "~sass/varibles.scss";
 .block {
   padding-bottom: 0.2rem;
-  border-top: 0.15rem solid #eee;
+  margin-top: 0.15rem;
+  background-color: #fff;
   .block-top {
-    margin: 0.2rem 0.2rem 0.15rem;
+    padding: 0.2rem 0.2rem 0.15rem;
     @include flexSpaceBetween;
     .title {
       line-height: $text-XL;

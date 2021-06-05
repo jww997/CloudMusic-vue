@@ -6,7 +6,7 @@
     <!-- <refresh :isLoading="isLoading" @refresh="refresh"> -->
 
     <div v-for="(item, index) in blocks" :key="index">
-      <div style="background-color: #eee; font-size: 14px">
+      <div style="border: 1px solid #f00; font-size: 14px">
         {{ index }} - {{ item.showType }}
       </div>
       <template v-if="['BANNER'].includes(item.showType)">
@@ -17,7 +17,7 @@
       </template>
       <template v-else-if="['HOMEPAGE_SLIDE_PLAYLIST'].includes(item.showType)">
         <!-- 旋转木马1 -->
-        <whirligig :block="item"></whirligig>
+        <!-- <whirligig :block="item"></whirligig> -->
       </template>
       <template
         v-else-if="
@@ -39,7 +39,6 @@
       </template>
     </div>
 
-    <!-- <height-clear v-if="music.isPlaying" /> -->
     <height-clear />
     <!-- </refresh> -->
 
@@ -128,4 +127,7 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
+.discover {
+  background-color: #eee;
+}
 </style>

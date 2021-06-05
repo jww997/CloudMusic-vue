@@ -1,5 +1,5 @@
 <template>
-  <div class="kid">
+  <div class="topbar">
     <div class="left iconfont" is-link @click="showPopup">&#xe70d;</div>
     <div class="frame" @click="toPages({ name: 'search' })">
       <van-icon name="search" />
@@ -77,7 +77,7 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-.kid {
+.topbar {
   height: $safeDistance;
   padding: 0 $text-XS;
   box-sizing: border-box;

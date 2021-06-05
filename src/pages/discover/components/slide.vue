@@ -1,13 +1,18 @@
 <template>
   <div class="slide">
-    <van-swipe width="118" :show-indicators="false" :loop="isLoop">
+    <van-swipe
+      :width="width"
+      :autoplay="autoplay"
+      :loop="isLoop"
+      :indicator-color="indicatorsColor"
+      :show-indicators="isShowIndicators"
+    >
       <van-swipe-item
-        class="swiper-item"
         v-for="item in list"
         :key="item.id"
         @click="$emit('handleClick', item)"
       >
-        <slot />
+        <slot name="box" :item="item" />
       </van-swipe-item>
     </van-swipe>
   </div>
@@ -16,11 +21,14 @@
 <script>
 export default {
   name: "slide",
-  props: ["list", "handleClick"],
-  data() {
-    return {
-      isLoop: false, // 是否循环
-    };
+  props: ["width", "autoplay", "indicatorsColor", "list", "handleClick"],
+  computed: {
+    isLoop() {
+      return !!this.$props.autoplay;
+    },
+    isShowIndicators() {
+      return !!this.$props.indicatorsColor;
+    },
   },
 };
 </script>
@@ -28,11 +36,14 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-.swiper {
-  .swiper-item {
-    margin-top: 0.3rem;
-    padding-left: 0.2rem;
-    box-sizing: border-box;
+.slide {
+  >>> .van-swipe__indicators {
+    bottom: 6px;
+    .van-swipe__indicator {
+      width: 8px;
+      height: 2px;
+      border-radius: 30px;
+    }
   }
 }
 </style>

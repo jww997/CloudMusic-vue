@@ -1,5 +1,5 @@
 <template>
-  <div class="children">
+  <div class="bowling">
     <van-swipe class="swiper" width="70" :loop="false" :show-indicators="false">
       <van-swipe-item
         class="swiper-item"
@@ -88,7 +88,8 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-.children {
+.bowling {
+  background-color: #fff;
   padding: 0.3rem 0;
   .swiper-item {
     // padding-left: 0.35rem;

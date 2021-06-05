@@ -1,42 +1,34 @@
 <template>
   <div class="whirligig2">
     <block :block="block">
-      <van-swipe
-        class="swiper"
-        indicator-color="white"
-        width="355"
-        :show-indicators="false"
-        :loop="false"
-      >
-        <div v-for="(item, index) in list" :key="index">
-          <van-swipe-item class="swiper-item">
-            <div
-              class="resources"
-              v-for="(item, index) in item.resources"
-              :key="index"
-              @click="toggleMusic(item.resourceId, item)"
-            >
-              <div class="left">
-                <img class="image" :src="item.uiElement.image.imageUrl" />
-                <van-icon
-                  class="icon"
-                  name="pause"
-                  v-if="music.id == item.resourceId && music.isPlaying"
-                />
-                <van-icon class="icon" name="play" v-else />
+      <slide :width="355" :list="list">
+        <template slot="box" slot-scope="{ item }">
+          <div
+            class="resources"
+            v-for="(item2, index) in item.resources"
+            :key="index"
+            @click="toggleMusic(item2.resourceId, item2)"
+          >
+            <div class="left">
+              <img class="image" :src="item2.uiElement.image.imageUrl" />
+              <van-icon
+                class="icon"
+                name="pause"
+                v-if="music.id == item2.resourceId && music.isPlaying"
+              />
+              <van-icon class="icon" name="play" v-else />
+            </div>
+            <div class="right">
+              <div class="mainTitle">
+                {{ item2.uiElement.mainTitle.title }}
               </div>
-              <div class="right">
-                <div class="mainTitle">
-                  {{ item.uiElement.mainTitle.title }}
-                </div>
-                <div class="subTitle" v-if="item.uiElement.subTitle">
-                  {{ item.uiElement.subTitle.title }}
-                </div>
+              <div class="subTitle" v-if="item2.uiElement.subTitle">
+                {{ item2.uiElement.subTitle.title }}
               </div>
             </div>
-          </van-swipe-item>
-        </div>
-      </van-swipe>
+          </div>
+        </template>
+      </slide>
     </block>
   </div>
 </template>
@@ -45,11 +37,14 @@
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { toPages } from "@/assets/js/util.js";
 import Block from "./components/block.vue";
+import Slide from "./components/slide.vue";
+
 export default {
-  name: "slideSonglistAlign",
+  name: "whirligig2",
   props: ["block"],
   components: {
     Block,
+    Slide,
   },
   computed: {
     list() {

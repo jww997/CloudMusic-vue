@@ -5,27 +5,27 @@
     <height-clear />
     <!-- <refresh :isLoading="isLoading" @refresh="refresh"> -->
 
-    <div v-for="(item, index) in blocks" :key="index">
-      <div style="border: 1px solid #f00; font-size: 14px">
-        {{ index }} - {{ item.showType }}
+    <div v-for="(block, index) in blocks" :key="block.blockCode">
+      <div v-if="test" style="border: 1px solid #f00; font-size: 14px">
+        {{ index }} - {{ block.showType }}
       </div>
-      <template v-if="banner.includes(item.showType)">
+      <template v-if="banner.includes(block.showType)">
         <!-- 轮播图 -->
         <banner :list="banners"></banner>
         <!-- 保龄球 -->
         <bowling></bowling>
       </template>
-      <template v-else-if="whirligig.includes(item.showType)">
+      <template v-else-if="whirligig.includes(block.showType)">
         <!-- 旋转木马1 -->
-        <whirligig :block="item"></whirligig>
+        <whirligig :block="block"></whirligig>
       </template>
-      <template v-else-if="whirligig2.includes(item.showType)">
+      <template v-else-if="whirligig2.includes(block.showType)">
         <!-- 旋转木马2 -->
-        <whirligig2 :block="item"></whirligig2>
+        <whirligig2 :block="block"></whirligig2>
       </template>
-      <template v-else-if="calendar.includes(item.showType)">
+      <template v-else-if="calendar.includes(block.showType)">
         <!-- 音乐日历 -->
-        <calendar :block="item"></calendar>
+        <calendar :block="block"></calendar>
       </template>
       <template v-else>
         <!-- 其他 -->
@@ -75,12 +75,20 @@ export default {
       banners: [],
       isLoading: false,
 
+      test: 0,
+
       banner: ["BANNER"],
-      whirligig: ["HOMEPAGE_SLIDE_PLAYLIST"],
+      whirligig: [
+        "HOMEPAGE_SLIDE_PLAYLIST",
+        "SHUFFLE_MLOG",
+        "SLIDE_SINGLE_SONG",
+        "SLIDE_VOICELIST",
+        "SLIDE_PLAYABLE_DRAGON_BALL",
+      ],
       whirligig2: [
         "HOMEPAGE_SLIDE_SONGLIST_ALIGN",
         "HOMEPAGE_NEW_SONG_NEW_ALBUM",
-      ],
+      ], 
       calendar: ["SHUFFLE_MUSIC_CALENDAR"],
     };
   },

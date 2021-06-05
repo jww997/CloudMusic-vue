@@ -8,7 +8,7 @@
             :image="item.uiElement.image.imageUrl"
             :name="item.uiElement.mainTitle.title"
             :count="item.resources[0].resourceExtInfo.playCount"
-          ></playlist>
+          />
         </template>
       </slide>
     </block>

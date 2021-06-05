@@ -48,7 +48,7 @@ export default {
 @import "~sass/varibles.scss";
 .block {
   background-color: #fff;
-  margin-top: 0.15rem;
+  margin-bottom: 0.15rem;
   .block-top {
     padding: 0.2rem 0.2rem 0.15rem;
     @include flexSpaceBetween;

@@ -2,7 +2,7 @@
   <div class="block">
     <div class="block-top">
       <div class="title">{{ title }}</div>
-      <div class="btn" @click="toPages({ name: 'square' })">
+      <div class="btn" v-if="btnText" @click="toPages({ name: 'square' })">
         {{ btnText }} &gt;
       </div>
     </div>

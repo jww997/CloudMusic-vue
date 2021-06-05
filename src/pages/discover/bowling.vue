@@ -30,7 +30,7 @@ import { toPages } from "@/assets/js/util.js";
 import Slide from "./components/slide.vue";
 
 export default {
-  name: "list",
+  name: "bowling",
   components: {
     Slide,
   },

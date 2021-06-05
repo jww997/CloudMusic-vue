@@ -21,21 +21,8 @@
 import { formatUnit } from "@/assets/js/filter";
 
 export default {
-  name: "cover",
-  props: {
-    image: {
-      type: String,
-      default: "",
-    },
-    name: {
-      type: String,
-      default: "",
-    },
-    count: {
-      type: Number,
-      default: 0,
-    },
-  },
+  name: "playlist",
+  props: ["image", "name", "count"],
   data: function () {
     return {
       size: "100%",

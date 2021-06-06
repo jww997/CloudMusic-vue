@@ -40,8 +40,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~sass/var.scss";
 @import "~sass/mixins.scss";
-@import "~sass/varibles.scss";
 .playlist {
   position: relative;
   display: flex;
@@ -49,49 +49,49 @@ export default {
   .image {
     width: 2.5rem;
     height: 2.5rem;
-    border-radius: 0.2rem;
-    background-color: $theme-LIGHTGRAY;
+    border-radius: $border-radius-lg;
+    background-color: $background-color;
     overflow: hidden;
-    transition: 1s;
   }
   .text {
+    line-height: $line-height-md;
+    padding-top: $padding-xs;
+    font-size: $font-size-md;
+    color: $text-color;
     @include omit;
     display: -webkit-box;
     white-space: normal;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     line-clamp: 2;
-    line-height: 0.5rem;
-    padding-top: 0.1rem;
-    font-size: $text-XXS;
-    color: #333;
   }
   .count {
-    color: #fff;
-    font-size: $text-XS;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 0.1rem 0.2rem;
-    border-radius: 1rem;
+    color: $active-color;
+    font-size: $font-size-xs;
+    padding: $padding-base $padding-xs;
+    background-color: $black;
+    border-radius: $border-radius-lg;
+    opacity: $active-opacity;
     position: absolute;
-    right: 5%;
-    top: 5%;
+    right: $padding-xs;
+    top: $padding-xs;
     @include flexCenter;
     .iconfont {
-      font-size: $text-XS;
+      font-size: $font-size-xs;
+      margin-right: $padding-base;
     }
   }
   &.active:after {
     content: "";
-    width: 90%;
-    padding-bottom: 90%;
-    margin: -0.2rem auto;
-    background-color: $theme-LIGHTGRAY;
-    border-radius: 0.1rem;
-    z-index: -1;
+    padding-bottom: 100%;
+    margin-top: -$padding-sm;
+    background-color: $background-color;
+    border-radius: $border-radius-lg;
+    transform: scale(0.9);
     position: absolute;
+    z-index: -1;
     right: 0;
     left: 0;
-    top: 0;
   }
 }
 </style>

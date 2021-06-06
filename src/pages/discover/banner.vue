@@ -55,12 +55,11 @@ export default {
 @import "~sass/var.scss";
 @import "~sass/mixins.scss";
 .banner {
-  background-color: $white;
+  background-color: $background-color-light;
   .banner-box {
-    margin: 0 3%;
-    border-radius: 0.2rem;
+    margin: 0 $padding-sm;
+    border-radius: $border-radius-lg;
     background-color: $background-color;
-    border: 1px solid $red;
     position: relative;
     overflow: hidden;
     .image {
@@ -68,10 +67,10 @@ export default {
       height: 100%;
     }
     .text {
-      // font-size: $text-XXXS;
-      padding: 0.1rem 0.2rem;
-      border-radius: 0.15rem 0 0 0;
-      opacity: 0.8;
+      font-size: $font-size-sm;
+      padding: $padding-base $padding-xs;
+      border-radius: $border-radius-md 0 0 0;
+      opacity: $active-opacity;
       color: $white;
       position: absolute;
       bottom: 0;

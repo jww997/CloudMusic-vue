@@ -39,26 +39,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~sass/var.scss";
 @import "~sass/mixins.scss";
-@import "~sass/varibles.scss";
 .songlist {
   .resources {
-    height: 1.5rem;
-    margin-top: $text-XS;
+    height: 1.8rem;
+    padding: $padding-sm $padding-sm 0;
     box-sizing: border-box;
-    position: relative;
-    padding-left: $text-XS + 1.5rem;
-    padding-right: $text-S;
-    &:first-child {
-      margin-top: 0;
-    }
+    display: flex;
+    align-items: center;
     .left {
+      flex-shrink: 0;
       width: 1.2rem;
       height: 1.2rem;
-      border-radius: $text-XXS;
-      @include positionCenter;
-      left: $text-XS;
-      right: auto;
+      border-radius: $border-radius-lg;
+      position: relative;
       overflow: hidden;
       .image {
         width: inherit;
@@ -66,23 +61,29 @@ export default {
       .icon {
         @include positionCenter;
         @include flexCenter;
-        font-size: $text-L;
-        color: $theme-WHITE;
+        font-size: $font-size-lg;
+        opacity: $active-opacity;
+        color: $white;
       }
     }
     .right {
+      flex-grow: 1;
       height: 100%;
-      border-bottom: 1px solid $theme-LIGHTGRAY;
+      line-height: $line-height-sm;
+      border-top: $border-width-base solid $border-color;
+      margin-left: $padding-xs;
       @include flexCenter;
       flex-direction: column;
       align-items: flex-start;
       .mainTitle {
-        font-size: $text-S;
+        font-size: $font-size-lg;
       }
       .subTitle {
-        margin-top: $text-XXS;
-        font-size: $text-XS;
+        font-size: $font-size-xs;
       }
+    }
+    &:first-child .right {
+      border: none;
     }
   }
 }

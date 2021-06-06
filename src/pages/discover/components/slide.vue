@@ -35,14 +35,14 @@ export default {
 
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
-@import "~sass/varibles.scss";
+@import "~sass/var.scss";
 .slide {
   >>> .van-swipe__indicators {
-    bottom: 6px;
+    bottom: $padding-xs;
     .van-swipe__indicator {
       width: 8px;
       height: 2px;
-      border-radius: 30px;
+      border-radius: $border-radius-lg;
     }
   }
 }

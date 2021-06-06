@@ -1,6 +1,6 @@
 <template>
   <div class="block">
-    <div class="block-top">
+    <div class="block-top" v-if="title">
       <div class="title">{{ title }}</div>
       <div class="btn" v-if="btnText" @click="toPages({ name: 'square' })">
         {{ btnText }} &gt;
@@ -44,29 +44,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~sass/var.scss";
 @import "~sass/mixins.scss";
-@import "~sass/varibles.scss";
 .block {
-  background-color: #fff;
-  margin-bottom: 0.15rem;
+  background-color: $background-color-light;
+  margin-bottom: $padding-xs;
+  padding: $padding-sm 0;
+  box-sizing: border-box;
   .block-top {
-    padding: 0.2rem 0.2rem 0.15rem;
+    font-weight: bold;
+    padding: 0 $padding-sm $padding-xs;
     @include flexSpaceBetween;
     .title {
-      line-height: $text-XL;
-      font-size: $text-M;
-      font-weight: bold;
+      font-size: $font-size-lg;
       @include omit;
     }
     .btn {
       flex-shrink: 0;
-      line-height: $text-L;
-      font-size: $text-XS;
-      font-weight: bold;
-      margin-left: 0.2rem;
-      padding: 0 0.3rem;
-      border: 1px solid #eee;
-      border-radius: 2rem;
+      font-size: $font-size-sm;
+      padding: $padding-base $padding-sm;
+      border: $border-width-base solid $border-color;
+      border-radius: $border-radius-lg;
       @include flexCenter;
     }
   }

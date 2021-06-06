@@ -52,12 +52,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~sass/var.scss";
 @import "~sass/mixins.scss";
-@import "~sass/varibles.scss";
 .whirligig {
   .playlist {
-    margin: 0.3rem 0;
-    padding-left: 0.2rem;
+    margin-top: $padding-xs;
+    margin-left: $padding-xs;
     box-sizing: border-box;
   }
 }

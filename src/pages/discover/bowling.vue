@@ -87,13 +87,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~sass/var.scss";
 @import "~sass/mixins.scss";
-@import "~sass/varibles.scss";
 .bowling {
-  background-color: #fff;
-  padding: 0.3rem 0;
+  background-color: $background-color-light;
+  padding: $padding-sm 0;
+  margin-bottom: $border-width-base;
   .box {
-    // width: 100%;
     box-sizing: content-box;
     @include flexCenter;
     flex-direction: column;
@@ -105,32 +105,28 @@ export default {
       width: 1rem;
       height: 1rem;
       position: relative;
-      margin-bottom: 0.2rem;
       border-radius: 50%;
       overflow: hidden;
-
-      // filter: invert(100%);
-      // background: #f00 no-repeat center;
       background-size: cover;
-
       @include flexCenter;
-
+      // filter: invert(100%);
       .date {
-        color: $theme-RED;
-        font-size: $text-XS;
-        margin-bottom: -$text-XXXS;
+        color: $red;
+        font-size: $font-size-xs;
+        margin-bottom: -$padding-xs;
       }
 
       &::after {
         content: "";
         z-index: -1;
-        background-color: $theme-RED;
+        background-color: $red;
         @include positionCenter;
       }
     }
     .text {
-      font-size: $text-XS;
-      color: $theme-BLACK;
+      margin-top: $padding-xs;
+      font-size: $font-size-sm;
+      color: $text-color;
     }
   }
 }

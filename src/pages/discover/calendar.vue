@@ -10,7 +10,7 @@
                 :key="index"
                 >{{ item }}</van-tag
               >
-            </p> 
+            </p>
             <p class="title">
               {{ item.resources[0].uiElement.mainTitle.title }}
             </p>
@@ -43,33 +43,35 @@ export default {
       }
     },
   },
-}; 
+};
 </script>
 
 <style lang="scss" scoped>
+@import "~sass/var.scss";
 @import "~sass/mixins.scss";
-@import "~sass/varibles.scss";
 .calendar {
   .resource {
     height: 2.5rem;
-    padding: 0 0.3rem;
+    margin: 0 $padding-sm;
     box-sizing: border-box;
-    border-top: 1px solid #eee;
+    border-top: $border-width-base solid $border-color;
     display: flex;
     justify-content: space-between;
     align-items: center;
     .left {
-      font-size: 0.3rem;
+      line-height: $line-height-sm;
+      font-size: $font-size-sm;
       .title {
-        margin-top: 0.2rem;
+        margin-top: $padding-xs;
       }
     }
     .right {
+      flex-shrink: 0;
       width: 1.5rem;
-
+      padding-left: $padding-lg;
       img {
         width: 100%;
-        border-radius: 0.2rem;
+        border-radius: $border-radius-lg ;
       }
     }
     &:first-child {

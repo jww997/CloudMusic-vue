@@ -88,8 +88,12 @@ export default {
       whirligig2: [
         "HOMEPAGE_SLIDE_SONGLIST_ALIGN",
         "HOMEPAGE_NEW_SONG_NEW_ALBUM",
-      ], 
+      ],
       calendar: ["SHUFFLE_MUSIC_CALENDAR"],
+
+      // whirligig: [],
+      // whirligig2: [],
+      // calendar: [],
     };
   },
   computed: {
@@ -133,9 +137,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~sass/var.scss";
 @import "~sass/mixins.scss";
-@import "~sass/varibles.scss";
 .discover {
-  background-color: #eee;
+  background-color: $background-color;
 }
 </style>

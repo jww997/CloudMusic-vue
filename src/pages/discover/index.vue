@@ -91,6 +91,8 @@ export default {
       ],
       calendar: ["SHUFFLE_MUSIC_CALENDAR"],
 
+      // test: 1,
+      // banner: [],
       // whirligig: [],
       // whirligig2: [],
       // calendar: [],

@@ -80,6 +80,7 @@ export default {
       }
       .subTitle {
         font-size: $font-size-xs;
+        color: $gray-6;
       }
     }
     &:first-child .right {

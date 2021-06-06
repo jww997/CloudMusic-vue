@@ -94,7 +94,6 @@ export default {
   padding: $padding-sm 0;
   margin-bottom: $border-width-base;
   .box {
-    box-sizing: content-box;
     @include flexCenter;
     flex-direction: column;
     .icon,

@@ -57,7 +57,7 @@ export default {
 .whirligig {
   .playlist {
     margin-top: $padding-xs;
-    margin-left: $padding-xs;
+    margin-left: $padding-sm;
     box-sizing: border-box;
   }
 }

@@ -14,13 +14,14 @@ const setting = {
       path: "/discover",
       name: "discover",
       component: () => import("@/pages/discover"),
-      meta: { keepAlive: true }
+      meta: { keepAlive: true },
     },
     {
       // alias: "歌单详情",
       path: "/playlist/:id",
       name: "playlist",
       component: () => import("@/pages/playlist"),
+      // meta: { keepAlive: true },
     },
     {
       // alias: "评论",
@@ -39,12 +40,14 @@ const setting = {
       path: "/square",
       name: "square",
       component: () => import("@/pages/square"),
+      // meta: { keepAlive: true },
     },
     {
       // alias: "排行榜",
       path: "/toplist",
       name: "toplist",
       component: () => import("@/pages/toplist"),
+      // meta: { keepAlive: true },
     },
     {
       // alias: "搜索",

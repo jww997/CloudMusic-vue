@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="app">
     <!-- 动画效果 fade-淡出淡入 drawer-抽屉 -->
-    <transition name="fade">
+    <transition :name="!keepAlive && 'fade'">
       <keep-alive>
         <router-view class="router-view" v-if="keepAlive"></router-view>
       </keep-alive>

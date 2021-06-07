@@ -6,7 +6,7 @@
 
     <box :playlist="playlist"></box>
 
-    <bottombar></bottombar>
+    
   </div>
 </template>
 

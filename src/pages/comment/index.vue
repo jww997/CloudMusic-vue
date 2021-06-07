@@ -10,8 +10,8 @@
     ></navbar>
     <list :comments="comments"></list>
 
-    <height-clear v-if="music.isPlaying" />
-    <bottombar></bottombar>
+    <height-clear />
+    
   </div>
   <!-- </scroll> -->
 </template>

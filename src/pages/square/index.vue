@@ -9,7 +9,7 @@
       destination="playlist"
       @scrollToEnd="scrollToEnd"
     ></matrix>
-    <height-clear v-if="music.isPlaying" />
+    <height-clear />
 
     <!-- <scroll
       :data="playlists"
@@ -24,7 +24,7 @@
     <!-- v-if="isLoading && total != playlists.length" -->
     <!-- </scroll> -->
 
-    <!-- <bottombar></bottombar> -->
+    <!--  -->
 
     <transition :name="transition">
       <router-view></router-view>
@@ -129,7 +129,5 @@ export default {
 @import "~sass/varibles.scss";
 .square {
   @include suspension;
-  // padding: $safeDistance + 1rem 0 $safeDistance;
-  z-index: $zIndex-M;
 }
 </style>

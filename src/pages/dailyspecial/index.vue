@@ -5,8 +5,8 @@
     <cap></cap>
     <list :list="dailySongs" sorttype="2" allTop="1.5rem"></list>
 
-    <height-clear v-if="music.isPlaying" />
-    <bottombar></bottombar>
+    <height-clear />
+    
   </div>
 </template>
 

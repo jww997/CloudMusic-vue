@@ -26,7 +26,7 @@
     <hot @getSearch="getSearch" v-if="!list.length"></hot>
     <list :list="list" v-else></list>
 
-    <bottombar></bottombar>
+    
   </div>
 </template>
 
@@ -142,7 +142,7 @@ export default {
 .search {
   @include suspension;
   padding: $safeDistance 0;
-  z-index: $zIndex-M;
+  
   .seek {
     width: 100%;
     height: $text-XXL;

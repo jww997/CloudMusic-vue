@@ -18,8 +18,6 @@
       </div>
     </div> -->
 
-    <bottombar></bottombar>
-
     <transition :name="transition">
       <router-view></router-view>
     </transition>
@@ -38,7 +36,8 @@ import { toPages } from "@/assets/js/util.js";
 export default {
   name: "ranking",
   components: {
-    Matrix,Bottombar,
+    Matrix,
+    Bottombar,
 
     Navbar,
     Cover,
@@ -76,6 +75,5 @@ export default {
 .toplist {
   @include suspension;
   padding: $safeDistance 0;
-  z-index: $zIndex-M;
 }
 </style>

@@ -6,7 +6,7 @@
     <height-clear />
     <div class="general" v-if="!obj.titleImageUrl">
       <div class="left" @click.stop="imagePreview">
-        <cover :image="obj.coverImgUrl" :count="obj.playCount"></cover>
+        <playlist :image="obj.coverImgUrl" :count="obj.playCount"></playlist>
       </div>
       <div class="right">
         <div class="top">
@@ -55,16 +55,16 @@
 <script>
 import heightClear from "@/base/height-clear";
 
-import Cover from "@/components/cover";
 import { formatUnit } from "@/assets/js/filter";
 import { toPages } from "@/assets/js/util.js";
+import Playlist from '../discover/components/playlist.vue';
 
 export default {
   name: "Cap",
   components: {
     heightClear,
 
-    Cover,
+    Playlist,
   },
   props: {
     obj: {

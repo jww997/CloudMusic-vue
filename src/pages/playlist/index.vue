@@ -18,9 +18,7 @@
       <capplus :obj="playlist"></capplus>
     </div>
 
-    <height-clear v-if="music.isPlaying" />
-     <bottombar />
-     
+    <height-clear />
   </div>
   <!-- </scroll> -->
 </template>
@@ -33,9 +31,9 @@ import List from "@/common/list";
 
 import Scroll from "@/base/scroll";
 import Navbar from "@/common/navbar";
-import Cap from "@/pages/playlist/components/cap";
-import Capplus from "@/pages/playlist/components/cappuls";
-import Subscribers from "@/pages/playlist/components/subscribers";
+import Cap from "@/pages/playlist/cap.vue";
+import Capplus from "@/pages/playlist/cappuls.vue";
+import Subscribers from "@/pages/playlist/subscribers.vue";
 
 import Bottombar from "@/common/bottombar";
 // import List from "@/pages/playlist/components/list";
@@ -104,6 +102,6 @@ export default {
 .playlist {
   @include suspension;
   // padding-bottom: $safeDistance;
-  z-index: $zIndex-S;
+  // z-index: $zIndex-S;
 }
 </style>

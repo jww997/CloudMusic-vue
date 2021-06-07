@@ -2,7 +2,12 @@
   <div id="app" class="app">
     <!-- 动画效果 fade-淡出淡入 drawer-抽屉 -->
     <transition name="fade">
-      <router-view style="min-height: 100%" />
+      <keep-alive>
+        <router-view class="router-view" v-if="keepAlive"></router-view>
+      </keep-alive>
+    </transition>
+    <transition name="fade">
+      <router-view class="router-view" v-if="!keepAlive"></router-view>
     </transition>
     <music />
   </div>
@@ -22,6 +27,12 @@ export default {
   name: "App",
   components: {
     Music,
+  },
+  computed: {
+    keepAlive() {
+      console.log(this.$route.meta.keepAlive);
+      return this.$route.meta.keepAlive;
+    },
   },
   provide() {
     // 父组件中通过provide来提供变量，在子组件中通过inject来注入变量。
@@ -90,6 +101,9 @@ export default {
 .app {
   height: 100vh;
   font-family: $base-font-family;
+  .router-view {
+    min-height: 100%;
+  }
 
   // 动画
   .fade-enter-active,

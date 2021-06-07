@@ -14,7 +14,7 @@ const setting = {
       path: "/discover",
       name: "discover",
       component: () => import("@/pages/discover"),
-
+      meta: { keepAlive: true }
     },
     {
       // alias: "歌单详情",

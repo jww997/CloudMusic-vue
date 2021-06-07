@@ -35,7 +35,7 @@
     <height-clear />
     <!-- </refresh> -->
 
-    <bottombar></bottombar>
+    <!-- <bottombar></bottombar> -->
   </div>
 </template>
 

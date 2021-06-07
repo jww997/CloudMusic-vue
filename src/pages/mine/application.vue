@@ -1,5 +1,5 @@
 <template>
-  <div class="children">
+  <div class="application">
     <div></div>
   </div>
 </template>
@@ -11,8 +11,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~sass/var.scss";
 @import "~sass/mixins.scss";
-@import "~sass/varibles.scss";
-.children {
-}
 </style>

@@ -3,44 +3,42 @@
     <profile :profile="profile" :level="level"></profile>
     <application></application>
 
-    <tabbar></tabbar>
+    我的
   </div>
 </template>
 
 <script>
-import Tabbar from "@/components/tabbar";
-import Profile from "./components/profile";
-import Application from "./components/application";
+import Profile from "./profile.vue";
+import Application from "./application.vue";
 
 export default {
-  name: "Mine",
+  name: "mine",
   components: {
     Profile,
-    Tabbar,
     Application,
   },
-  data: function () {
+  data() {
     return {
       profile: {},
     };
   },
-  mounted: function () {
+  mounted() {
     const that = this;
 
-    that.$api
-      .getLoginStatus()
-      .then((res) => {
-        that.profile = res.data.profile;
-        return that.$api.getUserLevel();
-      })
-      .then((res) => {
-        that.level = res.data.data;
-      });
+    // that.$api
+    //   .getLoginStatus()
+    //   .then((res) => {
+    //     that.profile = res.data.profile;
+    //     return that.$api.getUserLevel();
+    //   })
+    //   .then((res) => {
+    //     that.level = res.data.data;
+    //   });
   },
 };
 </script>
 
 <style lang="scss" scoped>
+@import "~sass/var.scss";
 @import "~sass/mixins.scss";
-@import "~sass/varibles.scss";
 </style>

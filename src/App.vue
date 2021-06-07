@@ -9,6 +9,14 @@
     <transition name="fade">
       <router-view class="router-view" v-if="!keepAlive"></router-view>
     </transition>
+    <!-- 选项栏 -->
+    <transition name="drawer">
+      <tabbar v-if="tabbar.includes(this.$route.name)" />
+    </transition>
+    <!-- 播放条 -->
+    <transition name="drawer">
+      <playbar :class="`fixed-${tabbar.includes(this.$route.name) ? 2 : 1}`" />
+    </transition>
     <music />
   </div>
 </template>
@@ -23,10 +31,20 @@ import {
 import { formatTime, formatDate } from "@/assets/js/filter.js";
 
 import Music from "@/base/music";
+import Tabbar from "@/components/tabbar.vue";
+import Playbar from "@/components/playbar.vue";
+
 export default {
   name: "App",
   components: {
     Music,
+    Tabbar,
+    Playbar,
+  },
+  data() {
+    return {
+      tabbar: ["discover", "mine"],
+    };
   },
   computed: {
     keepAlive() {
@@ -34,6 +52,12 @@ export default {
       return this.$route.meta.keepAlive;
     },
   },
+  // watch: {
+  //   $route(c) {
+  //     console.log(c);
+  //   },
+  // },
+
   provide() {
     // 父组件中通过provide来提供变量，在子组件中通过inject来注入变量。
     const that = this;
@@ -41,41 +65,7 @@ export default {
       reload: that.reload,
     };
   },
-  data: function () {
-    return {
-      // isShowTopBar: true,
-      isShowBottomBar: true,
-
-      isRouterAlive: true, // 控制视图是否显示的变量
-    };
-  },
-  // watch: {
-  //   $route(to, from) {
-  //     const that = this;
-  //     let drawer = ["mv", "player"];
-
-  //     console.log(to);
-  //     console.log(from);
-
-  //     console.log(`to.path = `, to.path);
-  //     console.log(`from.path = `, from.path);
-
-  //     const toDepth = to.path.split("/").length;
-  //     const fromDepth = from.path.split("/").length;
-
-  //     console.log(`toDepth = ${toDepth}, fromDepth = ${fromDepth}`);
-
-  //     that.setTranstion(toDepth == 3 || fromDepth == 3 ? "drawer" : "fade");
-  //   },
-  // },
   methods: {
-    reload() {
-      const that = this;
-      that.isRouterAlive = false; // 先关闭
-      that.$nextTick(function () {
-        that.isRouterAlive = true; // 再打开
-      });
-    },
     ...mapMutations({
       setTranstion: "SET_TRANSITION",
     }),
@@ -102,7 +92,20 @@ export default {
   height: 100vh;
   font-family: $base-font-family;
   .router-view {
-    min-height: 100%;
+    min-height: calc(100vh - 50px);
+  }
+
+  // 底部排列
+  .fixed-1,
+  .fixed-2 {
+    position: fixed;
+    z-index: 9999;
+  }
+  .fixed-1 {
+    bottom: 0;
+  }
+  .fixed-2 {
+    bottom: 50px;
   }
 
   // 动画

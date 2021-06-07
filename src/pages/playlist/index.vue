@@ -19,11 +19,8 @@
     </div>
 
     <height-clear v-if="music.isPlaying" />
-    <bottombar />
-
-    <transition :name="transition">
-      <router-view></router-view>
-    </transition>
+     <bottombar />
+     
   </div>
   <!-- </scroll> -->
 </template>

@@ -17,6 +17,13 @@ const setting = {
       meta: { keepAlive: true },
     },
     {
+      // alias: "我的",
+      path: "/mine",
+      name: "mine",
+      component: () => import("@/pages/mine"),
+      meta: { keepAlive: true },
+    },
+    {
       // alias: "歌单详情",
       path: "/playlist/:id",
       name: "playlist",

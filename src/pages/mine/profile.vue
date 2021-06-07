@@ -1,5 +1,5 @@
 <template>
-  <div class="children" :data-id="profile.userId">
+  <div class="profile" :data-id="profile.userId">
     <div>
       <img class="portrait" :src="profile.avatarUrl" />
     </div>
@@ -13,27 +13,14 @@
 <script>
 export default {
   name: "profile",
-  props: {
-    profile: {
-      type: Object,
-      default: function () {
-        return {};
-      },
-    },
-    level: {
-      type: Object,
-      default: function () {
-        return {};
-      },
-    },
-  },
+  props: ["profile", "level"],
 };
 </script>
 
 <style lang="scss" scoped>
+@import "~sass/var.scss";
 @import "~sass/mixins.scss";
-@import "~sass/varibles.scss";
-.children {
+.profile {
   padding: 0.2rem 0.3rem;
   @include flexCenter;
   justify-content: flex-start;

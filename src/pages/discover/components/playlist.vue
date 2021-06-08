@@ -3,11 +3,12 @@
     <van-image
       class="image"
       fit="contain"
-      :width="size"
-      :height="size"
+      :width="width"
+      :height="height"
       :src="image"
       v-lazy="image"
       @load="load"
+      @click="$emit('handleClick')"
     />
     <span class="text" v-if="name">{{ name }}</span>
     <div class="count" v-if="count">
@@ -22,10 +23,9 @@ import { formatUnit } from "@/assets/js/filter";
 
 export default {
   name: "playlist",
-  props: ["image", "name", "count"],
+  props: ["width", "height", "image", "name", "count"],
   data: function () {
     return {
-      size: "100%",
       isLoad: false,
     };
   },
@@ -35,6 +35,9 @@ export default {
       const that = this;
       that.isLoad = true;
     },
+  },
+  mounted() {
+    console.log(this.$props);
   },
 };
 </script>
@@ -47,8 +50,8 @@ export default {
   display: flex;
   flex-direction: column;
   .image {
-    width: 2.5rem;
-    height: 2.5rem;
+    // width: 2.5rem;
+    // height: 2.5rem;
     border-radius: $border-radius-lg;
     background-color: $background-color;
     overflow: hidden;

@@ -48,8 +48,8 @@ export default {
   },
   computed: {
     keepAlive() {
-      console.log(this.$route.meta.keepAlive);
-      return this.$route.meta.keepAlive;
+      const { keepAlive } = this.$route.meta;
+      return keepAlive;
     },
   },
   // watch: {

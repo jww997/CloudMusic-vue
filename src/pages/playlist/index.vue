@@ -1,37 +1,34 @@
 <template>
-  <!-- <scroll :data="[playlist]" :refreshDelay="1000"> -->
   <div class="playlist" ref="playlist">
-    <navbar
+    <!-- <navbar
       :title="'歌单'"
       fixed
       :black="!isTop"
       :backgroundColor="!isTop ? '#fff' : ''"
-    ></navbar>
-    <div @click="toggleCapplus">
-      <cap :obj="playlist"></cap>
-    </div>
-    <!-- <list :obj="playlist"></list> -->
+    /> -->
+    <!-- <div @click="toggleCapplus"> -->
+
+    <detail :playlist="playlist" :pill="pill"></detail>
+    <!-- </div>
+    <div @click="toggleCapplus" v-if="isShowCapplus">
+      <capplus :obj="playlist"></capplus>
+    </div> -->
+
     <list :list="playlist.tracks" allTop="1.5rem"></list>
     <subscribers :list="playlist.subscribers"></subscribers>
 
-    <div @click="toggleCapplus" v-if="isShowCapplus">
-      <capplus :obj="playlist"></capplus>
-    </div>
-
     <height-clear />
   </div>
-  <!-- </scroll> -->
 </template>
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
+import Navbar from "./components/navbar.vue";
+import Detail from "./detail.vue";
+
 import heightClear from "@/base/height-clear";
-
 import List from "@/common/list";
-
 import Scroll from "@/base/scroll";
-import Navbar from "@/common/navbar";
-import Cap from "@/pages/playlist/cap.vue";
 import Capplus from "@/pages/playlist/cappuls.vue";
 import Subscribers from "@/pages/playlist/subscribers.vue";
 
@@ -40,18 +37,14 @@ import Bottombar from "@/common/bottombar";
 export default {
   name: "playlist",
   components: {
-    heightClear,
-
-    List,
-
-    Scroll,
-
     Navbar,
-    Cap,
+    Detail,
+
+    heightClear,
+    List,
+    Scroll,
     Capplus,
-
     Subscribers,
-
     Bottombar,
   },
   data() {
@@ -60,9 +53,14 @@ export default {
       playlist: {},
       count: 0,
       data: [],
-      // busy: false,
 
       isTop: true,
+
+      pill: [
+        { id: 1, name: "收藏", icon: "&#xe61d;" },
+        { id: 2, name: "评论", icon: "&#xe65d;" },
+        { id: 3, name: "分享", icon: "&#xe65c;" },
+      ],
     };
   },
   computed: {
@@ -84,8 +82,24 @@ export default {
       if (!id) return false;
       console.log(`id = ${id}`);
       that.$api.getPlaylistDetail({ id }).then((res) => {
-        that.playlist = res.data.playlist;
+        const { playlist } = res.data;
+        that.playlist = playlist;
         that.$refs.playlist.addEventListener("scroll", that.handleScroll);
+
+        const { subscribedCount, commentCount, shareCount } = playlist;
+        this.pill.map((item, index) => {
+          switch (index) {
+            case 0:
+              item.count = subscribedCount;
+              break;
+            case 1:
+              item.count = commentCount;
+              break;
+            case 2:
+              item.count = shareCount;
+              break;
+          }
+        });
       });
     },
   },
@@ -97,11 +111,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~sass/var.scss";
 @import "~sass/mixins.scss";
-@import "~sass/varibles.scss";
-.playlist {
-  @include suspension;
-  // padding-bottom: $safeDistance;
-  // z-index: $zIndex-S;
-}
 </style>

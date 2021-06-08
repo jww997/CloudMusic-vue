@@ -29,6 +29,12 @@ const setting = {
       name: "playlist",
       component: () => import("@/pages/playlist"),
       // meta: { keepAlive: true },
+      children: [{
+        // alias: "歌单详情全屏",
+        path: "/playlist/:id/fullscreen",
+        name: "playlistFullscreen",
+        component: () => import("@/pages/playlist/fullscreen.vue"),
+      }],
     },
     {
       // alias: "评论",

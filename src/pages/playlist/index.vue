@@ -16,8 +16,9 @@
 
     <list :list="playlist.tracks" allTop="1.5rem"></list>
     <subscribers :list="playlist.subscribers"></subscribers>
-
     <height-clear />
+
+    <router-view />
   </div>
 </template>
 
@@ -29,7 +30,7 @@ import Detail from "./detail.vue";
 import heightClear from "@/base/height-clear";
 import List from "@/common/list";
 import Scroll from "@/base/scroll";
-import Capplus from "@/pages/playlist/cappuls.vue";
+// import Capplus from "@/pages/playlist/cappuls.vue";
 import Subscribers from "@/pages/playlist/subscribers.vue";
 
 import Bottombar from "@/common/bottombar";
@@ -43,13 +44,13 @@ export default {
     heightClear,
     List,
     Scroll,
-    Capplus,
+    // Capplus,
     Subscribers,
     Bottombar,
   },
   data() {
     return {
-      isShowCapplus: false,
+      // isShowCapplus: false,
       playlist: {},
       count: 0,
       data: [],

@@ -3,11 +3,11 @@
     <!-- 动画效果 fade-淡出淡入 drawer-抽屉 -->
     <transition :name="!keepAlive && 'fade'">
       <keep-alive>
-        <router-view class="router-view" v-if="keepAlive"></router-view>
+        <router-view class="router-view" v-if="keepAlive" />
       </keep-alive>
     </transition>
     <transition name="fade">
-      <router-view class="router-view" v-if="!keepAlive"></router-view>
+      <router-view class="router-view" v-if="!keepAlive" />
     </transition>
     <!-- 选项栏 -->
     <transition name="drawer">

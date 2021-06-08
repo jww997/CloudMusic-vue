@@ -1,5 +1,5 @@
 <template>
-  <div class="children">
+  <div class="fullscreen">
     <img class="coverImgUrl" :src="obj.coverImgUrl" :alt="obj.name" />
     <span class="name">{{ obj.name }}</span>
     <div class="tags">
@@ -31,19 +31,26 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-.children {
-  height: 100%;
-  @include suspension;
-  @include flexCenter;
-  flex-direction: column;
-  justify-content: flex-start;
-  line-height: 0.5rem;
-  padding: 0 0.3rem 1rem;
-  box-sizing: border-box;
-  overflow: scroll;
-  background-color: #999;
-  z-index: $zIndex-L;
-  color: #fff;
+.fullscreen {
+  width: 100vw;
+  height: 100vh;
+
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  // height: 100%;
+  // @include suspension;
+  // @include flexCenter;
+  // flex-direction: column;
+  // justify-content: flex-start;
+  // line-height: 0.5rem;
+  // padding: 0 0.3rem 1rem;
+  // box-sizing: border-box;
+  // overflow: scroll;
+  // background-color: #999;
+  // z-index: $zIndex-L;
+  // color: #fff;
   .coverImgUrl {
     width: 6rem;
     border-radius: 0.3rem;

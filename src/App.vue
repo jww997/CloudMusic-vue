@@ -1,12 +1,12 @@
 <template>
   <div id="app" class="app">
     <!-- 动画效果 fade<淡出淡入> drawer<抽屉> -->
-    <transition :name="!keepAlive && 'fade'">
+    <transition :name="transitionKeepAliveName">
       <keep-alive>
         <router-view class="router-view" v-if="keepAlive" />
       </keep-alive>
     </transition>
-    <transition name="fade">
+    <transition :name="transitionName">
       <router-view class="router-view" v-if="!keepAlive" />
     </transition>
     <!-- 选项栏 -->
@@ -29,39 +29,60 @@ import {
   delLocalStorage,
 } from "@/assets/js/util.js";
 import { formatTime, formatDate } from "@/assets/js/filter.js";
-
-import Music from "@/components/music";
 import Tabbar from "@/components/tabbar.vue";
 import Playbar from "@/components/playbar.vue";
+import Music from "@/components/music.vue";
 
 export default {
   name: "App",
   components: {
-    Music,
     Tabbar,
     Playbar,
+    Music,
   },
   data() {
     return {
       tabbar: ["discover", "mine"],
+      drawer: ["player", "mv"],
+
+      transitionKeepAliveName: "",
+      transitionName: "",
     };
   },
   computed: {
     keepAlive() {
-      const { keepAlive } = this.$route.meta;
-      console.log(this.$route);
-      return keepAlive;
+      return this.$route.meta.keepAlive;
     },
     playbarClassName() {
       return `fixedBottom-${this.tabbar.includes(this.$route.name) ? 2 : 1}`;
     },
   },
-  // watch: {
-  //   $route(c) {
-  //     console.log(c);
-  //   },
-  // },
+  watch: {
+    // 监听路由变化
+    $route(to, from) {
+      console.log("to = ", to);
+      console.log("from = ", from);
 
+      const { keepAlive: toKeepAlive } = to.meta;
+      const { keepAlive: fromKeepAlive } = from.meta;
+
+      if (this.drawer.includes(to.name)) {
+        this.transitionKeepAliveName = "";
+        this.transitionName = "drawer";
+        return false;
+      }
+      if (toKeepAlive && fromKeepAlive) {
+        this.transitionKeepAliveName = "fade";
+        this.transitionName = "";
+      } else if (toKeepAlive) {
+        this.transitionKeepAliveName = "";
+        this.transitionName = "fade";
+      } else if (fromKeepAlive) {
+        this.transitionKeepAliveName = "fade";
+        this.transitionName = "";
+      }
+    },
+  },
   provide() {
     // 父组件中通过provide来提供变量，在子组件中通过inject来注入变量。
     const that = this;

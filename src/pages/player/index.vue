@@ -3,10 +3,8 @@
     <navbar
       :title="title"
       :subtitle="subtitle"
-      :fixed="false"
-      iconLeft="arrow-down"
+      beforeIconName="arrow-down"
     ></navbar>
-    <height-clear />
     <div class="song" @click="toggleShowLyric">
       <lyric :lyric="lyric" v-if="isShowLyric"></lyric>
       <phonograph :picUrl="picUrl" v-else></phonograph>
@@ -17,18 +15,20 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
+import Navbar from "../playlist/components/navbar.vue";
+
 import { formatLyric, formatArtists } from "@/assets/js/filter.js";
 import LyricParser from "lyric-parser"; // 歌词解析
 import heightClear from "@/base/height-clear";
-import Navbar from "@/common/navbar";
 import Phonograph from "./components/phonograph";
 import Handle from "./components/handle";
 import Lyric from "./components/lyric";
 export default {
   name: "player",
   components: {
-    heightClear,
     Navbar,
+
+    heightClear,
     Phonograph,
     Handle,
     Lyric,
@@ -114,6 +114,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~sass/var.scss";
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .player {

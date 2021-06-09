@@ -1,6 +1,10 @@
 <template>
   <div class="navbar">
-    <van-icon class="icon" name="arrow-left" @click="back" />
+    <van-icon
+      class="icon"
+      :name="beforeIconName || 'arrow-left'"
+      @click="back"
+    />
     <div class="headline" v-if="title">
       <p class="title">{{ title }}</p>
       <p class="subtitle" v-if="subtitle">{{ subtitle }}</p>
@@ -15,15 +19,7 @@
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   name: "navbar",
-  props: [
-    "title",
-    "subtitle",
-    "fixed",
-    "black",
-    "backgroundColor",
-    "iconLeft",
-    "type",
-  ],
+  props: ["title", "subtitle", "beforeIconName"],
   computed: {
     ...mapState(["music", "mv"]),
   },
@@ -54,8 +50,11 @@ export default {
 @import "~sass/var.scss";
 @import "~sass/mixins.scss";
 .navbar {
+  flex-shrink: 0;
+  width: 100%;
   height: 50px;
   padding: 0 $padding-sm;
+  box-sizing: border-box;
   background-color: transparent;
   color: $white;
   display: flex;
@@ -74,14 +73,14 @@ export default {
   }
   .headline {
     flex-grow: 1;
-    line-height: $line-height-md;
+    line-height: $line-height-lg;
     text-align: center;
     .title {
       font-size: $font-size-lg * 1.3;
       font-weight: bold;
     }
     .subtitle {
-      font-size: $font-size-lg;
+      font-size: $font-size-sm;
     }
   }
   // -webkit-backdrop-filter: saturate(180%) blur(20px);

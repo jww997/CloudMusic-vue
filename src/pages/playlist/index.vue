@@ -8,7 +8,11 @@
     />
     <!-- 歌单基本信息全屏 -->
     <transition name="fade">
-      <fullscreen :playlist="playlist" v-if="isShowFullscreen" @close="handleHeaderClick"/>
+      <fullscreen
+        :playlist="playlist"
+        v-if="isShowFullscreen"
+        @close="handleHeaderClick"
+      />
     </transition>
     <!-- 播放全部 -->
     <playall :list="playlist.tracks" allTop="1.5rem" />
@@ -16,12 +20,14 @@
     <songs :list="playlist.tracks" allTop="1.5rem" />
     <!-- 收藏该歌单的用户 -->
     <subscribers :list="playlist.subscribers" />
-    <height-clear />
+    <placeholder />
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
+import { formatUnit } from "@/assets/js/filter.js";
+import Placeholder from "@/components/placeholder.vue";
 import Navbar from "./components/navbar.vue";
 import Detail from "./detail.vue";
 import Playall from "./playall.vue";
@@ -29,26 +35,16 @@ import Songs from "./songs.vue";
 import Subscribers from "./subscribers.vue";
 import Fullscreen from "./fullscreen.vue";
 
-import { formatUnit } from "@/assets/js/filter.js";
-import heightClear from "@/base/height-clear";
-import List from "@/common/list";
-import Scroll from "@/base/scroll";
-import Bottombar from "@/common/bottombar";
-
 export default {
   name: "playlist",
   components: {
+    Placeholder,
     Navbar,
     Detail,
     Playall,
     Songs,
     Subscribers,
     Fullscreen,
-
-    heightClear,
-    List,
-    Scroll,
-    Bottombar,
   },
   data() {
     return {

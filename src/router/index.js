@@ -28,7 +28,7 @@ const setting = {
       path: "/playlist/:id",
       name: "playlist",
       component: () => import("@/pages/playlist"),
-      // meta: { keepAlive: true },
+      meta: { keepAlive: true },
     },
     {
       // alias: "评论",
@@ -82,9 +82,9 @@ const setting = {
     },
   ],
   // 重置滚动条位置
-  scrollBehavior(to, from, savedPosition) {
-    return { x: 0, y: 0 }
-  }
+  // scrollBehavior(to, from, savedPosition) {
+  //   return { x: 0, y: 0 }
+  // }
 }
 
 const router = new Router(setting);

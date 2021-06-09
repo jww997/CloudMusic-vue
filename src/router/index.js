@@ -28,7 +28,7 @@ const setting = {
       path: "/playlist/:id",
       name: "playlist",
       component: () => import("@/pages/playlist"),
-      meta: { keepAlive: true },
+      // meta: { keepAlive: true },
     },
     {
       // alias: "评论",

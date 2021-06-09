@@ -1,16 +1,20 @@
-@mixin omit {
+.omit {
   overflow: hidden;
-  white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-@mixin omitxs {
-  overflow: hidden;
-  white-space: normal;
-  text-overflow: ellipsis;
+@mixin omit {
+  @extend .omit;
+  white-space: nowrap;
+}
+
+@mixin omitS {
+  @extend .omit;
   display: -webkit-box;
-  -webkit-column-count: 2;
-  column-count: 2;
+  white-space: normal;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
 }
 
 @mixin flexCenter {
@@ -28,10 +32,44 @@
   top: 0;
 }
 
+@mixin fixedTop {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+}
+
+@mixin fixedBottom {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+}
 
 
 
 
+.fixedTop-1,
+.fixedTop-2,
+.fixedBottom-1,
+.fixedBottom-2 {
+  position: fixed;
+  z-index: 9999;
+}
+
+.fixedTop-1 {
+  top: 0;
+}
+
+.fixedTop-1 {
+  top: 50px;
+}
+
+.fixedBottom-1 {
+  bottom: 0;
+}
+
+.fixedBottom-2 {
+  bottom: 50px;
+}
 
 
 
@@ -68,5 +106,3 @@
   justify-content: space-between;
   align-items: center;
 }
-
-

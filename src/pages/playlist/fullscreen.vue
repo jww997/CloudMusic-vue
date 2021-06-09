@@ -1,14 +1,17 @@
 <template>
   <div class="fullscreen">
-    <img class="coverImgUrl" :src="obj.coverImgUrl" :alt="obj.name" />
-    <span class="name">{{ obj.name }}</span>
+    <playlist :width="200" :image="playlist.coverImgUrl" />
+    
+
+
+    <span class="name">{{ playlist.name }}</span>
     <div class="tags">
       标签:
-      <span class="tag" v-for="(item, index) in obj.tags" :key="index">{{
+      <span class="tag" v-for="(item, index) in playlist.tags" :key="index">{{
         item
       }}</span>
     </div>
-    <div class="description">{{ obj.description }}</div>
+    <div class="description">{{ playlist.description }}</div>
     <van-icon name="cross" />
     <!-- <div class="iconfont close">&#xe626;</div> -->
     <!-- <button class="save">保存封面</button> -->
@@ -16,41 +19,46 @@
 </template>
 
 <script>
+import Playlist from "../discover/components/playlist.vue";
 import Navbar from "@/common/navbar";
 export default {
-  name: "capplus",
-  props: {
-    obj: {},
-  },
+  name: "fullscreen",
+  props: ["playlist"],
   components: {
+    Playlist,
+
     Navbar,
   },
 };
 </script>
 
 <style lang="scss" scoped>
+@import "~sass/var.scss";
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .fullscreen {
   width: 100vw;
   height: 100vh;
+  padding: 0 $padding-sm;
+  box-sizing: border-box;
+  background-color: $background-color-dark;
+  color: $white;
 
+  overflow: scroll;
+  z-index: 998;
   position: fixed;
   left: 0;
   top: 0;
+  @include flexCenter;
+  flex-direction: column;
 
   // height: 100%;
   // @include suspension;
-  // @include flexCenter;
   // flex-direction: column;
   // justify-content: flex-start;
   // line-height: 0.5rem;
   // padding: 0 0.3rem 1rem;
   // box-sizing: border-box;
-  // overflow: scroll;
-  // background-color: #999;
-  // z-index: $zIndex-L;
-  // color: #fff;
   .coverImgUrl {
     width: 6rem;
     border-radius: 0.3rem;

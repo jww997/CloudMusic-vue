@@ -8,17 +8,23 @@
     /> -->
     <!-- <div @click="toggleCapplus"> -->
 
-    <detail :playlist="playlist" :pill="pill"></detail>
+    <!-- 歌单基本信息 -->
+    <detail :playlist="playlist" :pill="pill" />
+    <!-- 歌单基本信息全屏 -->
+    <!-- <fullscreen :playlist="playlist" /> -->
+    <!-- 播放全部 -->
+    <playall :list="playlist.tracks" allTop="1.5rem" />
+    <!-- 播放全部 -->
+    <songs :list="playlist.tracks" allTop="1.5rem" />
+    <!-- 收藏该歌单的用户 -->
+    <subscribers :list="playlist.subscribers" />
+    <height-clear />
+
     <!-- </div>
     <div @click="toggleCapplus" v-if="isShowCapplus">
       <capplus :obj="playlist"></capplus>
     </div> -->
-
-    <list :list="playlist.tracks" allTop="1.5rem"></list>
-    <subscribers :list="playlist.subscribers"></subscribers>
-    <height-clear />
-
-    <router-view />
+    <!-- <router-view /> -->
   </div>
 </template>
 
@@ -26,12 +32,15 @@
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import Navbar from "./components/navbar.vue";
 import Detail from "./detail.vue";
+import Playall from "./playall.vue";
+import Songs from "./songs.vue";
+import Subscribers from "./subscribers.vue";
+import Fullscreen from "./fullscreen.vue";
 
+import { formatUnit } from "@/assets/js/filter.js";
 import heightClear from "@/base/height-clear";
 import List from "@/common/list";
 import Scroll from "@/base/scroll";
-// import Capplus from "@/pages/playlist/cappuls.vue";
-import Subscribers from "@/pages/playlist/subscribers.vue";
 
 import Bottombar from "@/common/bottombar";
 // import List from "@/pages/playlist/components/list";
@@ -40,12 +49,14 @@ export default {
   components: {
     Navbar,
     Detail,
+    Playall,
+    Songs,
+    Subscribers,
+    Fullscreen,
 
     heightClear,
     List,
     Scroll,
-    // Capplus,
-    Subscribers,
     Bottombar,
   },
   data() {
@@ -91,13 +102,13 @@ export default {
         this.pill.map((item, index) => {
           switch (index) {
             case 0:
-              item.count = subscribedCount;
+              item.count = formatUnit(subscribedCount);
               break;
             case 1:
-              item.count = commentCount;
+              item.count = formatUnit(commentCount);
               break;
             case 2:
-              item.count = shareCount;
+              item.count = formatUnit(shareCount);
               break;
           }
         });

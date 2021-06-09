@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="app">
-    <!-- 动画效果 fade-淡出淡入 drawer-抽屉 -->
+    <!-- 动画效果 fade<淡出淡入> drawer<抽屉> -->
     <transition :name="!keepAlive && 'fade'">
       <keep-alive>
         <router-view class="router-view" v-if="keepAlive" />
@@ -15,7 +15,7 @@
     </transition>
     <!-- 播放条 -->
     <transition name="drawer">
-      <playbar :class="`fixed-${tabbar.includes(this.$route.name) ? 2 : 1}`" />
+      <playbar :class="playbarClassName" />
     </transition>
     <music />
   </div>
@@ -49,7 +49,11 @@ export default {
   computed: {
     keepAlive() {
       const { keepAlive } = this.$route.meta;
+      console.log(this.$route);
       return keepAlive;
+    },
+    playbarClassName() {
+      return `fixedBottom-${this.tabbar.includes(this.$route.name) ? 2 : 1}`;
     },
   },
   // watch: {
@@ -91,20 +95,29 @@ export default {
 .app {
   height: 100vh;
   font-family: $base-font-family;
+  color: $text-color;
   .router-view {
     min-height: calc(100vh - 50px);
   }
 
-  // 底部排列
-  .fixed-1,
-  .fixed-2 {
+  // 上下边缘排列
+  .fixedTop-1,
+  .fixedTop-2,
+  .fixedBottom-1,
+  .fixedBottom-2 {
     position: fixed;
     z-index: 9999;
   }
-  .fixed-1 {
+  .fixedTop-1 {
+    top: 0;
+  }
+  .fixedTop-1 {
+    top: 50px;
+  }
+  .fixedBottom-1 {
     bottom: 0;
   }
-  .fixed-2 {
+  .fixedBottom-2 {
     bottom: 50px;
   }
 

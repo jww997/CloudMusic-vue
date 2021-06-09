@@ -1,16 +1,19 @@
 <template>
   <div :class="{ playlist: true, active: isLoad }">
-    <van-image
-      class="image"
-      fit="contain"
-      :width="width"
-      :height="height"
-      :src="image"
-      v-lazy="image"
-      @load="load"
-      @click="$emit('handleClick')"
-    />
-    <span class="text" v-if="name">{{ name }}</span>
+    <div class="cover">
+      <van-image
+        class="image"
+        fit="contain"
+        :width="width"
+        :height="height"
+        :src="image"
+        v-lazy="image"
+        @load="load"
+        @click="$emit('handleClick')"
+      />
+      <div class="mask"></div>
+    </div>
+    <p class="text" v-if="name">{{ name }}</p>
     <div class="count" v-if="count">
       <span class="iconfont">&#xe656;</span>
       <span>{{ formatUnit(count) }}</span>
@@ -36,9 +39,6 @@ export default {
       that.isLoad = true;
     },
   },
-  mounted() {
-    console.log(this.$props);
-  },
 };
 </script>
 
@@ -46,27 +46,36 @@ export default {
 @import "~sass/var.scss";
 @import "~sass/mixins.scss";
 .playlist {
-  position: relative;
   display: flex;
   flex-direction: column;
-  .image {
-    // width: 2.5rem;
-    // height: 2.5rem;
-    border-radius: $border-radius-lg;
-    background-color: $background-color;
-    overflow: hidden;
+  position: relative;
+  .cover {
+    position: relative;
+    display: flex;
+    .image {
+      border-radius: $border-radius-lg;
+      background-color: $background-color;
+      overflow: hidden;
+    }
+    .mask {
+      width: 100%;
+      height: 100%;
+      margin-top: -10%;
+      border-radius: $border-radius-lg;
+      background-color: $background-color;
+      transform: scale(0.9);
+      position: absolute;
+      z-index: -1;
+      right: 0;
+      left: 0;
+    }
   }
   .text {
     line-height: $line-height-md;
     padding-top: $padding-xs;
     font-size: $font-size-md;
     color: $text-color;
-    @include omit;
-    display: -webkit-box;
-    white-space: normal;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
+    @include omitS;
   }
   .count {
     color: $active-color;
@@ -83,18 +92,6 @@ export default {
       font-size: $font-size-xs;
       margin-right: $padding-base;
     }
-  }
-  &.active:after {
-    content: "";
-    padding-bottom: 100%;
-    margin-top: -$padding-sm;
-    background-color: $background-color;
-    border-radius: $border-radius-lg;
-    transform: scale(0.9);
-    position: absolute;
-    z-index: -1;
-    right: 0;
-    left: 0;
   }
 }
 </style>

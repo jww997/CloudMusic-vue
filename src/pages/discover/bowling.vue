@@ -110,7 +110,7 @@ export default {
       @include flexCenter;
       // filter: invert(100%);
       .date {
-        color: $red;
+        color: $theme-color;
         font-size: $font-size-xs;
         margin-bottom: -$padding-xs;
       }
@@ -118,7 +118,7 @@ export default {
       &::after {
         content: "";
         z-index: -1;
-        background-color: $red;
+        background-color: $theme-color;
         @include positionCenter;
       }
     }

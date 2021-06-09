@@ -1,9 +1,9 @@
 <template>
   <div
     :class="{ detail: true, official: isOfficial }"
-    
     :style="{ backgroundImage: `url(${playlist.backgroundCoverUrl})` }"
   >
+    <!-- 顶部导航栏 -->
     <navbar title="歌单" />
     <!-- 歌单信息详情 -->
     <div class="header">
@@ -91,6 +91,7 @@ export default {
   margin-bottom: 1rem;
   border-radius: 0 0 40rem 40rem / 1rem;
   background-color: $background-color-dark;
+  transition: $animation-duration-base;
   position: relative;
   .header {
     padding: 0 $padding-sm;
@@ -107,7 +108,7 @@ export default {
       .name {
         font-size: $font-size-lg;
         font-weight: $font-weight-bold;
-        @include omitxs;
+        @include omitS;
       }
       .creator {
         display: flex;
@@ -120,7 +121,7 @@ export default {
       .signature {
         max-height: 1rem;
         font-size: $font-size-sm;
-        @include omitxs;
+        @include omitS;
       }
     }
   }
@@ -159,14 +160,16 @@ export default {
     }
   }
   &.official {
+    height: 10rem;
     background: center no-repeat transparent;
     background-size: cover;
     .header {
-      height: 4rem;
+      height: 6rem;
       flex-direction: column;
       justify-content: center;
       .updateFrequency {
         font-size: $font-size-lg;
+        margin-top: $padding-xs;
       }
     }
   }

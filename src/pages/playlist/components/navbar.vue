@@ -57,11 +57,11 @@ export default {
   height: 50px;
   padding: 0 $padding-sm;
   background-color: transparent;
-  color: #fff;
-
+  color: $white;
   display: flex;
   align-items: center;
-
+  position: sticky;
+  top: 0;
   .icon,
   .solt {
     flex-shrink: 0;

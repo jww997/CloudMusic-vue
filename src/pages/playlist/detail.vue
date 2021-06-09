@@ -161,7 +161,7 @@ export default {
   }
   &.official {
     height: 10rem;
-    background: center no-repeat transparent;
+    background: center no-repeat;
     background-size: cover;
     .header {
       height: 6rem;

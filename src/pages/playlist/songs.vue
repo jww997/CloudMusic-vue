@@ -172,11 +172,14 @@ export default {
       flex-grow: 1;
       margin-left: $padding-sm;
       line-height: $line-height-md;
-      font-size: $font-size-md;
       .text-top,
       .text-bottom {
         width: 6rem;
         @include omit;
+      }
+      .text-top {
+        font-size: $font-size-lg;
+        font-weight: bold;
       }
       .text-bottom {
         font-size: $font-size-xs;

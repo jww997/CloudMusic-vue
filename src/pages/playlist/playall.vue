@@ -87,7 +87,7 @@ export default {
   height: 50px;
   padding: 0 $padding-sm;
   position: sticky;
-  top: 0;
+  top: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -1,17 +1,15 @@
 <template>
   <div class="playlist" ref="playlist">
-    <!-- <navbar
-      :title="'歌单'"
-      fixed
-      :black="!isTop"
-      :backgroundColor="!isTop ? '#fff' : ''"
-    /> -->
-    <!-- <div @click="toggleCapplus"> -->
-
     <!-- 歌单基本信息 -->
-    <detail :playlist="playlist" :pill="pill" />
+    <detail
+      :playlist="playlist"
+      :pill="pill"
+      @handleHeaderClick="handleHeaderClick"
+    />
     <!-- 歌单基本信息全屏 -->
-    <!-- <fullscreen :playlist="playlist" /> -->
+    <transition name="fade">
+      <fullscreen :playlist="playlist" v-if="isShowFullscreen" @close="handleHeaderClick"/>
+    </transition>
     <!-- 播放全部 -->
     <playall :list="playlist.tracks" allTop="1.5rem" />
     <!-- 播放全部 -->
@@ -19,12 +17,6 @@
     <!-- 收藏该歌单的用户 -->
     <subscribers :list="playlist.subscribers" />
     <height-clear />
-
-    <!-- </div>
-    <div @click="toggleCapplus" v-if="isShowCapplus">
-      <capplus :obj="playlist"></capplus>
-    </div> -->
-    <!-- <router-view /> -->
   </div>
 </template>
 
@@ -41,9 +33,8 @@ import { formatUnit } from "@/assets/js/filter.js";
 import heightClear from "@/base/height-clear";
 import List from "@/common/list";
 import Scroll from "@/base/scroll";
-
 import Bottombar from "@/common/bottombar";
-// import List from "@/pages/playlist/components/list";
+
 export default {
   name: "playlist",
   components: {
@@ -61,7 +52,8 @@ export default {
   },
   data() {
     return {
-      // isShowCapplus: false,
+      isShowFullscreen: false,
+
       playlist: {},
       count: 0,
       data: [],
@@ -79,9 +71,9 @@ export default {
     ...mapGetters(["music", "transition"]),
   },
   methods: {
-    toggleCapplus: function () {
+    handleHeaderClick: function () {
       const that = this;
-      that.isShowCapplus = !that.isShowCapplus;
+      that.isShowFullscreen = !that.isShowFullscreen;
     },
     handleScroll: function (event) {
       const that = this;
@@ -125,4 +117,7 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/var.scss";
 @import "~sass/mixins.scss";
+.playlist {
+  background-color: $background-color-light;
+}
 </style>

@@ -150,6 +150,7 @@ export default {
   padding: 0 $padding-sm;
   .song {
     height: 50px;
+    margin-top: $padding-base;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -159,10 +160,15 @@ export default {
       flex-shrink: 0;
       width: 0.6rem;
       text-align: center;
+    }
+    .volume,
+    .video,
+    .ellipsis {
       font-size: $font-size-lg * 1.3;
     }
     .serial {
       flex-shrink: 0;
+      font-size: $font-size-lg;
       .volume {
         display: none;
         color: $theme-color;
@@ -172,6 +178,7 @@ export default {
       flex-grow: 1;
       margin-left: $padding-sm;
       line-height: $line-height-md;
+      transition: $animation-duration-base;
       .text-top,
       .text-bottom {
         width: 6rem;
@@ -188,6 +195,7 @@ export default {
     .ellipsis {
       margin-left: $padding-xs;
     }
+
     &.active {
       .serial {
         .volume {

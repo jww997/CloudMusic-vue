@@ -86,8 +86,10 @@ export default {
 .playall {
   height: 50px;
   padding: 0 $padding-sm;
+  background-color: $background-color-light;
   position: sticky;
-  top: 50px;
+  top: 0;
+  z-index: 100;
   display: flex;
   justify-content: space-between;
   align-items: center;

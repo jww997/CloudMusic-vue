@@ -6,14 +6,13 @@
     <!-- 顶部导航栏 -->
     <navbar title="歌单" />
     <!-- 歌单信息详情 -->
-    <div class="header">
+    <div class="header" @click="$emit('handleHeaderClick')">
       <template v-if="!isOfficial">
         <playlist
           width="120"
           fit="contain"
           :image="playlist.coverImgUrl"
           :count="playlist.playCount"
-          @handleClick="imagePreview"
         />
         <div class="text">
           <div class="name">{{ playlist.name }}</div>
@@ -71,13 +70,6 @@ export default {
     isOfficial() {
       const { titleImageUrl } = this.$props.playlist;
       return titleImageUrl;
-    },
-  },
-  methods: {
-    imagePreview() {
-      const that = this;
-      let image = that.playlist.coverImgUrl;
-      that.$vant.ImagePreview([image]);
     },
   },
 };

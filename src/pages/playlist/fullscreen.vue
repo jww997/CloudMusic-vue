@@ -1,33 +1,38 @@
 <template>
-  <div class="fullscreen">
-    <playlist :width="200" :image="playlist.coverImgUrl" />
-    
-
-
-    <span class="name">{{ playlist.name }}</span>
+  <div class="fullscreen" @click="$emit('close')">
+    <playlist
+      :width="200"
+      :image="playlist.coverImgUrl"
+      @handleClick="imagePreview"
+    />
+    <p class="name">{{ playlist.name }}</p>
     <div class="tags">
-      标签:
-      <span class="tag" v-for="(item, index) in playlist.tags" :key="index">{{
-        item
-      }}</span>
+      <span>标签:</span>
+      <span class="tag" v-for="(item, index) in playlist.tags" :key="index">
+        {{ item }}
+      </span>
     </div>
     <div class="description">{{ playlist.description }}</div>
-    <van-icon name="cross" />
-    <!-- <div class="iconfont close">&#xe626;</div> -->
-    <!-- <button class="save">保存封面</button> -->
+    <van-icon class="close" name="cross" />
+    <button class="save">保存封面</button>
   </div>
 </template>
 
 <script>
 import Playlist from "../discover/components/playlist.vue";
-import Navbar from "@/common/navbar";
+
 export default {
   name: "fullscreen",
   props: ["playlist"],
   components: {
     Playlist,
-
-    Navbar,
+  },
+  methods: {
+    imagePreview() {
+      const that = this;
+      let image = that.playlist.coverImgUrl;
+      that.$vant.ImagePreview([image]);
+    },
   },
 };
 </script>
@@ -35,85 +40,66 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/var.scss";
 @import "~sass/mixins.scss";
-@import "~sass/varibles.scss";
 .fullscreen {
   width: 100vw;
   height: 100vh;
-  padding: 0 $padding-sm;
+  padding: $padding-lg * 3 $padding-sm;
   box-sizing: border-box;
   background-color: $background-color-dark;
-  color: $white;
-
   overflow: scroll;
-  z-index: 998;
+  color: $white;
+  z-index: 200;
   position: fixed;
   left: 0;
   top: 0;
   @include flexCenter;
   flex-direction: column;
-
-  // height: 100%;
-  // @include suspension;
-  // flex-direction: column;
-  // justify-content: flex-start;
-  // line-height: 0.5rem;
-  // padding: 0 0.3rem 1rem;
-  // box-sizing: border-box;
-  .coverImgUrl {
-    width: 6rem;
-    border-radius: 0.3rem;
-    margin-top: 1rem;
-  }
-  .name {
-    line-height: 0.6rem;
-    margin-top: 0.3rem;
-    font-size: $text-M;
-    font-weight: bold;
-    text-align: center;
-  }
+  .name,
   .tags,
   .description {
-    width: 100%;
-    line-height: 0.6rem;
-    font-size: $text-S;
+    width: 95%;
+    margin-top: $padding-md;
+  }
+  .name {
+    text-align: center;
+    font-size: $font-size-lg * 1.2;
+    font-weight: bold;
+    @include omit;
   }
   .tags {
-    margin-top: 0.5rem;
-    @include flexCenter;
-    justify-content: flex-start;
+    display: flex;
+    align-items: center;
+    font-size: $font-size-lg;
     .tag {
-      height: 0.4rem;
-      font-size: $text-XS;
-      margin-left: 0.2rem;
-      border: 1px solid #eee;
-      padding: 0.1rem 0.2rem;
-      border-radius: 0.5rem;
-      @include flexCenter;
+      font-size: $font-size-sm;
+      margin-left: $padding-sm;
+      padding: $padding-base $padding-xs;
+      border: $border-width-base solid $border-color;
+      border-radius: $border-radius-max;
     }
   }
   .description {
-    margin-top: 0.3rem;
-    text-align: justify;
-    text-align-last: left;
-    white-space: pre-wrap;
+    font-size: $font-size-md;
+    line-height: $line-height-md;
+    @include omitS;
+    @include linefeed;
+    -webkit-line-clamp: 10;
+    line-clamp: 10;
   }
-  .close,
-  >>> .van-icon {
-    font-size: $text-XL;
+  .close {
+    font-size: $font-size-lg * 3;
     position: absolute;
-    right: 0.4rem;
-    top: 0.4rem;
+    right: $padding-sm;
+    top: $padding-sm;
   }
   .save {
-    height: 0.6rem;
-    padding: 0.1rem 0.2rem;
+    font-size: $font-size-lg * 1.2;
+    padding: $padding-sm $padding-md;
     background-color: transparent;
-    border: 1px solid #fff;
-    border-radius: 0.5rem;
-    font-size: $text-XS;
+    border: $border-width-base solid $border-color;
+    border-radius: $border-radius-max;
     @include positionCenter;
-    @include flexCenter;
-    bottom: 0.5rem;
+    bottom: $padding-lg;
     top: auto;
   }
 }

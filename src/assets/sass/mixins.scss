@@ -44,6 +44,18 @@
   top: 0;
 }
 
+@mixin linefeed {
+  text-align: justify;
+  text-align-last: left;
+  white-space: pre-wrap;
+}
+
+
+
+
+
+
+
 
 
 

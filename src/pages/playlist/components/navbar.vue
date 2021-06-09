@@ -5,7 +5,7 @@
       <p class="title">{{ title }}</p>
       <p class="subtitle" v-if="subtitle">{{ subtitle }}</p>
     </div>
-    <div class="solt">
+    <div class="addonAfter">
       <slot name="addonAfter"></slot>
     </div>
   </div>
@@ -62,8 +62,9 @@ export default {
   align-items: center;
   position: sticky;
   top: 0;
+  z-index: 100;
   .icon,
-  .solt {
+  .addonAfter {
     flex-shrink: 0;
     min-width: 0.7rem;
     max-width: 50%;

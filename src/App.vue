@@ -30,7 +30,7 @@ import {
 } from "@/assets/js/util.js";
 import { formatTime, formatDate } from "@/assets/js/filter.js";
 
-import Music from "@/base/music";
+import Music from "@/components/music";
 import Tabbar from "@/components/tabbar.vue";
 import Playbar from "@/components/playbar.vue";
 

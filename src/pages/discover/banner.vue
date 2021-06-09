@@ -10,8 +10,7 @@
         <div class="banner-box" :data-url="item.url" :data-video="item.video">
           <img class="image" :src="item.imageUrl" />
           <span
-            class="text"
-            :style="{ backgroundColor: item.titleColor }"
+            :class="{ text: true, [item.titleColor]: true }"
             v-if="item.typeTitle"
             >{{ item.typeTitle }}</span
           >
@@ -69,12 +68,18 @@ export default {
     .text {
       font-size: $font-size-sm;
       padding: $padding-base $padding-xs;
-      border-radius: $border-radius-md 0 0 0;
+      border-radius: $border-radius-lg 0 0 0;
       opacity: $active-opacity;
       color: $white;
       position: absolute;
       bottom: 0;
       right: 0;
+      &.red {
+        background-color: $red;
+      }
+      &.blue {
+        background-color: $blue;
+      }
     }
   }
 }

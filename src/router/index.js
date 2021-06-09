@@ -80,7 +80,11 @@ const setting = {
       name: "login",
       component: () => import("@/pages/login"),
     },
-  ]
+  ],
+  // 重置滚动条位置
+  scrollBehavior(to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
 }
 
 const router = new Router(setting);
@@ -88,9 +92,6 @@ const router = new Router(setting);
 export default router;
 
 
-//   scrollBehavior(to, from, savedPosition) {
-//     return { x: 0, y: 0 }
-//   }
 
 
 // 全局导航守卫

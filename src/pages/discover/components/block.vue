@@ -2,7 +2,7 @@
   <div class="block">
     <div class="block-top" v-if="title">
       <div class="title">{{ title }}</div>
-      <div class="btn" v-if="btnText" @click="toPages({ name: 'square' })">
+      <div class="btn" v-if="btnText" @click="$emit('handleBtnClick')">
         {{ btnText }} &gt;
       </div>
     </div>
@@ -64,7 +64,7 @@ export default {
       font-size: $font-size-sm;
       padding: $padding-base $padding-sm;
       border: $border-width-base solid $border-color;
-      border-radius: $border-radius-lg;
+      border-radius: $border-radius-max;
       @include flexCenter;
     }
   }

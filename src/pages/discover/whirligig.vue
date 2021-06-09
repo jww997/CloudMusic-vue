@@ -1,6 +1,6 @@
 <template>
   <div class="whirligig">
-    <block :block="block">
+    <block :block="block" @handleBtnClick="toSquare">
       <slide :width="118" :list="list" @handleClick="toSonglist">
         <template slot="box" slot-scope="{ item }">
           <playlist
@@ -41,6 +41,12 @@ export default {
     },
   },
   methods: {
+    toSquare: function (value) {
+      console.log(1)
+      toPages.call(this, {
+        name: "square",
+      });
+    },
     toSonglist: function (value) {
       toPages.call(this, {
         name: "playlist",

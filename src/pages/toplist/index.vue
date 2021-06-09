@@ -3,24 +3,6 @@
     <navbar :title="'排行榜'" fixed black backgroundColor="#fff"></navbar>
 
     <matrix :list="list" destination="playlist"></matrix>
-    <!-- <div class="list">
-      <div
-        class="billboard"
-        v-for="item in list"
-        :key="item.id"
-        @click="toPages({ name: 'toplist/playlist', params: { id: item.id } })"
-      >
-        <cover
-          :image="item.coverImgUrl"
-          :name="item.name"
-          :count="item.playCount"
-        ></cover>
-      </div>
-    </div> -->
-
-    <transition :name="transition">
-      <router-view></router-view>
-    </transition>
   </div>
 </template>
 
@@ -70,6 +52,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~sass/var.scss";
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .toplist {

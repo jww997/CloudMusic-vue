@@ -1,10 +1,8 @@
 <template>
   <div class="discover">
-    <topbar></topbar>
-
-    <height-clear />
     <!-- <refresh :isLoading="isLoading" @refresh="refresh"> -->
 
+    <search />
     <div v-for="(block, index) in blocks" :key="block.blockCode">
       <div v-if="test" style="border: 1px solid #f00; font-size: 14px">
         {{ index }} - {{ block.showType }}
@@ -42,6 +40,7 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
+import Search from "./components/search";
 import Banner from "./banner.vue";
 import Bowling from "./bowling.vue";
 import Whirligig from "./whirligig.vue";
@@ -52,7 +51,6 @@ import heightClear from "@/base/height-clear";
 import Refresh from "@/common/refresh";
 import Bottombar from "@/common/bottombar";
 import Scroll from "@/base/scroll";
-import Topbar from "@/components/topbar";
 
 export default {
   name: "discover",
@@ -62,11 +60,11 @@ export default {
     Whirligig,
     Whirligig2,
     Calendar,
+    Search,
 
     Bottombar,
     heightClear,
     Scroll,
-    Topbar,
     Refresh,
   },
   inject: ["reload"],

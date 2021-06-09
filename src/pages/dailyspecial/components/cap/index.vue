@@ -1,6 +1,6 @@
 <template>
   <div class="children">
-    <height-clear />
+    <placeholder />
     <div class="time">
       <span class="date">{{ formatDate(undefined, 4).d }}</span>
       <span class="month">{{ formatDate(undefined, 4).m }}</span>
@@ -9,13 +9,13 @@
 </template>
 
 <script>
-import heightClear from "@/base/height-clear";
+import Placeholder from "@/components/placeholder.vue";
 
 import { formatDate } from "@/assets/js/filter.js";
 export default {
   name: "cap",
   components: {
-    heightClear,
+    Placeholder,
   },
   methods: {
     formatDate,

@@ -1,7 +1,7 @@
 <template>
   <div class="mv">
     <navbar :title="'视频'" :fixed="false" iconLeft="arrow-down"></navbar>
-    <height-clear />
+    <placeholder />
     <div
       :class="{ interaction: true, active: !mv.isPlaying }"
       @click="toggleMvPlaying"
@@ -28,13 +28,13 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
-import heightClear from "@/base/height-clear";
+import Placeholder from "@/components/placeholder.vue";
 import Navbar from "@/common/navbar";
 import Info from "./components/info";
 export default {
   name: "mv",
   components: {
-    heightClear,
+    Placeholder,
     Navbar,
     Info,
   },

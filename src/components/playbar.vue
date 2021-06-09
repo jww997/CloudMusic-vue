@@ -75,14 +75,6 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-@keyframes turn {
-  0% {
-    transform: rotate(0);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
 .playbar {
   width: 100%;
   height: 50px;

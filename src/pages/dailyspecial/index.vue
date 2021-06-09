@@ -5,14 +5,14 @@
     <cap></cap>
     <list :list="dailySongs" sorttype="2" allTop="1.5rem"></list>
 
-    <height-clear />
+    <placeholder />
     
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
-import heightClear from "@/base/height-clear";
+import Placeholder from "@/components/placeholder.vue";
 
 import List from "@/common/list";
 import Bottombar from "@/common/bottombar";
@@ -22,7 +22,7 @@ import Cap from "./components/cap";
 export default {
   name: "dailyspecial",
   components: {
-    heightClear,
+    Placeholder,
 
     Navbar,
     Bottombar,

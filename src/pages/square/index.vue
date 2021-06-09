@@ -2,14 +2,14 @@
   <div class="square">
     <navbar :title="'歌单广场'" fixed black backgroundColor="#fff"></navbar>
 
-    <height-clear />
+    <placeholder />
     <tags :list="tags" @toggleCat="toggleCat"></tags>
     <matrix
       :list="playlists"
       destination="playlist"
       @scrollToEnd="scrollToEnd"
     ></matrix>
-    <height-clear />
+    <placeholder />
 
     <!-- <scroll
       :data="playlists"
@@ -34,7 +34,7 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
-import heightClear from "@/base/height-clear";
+import Placeholder from "@/components/placeholder.vue";
 
 import Matrix from "@/common/matrix";
 
@@ -47,7 +47,7 @@ import Tags from "./components/tags";
 export default {
   name: "square",
   components: {
-    heightClear,
+    Placeholder,
 
     Matrix,
     Bottombar,

@@ -45,13 +45,16 @@ export default {
       tabbar: ["discover", "mine"],
       drawer: ["player", "mv"],
 
-      transitionKeepAliveName: "",
-      transitionName: "",
+      // transitionKeepAliveName: "",
+      transitionName: "fade",
     };
   },
   computed: {
     keepAlive() {
       return this.$route.meta.keepAlive;
+    },
+    transitionKeepAliveName() {
+      return !this.keepAlive && this.transitionName;
     },
     playbarClassName() {
       return `fixedBottom-${this.tabbar.includes(this.$route.name) ? 2 : 1}`;
@@ -69,18 +72,20 @@ export default {
       if (this.drawer.includes(to.name)) {
         this.transitionKeepAliveName = "";
         this.transitionName = "drawer";
-        return false;
-      }
-      if (toKeepAlive && fromKeepAlive) {
-        this.transitionKeepAliveName = "fade";
-        this.transitionName = "";
-      } else if (toKeepAlive) {
-        this.transitionKeepAliveName = "";
+      } else {
         this.transitionName = "fade";
-      } else if (fromKeepAlive) {
-        this.transitionKeepAliveName = "fade";
-        this.transitionName = "";
       }
+      // return false;
+      // if (toKeepAlive && fromKeepAlive) {
+      //   this.transitionKeepAliveName = "";
+      //   this.transitionName = "fade";
+      // } else if (toKeepAlive) {
+      //   this.transitionKeepAliveName = "";
+      //   this.transitionName = "";
+      // } else if (fromKeepAlive) {
+      //   this.transitionKeepAliveName = "";
+      //   this.transitionName = "";
+      // }
     },
   },
   provide() {
@@ -113,6 +118,14 @@ export default {
 <style lang="scss">
 @import "~sass/var.scss";
 @import "~sass/mixins.scss";
+@keyframes turn {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .app {
   height: 100vh;
   font-family: $base-font-family;

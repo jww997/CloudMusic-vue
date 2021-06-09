@@ -1,14 +1,18 @@
 <template>
-  <div class="player" :style="{ backgroundImage: 'url(' + picUrl + ')' }">
+  <div class="player" :style="{ backgroundImage: `url(${picUrl})` }">
+    <!-- 顶部导航栏 -->
     <navbar
       :title="title"
       :subtitle="subtitle"
       beforeIconName="arrow-down"
     ></navbar>
-    <div class="song" @click="toggleShowLyric">
-      <lyric :lyric="lyric" v-if="isShowLyric"></lyric>
-      <phonograph :picUrl="picUrl" v-else></phonograph>
-    </div>
+    <!-- 背景遮罩层 -->
+    <div class="backgroundMask"></div>
+    <!-- 歌词 -->
+    <lyric :lyric="lyric" v-if="isShowLyric" @handleClick="toggleShowLyric"></lyric>
+    <!-- 唱片机 -->
+    <phonograph :picUrl="picUrl" v-else @handleClick="toggleShowLyric"></phonograph>
+    <!-- 控制歌曲 -->
     <handle :lyric="lyric"></handle>
   </div>
 </template>
@@ -16,19 +20,19 @@
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import Navbar from "../playlist/components/navbar.vue";
+import Handle from "./handle.vue";
 
 import { formatLyric, formatArtists } from "@/assets/js/filter.js";
 import LyricParser from "lyric-parser"; // 歌词解析
-import Phonograph from "./components/phonograph";
-import Handle from "./components/handle";
-import Lyric from "./components/lyric";
+import Phonograph from "./phonograph.vue";
+import Lyric from "./lyric.vue";
 export default {
   name: "player",
   components: {
     Navbar,
+    Handle,
 
     Phonograph,
-    Handle,
     Lyric,
   },
   data: function () {
@@ -114,61 +118,24 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/var.scss";
 @import "~sass/mixins.scss";
-@import "~sass/varibles.scss";
 .player {
-  height: 100vh;
-  @include suspension;
-  @include flexSpaceBetween;
-  flex-direction: column;
-
-  background: center no-repeat #fff;
+  background: center no-repeat;
   background-size: 0;
-  overflow: hidden;
-  z-index: $zIndex-XXL;
-
-  // -webkit-backdrop-filter: saturate(180%) blur(20px);
-  // backdrop-filter: saturate(180%) blur(20px);
-
-  &::before,
-  &::after {
-    content: "";
-    width: 100%;
-    height: 100%;
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  .backgroundMask {
     @include positionCenter;
-  }
-  &::before {
-    z-index: -1;
-    background-color: #000;
-    opacity: 0.5;
-  }
-  &::after {
-    z-index: -2;
     background: inherit;
     background-size: cover;
-    -webkit-filter: blur(20px);
-    filter: blur(20px);
-  }
-
-  .song {
-    flex-grow: 1;
-    width: 100%;
-    min-height: 5rem;
-
-    // &.lyric {
-    // overflow: hidden;
-    // mask-image: linear-gradient(
-    //   rgba(255, 255, 255, 0),
-    //   #fff 40%,
-    //   #fff 60%,
-    //   rgba(255, 255, 255, 0)
-    // );
-    // -webkit-mask-image: linear-gradient(
-    //   rgba(255, 255, 255, 0),
-    //   #fff 40%,
-    //   #fff 60%,
-    //   rgba(255, 255, 255, 0)
-    // );
-    // }
+    -webkit-filter: blur(10px);
+    filter: blur(10px);
+    &::after {
+      content: "";
+      @include positionCenter;
+      background-color: $black;
+      opacity: $active-opacity;
+    }
   }
 }
 </style>

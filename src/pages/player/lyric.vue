@@ -1,8 +1,14 @@
 <template>
-  <div class="children">
+  <div class="lyric" @click="$emit('handleClick')">
+    <!-- 音量控制 -->
     <div class="volume">
-      <!-- <div class="iconfont">&#xe66d;</div> -->
-      <van-icon size="22" color="#fff" name="volume-o" v-if="isMute" />
+      <van-icon
+        size="22"
+        color="#fff"
+        name="volume-o"
+        v-if="isMute"
+        @click.stop="toggleMusicVolume(100)"
+      />
       <van-icon
         size="22"
         color="#fff"
@@ -10,18 +16,17 @@
         @click.stop="toggleMusicVolume(0)"
         v-else
       />
-      <div class="slider">
-        <van-slider
-          v-model="music.volume"
-          step="1"
-          button-size="10px"
-          active-color="#fff"
-          inactive-color="#494949"
-          @input="toggleMusicVolume"
-        />
-      </div>
-      <div class="iconfont"></div>
+      <van-slider
+        class="slider"
+        step="1"
+        button-size="10"
+        active-color="#f00"
+        inactive-color="#fff"
+        v-model="music.volume"
+        @input="toggleMusicVolume"
+      />
     </div>
+    <!-- 歌词滚动 -->
     <div class="wrap">
       <div
         class="lyric"
@@ -113,34 +118,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~sass/var.scss";
 @import "~sass/mixins.scss";
-@import "~sass/varibles.scss";
-.children {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+.lyric {
+  padding: 0 $padding-sm;
   .volume {
-    flex-shrink: 0;
-    width: 100%;
-    margin: 0.3rem;
+    margin: $padding-sm 0;
     @include flexSpaceBetween;
     .iconfont {
-      flex-shrink: 0;
-      width: 0.8rem;
-      height: 0.8rem;
-      font-size: $text-M;
-      color: $theme-WHITE;
-      @include flexCenter;
+      font-size: $font-size-sm * 2;
+      color: $white;
     }
     .slider {
       flex-grow: 1;
-      margin: 0 0.3rem;
+      margin-left: $padding-sm;
     }
   }
   .wrap {
-    flex-grow: 1;
-    height: 100%;
-    margin-top: 0.3rem;
+    max-height: 10rem;
+    margin-top: $padding-sm;
     overflow: hidden;
     mask-image: linear-gradient(
       rgba(255, 255, 255, 0),
@@ -155,17 +151,18 @@ export default {
       rgba(255, 255, 255, 0)
     );
     .lyric {
-      transition: 1s;
       padding-top: 50%;
       box-sizing: border-box;
+      line-height: $line-height-xs;
+      transition: $animation-duration-base * 2;
       .line {
-        font-size: $text-S;
+        font-size: $font-size-lg;
+        color: $background-color-dark;
+        transition: $animation-duration-base * 2;
         text-align: center;
-        transition: 1s;
-        color: #aaa;
         &.active {
-          color: #fff;
-          font-size: $text-M;
+          color: $background-color-light;
+          font-size: $font-size-lg * 1.5;
           font-weight: bold;
         }
       }

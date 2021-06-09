@@ -9,13 +9,13 @@
     <transition :name="transitionName">
       <router-view class="router-view" v-if="!keepAlive" />
     </transition>
-    <!-- 选项栏 -->
+    <!-- 底部选项栏 -->
     <transition name="drawer">
       <tabbar v-if="tabbar.includes(this.$route.name)" />
     </transition>
     <!-- 播放条 -->
     <transition name="drawer">
-      <playbar :class="playbarClassName" />
+      <playbar :class="playbarClassName" v-if="isShowPlaybar" />
     </transition>
     <music />
   </div>
@@ -45,19 +45,19 @@ export default {
       tabbar: ["discover", "mine"],
       drawer: ["player", "mv"],
 
-      // transitionKeepAliveName: "",
-      transitionName: "fade",
+      transitionKeepAliveName: "",
+      transitionName: "",
     };
   },
   computed: {
     keepAlive() {
       return this.$route.meta.keepAlive;
     },
-    transitionKeepAliveName() {
-      return !this.keepAlive && this.transitionName;
-    },
     playbarClassName() {
       return `fixedBottom-${this.tabbar.includes(this.$route.name) ? 2 : 1}`;
+    },
+    isShowPlaybar() {
+      return !this.drawer.includes(this.$route.name);
     },
   },
   watch: {
@@ -72,20 +72,18 @@ export default {
       if (this.drawer.includes(to.name)) {
         this.transitionKeepAliveName = "";
         this.transitionName = "drawer";
-      } else {
-        this.transitionName = "fade";
+        return false;
       }
-      // return false;
-      // if (toKeepAlive && fromKeepAlive) {
-      //   this.transitionKeepAliveName = "";
-      //   this.transitionName = "fade";
-      // } else if (toKeepAlive) {
-      //   this.transitionKeepAliveName = "";
-      //   this.transitionName = "";
-      // } else if (fromKeepAlive) {
-      //   this.transitionKeepAliveName = "";
-      //   this.transitionName = "";
-      // }
+      if (toKeepAlive && fromKeepAlive) {
+        this.transitionKeepAliveName = "";
+        this.transitionName = "fade";
+      } else if (toKeepAlive) {
+        this.transitionKeepAliveName = "fade";
+        this.transitionName = "";
+      } else if (fromKeepAlive) {
+        this.transitionKeepAliveName = "";
+        this.transitionName = "";
+      }
     },
   },
   provide() {

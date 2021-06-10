@@ -1,49 +1,64 @@
 <template>
   <div class="mv">
-    <navbar :title="'视频'" :fixed="false" iconLeft="arrow-down"></navbar>
-    <placeholder />
-    <div
-      :class="{ interaction: true, active: !mv.isPlaying }"
-      @click="toggleMvPlaying"
-    >
-      <video
-        class="video"
-        ref="video"
-        :src="url"
-        :poster="info.cover"
-        controlsList="nodownload noremote nofootbar"
-        :controls="false"
-        loop
-        v-if="info.cover"
-        @timeupdate="timeupdate"
-        @canplay="canplay"
-      >
-        视频加载失败，请更换浏览器
-      </video>
-      <div class="iconfont" v-if="!mv.isPlaying">&#xe615;</div>
-    </div>
-    <info :info="info" :count="count"></info>
+    <!-- 顶部导航栏 -->
+    <navbar title="视频" />
+    <!-- 视频 -->
+    <musicvideo :url="url" :poster="info.cover" />
+    <!-- 视频文本介绍 && 用户对视频的操作 -->
+    <detail :info="info" :options="options" />
+
+    <!-- 控制视频 && 视频介绍 -->
+    <!-- <info :info="info" :count="count" /> -->
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
-import Placeholder from "@/components/placeholder.vue";
-import Navbar from "@/common/navbar";
-import Info from "./components/info";
+import { formatUnit } from "@/assets/js/filter.js";
+import Navbar from "../playlist/components/navbar.vue";
+import Musicvideo from "./musicvideo.vue";
+import Detail from "./detail.vue";
+
+import Info from "./info.vue";
+
 export default {
   name: "mv",
   components: {
-    Placeholder,
     Navbar,
+    Musicvideo,
+    Detail,
+
     Info,
   },
-  data: function () {
+  data() {
     return {
       isMusicPlaying: false, // 记录音乐播放状态
       url: "",
       info: {},
       count: {},
+
+      options: [
+        {
+          id: "01",
+          icon: "&#xe697;",
+          name: "点赞",
+        },
+        {
+          id: "02",
+          icon: "&#xe65d;",
+          name: "评论",
+        },
+        {
+          id: "03",
+          icon: "&#xe65c;",
+          name: "分享",
+        },
+        {
+          id: "04",
+          icon: "&#xe61d;",
+          name: "收藏",
+        },
+      ],
     };
   },
   computed: {
@@ -73,26 +88,7 @@ export default {
     },
   },
   methods: {
-    canplay: function () {
-      const that = this;
-      that.amendStateObjValue({ name: "mv", key: "isPlaying", value: true });
-    },
-    timeupdate: function () {
-      const that = this;
-      let video = that.$refs.video;
-      if (!video) return false;
-      that.amendStateObjValue({
-        name: "mv",
-        key: "currentTime",
-        value: video.currentTime,
-      });
-      that.amendStateObjValue({
-        name: "mv",
-        key: "duration",
-        value: video.duration,
-      });
-    },
-    toggleMvPlaying: function () {
+    toggleMvPlaying() {
       const that = this;
       that.amendStateObjValue({
         name: "mv",
@@ -100,7 +96,7 @@ export default {
         value: !that.mv.isPlaying,
       });
     },
-    getdata: function () {
+    getdata() {
       const that = this;
       // let id = that.$route.query.id;
       let id = that.mv.id;
@@ -113,18 +109,33 @@ export default {
         })
         .then((res) => {
           that.url = res.data.data.url;
-          return that.$api.getMvDetailInfo({ mvid: id });
-        })
-        .then((res) => {
-          that.count = res.data;
         });
+      that.$api.getMvDetailInfo({ mvid: id }).then((res) => {
+        const data = res.data;
+
+        that.count = data;
+
+        this.options.map((item, index) => {
+          switch (index) {
+            case 0:
+              item.count = formatUnit(data.likedCount);
+              break;
+            case 1:
+              item.count = formatUnit(data.shareCount);
+              break;
+            case 2:
+              item.count = formatUnit(data.commentCount);
+              break;
+          }
+        });
+      });
     },
     ...mapMutations({
       setMv: "SET_MV",
     }),
     ...mapActions(["amendStateObjValue"]),
   },
-  mounted: function () {
+  mounted() {
     const that = this;
     if (that.music.isPlaying) {
       that.amendStateObjValue({ key: "isPlaying", value: false });
@@ -132,7 +143,7 @@ export default {
     }
     that.getdata();
   },
-  destroyed: function () {
+  destroyed() {
     const that = this;
     if (that.isMusicPlaying) {
       that.amendStateObjValue({ key: "isPlaying", value: true });
@@ -143,76 +154,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~sass/var.scss";
 @import "~sass/mixins.scss";
-@import "~sass/varibles.scss";
 .mv {
   height: 100vh;
-  @include suspension;
-  background: center no-repeat $theme-BLACK;
-  background-size: 0;
   overflow: hidden;
-  z-index: $zIndex-XL;
-
-  box-sizing: border-box;
-  color: #fff;
-  .interaction {
-    max-height: 40%;
-    // margin-top: 1rem;
-    position: relative;
-    background-color: $theme-BLACK;
-    // background-color: #101010;
-    transition: $time-M;
-    overflow: hidden;
-    display: flex;
-    .video {
-      width: 100%;
-      min-height: 5rem;
-      transition: $time-M;
-    }
-    .iconfont {
-      width: 2.5rem;
-      height: 2.5rem;
-      font-size: 2rem;
-      text-shadow: 0 0 20px $theme-GRAY;
-      @include positionCenter;
-      @include flexCenter;
-      opacity: $opacity-M;
-    }
-    &.active {
-      background-color: $theme-BLACK;
-      .video {
-        opacity: $opacity-S;
-      }
-    }
-  }
-
-  /*video默认全屏按钮*/
-  video::-webkit-media-controls-fullscreen-button {
-    display: none !important;
-  }
-
-  /*video默认aduio音量按钮*/
-  video::-webkit-media-controls-mute-button {
-    display: none !important;
-  }
-
-  /*video默认setting按钮*/
-  video::-internal-media-controls-overflow-button {
-    display: none !important;
-  }
-
-  /*腾讯云点播禁用firefox全屏、设置按钮*/
-  .trump-button[sub-component="fullscreen_btn"],
-  .trump-button[now="fullscreen"] {
-    display: none !important;
-  }
-  .trump-button[sub-component="setting"] {
-    display: none !important;
-  }
-
-  /*禁用video的controls（要慎重！不要轻易隐藏掉，会导致点击视频不能播放）*/
-  video::-webkit-media-controls {
-    display: none !important;
-  }
+  background: center no-repeat $black;
+  background-size: 0;
+  color: $white;
+  position: relative;
 }
 </style>

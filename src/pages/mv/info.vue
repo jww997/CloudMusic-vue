@@ -1,45 +1,6 @@
 <template>
-  <div class="children">
-    <div class="top">
-      <div class="left">
-        <div class="artists">
-          {{ formatArtists(info.artists) }}
-          <!-- <span v-for="(item, index) in info.artists" :key="index"
-            >{{ item.name }} /
-          </span> -->
-        </div>
-        <div class="name" @click.stop="toggleDesc">
-          <span>{{ info.name }}</span>
-          <span
-            :class="{
-              triangle: true,
-              active: isShowDesc,
-            }"
-            v-if="info.desc"
-          ></span>
-        </div>
-        <div :class="{ desc: true, active: !isShowDesc }">{{ info.desc }}</div>
-        <div class="playCount">{{ info.playCount }}次观看</div>
-      </div>
-      <div class="right">
-        <div class="handle" v-if="count.likedCount">
-          <div class="iconfont">&#xe697;</div>
-          <div class="text">{{ count.likedCount }}</div>
-        </div>
-        <div class="handle" v-if="count.commentCount">
-          <div class="iconfont">&#xe65d;</div>
-          <div class="text">{{ count.commentCount }}</div>
-        </div>
-        <div class="handle" v-if="count.shareCount">
-          <div class="iconfont">&#xe65c;</div>
-          <div class="text">{{ count.shareCount }}</div>
-        </div>
-        <div class="handle">
-          <div class="iconfont">&#xe61d;</div>
-          <div class="text">收藏</div>
-        </div>
-      </div>
-    </div>
+  <div class="info">
+    <!-- 视频进度条 -->
     <div class="strip">
       <van-slider
         v-model="percentage"
@@ -50,6 +11,7 @@
         @input="togglePercentage"
       />
     </div>
+    <!-- 视频名称 -->
     <div class="bottom">
       <div
         :class="{
@@ -69,7 +31,7 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
-import { formatArtists } from "@/assets/js/filter.js";
+
 export default {
   name: "info",
   props: {
@@ -98,7 +60,6 @@ export default {
     },
   },
   methods: {
-    formatArtists,
     togglePercentage: function (val) {
       const that = this;
       that.amendStateObjValue({ name: "mv", key: "isDraging", value: true });
@@ -108,11 +69,7 @@ export default {
         value: that.mv.duration * (val / 100),
       }); // 根据选中百分比修改进度条
     },
-    toggleDesc: function () {
-      const that = this;
-      if (!that.info.desc) return false;
-      that.isShowDesc = !that.isShowDesc;
-    },
+    
     ...mapActions(["amendStateObjValue"]),
   },
 };
@@ -120,9 +77,10 @@ export default {
 
 
 <style lang="scss" scoped>
+@import "~sass/var.scss";
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-.children {
+.info {
   @include positionCenter;
   top: auto;
   .top {

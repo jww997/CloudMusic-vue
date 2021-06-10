@@ -61,7 +61,7 @@ export default {
       .icon {
         @include positionCenter;
         @include flexCenter;
-        font-size: $font-size-lg;
+        font-size: $font-size-lg * 1.5;
         opacity: $active-opacity;
         color: $white;
       }

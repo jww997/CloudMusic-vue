@@ -119,6 +119,8 @@ export default {
 @import "~sass/var.scss";
 @import "~sass/mixins.scss";
 .player {
+  height: 100vh;
+  overflow: hidden;
   background: center no-repeat;
   background-size: 0;
   z-index: 300;

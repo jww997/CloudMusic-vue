@@ -25,8 +25,7 @@ export default {
   },
   methods: {
     back() {
-      const that = this;
-      let router = that.$router;
+      let router = this.$router;
       window.history.length > 1 ? router.go(-1) : router.push("/");
     },
     hide() {
@@ -66,7 +65,7 @@ export default {
   .addonAfter {
     flex-shrink: 0;
     min-width: 0.7rem;
-    max-width: 50%;
+    max-width: 2rem;
   }
   .icon {
     font-size: $font-size-lg * 1.5;
@@ -74,7 +73,13 @@ export default {
   .headline {
     flex-grow: 1;
     line-height: $line-height-lg;
-    text-align: center;
+    .title,
+    .subtitle {
+      max-width: 7rem;
+      margin: 0 auto;
+      text-align: center;
+      @include omit;
+    }
     .title {
       font-size: $font-size-lg * 1.3;
       font-weight: bold;

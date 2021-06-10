@@ -134,7 +134,4 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/var.scss";
 @import "~sass/mixins.scss";
-.discover {
-  background-color: $background-color;
-}
 </style>

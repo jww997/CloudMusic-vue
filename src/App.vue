@@ -125,11 +125,15 @@ export default {
   }
 }
 .app {
-  height: 100vh;
+  min-height: 100vh;
   font-family: $base-font-family;
-  color: $text-color;
   .router-view {
     min-height: calc(100vh - 50px);
+    background-color: $background-color;
+    color: $text-color;
+  }
+  .iconfont {
+    font-size: $font-size-sm * 1.5;
   }
 
   // 上下边缘排列

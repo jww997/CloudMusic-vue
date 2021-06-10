@@ -1,15 +1,29 @@
 <template>
-  <van-tabbar v-model="selectedIndex" active-color="#EC4141" :border="false">
-    <van-tabbar-item v-for="(item, index) in list" :key="index" :to="item.to">
-      <template #icon="">
-        <span
-          :class="{ iconfont: true, ball: selectedIndex == index }"
-          v-html="item.icon"
-        ></span>
-      </template>
-      <span>{{ item.name }}</span>
-    </van-tabbar-item>
-  </van-tabbar>
+  <div class="tabbar">
+    <van-tabbar
+      v-model="selectedIndex"
+      active-color="#EC4141"
+      :border="false"
+      :fixed="false"
+      safe-area-inset-bottom
+      route
+    >
+      <van-tabbar-item
+        v-for="(item, index) in list"
+        :key="index"
+        :to="item.to"
+        replace
+      >
+        <template #icon="">
+          <span
+            :class="{ iconfont: true, ball: selectedIndex == index }"
+            v-html="item.icon"
+          ></span>
+        </template>
+        <span>{{ item.name }}</span>
+      </van-tabbar-item>
+    </van-tabbar>
+  </div>
 </template>
 
 <script>
@@ -53,13 +67,10 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/var.scss";
 @import "~sass/mixins.scss";
-.iconfont {
-  border-radius: 50%;
+.tabbar {
+  width: 100vw;
+  background-color: $white;
   transition: $animation-duration-base;
-  &.ball {
-    padding: $padding-base;
-    background-image: $gradient-red;
-    color: $white;
-  }
+  z-index: 100;
 }
 </style>

@@ -6,9 +6,8 @@
     <musicvideo :url="url" :poster="info.cover" />
     <!-- 视频文本介绍 && 用户对视频的操作 -->
     <detail :info="info" :options="options" />
-
-    <!-- 控制视频 && 视频介绍 -->
-    <!-- <info :info="info" :count="count" /> -->
+    <!-- 控制视频 && 视频名称 -->
+    <detail2 :info="info" :liked="count.liked" />
   </div>
 </template>
 
@@ -18,8 +17,8 @@ import { formatUnit } from "@/assets/js/filter.js";
 import Navbar from "../playlist/components/navbar.vue";
 import Musicvideo from "./musicvideo.vue";
 import Detail from "./detail.vue";
+import Detail2 from "./detail2.vue";
 
-import Info from "./info.vue";
 
 export default {
   name: "mv",
@@ -27,8 +26,7 @@ export default {
     Navbar,
     Musicvideo,
     Detail,
-
-    Info,
+    Detail2,
   },
   data() {
     return {

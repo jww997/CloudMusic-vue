@@ -1,21 +1,21 @@
 <template>
   <div id="app" class="app">
     <!-- 动画效果 fade<淡出淡入> drawer<抽屉> -->
-    <transition :name="transitionKeepAliveName">
+    <transition :name="KeepAliveName">
       <keep-alive>
-        <router-view class="router-view" v-if="keepAlive" />
+        <router-view v-if="keepAlive" class="router-view" />
       </keep-alive>
     </transition>
-    <transition :name="transitionName">
-      <router-view class="router-view" v-if="!keepAlive" />
-    </transition>
-    <!-- 底部选项栏 -->
-    <transition name="drawer">
-      <tabbar v-if="tabbar.includes(this.$route.name)" />
+    <transition :name="routerViewName">
+      <router-view v-if="!keepAlive" class="router-view" />
     </transition>
     <!-- 播放条 -->
     <transition name="drawer">
-      <playbar :class="playbarClassName" v-if="isShowPlaybar" />
+      <playbar v-if="isShowPlaybar" :class="playbarClassName" />
+    </transition>
+    <!-- 底部选项栏 -->
+    <transition name="drawer">
+      <tabbar v-if="isShowTabbar" class="fixedBottom-1" />
     </transition>
     <music />
   </div>
@@ -45,19 +45,22 @@ export default {
       tabbar: ["discover", "mine"],
       drawer: ["player", "mv"],
 
-      transitionKeepAliveName: "",
-      transitionName: "",
+      KeepAliveName: "",
+      routerViewName: "",
     };
   },
   computed: {
     keepAlive() {
       return this.$route.meta.keepAlive;
     },
-    playbarClassName() {
-      return `fixedBottom-${this.tabbar.includes(this.$route.name) ? 2 : 1}`;
+    isShowTabbar() {
+      return this.tabbar.includes(this.$route.name);
     },
     isShowPlaybar() {
       return !this.drawer.includes(this.$route.name);
+    },
+    playbarClassName() {
+      return `fixedBottom-${this.isShowTabbar ? 2 : 1}`;
     },
   },
   watch: {
@@ -70,19 +73,19 @@ export default {
       const { keepAlive: fromKeepAlive } = from.meta;
 
       if (this.drawer.includes(to.name)) {
-        this.transitionKeepAliveName = "";
-        this.transitionName = "drawer";
+        this.KeepAliveName = "";
+        this.routerViewName = "drawer";
         return false;
       }
       if (toKeepAlive && fromKeepAlive) {
-        this.transitionKeepAliveName = "";
-        this.transitionName = "fade";
+        this.KeepAliveName = "";
+        this.routerViewName = "fade";
       } else if (toKeepAlive) {
-        this.transitionKeepAliveName = "fade";
-        this.transitionName = "";
+        this.KeepAliveName = "fade";
+        this.routerViewName = "";
       } else if (fromKeepAlive) {
-        this.transitionKeepAliveName = "";
-        this.transitionName = "";
+        this.KeepAliveName = "";
+        this.routerViewName = "";
       }
     },
   },
@@ -127,22 +130,22 @@ export default {
 .app {
   min-height: 100vh;
   font-family: $base-font-family;
+  // 路由界面
   .router-view {
     min-height: calc(100vh - 50px);
     background-color: $background-color;
     color: $text-color;
   }
+  // 字体图标
   .iconfont {
     font-size: $font-size-sm * 1.5;
   }
-
   // 上下边缘排列
   .fixedTop-1,
   .fixedTop-2,
   .fixedBottom-1,
   .fixedBottom-2 {
     position: fixed;
-    z-index: 9999;
   }
   .fixedTop-1 {
     top: 0;
@@ -157,7 +160,7 @@ export default {
     bottom: 50px;
   }
 
-  // 动画
+  // 动画集合
   .fade-enter-active,
   .fade-leave-active,
   .drawer-enter-active,
@@ -165,9 +168,14 @@ export default {
     transition: $animation-duration-base;
   }
   .fade-enter,
+  .fade-leave-to,
+  .drawer-enter,
+  .drawer-leave-to {
+    opacity: 0;
+  }
+  .fade-enter,
   .fade-leave-to {
     transform: scale(1.5) translateY(2rem);
-    opacity: 0;
   }
   .drawer-enter,
   .drawer-leave-to {

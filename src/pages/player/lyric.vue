@@ -135,7 +135,7 @@ export default {
     }
   }
   .wrap {
-    max-height: 10rem;
+    height: 10rem;
     margin-top: $padding-sm;
     overflow: hidden;
     mask-image: linear-gradient(

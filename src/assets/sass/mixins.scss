@@ -32,18 +32,6 @@
   top: 0;
 }
 
-@mixin fixedTop {
-  position: fixed;
-  z-index: 9999;
-  top: 0;
-}
-
-@mixin fixedBottom {
-  position: fixed;
-  z-index: 9999;
-  top: 0;
-}
-
 @mixin linefeed {
   text-align: justify;
   text-align-last: left;

@@ -1,25 +1,25 @@
 <template>
-  <div :class="{ phonograph: true, active: music.isPlaying }" @click="$emit('handleClick')">
-    <div
-      class="disc"
-      :style="{ backgroundImage }"
-      @touchstart="touchstart"
-      @touchmove="touchmove"
-      @touchend="touchend"
-    >
-      <img class="cover" :src="picUrl" />
-      <!-- <img class="lid" :src="lidImage" /> -->
-      <img class="light" :src="lightImage" />
-    </div>
+  <div
+    :class="{ phonograph: true, active: music.isPlaying }"
+    @click="$emit('handleClick')"
+  >
+    <!-- 唱片 -->
+    <disc class="disc" :cover="picUrl" :active="music.isPlaying" />
+    <!-- 手柄 -->
     <img class="stick" :src="stickImage" />
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
+import Disc from "@/components/disc.vue";
+
 export default {
   name: "phonograph",
   props: ["picUrl"],
+  components: {
+    Disc,
+  },
   data: function () {
     return {
       touchTimer: 0,
@@ -46,31 +46,31 @@ export default {
     },
     ...mapGetters(["music"]),
   },
-  methods: {
-    touchstart: function () {
-      const that = this;
-      let touchTimer = that.touchTimer;
-      clearTimeout(touchTimer); // 清除定时器
-      touchTimer = 0;
-      that.touchTimer = setTimeout(function () {
-        that.$vant.ImagePreview([that.picUrl]);
-      }, that.touchDuration);
-    },
-    touchmove: function () {
-      const that = this; // 如果手指有移动，则取消所有事件，此时说明用户只是要移动而不是长按
-      let touchTimer = that.touchTimer;
-      clearTimeout(touchTimer); // 清除定时器
-      touchTimer = 0;
-    },
-    touchend: function () {
-      const that = this; // 手释放，如果在500毫秒内就释放，则取消长按事件，此时可以执行onclick应该执行的事件
-      let touchTimer = that.touchTimer;
-      clearTimeout(touchTimer);
-      if (touchTimer != 0) {
-        // 这里写要执行的内容（尤如onclick事件）
-      }
-    },
-  },
+  // methods: {
+  //   touchstart: function () {
+  //     const that = this;
+  //     let touchTimer = that.touchTimer;
+  //     clearTimeout(touchTimer); // 清除定时器
+  //     touchTimer = 0;
+  //     that.touchTimer = setTimeout(function () {
+  //       that.$vant.ImagePreview([that.picUrl]);
+  //     }, that.touchDuration);
+  //   },
+  //   touchmove: function () {
+  //     const that = this; // 如果手指有移动，则取消所有事件，此时说明用户只是要移动而不是长按
+  //     let touchTimer = that.touchTimer;
+  //     clearTimeout(touchTimer); // 清除定时器
+  //     touchTimer = 0;
+  //   },
+  //   touchend: function () {
+  //     const that = this; // 手释放，如果在500毫秒内就释放，则取消长按事件，此时可以执行onclick应该执行的事件
+  //     let touchTimer = that.touchTimer;
+  //     clearTimeout(touchTimer);
+  //     if (touchTimer != 0) {
+  //       // 这里写要执行的内容（尤如onclick事件）
+  //     }
+  //   },
+  // },
 };
 </script>
 
@@ -90,30 +90,6 @@ export default {
     width: 8rem;
     height: 8rem;
     margin-top: 2.5rem;
-    border-radius: 50%;
-    background: no-repeat center;
-    background-size: cover;
-    position: relative;
-    animation: turn 20s linear infinite paused;
-    img {
-      width: 100%;
-      height: 100%; // 部分图片呈长方形
-      // max-width: 100%;
-      // max-height: 100%;
-      @include positionCenter;
-      transform: scale(1.1);
-    }
-    .cover {
-      transform: scale(0.7);
-      border-radius: 50%;
-      z-index: 1;
-    }
-    // .lid {
-    //   z-index: 2;
-    // }
-    .light {
-      z-index: 3;
-    }
   }
   .stick {
     width: 2.5rem;

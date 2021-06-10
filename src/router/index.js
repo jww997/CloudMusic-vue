@@ -82,9 +82,9 @@ const setting = {
     },
   ],
   // 重置滚动条位置
-  // scrollBehavior(to, from, savedPosition) {
-  //   return { x: 0, y: 0 }
-  // }
+  scrollBehavior(to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
 }
 
 const router = new Router(setting);

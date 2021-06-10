@@ -1,55 +1,74 @@
 <template>
-  <div
-    class="playbar"
-    v-if="current.id"
-    @click.stop="toPages({ name: 'player' })"
-  >
-    <div
-      :class="{
-        al: true,
-        active: music.isPlaying,
-      }"
-      :style="{
-        backgroundImage: 'url(' + require('@/assets/images/chassis.png') + ')',
-      }"
-    >
-      <img class="cover" :src="current.al.picUrl" v-lazy="current.al.picUrl" />
-      <img class="light" :src="require('@/assets/images/light.png')" />
+  <div class="playbar" v-if="current.id">
+    <!-- 唱片 -->
+    <disc
+      class="disc"
+      :cover="current.al.picUrl"
+      :active="music.isPlaying"
+      @handleClick="toPlayer"
+    />
+    <!-- 歌曲名称 -->
+    <div class="name" @click="toPlayer">
+      {{ current.name }} - {{ current.ar[0].name }}
     </div>
-    <div class="monicker">
-      <span class="name">{{ current.name }}</span>
-      <span class="ar">{{ current.ar[0].name }}</span>
-    </div>
-    <div class="state" @click.stop="toggleStatus">
-      <van-icon name="pause-circle-o" v-if="music.isPlaying" />
-      <van-icon name="play-circle-o" v-else />
-    </div>
-    <!-- <span
-      :class="{
-        'iconfont center': true,
-        playing: music.isPlaying,
-      }"
+    <!-- 播放暂停 -->
+    <van-icon
+      class="circle"
+      name="pause-circle-o"
+      size="25"
+      v-if="music.isPlaying"
       @click.stop="toggleStatus"
-      >{{ music.isPlaying ? "&#xe665;" : "&#xe666;" }} 
-    </span>-->
-    <span class="iconfont" @click.stop="toggleDrawerShow">&#xe664;</span>
+    />
+    <van-icon
+      class="circle"
+      name="play-circle-o"
+      size="25"
+      v-else
+      @click.stop="toggleStatus"
+    />
+    <!-- 列表按钮 -->
+    <van-icon
+      class="wapNav"
+      name="wap-nav"
+      size="25"
+      @click.stop="handleWapNavClick"
+    />
+    <!-- 播放列表 -->
+    <drawerlist :show="isShowDrawerlist" @close="handleWapNavClick" />
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { toPages } from "@/assets/js/util.js";
+import Drawerlist from "./drawerlist.vue";
+import Disc from "./disc.vue";
+
 export default {
   name: "bottombar",
+  components: {
+    Drawerlist,
+    Disc,
+  },
+  data() {
+    return {
+      isShowDrawerlist: false,
+    };
+  },
   computed: {
     current() {
       const that = this;
       return that.music.current;
     },
-    ...mapGetters(["music"]),
+    ...mapGetters(["music", "isShowDrawer"]),
   },
   methods: {
-    toPages,
+    toPlayer() {
+      toPages.call(this, { name: "player" });
+    },
+    handleWapNavClick() {
+      this.isShowDrawerlist = !this.isShowDrawerlist;
+    },
     toggleStatus: function () {
       const that = this;
       let music = that.music;
@@ -73,91 +92,37 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~sass/var.scss";
 @import "~sass/mixins.scss";
-@import "~sass/varibles.scss";
 .playbar {
-  width: 100%;
+  width: 100vw;
   height: 50px;
-  padding: 0 0.3rem;
+  padding: 0 $padding-sm;
   box-sizing: border-box;
-  background-image: linear-gradient(#efefef, transparent);
-  background-color: #fff;
-  @include flexSpaceBetween;
-  transition: 0.5s;
-  overflow: visible;
-  // position: fixed;
-  // bottom: 0;
-  z-index: 1;
-  .al,
-  .cover {
-    border-radius: 50%;
-    overflow: visible;
-  }
-  .cover,
-  .light {
-    @include positionCenter;
-  }
-  .al {
+  background-image: linear-gradient($background-color, $white);
+  transition: $animation-duration-base;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .disc,
+  .circle,
+  .wapNav {
     flex-shrink: 0;
-    width: 1.5rem;
-    height: 1.5rem;
-    margin: -0.8rem 0.2rem 0 0;
-    background-size: 100% 100%;
-    position: relative;
-    overflow: visible;
-    @include flexCenter;
-    animation-duration: 20s;
-    animation-name: turn;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-play-state: paused;
-    &.active {
-      animation-play-state: running;
-    }
-    .cover {
-      width: 65%;
-      height: 65%;
-      z-index: $zIndex-XXXS;
-    }
-    .light {
-      width: 100%;
-      height: 100%;
-      z-index: $zIndex-XXS;
-    }
   }
-  .monicker {
+  .disc {
+    margin-top: -1rem;
+  }
+  .name {
     flex-grow: 1;
-    line-height: 1;
-    padding-bottom: $text-XXXS;
-    box-sizing: border-box;
-    @include omit;
-    .name,
-    .ar {
-      line-height: $safeDistance;
-    }
-    .name {
-      font-size: $text-S;
-    }
-    .ar {
-      margin-left: -0.2rem;
-      font-size: $text-XS;
-      color: $theme-GRAY;
-      &::before {
-        content: "-";
-        margin: 0 $text-XXXS;
-      }
-    }
+    line-height: $line-height-sm;
+    margin-left: $padding-xs;
+    font-size: $font-size-sm;
+    @include omitS;
   }
-  .iconfont,
-  .state {
-    margin-left: $text-XS;
-  }
-  .state {
-    @include flexCenter;
-    font-size: $text-XXL;
-  }
-  .iconfont {
-    font-size: $text-L;
+  .circle,
+  .wapNav {
+    margin-left: $padding-sm;
   }
 }
 </style>

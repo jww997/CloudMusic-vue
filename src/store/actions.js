@@ -47,15 +47,15 @@ export default {
         }
 
         // if (!music.current) {
-        api.getSongDetail({ ids: id }).then(res => {
-          let songs = res.data.songs;
-          music.current = songs[0];
-          music.currentList = songs;
-          commit("SET_MUSIC", music);
-        }).catch(err => {
-          // music.current = {};
-          // commit("SET_MUSIC", music);
-        })
+        // api.getSongDetail({ ids: id }).then(res => {
+        //   let songs = res.data.songs;
+        //   music.current = songs[0];
+        //   music.currentList = songs;
+        //   commit("SET_MUSIC", music);
+        // }).catch(err => {
+        //   // music.current = {};
+        //   // commit("SET_MUSIC", music);
+        // })
         // };
       })
     } catch (error) {

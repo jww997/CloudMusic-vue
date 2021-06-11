@@ -1,14 +1,15 @@
 <template>
   <div
     class="disc"
-    :class="{ active }"
+    ref="disc"
+    :class="{ animation, active }"
     :style="{ backgroundImage }"
     @click="$emit('handleClick')"
   >
     <div class="cover">
       <img :src="cover" />
     </div>
-    <!-- <img class="lid" :src="lid" /> -->
+    <img class="lid" :src="lid" />
     <img class="light" :src="light" />
   </div>
 </template>
@@ -17,15 +18,31 @@
 export default {
   name: "disc",
   props: ["cover", "active"],
+  data() {
+    return {
+      animation: true,
+    };
+  },
   computed: {
     backgroundImage() {
       return `url(${require("@/assets/images/chassis.png")})`;
     },
+    lid() {
+      return require("@/assets/images/lid.png");
+    },
     light() {
       return require("@/assets/images/light.png");
     },
-    lid() {
-      return require("@/assets/images/lid.png");
+  },
+  watch: {
+    cover() {
+      this.active = false;
+      this.animation = false;
+      setTimeout(() => {
+        // 动画位置重置
+        this.animation = true;
+        this.active = true;
+      });
     },
   },
 };
@@ -41,7 +58,7 @@ export default {
   background: no-repeat center;
   background-size: cover;
   position: relative;
-  animation: turn 20s linear infinite paused;
+
   .cover,
   .lid,
   .light {
@@ -58,7 +75,6 @@ export default {
     max-width: 63%;
     max-height: 63%;
     border-radius: 50%;
-    background-color: $background-color;
     overflow: hidden;
   }
   .cover img {
@@ -73,6 +89,9 @@ export default {
   }
   .light {
     z-index: 3;
+  }
+  &.animation {
+    animation: turn 20s linear infinite paused;
   }
   &.active {
     animation-play-state: running;

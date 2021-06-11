@@ -3,10 +3,11 @@
     <van-popup
       round
       lock-scroll
-      position="bottom"
-      v-model="show"
+      transition-appear
       safe-area-inset-bottom
-      :style="{ height: '60%' }"
+      overlay-class="popup"
+      position="bottom"
+      v-model="isShowDrawerlist"
       @close.stop="toggleDrawerHide"
     >
       <div class="list">
@@ -56,7 +57,7 @@
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   name: "bottomlist",
-  props: ["show"],
+  props: ["isShowDrawerlist"],
   data() {
     return { isShow: false };
   },
@@ -112,12 +113,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~sass/var.scss";
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .drawerlist {
-  z-index: 200;
-
-
+  z-index: 300;
+  .popup {
+    height: 8rem;
+    margin: $padding-sm;
+  }
 
   .list {
     height: 100%;
@@ -148,7 +152,6 @@ export default {
       }
       .operation {
         @include flexSpaceBetween;
-        // margin-bottom: $text-XXS;
         .module {
           width: 2rem;
           margin-right: $text-XXS;

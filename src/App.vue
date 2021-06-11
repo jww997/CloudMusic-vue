@@ -81,7 +81,7 @@ export default {
         this.KeepAliveName = "";
         this.routerViewName = "fade";
       } else if (toKeepAlive) {
-        this.KeepAliveName = "fade";
+        this.KeepAliveName = "";
         this.routerViewName = "";
       } else if (fromKeepAlive) {
         this.KeepAliveName = "";

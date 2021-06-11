@@ -31,10 +31,13 @@
       class="wapNav"
       name="wap-nav"
       size="25"
-      @click.stop="handleWapNavClick"
+      @click.stop="handleWapNavClick(true)"
     />
     <!-- 播放列表 -->
-    <drawerlist :show="isShowDrawerlist" @close="handleWapNavClick" />
+    <drawerlist
+      :isShowDrawerlist="isShowDrawerlist"
+      @close="handleWapNavClick(false)"
+    />
   </div>
 </template>
 
@@ -45,7 +48,7 @@ import Drawerlist from "./drawerlist.vue";
 import Disc from "./disc.vue";
 
 export default {
-  name: "bottombar",
+  name: "playbar",
   components: {
     Drawerlist,
     Disc,
@@ -57,8 +60,7 @@ export default {
   },
   computed: {
     current() {
-      const that = this;
-      return that.music.current;
+      return this.music.current;
     },
     ...mapGetters(["music", "isShowDrawer"]),
   },
@@ -66,8 +68,9 @@ export default {
     toPlayer() {
       toPages.call(this, { name: "player" });
     },
-    handleWapNavClick() {
-      this.isShowDrawerlist = !this.isShowDrawerlist;
+    handleWapNavClick(val) {
+      const that = this;
+      that.isShowDrawerlist = val;
     },
     toggleStatus: function () {
       const that = this;

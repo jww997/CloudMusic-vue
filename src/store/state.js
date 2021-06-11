@@ -14,7 +14,7 @@ const list = [{
 export default {
 
   music: {
-    id: -1,               // 标识号
+    id: -1,               // 标识id
     isShow: false,        // 显示
     isPlaying: false,     // 状态
     isDraging: false,     // 拖拽
@@ -33,7 +33,7 @@ export default {
     isShowDrawer: false,  // 抽屉列表
   },
   mv: {
-    id: -1,               // 标识号
+    id: -1,               // 标识id
     isShow: false,        // 显示
     isPlaying: false,     // 状态
     isDraging: false,     // 拖拽

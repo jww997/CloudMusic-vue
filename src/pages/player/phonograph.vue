@@ -84,6 +84,7 @@ export default {
     @include positionCenter;
     bottom: auto;
     left: 1.3rem;
+    z-index: 5;
     &.active {
       transform: rotate(0);
     }

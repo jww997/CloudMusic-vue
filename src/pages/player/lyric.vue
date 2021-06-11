@@ -98,9 +98,10 @@ export default {
     },
     currentTime: function (val) {
       const that = this;
-      try {
-        that.lyric.seek(val * 1000);
-      } catch (error) {}
+      const currentTime = (val * 1000).toFixed(3);
+      that.lyric.seek(currentTime);
+      // try {
+      // } catch (error) {}
     },
     volume: function (val) {
       const that = this;

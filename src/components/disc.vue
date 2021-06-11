@@ -42,7 +42,7 @@ export default {
         // 动画位置重置
         this.animation = true;
         this.active = true;
-      });
+      }, 300);
     },
   },
 };

@@ -23,7 +23,7 @@
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { toPages } from "@/assets/js/util.js";
-import Slide from "./components/slide.vue";
+import Slide from "./components/slide";
 
 export default {
   name: "banner",

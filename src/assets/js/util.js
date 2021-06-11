@@ -18,7 +18,6 @@ export {
 
 function toPages(to = {}, success, fail, complete) {
   const that = this;
-  console.log(`to = `, to);
   let {
     name,
     params,

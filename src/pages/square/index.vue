@@ -1,60 +1,34 @@
 <template>
   <div class="square">
-    <navbar :title="'歌单广场'" fixed black backgroundColor="#fff"></navbar>
+    <!-- 顶部导航条 -->
+    <navbar class="navbar" title="歌单广场" />
 
-    <placeholder />
-    <tags :list="tags" @toggleCat="toggleCat"></tags>
+    <tags :list="tags" @toggleCat="toggleCat" />
     <matrix
       :list="playlists"
       destination="playlist"
       @scrollToEnd="scrollToEnd"
-    ></matrix>
+    />
     <placeholder />
-
-    <!-- <scroll
-      :data="playlists"
-      :refreshDelay="1000"
-      :pullup="true"
-      @scrollToEnd="scrollToEnd"
-    > -->
-
-    <!-- <list :list="playlists"></list> -->
-
-    <!-- <van-loading class="loading" size="24px">加载中...</van-loading> -->
-    <!-- v-if="isLoading && total != playlists.length" -->
-    <!-- </scroll> -->
-
-    <!--  -->
-
-    <transition :name="transition">
-      <router-view></router-view>
-    </transition>
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
-import Placeholder from "@/components/placeholder.vue";
+import Navbar from "@/components/navbar";
+import Placeholder from "@/components/placeholder";
 
 import Matrix from "@/common/matrix";
-
-import Bottombar from "@/common/bottombar";
-
-import Navbar from "@/common/navbar";
-import Tags from "./components/tags";
-// import List from "./components/list";
+import Tags from "./tags";
 
 export default {
   name: "square",
   components: {
-    Placeholder,
-
-    Matrix,
-    Bottombar,
-    // Scroll,
     Navbar,
+
+    Placeholder,
+    Matrix,
     Tags,
-    // List,
   },
   data: function () {
     return {
@@ -125,9 +99,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~sass/var.scss";
 @import "~sass/mixins.scss";
-@import "~sass/varibles.scss";
 .square {
-  @include suspension;
+  .navbar {
+    color: $black;
+  }
 }
 </style>

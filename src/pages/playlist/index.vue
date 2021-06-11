@@ -28,7 +28,7 @@
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { formatUnit } from "@/assets/js/filter.js";
 import Placeholder from "@/components/placeholder.vue";
-import Navbar from "./components/navbar.vue";
+import Navbar from "@/components/navbar.vue";
 import Detail from "./detail.vue";
 import Playall from "./playall.vue";
 import Songs from "./songs.vue";
@@ -80,7 +80,6 @@ export default {
       const that = this;
       let id = that.$route.params.id;
       if (!id) return false;
-      console.log(`id = ${id}`);
       that.$api.getPlaylistDetail({ id }).then((res) => {
         const { playlist } = res.data;
         that.playlist = playlist;

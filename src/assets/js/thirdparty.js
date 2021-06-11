@@ -9,7 +9,7 @@ import api from "@/api"
 
 import 'amfe-flexible/index.js' // rem 动态适配
 import './vant.js' // 有赞
-import './antd.js'
+// import './antd.js'
 
 Vue.prototype.$api = api;
 

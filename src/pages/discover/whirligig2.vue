@@ -12,9 +12,9 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
-import Block from "./components/block.vue";
-import Slide from "./components/slide.vue";
-import Songlist from "./components/songlist.vue";
+import Block from "./components/block";
+import Slide from "./components/slide";
+import Songlist from "./components/songlist";
 
 export default {
   name: "whirligig2",

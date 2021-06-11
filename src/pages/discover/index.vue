@@ -38,13 +38,13 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
-import Placeholder from "@/components/placeholder.vue";
-import Searchbar from "./components/searchbar.vue";
-import Banner from "./banner.vue";
-import Bowling from "./bowling.vue";
-import Whirligig from "./whirligig.vue";
-import Whirligig2 from "./whirligig2.vue";
-import Calendar from "./calendar.vue";
+import Placeholder from "@/components/placeholder";
+import Searchbar from "./components/searchbar";
+import Banner from "./banner";
+import Bowling from "./bowling";
+import Whirligig from "./whirligig";
+import Whirligig2 from "./whirligig2";
+import Calendar from "./calendar";
 
 import Refresh from "@/common/refresh";
 
@@ -113,15 +113,12 @@ export default {
     },
     getdata() {
       const that = this;
-      that.$api
-        .getHomepageBlockPage({ refresh: true })
-        .then((res) => {
-          that.blocks = res.data.data.blocks;
-          return that.$api.getBanner();
-        })
-        .then((res) => {
-          that.banners = res.data.banners;
-        });
+      that.$api.getHomepageBlockPage({ refresh: true }).then((res) => {
+        that.blocks = res.data.data.blocks;
+      });
+      that.$api.getBanner().then((res) => {
+        that.banners = res.data.banners;
+      });
     },
   },
   mounted: function () {

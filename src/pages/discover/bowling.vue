@@ -27,7 +27,7 @@
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { formatDate } from "@/assets/js/filter.js";
 import { toPages } from "@/assets/js/util.js";
-import Slide from "./components/slide.vue";
+import Slide from "./components/slide";
 
 export default {
   name: "bowling",

@@ -26,7 +26,7 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
-import Block from "./components/block.vue";
+import Block from "./components/block";
 export default {
   name: "calendar",
   props: ["block"],

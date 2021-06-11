@@ -19,7 +19,7 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
-import Navbar from "../playlist/components/navbar.vue";
+import Navbar from "@/components/navbar.vue";
 import Handle from "./handle.vue";
 
 import { formatLyric, formatArtists } from "@/assets/js/filter.js";

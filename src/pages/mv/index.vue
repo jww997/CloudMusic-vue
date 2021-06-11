@@ -14,7 +14,7 @@
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { formatUnit } from "@/assets/js/filter.js";
-import Navbar from "../playlist/components/navbar.vue";
+import Navbar from "@/components/navbar.vue";
 import Musicvideo from "./musicvideo.vue";
 import Detail from "./detail.vue";
 import Detail2 from "./detail2.vue";

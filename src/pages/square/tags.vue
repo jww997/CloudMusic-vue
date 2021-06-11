@@ -1,6 +1,6 @@
 <template>
-  <div class="children">
-    <div class="tags">
+  <div class="tags">
+    <div class="cccccccccccc">
       <span
         :class="{ tag: true, active: index == tagsIndex }"
         v-for="(item, index) in list"
@@ -42,7 +42,7 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-.children {
+.tags {
   @include flexSpaceBetween;
   height: 1rem;
   // padding: 0.3rem 0;
@@ -54,7 +54,7 @@ export default {
   // bottom: auto;
   top: $safeDistance;
   z-index: 1;
-  .tags {
+  .cccccccccccc {
     flex-grow: 1;
     width: 3rem;
     @include flexSpaceBetween;

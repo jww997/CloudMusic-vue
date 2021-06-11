@@ -34,10 +34,10 @@
       @click.stop="handleWapNavClick(true)"
     />
     <!-- 播放列表 -->
-    <drawerlist
+    <!-- <drawerlist
       :isShowDrawerlist="isShowDrawerlist"
       @close="handleWapNavClick(false)"
-    />
+    /> -->
   </div>
 </template>
 

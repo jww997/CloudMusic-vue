@@ -28,7 +28,6 @@ import {
   setLocalStorage,
   delLocalStorage,
 } from "@/assets/js/util.js";
-import { formatTime, formatDate } from "@/assets/js/filter.js";
 import Tabbar from "@/components/tabbar.vue";
 import Playbar from "@/components/playbar.vue";
 import Music from "@/components/music.vue";
@@ -66,27 +65,31 @@ export default {
   watch: {
     // 监听路由变化
     $route(to, from) {
-      console.log("to = ", to);
-      console.log("from = ", from);
-
       const { keepAlive: toKeepAlive } = to.meta;
       const { keepAlive: fromKeepAlive } = from.meta;
 
       if (this.drawer.includes(to.name)) {
         this.KeepAliveName = "";
         this.routerViewName = "drawer";
-        return false;
-      }
-      if (toKeepAlive && fromKeepAlive) {
-        this.KeepAliveName = "";
-        this.routerViewName = "fade";
-      } else if (toKeepAlive) {
-        this.KeepAliveName = "";
-        this.routerViewName = "";
-      } else if (fromKeepAlive) {
+      } else {
         this.KeepAliveName = "";
         this.routerViewName = "";
       }
+
+      // const { enterAnimationName, leaveAnimationName } = to.meta;
+      // this.KeepAliveName = enterAnimationName;
+      // this.routerViewName = leaveAnimationName;
+
+      // if (toKeepAlive && fromKeepAlive) {
+      //   this.KeepAliveName = "";
+      //   this.routerViewName = "fade";
+      // } else if (toKeepAlive) {
+      //   this.KeepAliveName = "";
+      //   this.routerViewName = "";
+      // } else if (fromKeepAlive) {
+      //   this.KeepAliveName = "";
+      //   this.routerViewName = "";
+      // }
     },
   },
   provide() {
@@ -103,13 +106,6 @@ export default {
   },
   mounted: function () {
     const that = this;
-    console.log(`欢迎来到村乐，网易云音乐的搬运工！`);
-    console.log(`说明：本项目仅用于学习，无任何商业用途，也请勿用于商业！`);
-    console.log(`说明：如有侵权，请联系删除！1551005987@qq.com`);
-    console.log(`小程序版 https://github.com/jww997/CloudMusic-wx`);
-    console.log(`VUE版 https://github.com/jww997/CloudMusic-vue`);
-    console.log(formatDate(undefined, 2), formatTime()); // undefined还是有点用
-    console.log(`需求墙：1. 播放页加个分享功能 2. 加个调音量(已完成)`);
 
     if (!getLocalStorage("history")) setLocalStorage("history", []);
   },

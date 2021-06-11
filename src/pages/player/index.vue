@@ -11,7 +11,7 @@
     <!-- 歌词 -->
     <lyric :lyric="lyric" v-if="isShowLyric" @handleClick="toggleShowLyric"></lyric>
     <!-- 唱片机 -->
-    <phonograph :picUrl="picUrl" v-else @handleClick="toggleShowLyric"></phonograph>
+    <phonograph :cover="picUrl" v-else @handleClick="toggleShowLyric"></phonograph>
     <!-- 控制歌曲 -->
     <handle :lyric="lyric"></handle>
   </div>

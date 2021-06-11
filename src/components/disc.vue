@@ -9,7 +9,7 @@
     <div class="cover">
       <img :src="cover" />
     </div>
-    <img class="lid" :src="lid" />
+    <!-- <img class="lid" :src="lid" /> -->
     <img class="light" :src="light" />
   </div>
 </template>
@@ -64,7 +64,6 @@ export default {
   .light {
     transform: scale(1.1);
     @include positionCenter;
-    @include flexCenter;
   }
   .lid,
   .light {
@@ -76,6 +75,7 @@ export default {
     max-height: 63%;
     border-radius: 50%;
     overflow: hidden;
+    @include flexCenter;
   }
   .cover img {
     max-width: 100%;

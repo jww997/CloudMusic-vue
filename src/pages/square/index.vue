@@ -2,8 +2,9 @@
   <div class="square">
     <!-- 顶部导航条 -->
     <navbar class="navbar" title="歌单广场" />
-
+    <!-- 标签 -->
     <tags :list="tags" @toggleCat="toggleCat" />
+    <!-- 歌单列表 -->
     <matrix
       :list="playlists"
       destination="playlist"
@@ -103,6 +104,7 @@ export default {
 @import "~sass/mixins.scss";
 .square {
   .navbar {
+    background-color: $background-color;
     color: $black;
   }
 }

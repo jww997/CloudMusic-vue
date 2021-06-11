@@ -1,38 +1,35 @@
 <template>
   <div class="tags">
-    <div class="cccccccccccc">
+    <!-- 标签 -->
+    <div class="labels">
       <span
-        :class="{ tag: true, active: index == tagsIndex }"
+        class="label"
+        :class="{ active: index == labelIndex }"
         v-for="(item, index) in list"
         :key="item.id"
         @click="toggleCat(item.name, index)"
       >
         {{ item.name }}
       </span>
-      <!-- <div class="slider" :style="{ left: `${tagsIndex}rem` }"></div> -->
     </div>
-    <div class="iconfont">&#xe609;</div>
+    <!-- 编辑标签 -->
+    <van-icon class="edit" name="edit" />
   </div>
 </template>
 
 <script>
 export default {
   name: "tags",
-  props: {
-    list: {
-      type: Array,
-      default: [],
-    },
-  },
-  data: function () {
+  props: ["list"],
+  data() {
     return {
-      tagsIndex: -1,
+      labelIndex: -1,
     };
   },
   methods: {
-    toggleCat: function (name, index) {
+    toggleCat(name, index) {
       const that = this;
-      that.tagsIndex = index;
+      that.labelIndex = index;
       that.$emit("toggleCat", name);
     },
   },
@@ -40,61 +37,45 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~sass/var.scss";
 @import "~sass/mixins.scss";
-@import "~sass/varibles.scss";
 .tags {
-  @include flexSpaceBetween;
-  height: 1rem;
-  // padding: 0.3rem 0;
-  box-sizing: border-box;
-  background-color: #fff;
-  // overflow: visible;
+  height: 50px;
+  padding: 0 $padding-sm;
+  background-color: $background-color;
   position: sticky;
-  // @include positionCenter;
-  // bottom: auto;
-  top: $safeDistance;
-  z-index: 1;
-  .cccccccccccc {
+  top: 50px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  .labels {
     flex-grow: 1;
-    width: 3rem;
-    @include flexSpaceBetween;
-    flex-wrap: nowrap;
+    height: 0.7rem;
     overflow: scroll;
-    .tag {
+    display: flex;
+    .label {
       flex-shrink: 0;
-      padding: 0.1rem $text-S;
-      font-size: $text-XS;
-      transition: 0.5s;
-      color: $theme-GRAY;
+      margin-right: $padding-sm * 2;
+      font-size: $font-size-lg;
+      transition: $animation-duration-base;
       &.active {
-        color: $theme-BLACK;
-        font-weight: bold;
+        color: $theme-color;
         position: relative;
-        &::before {
+        &::after {
           content: "";
-          width: 50%;
+          width: 60%;
           height: 0.1rem;
-          background-color: $theme-RED;
-          border-radius: 5rem;
-          z-index: -1;
+          background-color: $theme-color;
+          border-radius: $border-radius-max;
           @include positionCenter;
           top: auto;
         }
       }
     }
-    // .slider {
-    //   width: 1rem;
-    //   height: 0.1rem;
-    //   background-color: $theme-RED;
-    //   border-radius: 5rem;
-    //   position: absolute;
-    //   bottom: 0;
-    //   left: 0;
-    // }
   }
-  .iconfont {
+  .edit {
     flex-shrink: 0;
-    margin: 0 $text-XS;
+    margin-left: $padding-sm;
   }
 }
 </style>

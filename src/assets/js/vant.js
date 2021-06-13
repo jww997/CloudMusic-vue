@@ -11,7 +11,7 @@ import {
   // Cell, CellGroup, // 单元格为列表中的单个展示项。
   Icon, // 基于字体的图标集，可以通过 Icon 组件使用，也可以在其他组件中通过 icon 属性引用。
   Image as VanImage, // 增强版的 img 标签，提供多种图片填充模式，支持图片懒加载、加载中提示、加载失败提示。
-  // Col, Row, // Layout 提供了 van-row 和 van-col 两个组件来进行行列布局。
+  Col, Row, // Layout 提供了 van-row 和 van-col 两个组件来进行行列布局。
   Popup, // 弹出层容器，用于展示弹窗、信息提示等内容，支持多个弹出层叠加展示。
   Toast, // 在页面中间弹出黑色半透明提示，用于消息通知、加载提示、操作结果提示等场景。
 
@@ -92,8 +92,8 @@ import {
 // Vue.use(CellGroup);
 Vue.use(Icon); // 图标
 Vue.use(VanImage); // 图片
-// Vue.use(Col); // 布局
-// Vue.use(Row);
+Vue.use(Col); // 布局
+Vue.use(Row);
 Vue.use(Popup); // 弹出层
 // Vue.use(Toast); // 轻提示
 

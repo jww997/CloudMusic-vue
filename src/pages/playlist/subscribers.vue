@@ -11,7 +11,7 @@
       />
     </div>
     <!-- 右侧文本 -->
-    <div class="text" v-if="list.length">{{ list.length }}人收藏</div>
+    <div class="text" v-if="list && list.length">{{ list.length }}人收藏</div>
   </div>
 </template>
 

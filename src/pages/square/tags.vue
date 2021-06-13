@@ -50,7 +50,7 @@ export default {
   align-items: center;
   .labels {
     flex-grow: 1;
-    height: 0.7rem;
+   line-height: 50px;
     overflow: scroll;
     display: flex;
     .label {
@@ -76,6 +76,7 @@ export default {
   .edit {
     flex-shrink: 0;
     margin-left: $padding-sm;
+    font-size: $font-size-sm * 2;
   }
 }
 </style>

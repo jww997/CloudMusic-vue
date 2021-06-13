@@ -14,5 +14,6 @@ export default {
 .placeholder {
   height: 50px;
   flex-shrink: 0;
+  background-color: transparent;
 }
 </style>

@@ -5,31 +5,32 @@
     <!-- 标签 -->
     <tags :list="tags" @toggleCat="toggleCat" />
     <!-- 歌单列表 -->
-    <matrix
+    <!-- <matrix
       :list="playlists"
       destination="playlist"
       @scrollToEnd="scrollToEnd"
     />
-    <placeholder />
+    <placeholder /> -->
+    <list :list="playlists"/>
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import Navbar from "@/components/navbar";
-import Placeholder from "@/components/placeholder";
-
-import Matrix from "@/common/matrix";
 import Tags from "./tags";
+import List from "./list";
+
+import Placeholder from "@/components/placeholder";
 
 export default {
   name: "square",
   components: {
     Navbar,
+    Tags,
+    List,
 
     Placeholder,
-    Matrix,
-    Tags,
   },
   data: function () {
     return {

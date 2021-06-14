@@ -4,8 +4,7 @@ import Router from "vue-router"
 Vue.use(Router);
 
 const routers = {
-  routes: [
-    {
+  routes: [{
       path: "*",
       redirect: "/discover",
     },
@@ -25,7 +24,9 @@ const routers = {
       path: "/mine",
       name: "mine",
       component: () => import("@/pages/mine"),
-      meta: { keepAlive: true },
+      meta: {
+        keepAlive: true
+      },
     },
     {
       // alias: "歌单详情",
@@ -51,14 +52,18 @@ const routers = {
       path: "/square",
       name: "square",
       component: () => import("@/pages/square"),
-      // meta: { keepAlive: true },
+      meta: {
+        keepAlive: true
+      },
     },
     {
       // alias: "排行榜",
       path: "/toplist",
       name: "toplist",
       component: () => import("@/pages/toplist"),
-      // meta: { keepAlive: true },
+      meta: {
+        keepAlive: true
+      },
     },
     {
       // alias: "搜索",
@@ -87,7 +92,10 @@ const routers = {
   ],
   // 重置滚动条位置
   scrollBehavior(to, from, savedPosition) {
-    return { x: 0, y: 0 }
+    return {
+      x: 0,
+      y: 0
+    }
   }
 }
 
@@ -96,7 +104,10 @@ const router = new Router(routers);
 export default router;
 
 // 全局前置守卫
-import { formatTime, formatDate } from "@/assets/js/filter.js";
+import {
+  formatTime,
+  formatDate
+} from "@/assets/js/filter.js";
 router.beforeEach((to, from, next) => {
   console.log("全局前置守卫");
   console.log(`to = `, to);

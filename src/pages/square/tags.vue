@@ -7,8 +7,9 @@
         :class="{ active: index == labelIndex }"
         v-for="(item, index) in list"
         :key="item.id"
-        @click="toggleCat(item.name, index)"
+        @click="$emit('handleLabelClick', item, index)"
       >
+        <!-- @click="toggleCat(item.name, index)" -->
         {{ item.name }}
       </span>
     </div>
@@ -20,12 +21,7 @@
 <script>
 export default {
   name: "tags",
-  props: ["list"],
-  data() {
-    return {
-      labelIndex: -1,
-    };
-  },
+  props: ["list", "labelIndex"],
   methods: {
     toggleCat(name, index) {
       const that = this;
@@ -50,7 +46,7 @@ export default {
   align-items: center;
   .labels {
     flex-grow: 1;
-   line-height: 50px;
+    line-height: 50px;
     overflow: scroll;
     display: flex;
     .label {
@@ -68,6 +64,7 @@ export default {
           background-color: $theme-color;
           border-radius: $border-radius-max;
           @include positionCenter;
+          bottom: $padding-sm / 2;
           top: auto;
         }
       }

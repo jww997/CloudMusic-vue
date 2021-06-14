@@ -1,6 +1,6 @@
 <template>
   <div class="list">
-    <van-row>
+    <van-row gutter="20">
       <van-col span="8" v-for="item in list" :key="item.id">
         <playlist
           class="playlist"
@@ -39,10 +39,11 @@ export default {
 @import "~sass/var.scss";
 @import "~sass/mixins.scss";
 .list {
-  padding-right: $padding-sm;
+  min-height: 15rem;
+  background-color: $white;
+  padding: $padding-sm $padding-sm 0;
   .playlist {
-    height: 5rem;
-    margin-left: $padding-sm;
+    height: 4.5rem;
   }
 }
 </style>

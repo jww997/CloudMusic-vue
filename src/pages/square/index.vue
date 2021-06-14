@@ -3,15 +3,15 @@
     <!-- 顶部导航条 -->
     <navbar class="navbar" title="歌单广场" />
     <!-- 标签 -->
-    <tags :list="tags" @toggleCat="toggleCat" />
-    <!-- 歌单列表 -->
-    <!-- <matrix
-      :list="playlists"
-      destination="playlist"
-      @scrollToEnd="scrollToEnd"
+    <tags
+      :list="tags"
+      :labelIndex="labelIndex"
+      @handleLabelClick="handleLabelClick"
     />
-    <placeholder /> -->
-    <list :list="playlists"/>
+    <!-- 歌单列表 -->
+    <list :list="playlists" />
+
+    <placeholder />
   </div>
 </template>
 
@@ -36,8 +36,9 @@ export default {
     return {
       playlists: [],
       tags: [],
-      cat: "",
+      cat: "综艺",
       total: -1,
+      labelIndex: 0,
 
       // isLoading: false,
     };
@@ -58,6 +59,13 @@ export default {
       that.playlists = [];
       that.total = -1;
     },
+
+    handleLabelClick(val, index) {
+      const { name } = val;
+      this.cat = name;
+      this.labelIndex = index;
+    },
+
     toggleCat: function (name) {
       const that = this;
       that.cat = name;

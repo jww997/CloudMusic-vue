@@ -113,8 +113,8 @@ export default {
 @import "~sass/mixins.scss";
 .square {
   .navbar {
-    background-color: $background-color;
-    color: $black;
+    background-color: $white;
+    color: $text-color;
   }
 }
 </style>

@@ -1,30 +1,27 @@
 <template>
   <div class="toplist">
-    <navbar :title="'排行榜'" fixed black backgroundColor="#fff"></navbar>
-
-    <matrix :list="list" destination="playlist"></matrix>
+    <!-- 顶部导航栏 -->
+    <navbar class="navbar" title="排行榜" />
+    <!-- 榜单列表 -->
+    <list :list="list" />
+    <placeholder />
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
-import Matrix from "@/common/matrix";
+import Navbar from "@/components/navbar";
+import List from "./list";
+import Placeholder from "@/components/placeholder";
 
-import Bottombar from "@/common/bottombar";
-
-import Navbar from "@/common/navbar";
-import Cover from "@/components/cover";
-import { toPages } from "@/assets/js/util.js";
 export default {
-  name: "ranking",
+  name: "toplist",
   components: {
-    Matrix,
-    Bottombar,
-
     Navbar,
-    Cover,
+    List,
+    Placeholder,
   },
-  data: function () {
+  data() {
     return {
       list: [],
     };
@@ -32,13 +29,12 @@ export default {
   computed: {
     ...mapGetters(["transition"]),
   },
-  mounted: function () {
+  mounted() {
     const that = this;
     that.getdata();
   },
   methods: {
-    toPages,
-    getdata: function () {
+    getdata() {
       const that = this;
       that.$api.getToplist().then((res) => {
         that.list = res.data.list;
@@ -54,9 +50,10 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/var.scss";
 @import "~sass/mixins.scss";
-@import "~sass/varibles.scss";
 .toplist {
-  @include suspension;
-  padding: $safeDistance 0;
+  .navbar {
+    background-color: $white;
+    color: $text-color;
+  }
 }
 </style>

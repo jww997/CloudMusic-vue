@@ -38,7 +38,7 @@ export default {
 .tags {
   height: 50px;
   padding: 0 $padding-sm;
-  background-color: $background-color;
+  background-color: $white;
   position: sticky;
   top: 50px;
   z-index: 100;

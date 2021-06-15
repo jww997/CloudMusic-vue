@@ -3,7 +3,7 @@
     <!-- 顶部导航栏 -->
     <navbar :title="`评论(${totalCount})`" />
     <!-- 评论列表 -->
-    <list :comments="comments" @handleScrollBottom="handleScrollBottom" />
+    <list :list="comments" @handleScrollBottom="handleScrollBottom" />
   </div>
 </template>
 

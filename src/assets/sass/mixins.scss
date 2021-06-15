@@ -33,6 +33,7 @@
 }
 
 @mixin linefeed {
+  letter-spacing: 1px;
   text-align: justify;
   text-align-last: left;
   white-space: pre-wrap;

@@ -1,22 +1,27 @@
 <template>
   <div class="list">
     <scroll :handleScrollBottom="handleScrollBottom">
-      <div class="comment" v-for="item in comments" :key="item.id">
-        <div class="left">
-          <img class="avatarUrl" :src="item.user.avatarUrl" />
-        </div>
-        <div class="right">
-          <div class="nickname">{{ item.user.nickname }}</div>
-          <div class="subheading">
-            <span class="time">{{ formatDate(item.time) }}</span>
-            <span class="wonderful">·精彩评论</span>
-          </div>
+      <div class="line" v-for="item in list" :key="item.id">
+        <van-image
+          class="portrait"
+          :src="item.user.avatarUrl"
+          :lazy-load="item.user.avatarUrl"
+        />
+        <div class="text">
+          <div class="name">{{ item.user.nickname }}</div>
+          <div class="subheading">{{ formatDate(item.time) }}·精彩评论</div>
           <div class="content">{{ item.content }}</div>
-          <div class="reply">2条回复 &gt;</div>
+          <div class="reply" v-if="item.showFloorComment.showReplyCount">
+            {{ item.showFloorComment.replyCount }}条回复 &gt;
+          </div>
         </div>
         <div class="like">
-          <div class="text">{{ item.likedCount }}</div>
-          <div :class="{ iconfont: true, active: item.liked }">&#xe697;</div>
+          <span class="count">{{ item.likedCount }}</span>
+          <van-icon
+            class="goodjob"
+            :class="{ active: item.liked }"
+            :name="`good-job${item.liked ? '' : '-o'}`"
+          />
         </div>
       </div>
     </scroll>
@@ -31,7 +36,7 @@ import Scroll from "@/components/Scroll";
 
 export default {
   name: "list",
-  props: ["comments"],
+  props: ["list"],
   components: {
     Placeholder,
     Scroll,
@@ -48,79 +53,66 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/var.scss";
 @import "~sass/mixins.scss";
-@import "~sass/varibles.scss";
 .list {
   padding: 0 $padding-sm;
   background-color: $white;
-
-  .comment {
+  .line {
     min-height: 2rem;
-    padding: 0.3rem;
-    padding-left: 20%;
-    // padding-right: 15%;
+    padding: $padding-sm 0 $padding-sm 1.7rem;
+    border-bottom: $border-width-base solid $border-color;
     box-sizing: border-box;
-    border-bottom: 1px solid $theme-LIGHTGRAY;
     position: relative;
-    .left,
-    .like {
-      @include positionCenter;
-      @include flexCenter;
-      bottom: auto;
-      top: 0.4rem;
+    .portrait {
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      overflow: hidden;
+      position: absolute;
+      top: $padding-sm;
+      left: 0;
     }
-    .left {
-      flex-direction: column;
-      right: 80%;
-      .avatarUrl {
-        width: 1.3rem;
-        height: 1.3rem;
-        border-radius: 50%;
-        background-color: $theme-LIGHTGRAY;
-      }
-    }
-    .right {
-      line-height: $text-S;
-      font-size: $text-XS;
-      .nickname,
+    .text {
+      line-height: $line-height-sm;
+      font-size: $font-size-sm;
+      .name,
       .subheading {
-        padding-right: 15%;
+        padding-right: 3rem;
         box-sizing: border-box;
       }
-      .nickname {
-        color: $theme-GRAY;
+      .name {
+        color: $gray-7;
       }
       .subheading {
-        line-height: $text-M;
-        font-size: $text-XXS;
-
-        .time {
-          color: #999;
-        }
-        .wonderful {
-          color: #777;
-        }
+        color: $gray-5;
+      }
+      .content,
+      .reply {
+        margin-top: $padding-base;
       }
       .content {
-        margin-top: $text-XXXS;
-        text-align: justify;
+        @include linefeed;
       }
       .reply {
-        margin-top: $text-XXXS;
-        color: $theme-BLUE;
+        color: $theme-color;
       }
     }
-
     .like {
-      left: 85%;
-      color: $theme-GRAY;
-      .text {
-        margin-right: $text-XXXS;
-        font-size: $text-XS;
+      position: absolute;
+      top: $padding-sm;
+      right: 0;
+      display: flex;
+      align-items: center;
+      .count {
+        max-width: 2rem;
+        font-size: $font-size-sm;
+        margin-bottom: -$padding-base;
+        @include omit;
       }
-      .iconfont {
-        font-size: $text-S;
+      .goodjob {
+        font-size: $font-size-lg;
+        margin-left: $padding-base;
         &.active {
-          color: $theme-RED;
+          color: $theme-color;
         }
       }
     }

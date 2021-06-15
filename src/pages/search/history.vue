@@ -1,7 +1,8 @@
 <template>
-  <div class="children" v-if="list.length">
+  <div class="history">
     <div class="title">历史</div>
     <div
+      class="words"
       :class="{
         list: true,
         fadeLeft: fadeType == 1,
@@ -85,62 +86,61 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~sass/var.scss";
 @import "~sass/mixins.scss";
-@import "~sass/varibles.scss";
-.children {
-  margin: $text-XS $text-XS 0;
-  @include flexSpaceBetween;
-  .title {
+.history {
+  padding: $padding-sm;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .title,
+  .delete,
+  .keywords {
     flex-shrink: 0;
-    line-height: $text-XL;
-    font-size: $text-S;
-    font-weight: bold;
-    @include omit;
   }
-  .list {
+  .title {
+    font-size: $font-size-lg;
+    font-weight: bold;
+  }
+  .words {
     flex-grow: 1;
-    margin: 0 $text-XS;
+    margin: 0 $padding-sm;
     display: flex;
-    overflow: scroll;
+    overflow-y: scroll;
     &.fadeLeft {
-      -webkit-mask-image: linear-gradient(to right, transparent, #fff 10%);
-      mask-image: linear-gradient(to right, transparent, #fff 10%);
+      -webkit-mask-image: linear-gradient(to right, transparent, $white 10%);
+      mask-image: linear-gradient(to right, transparent, $white 10%);
     }
     &.fadeRight {
-      -webkit-mask-image: linear-gradient(to right, #fff 90%, transparent);
-      mask-image: linear-gradient(to right, #fff 90%, transparent);
+      -webkit-mask-image: linear-gradient(to right, $white 90%, transparent);
+      mask-image: linear-gradient(to right, $white 90%, transparent);
     }
     &.fadeBoth {
       -webkit-mask-image: linear-gradient(
         to right,
         transparent,
-        #fff 10%,
-        #fff 90%,
+        $white 10%,
+        $white 90%,
         transparent
       );
       mask-image: linear-gradient(
         to right,
         transparent,
-        #fff 10%,
-        #fff 90%,
+        $white 10%,
+        $white 90%,
         transparent
       );
     }
     .keywords {
-      flex-shrink: 0;
-      padding: 0 $text-XS;
-      margin-left: $text-XS;
-      background-color: $theme-LIGHTGRAY;
-      border-radius: 30px;
-      line-height: $text-XL;
-      font-size: $text-S;
+      margin-left: $padding-sm;
+      padding: $padding-xs $padding-sm;
+      background-color: $background-color;
+      border-radius: $border-radius-max;
+      font-size: $font-size-sm;
       &:first-child {
         margin-left: 0;
       }
     }
-  }
-  .delete {
-    flex-shrink: 0;
   }
 }
 </style>

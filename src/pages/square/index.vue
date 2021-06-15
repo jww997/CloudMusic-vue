@@ -1,6 +1,6 @@
 <template>
   <div class="square">
-    <!-- 顶部导航条 -->
+    <!-- 顶部导航栏 -->
     <navbar class="navbar" title="歌单广场" />
     <!-- 标签 -->
     <tags

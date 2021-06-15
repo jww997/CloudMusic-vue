@@ -5,12 +5,16 @@
       :name="beforeIconName || 'arrow-left'"
       @click="back"
     />
-    <div class="headline" v-if="title">
-      <p class="title">{{ title }}</p>
-      <p class="subtitle" v-if="subtitle">{{ subtitle }}</p>
+
+    <div class="headline">
+      <template v-if="title">
+        <p class="title">{{ title }}</p>
+        <p class="subtitle" v-if="subtitle">{{ subtitle }}</p>
+      </template>
+      <slot name="addonMiddle" v-else />
     </div>
     <div class="addonAfter">
-      <slot name="addonAfter"></slot>
+      <slot name="addonAfter" />
     </div>
   </div>
 </template>

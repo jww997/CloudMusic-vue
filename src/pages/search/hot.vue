@@ -1,5 +1,5 @@
 <template>
-  <div class="children">
+  <div class="hot">
     <div class="header">
       <div class="title">热搜榜</div>
     </div>
@@ -46,11 +46,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~sass/var.scss";
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
-.children {
+.hot {
+  padding: 0 $padding-sm $padding-sm;
   .header {
-    margin: $text-XS $text-XS 0;
     @include flexSpaceBetween;
     border-bottom: 1px solid $theme-LIGHTGRAY;
     .title {

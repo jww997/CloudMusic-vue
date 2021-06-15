@@ -1,32 +1,33 @@
 <template>
   <div class="search">
-    <navbar fixed black backgroundColor="white">
-      <div class="seek">
-        <input
-          class="input"
-          type="text"
-          autofocus
-          :placeholder="searchDefault.showKeyword"
-          v-model="keywords"
-          @change="getdata"
-        />
-        <!-- @keydown="getSearch(keywords || searchDefault.realkeyword)" -->
-        <van-icon
-          class="clear"
-          name="cross"
-          @click="clearKeywords"
-          v-if="keywords"
-        />
-      </div>
+    <!-- 顶部导航栏 -->
+    <navbar class="navbar">
+      <template slot="addonMiddle">
+        <div class="seek">
+          <input
+            class="input"
+            type="text"
+            autofocus
+            :placeholder="searchDefault.showKeyword"
+            v-model="keywords"
+            @change="getdata"
+          />
+          <van-icon
+            class="clear"
+            name="cross"
+            @click="clearKeywords"
+            v-if="keywords"
+          />
+        </div>
+      </template>
     </navbar>
 
-    <!-- :list="history" -->
-    <!-- v-if="history.length" -->
-    <history @getSearch="getSearch"></history>
-    <hot @getSearch="getSearch" v-if="!list.length"></hot>
-    <list :list="list" v-else></list>
-
-    
+    <history @getSearch="getSearch" />
+    <hot @getSearch="getSearch" v-if="!list.length" />
+    <template v-else>
+      <playall class="playall" :list="list" />
+      <songs :list="list" />
+    </template>
   </div>
 </template>
 
@@ -37,23 +38,20 @@ import {
   setLocalStorage,
   delLocalStorage,
 } from "@/assets/js/util.js";
-import Navbar from "@/common/navbar";
-import List from "@/common/list";
-
-import Bottombar from "@/common/bottombar";
-
-import History from "./components/history";
-import Hot from "./components/hot";
+import Navbar from "@/components/navbar";
+import History from "./history";
+import Hot from "./hot";
+import Playall from "../playlist/playall";
+import Songs from "../playlist/songs";
 
 export default {
   name: "search",
   components: {
     Navbar,
     History,
-    Bottombar,
     Hot,
-
-    List,
+    Playall,
+    Songs,
   },
   data() {
     return {
@@ -137,28 +135,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~sass/var.scss";
 @import "~sass/mixins.scss";
 @import "~sass/varibles.scss";
 .search {
-  @include suspension;
-  padding: $safeDistance 0;
-  
+  background-color: $white;
+  .navbar {
+    background-color: $white;
+    color: $text-color;
+  }
+  .playall {
+    background-color: $white;
+    top: 50px;
+  }
   .seek {
-    width: 100%;
-    height: $text-XXL;
-    margin-right: $text-XS;
-    @include flexSpaceBetween;
-    font-size: $text-S;
+    margin: 0 $padding-sm;
+    font-size: $font-size-lg;
     position: relative;
     .input {
       width: 100%;
-      border-bottom: 1px solid $theme-GRAY;
+      border-bottom: $border-width-base solid $border-color;
     }
     .clear {
-      width: $text-L;
-      height: $text-L;
-      @include positionCenter;
+      font-size: $font-size-sm;
       @include flexCenter;
+      @include positionCenter;
       left: auto;
     }
   }

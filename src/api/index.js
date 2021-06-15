@@ -4,33 +4,9 @@
  * @Update: 2021-2-24 11:15:03
  * @Update log: 接口整合
  */
-import Vue from 'vue';
-import axios from 'axios';
-
-// const api = "https://www.mikonchen.top";
-const api = "http://www.mikonchen.top";
-// const api = "http://49.234.76.196";
-// const api = "http://localhost";
-const port = 3000;
-const limit = 20;
-
-function request(
-  suffix, // 接口后缀
-  parameter = {}, // 携带参数
-  config = {  // 额外配置项
-    isNeedLogin: false, // 是否需要登录
-  }) {
-
-  let cookie = Vue.prototype.$cookie.getCookie("cookie");
-  config.isNeedLogin && cookie && (parameter.cookie = cookie);
-
-  suffix += `?timestamp=${Date.parse(new Date()) / 1000}`; // POST请求url必须添加时间戳,使每次请求url不一样,不然请求会被缓存
-  return axios.post(`${api}:${port}/${suffix}`, parameter);
-}
-
+import { request, requestLogined } from "./http"
 
 export default {
-
   getLoginCellphone: parameter => { // 手机登录
     return request("login/cellphone", parameter);
     /**
@@ -79,7 +55,6 @@ export default {
      * 注意:调用登录接口的速度比调用其他接口慢,因为登录过程调用了加密算法
      */
   },
-
 
   getLoginRefresh: parameter => { // 刷新登录
     return request("login/refresh", parameter);
@@ -147,7 +122,7 @@ export default {
   },
 
   getLoginStatus: parameter => { // 登录状态
-    return request("login/status", parameter, { isNeedLogin: true });
+    return requestLogined("login/status", parameter);
     /**
      * 说明: 调用此接口, 可获取登录状态
      */
@@ -160,13 +135,13 @@ export default {
      */
   },
   getUserAccount: parameter => { // 获取账号信息
-    return request("user/account", parameter, { isNeedLogin: true });
+    return requestLogined("user/account", parameter);
     /**
      * 说明:登录后调用此接口,可获取用户账号信息
      */
   },
   getUserSubcount: parameter => { // 获取用户信息,歌单,收藏,mv,dj数量
-    return request("user/subcount", parameter, { isNeedLogin: true });
+    return requestLogined("user/subcount", parameter);
     /**
      * 说明:登录后调用此接口,可获取用户账号信息
      */
@@ -541,7 +516,7 @@ export default {
      */
   },
   getPlaylistDetail: parameter => { // 获取歌单详情
-    return request("playlist/detail", parameter, { isNeedLogin: true });
+    return requestLogined("playlist/detail", parameter);
     /**
      * @param id 歌单id
      * @param s (选)歌单最近的s个收藏者,默认为8
@@ -557,7 +532,7 @@ export default {
   },
 
   getSongUrl: parameter => { // 获取音乐地址
-    return request("song/url", parameter, { isNeedLogin: true });
+    return requestLogined("song/url", parameter);
     /**
      * @param id 音乐id
      * @param br (选)码率,默认设置了 999000 即最大码率,如果要 320k 则可设置为 320000,其他类推
@@ -708,7 +683,7 @@ export default {
   },
 
   getHomepageBlockPage: parameter => { // 首页-发现
-    return request("homepage/block/page", parameter, { isNeedLogin: true });
+    return requestLogined("homepage/block/page", parameter);
     /**
      * @param refresh 是否刷新数据,默认为true
      * 说明:调用此接口,可获取APP首页信息
@@ -873,7 +848,7 @@ export default {
      */
   },
   getBanner: parameter => { // banner
-    return request("banner", parameter, { isNeedLogin: true });
+    return requestLogined("banner", parameter);
     /**
      * @param type (选)资源类型,0PC, 1android, 2iphone, 3ipad
      */
@@ -896,7 +871,7 @@ export default {
      */
   },
   getSongDetail: parameter => { // 获取歌曲详情
-    return request("song/detail", parameter, { isNeedLogin: true });
+    return requestLogined("song/detail", parameter);
     /**
      * @param ids 音乐id,如ids=347230
      * 说明:调用此接口,传入音乐id(支持多个id,用,隔开),可获得歌曲详情(注意:歌曲封面现在需要通过专辑内容接口获取)
@@ -1009,39 +984,39 @@ export default {
   },
 
   getRecommendResource: parameter => { // 获取每日推荐歌单(需要登录)
-    return request("recommend/resource", parameter, { isNeedLogin: true });
+    return requestLogined("recommend/resource", parameter);
     /**
      * 说明:调用此接口,可获得每日推荐歌单
      */
   },
   getRecommendSongs: parameter => { // 获取每日推荐歌曲(需要登录)
-    return request("recommend/songs", parameter, { isNeedLogin: true });
+    return requestLogined("recommend/songs", parameter);
     /**
      * 说明:调用此接口,可获得每日推荐歌曲
      */
   },
 
   getHistoryRecommendSongs: parameter => { // 获取历史日推可用日期列表
-    return request("history/recommend/songs", parameter, { isNeedLogin: true });
+    return requestLogined("history/recommend/songs", parameter);
     /**
      * 说明:调用此接口,可获得历史日推可用日期列表
      */
   },
   getHistoryRecommendSongsDetail: parameter => { // 获取历史日推详情数据
-    return request("history/recommend/songs/detail", parameter, { isNeedLogin: true });
+    return requestLogined("history/recommend/songs/detail", parameter);
     /**
      * @param date 日期,通过历史日推可用日期列表接口获取,不能任意日期
      * 说明:调用此接口,传入当日日期,可获得当日历史日推数据
      */
   },
   getPersonalFm: parameter => { // 私人FM
-    return request("personal_fm", parameter, { isNeedLogin: true });
+    return requestLogined("personal_fm", parameter);
     /**
      * 说明:私人FM(需要登录)
      */
   },
   getDailySignin: parameter => { // 签到
-    return request("daily_signin", parameter, { isNeedLogin: true });
+    return requestLogined("daily_signin", parameter);
     /**
      * @param type (选)签到类型,默认0,其中0为安卓端签到,1为web/PC签到
      * 说明:调用此接口,传入签到类型(可不传,默认安卓端签到),可签到(需要登录),其中安卓端签到可获得3点经验,web/PC端签到可获得2点经验
@@ -1744,7 +1719,6 @@ export default {
      * 调用例子:使用GET方式:/batch?/api/v2/banner/get={"clientType":"pc"}使用POST方式传入参数:{"/api/v2/banner/get":{"clientType":"pc"}}
      */
   },
-
 }
 
 

@@ -27,7 +27,7 @@ import { formatUnit } from "@/assets/js/filter";
 export default {
   name: "playlist",
   props: ["width", "height", "image", "name", "count"],
-  data: function () {
+  data () {
     return {
       isLoad: false,
     };

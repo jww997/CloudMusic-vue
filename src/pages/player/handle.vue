@@ -5,7 +5,7 @@
       <span class="iconfont">&#xe66a;</span>
       <span class="iconfont">&#xe694;</span>
       <span class="iconfont">&#xe612;</span>
-      <span class="iconfont">&#xe65d;</span>
+      <span class="iconfont" @click="toComment">&#xe65d;</span>
       <span class="iconfont">&#xe690;</span>
     </div>
     <!-- 进度条 -->
@@ -55,11 +55,12 @@
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { formatTime } from "@/assets/js/filter.js";
+import { toPages } from "@/assets/js/util.js";
 
 export default {
   name: "handle",
   props: ["lyric"],
-  data: function () {
+  data() {
     return {
       percentage: 0,
     };
@@ -72,14 +73,20 @@ export default {
     ...mapGetters(["playlistToast", "music"]),
   },
   watch: {
-    currentTime: function (val) {
+    currentTime(val) {
       const that = this;
       that.percentage = Number.parseFloat(val / that.music.duration) * 100;
     },
   },
   methods: {
     formatTime,
-    prev: function () {
+    toComment() {
+      toPages.call(this, {
+        name: "comment",
+        params: { id: this.music.id, type: 0 },
+      });
+    },
+    prev() {
       console.log("上一首");
       const that = this;
       let currentIndex = that.music.currentIndex;
@@ -96,7 +103,7 @@ export default {
         });
       }
     },
-    next: function () {
+    next() {
       console.log("下一首");
       const that = this;
       let currentIndex = that.music.currentIndex;
@@ -110,20 +117,20 @@ export default {
         });
       }
     },
-    togglePercentage: function (val) {
+    togglePercentage(val) {
       const that = this;
       let i = that.music.duration * (val / 100); // 根据选中百分比修改进度条
       that.amendStateObjValue({ key: "isDraging", value: true });
       that.amendStateObjValue({ key: "currentTime", value: i }); // 接收秒数，要处理下
     },
-    toggleStatus: function () {
+    toggleStatus() {
       const that = this;
       that.amendStateObjValue({
         key: "isPlaying",
         value: !that.music.isPlaying,
       });
     },
-    toggleModeIndex: function () {
+    toggleModeIndex() {
       const that = this;
       let i = that.music.modeIndex + 1;
       let min = 0;
@@ -133,7 +140,7 @@ export default {
       that.amendStateObjValue({ key: "modeIndex", value: i });
     },
 
-    toggleDrawerShow: function () {
+    toggleDrawerShow() {
       const that = this;
       that.amendStateObjValue({ key: "isShowDrawer", value: true });
     },

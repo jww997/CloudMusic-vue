@@ -37,7 +37,7 @@ const routers = {
     },
     {
       // alias: "评论",
-      path: "/comment/:id",
+      path: "/comment/:id/:type",
       name: "comment",
       component: () => import("@/pages/comment"),
     },

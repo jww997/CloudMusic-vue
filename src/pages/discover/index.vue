@@ -62,7 +62,7 @@ export default {
     Refresh,
   },
   inject: ["reload"],
-  data: function () {
+  data () {
     return {
       blocks: [],
       banners: [],
@@ -105,7 +105,7 @@ export default {
     },
   },
   methods: {
-    refresh: function () {
+    refresh () {
       const that = this;
       that.reload();
       that.$vant.Toast.success("刷新成功");
@@ -121,7 +121,7 @@ export default {
       });
     },
   },
-  mounted: function () {
+  mounted () {
     const that = this;
     that.getdata();
   },

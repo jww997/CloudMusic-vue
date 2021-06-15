@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import Placeholder from "@/components/placeholder.vue";
+import Placeholder from "@/components/placeholder";
 
 import { formatDate } from "@/assets/js/filter.js";
 export default {

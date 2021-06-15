@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import Profile from "./profile.vue";
-import Application from "./application.vue";
+import Profile from "./profile";
+import Application from "./application";
 
 export default {
   name: "mine",

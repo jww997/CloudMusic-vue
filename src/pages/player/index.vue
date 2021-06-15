@@ -19,13 +19,13 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
-import Navbar from "@/components/navbar.vue";
-import Handle from "./handle.vue";
+import Navbar from "@/components/navbar";
+import Handle from "./handle";
 
 import { formatLyric, formatArtists } from "@/assets/js/filter.js";
 import LyricParser from "lyric-parser"; // 歌词解析
-import Phonograph from "./phonograph.vue";
-import Lyric from "./lyric.vue";
+import Phonograph from "./phonograph";
+import Lyric from "./lyric";
 export default {
   name: "player",
   components: {
@@ -35,7 +35,7 @@ export default {
     Phonograph,
     Lyric,
   },
-  data: function () {
+  data () {
     const that = this;
     return {
       isShowLyric: false,
@@ -64,12 +64,12 @@ export default {
   },
   methods: {
     formatArtists,
-    toggleShowLyric: function () {
+    toggleShowLyric () {
       const that = this;
       that.isShowLyric = !that.isShowLyric;
       that.getLyric();
     },
-    getLyric: function () {
+    getLyric () {
       const that = this;
       let id = that.music.current.id;
       if (!that.isShowLyric) return false;
@@ -86,7 +86,7 @@ export default {
         } catch (e) {}
       });
     },
-    setLyric: function ({ lineNum, txt }) {
+    setLyric ({ lineNum, txt }) {
       const that = this;
       if (that.lyric.curLine == lineNum) return false;
       that.$set(that.lyric, "curLine", lineNum); // 歌词实时下标
@@ -100,13 +100,13 @@ export default {
       that.subtitle = that.formatArtists(val.ar);
     },
   },
-  mounted: function () {
+  mounted () {
     const that = this;
     try {
       that.update(that.music.current);
     } catch (error) {}
   },
-  destroyed: function () {
+  destroyed () {
     const that = this;
     try {
       clearInterval(that.lyric.timer); // 避免定时器残留，导致歌词抖动

@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     toPages,
-    toPage: function (id) {
+    toPage (id) {
       const that = this;
       let name;
       switch (id) {

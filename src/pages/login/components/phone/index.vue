@@ -41,7 +41,7 @@ export default {
     };
   },
   methods: {
-    submit: function () {
+    submit () {
       const that = this;
       let phone = that.phone;
       let password = that.password;

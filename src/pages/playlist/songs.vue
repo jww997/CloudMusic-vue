@@ -40,12 +40,12 @@
       />
     </div>
     <!-- 更多操作弹窗 -->
-    <van-share-sheet
+    <!-- <van-share-sheet
       v-model="isShowOptions"
       :options="options"
       title="立即分享给好友"
       description="描述信息"
-    />
+    /> -->
   </div>
 </template>
 
@@ -114,10 +114,10 @@ export default {
     toPages,
     formatArtists,
 
-    mouseenter: function (index) {
+    mouseenter (index) {
       const that = this;
     },
-    mouseleave: function (index) {
+    mouseleave (index) {
       const that = this;
     },
 
@@ -132,7 +132,7 @@ export default {
         that.amendStateObjValue({ key: "currentIndex", value: index });
       }
     },
-    toggleMv: function (id) {
+    toggleMv (id) {
       const that = this;
       that.toPages({ name: "mv" });
       that.amendStateObjValue({ name: "mv", key: "id", value: id });

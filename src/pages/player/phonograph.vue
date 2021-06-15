@@ -13,7 +13,7 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
-import Disc from "@/components/disc.vue";
+import Disc from "@/components/disc";
 
 export default {
   name: "phonograph",

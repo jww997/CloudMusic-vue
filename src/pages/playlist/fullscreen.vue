@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import Playlist from "../discover/components/playlist.vue";
+import Playlist from "../discover/components/playlist";
 
 export default {
   name: "fullscreen",

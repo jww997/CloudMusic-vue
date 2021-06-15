@@ -1,43 +1,29 @@
 <template>
-  <!-- <scroll :data="[comments]" :refreshDelay="1000"> -->
   <div class="comment">
-    <navbar
-      :title="`评论(${comments.length})`"
-      fixed
-      black
-      backgroundColor="#fff"
-    ></navbar>
-    <list :comments="comments"></list>
-
-    <placeholder />
-    
+    <!-- 顶部导航栏 -->
+    <navbar :title="`评论(${totalCount})`" />
+    <!-- 评论列表 -->
+    <list :comments="comments" @handleScrollBottom="handleScrollBottom" />
   </div>
-  <!-- </scroll> -->
 </template>
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
-import Placeholder from "@/components/placeholder.vue";
+import Navbar from "@/components/navbar";
+import List from "./list";
 
-import Scroll from "@/base/scroll";
-import Bottombar from "@/common/bottombar";
-
-import Navbar from "@/common/navbar";
-import List from "./components/list";
 export default {
   name: "comment",
   components: {
-    Placeholder,
-
-    Scroll,
-    Bottombar,
-
     Navbar,
     List,
   },
-  data: function () {
+  data() {
     return {
       comments: [],
+      totalCount: 0,
+      hasMore: false, // 是否还有更多
+      pageNo: 1,
     };
   },
   computed: {
@@ -46,15 +32,26 @@ export default {
   methods: {
     getdata() {
       const that = this;
-      let id = that.$route.params.id;
-      if (!id) return false;
-      console.log(`id = ${id}`);
-      that.$api.getCommentPlaylist({ id }).then((res) => {
-        that.comments = res.data.comments;
+      let { id, type } = that.$route.params;
+      // type 0:歌曲 1:mv 2:歌单 3:专辑 4:电台 5:视频 6:动态
+      if (that.comments.length >= that.totalCount && !id) return false;
+      that.$api.getCommentNew({ id, type, pageNo: that.pageNo }).then((res) => {
+        const { comments, totalCount, hasMore } = res.data.data;
+        that.pageNo == 1
+          ? (that.comments = comments)
+          : that.comments.push(...comments);
+        that.totalCount = totalCount;
+        that.hasMore = hasMore;
       });
     },
+    handleScrollBottom() {
+      if (this.totalCount > this.comments.length) {
+        this.pageNo++;
+        this.getdata();
+      }
+    },
   },
-  mounted: function () {
+  mounted() {
     const that = this;
     that.getdata();
   },
@@ -62,6 +59,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~sass/var.scss";
 @import "~sass/mixins.scss";
-@import "~sass/varibles.scss";
+.comment {
+  .navbar {
+    background-color: $white;
+    color: $text-color;
+  }
+}
 </style>

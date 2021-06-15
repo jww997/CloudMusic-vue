@@ -51,10 +51,10 @@ export default {
     },
   },
   methods: {
-    mouseenter: function (index) {
+    mouseenter (index) {
       const that = this;
     },
-    mouseleave: function (index) {
+    mouseleave (index) {
       const that = this;
     },
 
@@ -69,7 +69,7 @@ export default {
         that.amendStateObjValue({ key: "currentIndex", value: index });
       }
     },
-    toggleMv: function (id) {
+    toggleMv (id) {
       const that = this;
       toPages({ name: "mv" });
       that.amendStateObjValue({ name: "mv", key: "id", value: id });

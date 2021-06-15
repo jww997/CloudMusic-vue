@@ -25,13 +25,13 @@ export default {
     Bottombar,
     Box,
   },
-  data: function () {
+  data () {
     return { level: 0, profile: {}, playlist: [] };
   },
   computed: {
     ...mapGetters(["login"]),
   },
-  mounted: function () {
+  mounted () {
     const that = this;
     let profile = that.login.profile;
 

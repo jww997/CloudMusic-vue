@@ -44,8 +44,9 @@
     <div class="pill">
       <div
         class="pill-item"
-        v-for="({ id, name, count, icon }, index) in pill"
-        :key="id"
+        v-for="({ id, name, count, icon, handleFn }, index) in pill"
+        :key="index"
+        @click="$emit(handleFn, id)"
       >
         <span class="line" v-if="index"></span>
         <span class="iconfont" v-html="icon"></span>
@@ -56,8 +57,8 @@
 </template>
 
 <script>
-import Navbar from "@/components/navbar.vue";
-import Playlist from "../discover/components/playlist.vue";
+import Navbar from "@/components/navbar";
+import Playlist from "../discover/components/playlist";
 
 export default {
   name: "Cap",

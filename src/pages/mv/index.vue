@@ -5,7 +5,7 @@
     <!-- 视频 -->
     <musicvideo :url="url" :poster="info.cover" />
     <!-- 视频文本介绍 && 用户对视频的操作 -->
-    <detail :info="info" :options="options" />
+    <detail :info="info" :options="options" @toComment="toComment" />
     <!-- 控制视频 && 视频名称 -->
     <detail2 :info="info" :liked="count.liked" />
   </div>
@@ -14,11 +14,11 @@
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import { formatUnit } from "@/assets/js/filter.js";
-import Navbar from "@/components/navbar.vue";
-import Musicvideo from "./musicvideo.vue";
-import Detail from "./detail.vue";
-import Detail2 from "./detail2.vue";
-
+import { toPages } from "@/assets/js/util.js";
+import Navbar from "@/components/navbar";
+import Musicvideo from "./musicvideo";
+import Detail from "./detail";
+import Detail2 from "./detail2";
 
 export default {
   name: "mv",
@@ -40,21 +40,25 @@ export default {
           id: "01",
           icon: "&#xe697;",
           name: "点赞",
+          handleFn: "",
         },
         {
           id: "02",
           icon: "&#xe65d;",
           name: "评论",
+          handleFn: "toComment",
         },
         {
           id: "03",
           icon: "&#xe65c;",
           name: "分享",
+          handleFn: "",
         },
         {
           id: "04",
           icon: "&#xe61d;",
           name: "收藏",
+          handleFn: "",
         },
       ],
     };
@@ -86,6 +90,13 @@ export default {
     },
   },
   methods: {
+    toComment() {
+      console.log(1);
+      toPages.call(this, {
+        name: "comment",
+        params: { id: this.mv.id, type: 1 },
+      });
+    },
     toggleMvPlaying() {
       const that = this;
       that.amendStateObjValue({

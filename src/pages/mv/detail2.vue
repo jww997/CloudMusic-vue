@@ -32,7 +32,7 @@ import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   name: "detail2",
   props: ["info", "liked"],
-  data: function () {
+  data () {
     return {
       // isLike: true,
       isShowDesc: false,
@@ -54,7 +54,7 @@ export default {
     },
   },
   methods: {
-    togglePercentage: function (val) {
+    togglePercentage (val) {
       const that = this;
       that.amendStateObjValue({ name: "mv", key: "isDraging", value: true });
       that.amendStateObjValue({

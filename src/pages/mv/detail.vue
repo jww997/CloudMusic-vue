@@ -20,9 +20,14 @@
     </div>
     <!-- 用户操作 -->
     <div class="options">
-      <div class="option" v-for="item in options" :key="item.id">
-        <div class="iconfont" v-html="item.icon"></div>
-        <div class="text" v-html="item.count || item.name"></div>
+      <div
+        class="option"
+        v-for="{ id, handleFn, icon, count, name } in options"
+        :key="id"
+        @click="$emit(handleFn)"
+      >
+        <div class="iconfont" v-html="icon"></div>
+        <div class="text" v-html="count || name"></div>
       </div>
     </div>
   </div>
@@ -55,7 +60,7 @@ export default {
     ...mapState(["mv"]),
   },
   methods: {
-    handleNameClick: function () {
+    handleNameClick() {
       const that = this;
       if (!that.info.desc) return false;
       that.isShowDescription = !that.isShowDescription;

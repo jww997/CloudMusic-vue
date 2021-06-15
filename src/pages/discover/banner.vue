@@ -32,7 +32,7 @@ export default {
     Slide,
   },
   methods: {
-    toLink: function (val) {
+    toLink (val) {
       console.log(1);
       const that = this;
       switch (val.targetType) {

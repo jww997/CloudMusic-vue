@@ -41,13 +41,13 @@ export default {
     },
   },
   methods: {
-    toSquare: function (value) {
+    toSquare (value) {
       console.log(1)
       toPages.call(this, {
         name: "square",
       });
     },
-    toSonglist: function (value) {
+    toSonglist (value) {
       toPages.call(this, {
         name: "playlist",
         params: { id: value.creativeId },

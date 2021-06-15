@@ -12,7 +12,7 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
-import Placeholder from "@/components/placeholder.vue";
+import Placeholder from "@/components/placeholder";
 
 import List from "@/common/list";
 import Bottombar from "@/common/bottombar";
@@ -38,7 +38,7 @@ export default {
   computed: {
     ...mapGetters(["music"]),
   },
-  mounted: function () {
+  mounted () {
     const that = this;
     that.$api
       .getRecommendSongs()

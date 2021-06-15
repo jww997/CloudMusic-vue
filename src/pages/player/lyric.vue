@@ -90,20 +90,20 @@ export default {
     ...mapGetters(["music"]),
   },
   watch: {
-    isPlaying: function (val) {
+    isPlaying (val) {
       const that = this;
       try {
         that.lyric.togglePlay();
       } catch (error) {}
     },
-    currentTime: function (val) {
+    currentTime (val) {
       const that = this;
       const currentTime = (val * 1000).toFixed(3);
       that.lyric.seek(currentTime);
       // try {
       // } catch (error) {}
     },
-    volume: function (val) {
+    volume (val) {
       const that = this;
       that.isMute = val == 0 ? true : false;
     },

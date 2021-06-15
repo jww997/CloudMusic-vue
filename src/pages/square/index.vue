@@ -32,7 +32,7 @@ export default {
 
     Placeholder,
   },
-  data: function () {
+  data () {
     return {
       playlists: [],
       tags: [],
@@ -47,7 +47,7 @@ export default {
     ...mapGetters(["music", "transition"]),
   },
   watch: {
-    cat: function (val) {
+    cat (val) {
       const that = this;
       that._initData();
       that.getdata();
@@ -66,16 +66,16 @@ export default {
       this.labelIndex = index;
     },
 
-    toggleCat: function (name) {
+    toggleCat (name) {
       const that = this;
       that.cat = name;
     },
-    scrollToEnd: function () {
+    scrollToEnd () {
       const that = this;
       if (that.total == that.playlists.length) return false;
       that.getdata();
     },
-    getdata: function () {
+    getdata () {
       const that = this;
       if (that.total == that.playlists.length) return false;
       // that.isLoading = true;
@@ -97,7 +97,7 @@ export default {
         });
     },
   },
-  mounted: function () {
+  mounted () {
     const that = this;
     that._initData();
     that.getdata();

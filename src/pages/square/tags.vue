@@ -46,9 +46,10 @@ export default {
   align-items: center;
   .labels {
     flex-grow: 1;
-    line-height: 50px;
+    height: 50px;
     overflow: scroll;
     display: flex;
+    align-items: center;
     .label {
       flex-shrink: 0;
       margin-right: $padding-sm * 2;
@@ -64,7 +65,7 @@ export default {
           background-color: $theme-color;
           border-radius: $border-radius-max;
           @include positionCenter;
-          bottom: $padding-sm / 2;
+          bottom: -$padding-sm;
           top: auto;
         }
       }

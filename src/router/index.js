@@ -89,10 +89,11 @@ const routers = {
   },
   ],
   // 重置滚动条位置
-  scrollBehavior(to, from, savedPosition) {
-    return {
-      x: 0,
-      y: 0
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
     }
   }
 }

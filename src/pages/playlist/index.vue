@@ -78,6 +78,14 @@ export default {
   computed: {
     ...mapGetters(["music", "transition"]),
   },
+  watch: {
+    $route(to, from) {
+      if (to.name == "playlist") {
+        console.log(to.name);
+        this.getdata();
+      }
+    },
+  },
   methods: {
     handleHeaderClick() {
       const that = this;
@@ -119,9 +127,8 @@ export default {
       });
     },
   },
-  created() {
-    const that = this;
-    that.getdata();
+  mounted() {
+    this.getdata();
   },
 };
 </script>

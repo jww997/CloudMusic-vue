@@ -5,90 +5,88 @@ Vue.use(Router);
 
 const routers = {
   routes: [{
-      path: "*",
-      redirect: "/discover",
+    path: "*",
+    redirect: "/discover",
+  },
+  {
+    // alias: "发现",
+    path: "/discover",
+    name: "discover",
+    component: () => import("@/pages/discover"),
+    meta: {
+      keepAlive: true,
+      enterAnimationName: "fade",
+      leaveAnimationName: "",
     },
-    {
-      // alias: "发现",
-      path: "/discover",
-      name: "discover",
-      component: () => import("@/pages/discover"),
-      meta: {
-        keepAlive: true,
-        enterAnimationName: "fade",
-        leaveAnimationName: "",
-      },
+  },
+  {
+    // alias: "我的",
+    path: "/mine",
+    name: "mine",
+    component: () => import("@/pages/mine"),
+    meta: { keepAlive: true },
+  },
+  {
+    // alias: "歌单详情",
+    path: "/playlist/:id",
+    name: "playlist",
+    component: () => import("@/pages/playlist"),
+    meta: { keepAlive: true },
+  },
+  {
+    // alias: "评论",
+    path: "/comment/:id/:type",
+    name: "comment",
+    component: () => import("@/pages/comment"),
+  },
+  {
+    // alias: "每日推荐",
+    path: "/dailyspecial",
+    name: "dailyspecial",
+    component: () => import("@/pages/dailyspecial"),
+  },
+  {
+    // alias: "歌单广场",
+    path: "/square",
+    name: "square",
+    component: () => import("@/pages/square"),
+    meta: {
+      keepAlive: true
     },
-    {
-      // alias: "我的",
-      path: "/mine",
-      name: "mine",
-      component: () => import("@/pages/mine"),
-      meta: {
-        keepAlive: true
-      },
+  },
+  {
+    // alias: "排行榜",
+    path: "/toplist",
+    name: "toplist",
+    component: () => import("@/pages/toplist"),
+    meta: {
+      keepAlive: true
     },
-    {
-      // alias: "歌单详情",
-      path: "/playlist/:id",
-      name: "playlist",
-      component: () => import("@/pages/playlist"),
-      // meta: { keepAlive: true },
-    },
-    {
-      // alias: "评论",
-      path: "/comment/:id/:type",
-      name: "comment",
-      component: () => import("@/pages/comment"),
-    },
-    {
-      // alias: "每日推荐",
-      path: "/dailyspecial",
-      name: "dailyspecial",
-      component: () => import("@/pages/dailyspecial"),
-    },
-    {
-      // alias: "歌单广场",
-      path: "/square",
-      name: "square",
-      component: () => import("@/pages/square"),
-      meta: {
-        keepAlive: true
-      },
-    },
-    {
-      // alias: "排行榜",
-      path: "/toplist",
-      name: "toplist",
-      component: () => import("@/pages/toplist"),
-      meta: {
-        keepAlive: true
-      },
-    },
-    {
-      // alias: "搜索",
-      path: "/search",
-      name: "search",
-      component: () => import("@/pages/search"),
-    },
-    {
-      // alias: "播放器",
-      path: "/player",
-      name: "player",
-      component: () => import("@/pages/player"),
-    },
-    {
-      // alias: "视频",
-      path: "/mv",
-      name: "mv",
-      component: () => import("@/pages/mv"),
-    },
-    {
-      // alias: "登录",
-      path: "/login",
-      name: "login",
-      component: () => import("@/pages/login"),
-    },
+  },
+  {
+    // alias: "搜索",
+    path: "/search",
+    name: "search",
+    component: () => import("@/pages/search"),
+  },
+  {
+    // alias: "播放器",
+    path: "/player",
+    name: "player",
+    component: () => import("@/pages/player"),
+  },
+  {
+    // alias: "视频",
+    path: "/mv",
+    name: "mv",
+    component: () => import("@/pages/mv"),
+  },
+  {
+    // alias: "登录",
+    path: "/login",
+    name: "login",
+    component: () => import("@/pages/login"),
+  },
   ],
   // 重置滚动条位置
   scrollBehavior(to, from, savedPosition) {

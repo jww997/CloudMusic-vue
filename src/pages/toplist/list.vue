@@ -1,6 +1,6 @@
 <template>
   <div class="list">
-    <van-row gutter="20">
+    <van-row gutter="12">
       <van-col span="8" v-for="item in list" :key="item.id">
         <playlist
           class="playlist"

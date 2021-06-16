@@ -1,28 +1,32 @@
 <template>
   <div class="list">
-    <van-row gutter="20">
-      <van-col span="8" v-for="item in list" :key="item.id">
-        <playlist
-          class="playlist"
-          :image="item.coverImgUrl"
-          :name="item.name"
-          :count="item.playCount"
-          @handleClick="toPlaylist(item.id)"
-        />
-      </van-col>
-    </van-row>
+    <scroll :handleScrollBottom="handleScrollBottom">
+      <van-row gutter="12">
+        <van-col span="8" v-for="item in list" :key="item.id">
+          <playlist
+            class="playlist"
+            :image="item.coverImgUrl"
+            :name="item.name"
+            :count="item.playCount"
+            @handleClick="toPlaylist(item.id)"
+          />
+        </van-col>
+      </van-row>
+    </scroll>
   </div>
 </template>
 
 <script>
 import { toPages } from "@/assets/js/util.js";
 import Playlist from "../discover/components/playlist";
+import Scroll from "@/components/scroll";
 
 export default {
   name: "list",
   props: ["list"],
   components: {
     Playlist,
+    Scroll,
   },
   methods: {
     toPlaylist(value) {
@@ -30,6 +34,9 @@ export default {
         name: "playlist",
         params: { id: value },
       });
+    },
+    handleScrollBottom() {
+      this.$emit("handleScrollBottom");
     },
   },
 };

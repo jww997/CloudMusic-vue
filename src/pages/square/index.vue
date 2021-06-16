@@ -9,7 +9,7 @@
       @handleLabelClick="handleLabelClick"
     />
     <!-- 歌单列表 -->
-    <list :list="playlists" />
+    <list :list="playlists" @handleScrollBottom="handleScrollBottom" />
 
     <placeholder />
   </div>
@@ -32,13 +32,16 @@ export default {
 
     Placeholder,
   },
-  data () {
+  data() {
     return {
       playlists: [],
       tags: [],
       cat: "综艺",
       total: -1,
       labelIndex: 0,
+
+      offset: 1, // 偏移数量
+      before: "", 
 
       // isLoading: false,
     };
@@ -47,7 +50,7 @@ export default {
     ...mapGetters(["music", "transition"]),
   },
   watch: {
-    cat (val) {
+    cat(val) {
       const that = this;
       that._initData();
       that.getdata();
@@ -59,6 +62,12 @@ export default {
       that.playlists = [];
       that.total = -1;
     },
+    // 触底加载
+    handleScrollBottom() {
+      console.log(1);
+      this.offset++;
+      this.getdata();
+    },
 
     handleLabelClick(val, index) {
       const { name } = val;
@@ -66,38 +75,33 @@ export default {
       this.labelIndex = index;
     },
 
-    toggleCat (name) {
+    toggleCat(name) {
       const that = this;
       that.cat = name;
     },
-    scrollToEnd () {
+    scrollToEnd() {
       const that = this;
       if (that.total == that.playlists.length) return false;
       that.getdata();
     },
-    getdata () {
+    getdata() {
       const that = this;
-      if (that.total == that.playlists.length) return false;
-      // that.isLoading = true;
+      // if (that.total <= that.playlists.length) return false;
       that.$api
         .getTopPlaylist({
-          limit: 30,
           cat: that.cat,
           offset: that.playlists.length,
         })
         .then((res) => {
-          let playlists = res.data.playlists;
-          that.total = res.data.total;
-          if (!that.playlists.length) {
-            that.playlists = playlists;
-          } else {
-            that.playlists = that.playlists.concat(playlists);
-          }
-          // that.isLoading = false;
+          const { playlists, total } = res.data;
+          that.total = total;
+          this.offset == 1
+            ? (that.playlists = playlists)
+            : that.playlists.push(...playlists);
         });
     },
   },
-  mounted () {
+  mounted() {
     const that = this;
     that._initData();
     that.getdata();

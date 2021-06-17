@@ -9,6 +9,15 @@
     <transition :name="routerViewName">
       <router-view v-if="!keepAlive" class="router-view" />
     </transition>
+
+    <!-- <van-overlay :show="true" z-index="9999" @click="show = false">
+      <div class="wrapper" @click.stop>
+        <van-loading class="loading" vertical
+          >加载中...</van-loading
+        >
+      </div>
+    </van-overlay> -->
+
     <!-- 播放条 -->
     <transition name="drawer">
       <playbar v-if="isShowPlaybar" :class="playbarClassName" />
@@ -176,6 +185,21 @@ export default {
   .drawer-enter,
   .drawer-leave-to {
     transform: translateY(100%);
+  }
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    .loading {
+      width: 3rem;
+      height: 3rem;
+      font-size: $font-size-sm;
+      border-radius: $border-radius-sm;
+      background-color: $background-color;
+      @include flexCenter;
+    }
   }
 }
 </style>

@@ -37,7 +37,7 @@ import {
   // DropdownMenu, DropdownItem, // 向下弹出的菜单列表。
   Loading, // 加载图标，用于表示加载中的过渡状态。
   Notify, // 在页面顶部展示消息提示，支持函数调用和组件调用两种方式。
-  // Overlay, // 创建一个遮罩层，用于强调特定的页面元素，并阻止用户进行其他操作。
+  Overlay, // 创建一个遮罩层，用于强调特定的页面元素，并阻止用户进行其他操作。
   // PullRefresh, // 用于提供下拉刷新的交互操作。
   // ShareSheet, // 底部弹起的分享面板，用于展示各分享渠道对应的操作按钮，不含具体的分享逻辑。2.6 版本开始支持此组件。
   // SwipeCell, // 可以左右滑动来展示操作按钮的单元格组件。
@@ -124,7 +124,7 @@ Vue.use(Slider); // 滑块
 // Vue.use(DropdownItem);
 Vue.use(Loading); // 加载
 // Vue.use(Notify); // 消息通知
-// Vue.use(Overlay); // 遮罩层
+Vue.use(Overlay); // 遮罩层
 // Vue.use(PullRefresh); // 下拉刷新
 // Vue.use(ShareSheet); // 分享面板
 // Vue.use(SwipeCell); // 滑动单元格

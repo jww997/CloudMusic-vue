@@ -1,5 +1,5 @@
 <template>
-  <div class="loading">
+  <div class="loading" v-if="show">
     <van-overlay :show="show" z-index="9999">
       <van-loading class="tip" vertical>加载中...</van-loading>
     </van-overlay>
@@ -24,7 +24,7 @@ export default {
     width: 3rem;
     height: 3rem;
     font-size: $font-size-sm;
-    border-radius: $border-radius-sm;
+    border-radius: $border-radius-lg;
     background-color: $white;
     color: $theme-color;
     @include positionCenter;

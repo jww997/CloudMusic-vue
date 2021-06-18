@@ -13,6 +13,7 @@ const port = 3000;
 const httpService = axios.create({
   baseURL: `${domain}:${port}/`,
   responseType: "json",
+  dataType: "jsonp",
   timeout: 200000,
   withCredentials: true,
 });

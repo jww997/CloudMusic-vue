@@ -20,12 +20,12 @@ export default {
     duration: state => { return state.duration },
 
 
-
-
-
     music: state => { return state.music },
     mv: state => { return state.mv },
     login: state => { return state.login },
-
     transition: state => { return state.transition },
+
+
+
+    loading: state => { return state.loading },
 }

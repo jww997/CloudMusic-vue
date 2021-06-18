@@ -9,15 +9,6 @@
     <transition :name="routerViewName">
       <router-view v-if="!keepAlive" class="router-view" />
     </transition>
-
-    <!-- <van-overlay :show="true" z-index="9999" @click="show = false">
-      <div class="wrapper" @click.stop>
-        <van-loading class="loading" vertical
-          >加载中...</van-loading
-        >
-      </div>
-    </van-overlay> -->
-
     <!-- 播放条 -->
     <transition name="drawer">
       <playbar v-if="isShowPlaybar" :class="playbarClassName" />
@@ -26,6 +17,10 @@
     <transition name="drawer">
       <tabbar v-if="isShowTabbar" class="fixedBottom-1" />
     </transition>
+    <!-- 加载提示 -->
+    <loading :show="loading" />
+    <!-- {{loading}} -->
+    <!-- 音乐控件 -->
     <music />
   </div>
 </template>
@@ -39,6 +34,7 @@ import {
 } from "@/assets/js/util.js";
 import Tabbar from "@/components/tabbar.vue";
 import Playbar from "@/components/playbar.vue";
+import Loading from "@/components/loading.vue";
 import Music from "@/components/music.vue";
 
 export default {
@@ -46,6 +42,7 @@ export default {
   components: {
     Tabbar,
     Playbar,
+    Loading,
     Music,
   },
   data() {
@@ -55,6 +52,8 @@ export default {
 
       KeepAliveName: "",
       routerViewName: "",
+
+      // isShowLoading: true,
     };
   },
   computed: {
@@ -70,6 +69,7 @@ export default {
     playbarClassName() {
       return `fixedBottom-${this.isShowTabbar ? 2 : 1}`;
     },
+    ...mapGetters(["loading"]),
   },
   watch: {
     // 监听路由变化
@@ -185,21 +185,6 @@ export default {
   .drawer-enter,
   .drawer-leave-to {
     transform: translateY(100%);
-  }
-
-  .wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    .loading {
-      width: 3rem;
-      height: 3rem;
-      font-size: $font-size-sm;
-      border-radius: $border-radius-sm;
-      background-color: $background-color;
-      @include flexCenter;
-    }
   }
 }
 </style>

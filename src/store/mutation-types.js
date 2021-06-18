@@ -5,4 +5,7 @@ export default {
 
 
   SET_TRANSITION: "SET_TRANSITION",
+
+
+  SET_LOADING: "SET_LOADING",
 }

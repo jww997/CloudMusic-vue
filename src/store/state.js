@@ -49,4 +49,5 @@ export default {
 
 
   transition: "fade",     // 跳转动画
+  loading: false,
 }

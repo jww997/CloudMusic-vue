@@ -1,6 +1,8 @@
 import Vue from "vue"
 import axios from "axios";
 
+import store from "@/store"
+
 const domain = "http://www.mikonchen.top";
 // const domain = "http://49.234.76.196";
 // const domain = "http://localhost";
@@ -13,7 +15,7 @@ const httpService = axios.create({
   responseType: "json",
   timeout: 200000,
   withCredentials: true,
-})
+});
 
 httpService.interceptors.request.use(config => {
   return config;
@@ -39,9 +41,17 @@ export const request = (
     method == "POST" ?
       options.data = parameter :
       ""
-  return httpService.request(options)
+  // return httpService.request(options)
 
-  // suffix += `?timestamp=${Date.parse(new Date()) / 1000}`; // POST请求url必须添加时间戳,使每次请求url不一样,不然请求会被缓存
+  const http = httpService.request(options);
+  store.commit("SET_LOADING", true);
+  return http.then(() => {
+    store.commit("SET_LOADING", false);
+    return http;
+  }).catch(() => {
+    store.commit("SET_LOADING", false);
+    return http;
+  })
 }
 
 // 登录后普通请求
@@ -50,17 +60,25 @@ export const requestLogined = (
   parameter = {}, // 携带参数
   method = "GET", // 请求方法
 ) => {
-  
+
   let cookie = Vue.prototype.$cookie.getCookie("cookie");
   cookie && (parameter.cookie = cookie);
-  
+
   let options = { url, method };
   method == "GET" ?
     options.params = parameter :
     method == "POST" ?
       options.data = parameter :
       ""
-  return httpService.request(options)
+  const http = httpService.request(options);
+  store.commit("SET_LOADING", true);
+  return http.then(() => {
+    store.commit("SET_LOADING", false);
+    return http;
+  }).catch(() => {
+    store.commit("SET_LOADING", false);
+    return http;
+  })
 }
 
 

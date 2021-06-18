@@ -18,7 +18,9 @@ export default {
   [types.SET_TRANSITION](state, val) {
     state.transition = val;
   },
-
-
-
+  
+  
+  [types.SET_LOADING](state, val) {
+    state.loading = val;
+  },
 }

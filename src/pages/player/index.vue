@@ -9,9 +9,18 @@
     <!-- 背景遮罩层 -->
     <div class="backgroundMask"></div>
     <!-- 歌词 -->
-    <lyric :lyric="lyric" v-if="isShowLyric" @handleClick="toggleShowLyric"></lyric>
+    <lyric
+      :lyric="lyric"
+      @seekLyric="seekLyric"
+      v-if="isShowLyric"
+      @handleClick="toggleShowLyric"
+    ></lyric>
     <!-- 唱片机 -->
-    <phonograph :cover="picUrl" v-else @handleClick="toggleShowLyric"></phonograph>
+    <phonograph
+      :cover="picUrl"
+      v-else
+      @handleClick="toggleShowLyric"
+    ></phonograph>
     <!-- 控制歌曲 -->
     <handle :lyric="lyric"></handle>
   </div>
@@ -22,7 +31,7 @@ import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import Navbar from "@/components/navbar";
 import Handle from "./handle";
 
-import { formatLyric, formatArtists } from "@/assets/js/filter.js";
+import { formatLyric, formatDate, formatArtists } from "@/assets/js/filter.js";
 import LyricParser from "lyric-parser"; // 歌词解析
 import Phonograph from "./phonograph";
 import Lyric from "./lyric";
@@ -35,8 +44,7 @@ export default {
     Phonograph,
     Lyric,
   },
-  data () {
-    const that = this;
+  data() {
     return {
       isShowLyric: false,
       lyric: {},
@@ -64,34 +72,38 @@ export default {
   },
   methods: {
     formatArtists,
-    toggleShowLyric () {
+    toggleShowLyric() {
       const that = this;
       that.isShowLyric = !that.isShowLyric;
       that.getLyric();
     },
-    getLyric () {
+    getLyric() {
       const that = this;
-      let id = that.music.current.id;
-      if (!that.isShowLyric) return false;
-      if (that.lastId == id) return false;
+      let { id } = that.music.current;
+      if (!that.isShowLyric && that.lastId == id) return false;
       that.$api.getLyric({ id }).then((res) => {
-        let nolyric = res.data.nolyric;
-        if (nolyric) return false; // 判断数据有无歌词
-        let lyric = res.data.lrc.lyric;
-        if (!lyric) return false; // 判断数据歌词是否为空
-        try {
-          clearInterval(that.lyric.timer); // 清掉没用的
-          that.lyric = new LyricParser(lyric, that.setLyric);
-          that.lastId = id;
-        } catch (e) {}
+        const {
+          nolyric,
+          lrc: { lyric },
+        } = res.data;
+        if (nolyric && !lyric) return false;
+        that.lyric = {
+          lrc: lyric,
+          lines: formatLyric(lyric),
+          curLine: 0,
+          state: 0,
+        };
+        that.lastId = id;
       });
     },
-    setLyric ({ lineNum, txt }) {
-      const that = this;
-      if (that.lyric.curLine == lineNum) return false;
-      that.$set(that.lyric, "curLine", lineNum); // 歌词实时下标
-      console.log(`lineNum = ${lineNum}, txt = ${txt}`);
+    seekLyric(val) {
+      const { lines } = this.lyric;
+      lines.map((item, index) => {
+        item.time < val && (this.lyric.curLine = index);
+      });
     },
+
+    
 
     update(val) {
       const that = this;
@@ -100,13 +112,12 @@ export default {
       that.subtitle = that.formatArtists(val.ar);
     },
   },
-  mounted () {
-    const that = this;
+  mounted() {
     try {
-      that.update(that.music.current);
+      this.update(this.music.current);
     } catch (error) {}
   },
-  destroyed () {
+  destroyed() {
     const that = this;
     try {
       clearInterval(that.lyric.timer); // 避免定时器残留，导致歌词抖动

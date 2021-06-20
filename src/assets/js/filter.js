@@ -39,14 +39,14 @@ function formatLyric(str) {
     if (!item) return false;
     if (item.indexOf("]") == "-1") {
       arr.push({
-        text: item,
+        txt: item,
       });
     } else {
       let time = item.split("]").shift().substr(1, 8);
       if (item.split("]").pop()) {
         arr.push({
-          text: item.split("]").pop(),
-          sec: parseInt(
+          txt: item.split("]").pop(),
+          time: parseInt(
             time.split(":")[0] * 60 + time.split(":")[1] * 1
           ),
         });

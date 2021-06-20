@@ -35,9 +35,10 @@
         }"
       >
         <div
+          class="line"
           :class="{
-            line: true,
             active: index == lyric.curLine,
+            omit: index < lyric.curLine,
           }"
           :style="{
             lineHeight: `${lineHeight}rem`,
@@ -58,12 +59,7 @@
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   name: "lyric",
-  props: {
-    lyric: {
-      type: Object,
-      default: {},
-    },
-  },
+  props: ["lyric", "seekLyric"],
   data() {
     return {
       lineHeight: 0.9,
@@ -90,20 +86,21 @@ export default {
     ...mapGetters(["music"]),
   },
   watch: {
-    isPlaying (val) {
+    isPlaying(val) {
       const that = this;
       try {
         that.lyric.togglePlay();
       } catch (error) {}
     },
-    currentTime (val) {
-      const that = this;
-      const currentTime = (val * 1000).toFixed(3);
-      that.lyric.seek(currentTime);
-      // try {
-      // } catch (error) {}
+    currentTime(val) {
+      this.$emit("seekLyric", val);
+
+      // const currentTime = (val * 1000).toFixed(3);
+      // this.$emit("seekLyric", currentTime);
+
+      // that.lyric.seek(currentTime);
     },
-    volume (val) {
+    volume(val) {
       const that = this;
       that.isMute = val == 0 ? true : false;
     },
@@ -165,6 +162,9 @@ export default {
           color: $background-color-light;
           font-size: $font-size-lg * 1.5;
           font-weight: bold;
+        }
+        &.omit {
+          @include omit;
         }
       }
     }

@@ -67,7 +67,8 @@ export default {
       flex-direction: column;
       align-items: flex-start;
       .mainTitle {
-        font-size: $font-size-lg;
+        font-size: $font-size-sm;
+        @include linefeed;
       }
       .subTitle {
         font-size: $font-size-xs;

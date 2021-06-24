@@ -1,7 +1,7 @@
 /**
  * @Author: Gavin
  * @Begin: 2020-12-30 10:49:29
- * @Update: 2021-2-24 11:15:03
+ * @Update: 2021-6-24 23:10:04
  * @Update log: 接口整合
  */
 import { request, requestLogined } from "./http"
@@ -128,7 +128,7 @@ export default {
      */
   },
   getUserDetail: parameter => { // 获取用户详情
-    return request("user/detail", parameter);
+    return requestLogined("user/detail", parameter);
     /**
      * @param uid 用户id
      * 说明:登录后调用此接口,传入用户id,可以获取用户详情
@@ -147,20 +147,20 @@ export default {
      */
   },
   getUserLevel: parameter => { // 获取用户等级信息
-    return request("user/level", parameter);
+    return requestLogined("user/level", parameter);
     /**
      * 说明:登录后调用此接口,可以获取用户等级信息,包含当前登录天数,听歌次数,下一等级需要的登录天数和听歌次数,当前等级进度,对应https://music.163.com/#/user/level
      */
   },
   getUserBinding: parameter => { // 获取用户绑定信息
-    return request("user/binding", parameter);
+    return requestLogined("user/binding", parameter);
     /**
      * @param uid 用户id
      * 说明:登录后调用此接口,可以获取用户绑定信息
      */
   },
   getUserReplacephone: parameter => { // 用户绑定手机
-    return request("user/replacephone", parameter);
+    return requestLogined("user/replacephone", parameter);
     /**
      * @param phone 手机号码
      * @param oldcaptcha 原手机号码的验证码
@@ -170,7 +170,7 @@ export default {
      */
   },
   getUserUpdate: parameter => { // 更新用户信息
-    return request("user/update", parameter);
+    return requestLogined("user/update", parameter);
     /**
      * @param gender 性别0:保密1:男性2:女性
      * @param birthday :出生日期 时间戳 unix timestamp
@@ -182,7 +182,7 @@ export default {
      */
   },
   getAvatarUpload: parameter => { // 更新头像
-    return request("avatar/upload", parameter);
+    return requestLogined("avatar/upload", parameter);
     /**
      * @param imgSize (选)图片尺寸,默认为300
      * @param imgX (选)水平裁剪偏移,方形图片可不传,默认为0imgY:垂直裁剪偏移,方形图片可不传,默认为0
@@ -196,7 +196,7 @@ export default {
      */
   },
   getUserPlaylist: parameter => { // 获取用户歌单
-    return request("user/playlist", parameter);
+    return requestLogined("user/playlist", parameter);
     /**
      * @param uid 用户id
      * @param limit (选)返回数量,默认为30
@@ -205,7 +205,7 @@ export default {
      */
   },
   getPlaylistUpdate: parameter => { // 更新歌单
-    return request("playlist/update", parameter);
+    return requestLogined("playlist/update", parameter);
     /**
      * @param id 歌单id
      * @param name 歌单名字
@@ -215,7 +215,7 @@ export default {
      */
   },
   getPlaylistDescUpdate: parameter => { // 更新歌单描述
-    return request("playlist/desc/update", parameter);
+    return requestLogined("playlist/desc/update", parameter);
     /**
      * @param id 歌单id
      * @param desc 歌单描述
@@ -223,7 +223,7 @@ export default {
      */
   },
   getPlaylistNameUpdate: parameter => { // 更新歌单名
-    return request("playlist/name/update", parameter);
+    return requestLogined("playlist/name/update", parameter);
     /**
      * @param id 歌单id
      * @param name 歌单名
@@ -231,7 +231,7 @@ export default {
      */
   },
   getPlaylistTagsUpdate: parameter => { // 更新歌单标签
-    return request("playlist/tags/update", parameter);
+    return requestLogined("playlist/tags/update", parameter);
     /**
      * @param id 歌单id
      * @param tags 歌单标签
@@ -239,7 +239,7 @@ export default {
      */
   },
   getPlaylistCoverUpdate: parameter => { // 歌单封面上传
-    return request("playlist/cover/update", parameter);
+    return requestLogined("playlist/cover/update", parameter);
     /**
      * @param id 歌单id
      * @param imgSize (选)图片尺寸,默认为300
@@ -248,14 +248,14 @@ export default {
      */
   },
   getPlaylistOrderUpdate: parameter => { // 调整歌单顺序
-    return request("playlist/order/update", parameter);
+    return requestLogined("playlist/order/update", parameter);
     /**
      * @param ids 歌单id列表 [111,222]
      * 说明:登录后调用此接口,可以根据歌单id顺序调整歌单顺序
      */
   },
   getSongOrderUpdate: parameter => { // 调整歌曲顺序
-    return request("song/order/update", parameter);
+    return requestLogined("song/order/update", parameter);
     /**
      * @param pid 歌单id
      * @param ids 歌单id列表 [5268328,1219871]
@@ -263,14 +263,14 @@ export default {
      */
   },
   getUserDj: parameter => { // 获取用户电台
-    return request("user/dj", parameter);
+    return requestLogined("user/dj", parameter);
     /**
      * @param uid 用户id
      * 说明:登录后调用此接口,传入用户id,可以获取用户电台
      */
   },
   getUserFollows: parameter => { // 获取用户关注列表
-    return request("user/follows", parameter);
+    return requestLogined("user/follows", parameter);
     /**
      * @param uid 用户id
      * @param limit (选)返回数量,默认为30
@@ -279,7 +279,7 @@ export default {
      */
   },
   getUserFolloweds: parameter => { // 获取用户粉丝列表
-    return request("user/followeds", parameter);
+    return requestLogined("user/followeds", parameter);
     /**
      * @param uid 用户id
      * @param limit (选)返回数量,默认为30
@@ -288,7 +288,7 @@ export default {
      */
   },
   getUserEvent: parameter => { // 获取用户动态
-    return request("user/event", parameter);
+    return requestLogined("user/event", parameter);
     /**
      * @param uid 用户id
      * @param limit (选)返回数量,默认为30
@@ -306,7 +306,7 @@ export default {
      */
   },
   getEventForward: parameter => { // 转发用户动态
-    return request("event/forward", parameter);
+    return requestLogined("event/forward", parameter);
     /**
      * @param uid 用户id
      * @param evId 动态id
@@ -315,14 +315,14 @@ export default {
      */
   },
   getEventDel: parameter => { // 删除用户动态
-    return request("event/del", parameter);
+    return requestLogined("event/del", parameter);
     /**
      * @param evId 动态id
      * 说明:登录后调用此接口,可以删除用户动态
      */
   },
   getShareResource: parameter => { // 分享歌曲、歌单、mv、电台、电台节目到动态
-    return request("share/resource", parameter);
+    return requestLogined("share/resource", parameter);
     /**
      * @param id 资源id（歌曲，歌单，mv，电台，电台节目对应id）
      * @param type (选)资源类型，默认歌曲song，可传song,playlist,mv,djradio,djprogram
@@ -331,14 +331,14 @@ export default {
      */
   },
   getCommentEvent: parameter => { // 获取动态评论
-    return request("comment/event", parameter);
+    return requestLogined("comment/event", parameter);
     /**
      * @param threadId 动态id，可通过/event，/user/event接口获取
      * 说明:登录后调用此接口,可以获取动态下评论
      */
   },
   getFollow: parameter => { // 关注/取消关注用户
-    return request("follow", parameter);
+    return requestLogined("follow", parameter);
     /**
      * @param id 用户id
      * @param t 1为关注,其他为取消关注
@@ -346,7 +346,7 @@ export default {
      */
   },
   getUserRecord: parameter => { // 获取用户播放记录
-    return request("user/record", parameter);
+    return requestLogined("user/record", parameter);
     /**
      * @param uid 用户id
      * @param type (选)type=1时只返回weekData,type=0时返回allData
@@ -376,13 +376,13 @@ export default {
      */
   },
   getCommentHotwallList: parameter => { // 云村热评(官方下架,暂不能用)
-    return request("comment/hotwall/list", parameter);
+    return requestLogined("comment/hotwall/list", parameter);
     /**
      * 说明:登录后调用此接口,可获取云村热评
      */
   },
   getPlaymodeIntelligenceList: parameter => { // 心动模式/智能播放
-    return request("playmode/intelligence/list", parameter);
+    return requestLogined("playmode/intelligence/list", parameter);
     /**
      * @param id 歌曲id
      * @param pid 歌单id

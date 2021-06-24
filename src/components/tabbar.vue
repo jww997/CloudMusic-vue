@@ -36,7 +36,7 @@ export default {
         {
           name: "发现",
           icon: "&#xe62c;",
-          to: "/",
+          to: "/discover",
         },
         // {
         //   name: "播客",

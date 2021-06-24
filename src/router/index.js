@@ -6,7 +6,7 @@ Vue.use(Router);
 const routers = {
   routes: [{
     path: "*",
-    redirect: "/mine",
+    redirect: "/discover",
   },
   {
     // alias: "发现",

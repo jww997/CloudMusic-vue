@@ -61,7 +61,7 @@ export default {
       flex-grow: 1;
       height: 100%;
       line-height: $line-height-sm;
-      border-top: $border-width-base solid $border-color;
+      // border-top: $border-width-base solid $border-color;
       margin-left: $padding-xs;
       @include flexCenter;
       flex-direction: column;

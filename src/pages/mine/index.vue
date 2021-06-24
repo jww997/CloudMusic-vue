@@ -1,7 +1,9 @@
 <template>
   <div class="mine">
+    <searchbar class="searchbar" />
     <detail :detail="detail" />
     <my-songlist :list="playlist" @handleClick="toPlaylist" />
+    <placeholder />
     <placeholder />
   </div>
 </template>
@@ -10,6 +12,7 @@
 import { getCookie, setCookie } from "@/assets/js/util.js";
 import { getLocalStorage, setLocalStorage } from "@/assets/js/util.js";
 import { toPages } from "@/assets/js/util.js";
+import Searchbar from "../discover/components/searchbar";
 import Detail from "./detail";
 import MySonglist from "./mysonglist";
 import Placeholder from "@/components/placeholder";
@@ -17,6 +20,7 @@ import Placeholder from "@/components/placeholder";
 export default {
   name: "mine",
   components: {
+    Searchbar,
     Detail,
     MySonglist,
     Placeholder
@@ -72,4 +76,9 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/var.scss";
 @import "~sass/mixins.scss";
+.mine {
+  .searchbar {
+    background-color: transparent;
+  }
+}
 </style>

@@ -35,6 +35,7 @@ export default {
 @import "~sass/mixins.scss";
 .detail {
   padding: 0 $padding-sm;
+  margin-top: $padding-sm;
   display: flex;
   justify-content: space-between;
   align-items: center;

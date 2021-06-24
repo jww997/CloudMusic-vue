@@ -1,9 +1,6 @@
 <template>
   <div class="mysonglist">
     <songlist :list="list" @handleClick="handleClick" />
-    <!-- <block v-for="item in list" :key="item.id">
-      <div>{{ item.id }}</div>
-    </block> -->
   </div>
 </template>
 
@@ -24,4 +21,9 @@ export default {
 <style lang="scss" scoped>
 @import "~sass/var.scss";
 @import "~sass/mixins.scss";
+.mysonglist {
+  margin: $padding-sm $padding-sm 0;
+  border-radius: $border-radius-lg;
+  background-color: $white;
+}
 </style>

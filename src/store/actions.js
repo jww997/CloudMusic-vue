@@ -25,42 +25,27 @@ export default {
 
   getMusic({ state, commit, actions }, id) {
     const that = this;
-    console.log(`id = ${id}`);
-    let music = state.music;
-    // if (music.id == id) return false;
+    let { music } = state;
+
     let api = that._vm.$api;
-    try {
-      api.getSongUrl({ id }).then((res) => {
-        let url = res.data.data[0].url;
-        if (!url) {
-          that._vm.$vant.Toast("没有版权 / VIP专享");
-          return false;
-        } else {
-          // that.amendStateObjValue({ key: "id", value: id });
-          // that.amendStateObjValue({ key: "url", value: url });
-          // that.amendStateObjValue({ key: "isPlaying", value: true });
+    api.getCheckMusic({ id })
+      .then(res => {
+        const { success, message } = res.data
+        return success ? api.getSongUrl({ id }) : Promise.reject(message);
+      })
+      .then((res) => {
+        let { url } = res.data.data[0];
+        if (url) {
           music.id = id;
           music.url = url;
           music.isPlaying = true;
           console.log(`源 => ${url}`);
           commit("SET_MUSIC", music);
         }
-
-        // if (!music.current) {
-        // api.getSongDetail({ ids: id }).then(res => {
-        //   let songs = res.data.songs;
-        //   music.current = songs[0];
-        //   music.currentList = songs;
-        //   commit("SET_MUSIC", music);
-        // }).catch(err => {
-        //   // music.current = {};
-        //   // commit("SET_MUSIC", music);
-        // })
-        // };
       })
-    } catch (error) {
-      that.amendStateObjValue({ key: "current", value: {} });
-    }
+      .catch((err) => {
+        that._vm.$vant.Toast("亲爱的，暂无版权")
+      })
   },
 
 
@@ -78,5 +63,5 @@ export default {
 
 
 
-  
+
 }

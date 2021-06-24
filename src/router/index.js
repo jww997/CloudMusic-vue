@@ -6,18 +6,14 @@ Vue.use(Router);
 const routers = {
   routes: [{
     path: "*",
-    redirect: "/discover",
+    redirect: "/mine",
   },
   {
     // alias: "发现",
     path: "/discover",
     name: "discover",
     component: () => import("@/pages/discover"),
-    meta: {
-      keepAlive: true,
-      enterAnimationName: "fade",
-      leaveAnimationName: "",
-    },
+    meta: { keepAlive: true },
   },
   {
     // alias: "我的",
@@ -89,7 +85,7 @@ const routers = {
   },
   ],
   // 重置滚动条位置
-  scrollBehavior (to, from, savedPosition) {
+  scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition
     } else {

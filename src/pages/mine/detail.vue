@@ -5,19 +5,19 @@
       :src="profile.avatarUrl"
       v-lazy="profile.avatarUrl"
     />
-    <template v-if="!isLogin">
+    <!-- <template v-if="!isLogin"> -->
       <div class="text">
         <p class="nickname">{{ profile.nickname }}</p>
         <p>
           <span class="level">Lv.{{ level }}</span>
         </p>
       </div>
-    </template>
+    <!-- </template>
     <template v-else>
       <div class="text">
         <p>立即登录</p>
       </div>
-    </template>
+    </template> -->
     <van-icon class="arrow" name="arrow" />
   </div>
 </template>

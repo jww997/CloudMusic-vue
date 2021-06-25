@@ -15,7 +15,7 @@ import { getCookie, setCookie, delCookie } from "@/assets/js/util.js";
 import {
   getLocalStorage,
   setLocalStorage,
-  deleteLocalStorage
+  delLocalStorage
 } from "@/assets/js/util.js";
 import { toPages } from "@/assets/js/util.js";
 import Searchbar from "../discover/components/searchbar";
@@ -36,7 +36,8 @@ export default {
   },
   methods: {
     loginEnter() {
-      this.$api
+      const that = this;
+      that.$api
         .getLoginCellphone({
           phone: "15812811722",
           password: "MI15812811722"
@@ -56,23 +57,26 @@ export default {
           setLocalStorage("loginType", loginType);
           setLocalStorage("account", account);
           setLocalStorage("bindings", bindings);
-        });
+        }).then(()=>{
 
-      this.getdata();
+          
+          that.getdata();
+          });
     },
     loginOut() {
-      this.$api.getLogout().then(res => {
+      const that = this;
+      that.$api.getLogout().then(res => {
         delCookie("cookie");
-        deleteLocalStorage("token", token);
-        deleteLocalStorage("profile", profile);
-        deleteLocalStorage("loginType", loginType);
-        deleteLocalStorage("account", account);
-        deleteLocalStorage("bindings", bindings);
+        delLocalStorage("token");
+        delLocalStorage("profile");
+        delLocalStorage("loginType");
+        delLocalStorage("account");
+        delLocalStorage("bindings");
       });
 
-      this.detail = {};
-      this.playlist = [];
-      this.more = false;
+      that.detail = {};
+      that.playlist = [];
+      that.more = false;
     },
     getdata() {
       const that = this;
@@ -89,7 +93,7 @@ export default {
       that.$api.getUserBinding({ uid });
     },
     toPlaylist(id) {
-      toPages.call(this, { name: "playlist", params: { id: id } });
+      toPages.call(this, { name: "playlist", params: { id } });
     }
   },
   mounted() {

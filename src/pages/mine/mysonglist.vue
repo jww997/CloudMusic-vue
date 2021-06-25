@@ -1,7 +1,19 @@
 <template>
   <div class="mysonglist">
-    <div class="title">我的歌单</div>
-    <songlist :list="list" @handleClick="handleClick" />
+    <div class="box">
+      <div class="title">创建歌单</div>
+      <songlist
+        :list="list.filter(res => !res.ordered)"
+        @handleClick="handleClick"
+      />
+    </div>
+    <div class="box">
+      <div class="title">收藏歌单</div>
+      <songlist
+        :list="list.filter(res => res.ordered)"
+        @handleClick="handleClick"
+      />
+    </div>
   </div>
 </template>
 
@@ -11,6 +23,7 @@ export default {
   name: "mysonglist",
   props: ["list"],
   components: { Songlist },
+  computed: {},
   methods: {
     handleClick(id) {
       this.$emit("handleClick", id);
@@ -23,13 +36,16 @@ export default {
 @import "~sass/var.scss";
 @import "~sass/mixins.scss";
 .mysonglist {
-  margin: $padding-sm $padding-sm 0;
-  border-radius: $border-radius-lg;
-  background-color: $white;
-  .title {
+  margin: 0 $padding-sm;
+  .box {
+    margin-top: $padding-sm;
+    border-radius: $border-radius-lg;
+    background-color: $white;
+    .title {
       padding: $padding-sm $padding-sm 0;
       font-size: $font-size-lg;
       font-weight: bold;
+    }
   }
 }
 </style>

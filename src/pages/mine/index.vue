@@ -1,6 +1,7 @@
 <template>
   <div class="mine">
     <searchbar class="searchbar" />
+    <van-image :src="qrurl" />
     <button @click="loginEnter">登录</button>
     <button @click="loginOut">退出登录</button>
     <detail :detail="detail" />
@@ -32,7 +33,7 @@ export default {
     Placeholder
   },
   data() {
-    return { detail: {}, playlist: [], more: false };
+    return { detail: {}, playlist: [], more: false, qrurl: "" };
   },
   methods: {
     loginEnter() {
@@ -57,11 +58,10 @@ export default {
           setLocalStorage("loginType", loginType);
           setLocalStorage("account", account);
           setLocalStorage("bindings", bindings);
-        }).then(()=>{
-
-          
+        })
+        .then(() => {
           that.getdata();
-          });
+        });
     },
     loginOut() {
       const that = this;
@@ -97,6 +97,17 @@ export default {
     }
   },
   mounted() {
+    const that = this;
+    that.$api
+      .getLoginQrKey()
+      .then(res => {
+        const { unikey: key } = res.data.data;
+        return that.$api.getLoginQrCreate({ key });
+      })
+      .then(res => {
+        that.qrurl = res.data.qrurl;
+      });
+
     if (!getCookie("cookie")) return false;
     this.getdata();
   }

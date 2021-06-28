@@ -7,11 +7,7 @@
       @click="$emit('handleClick', item.id)"
     >
       <div class="left">
-        <van-image
-          class="image"
-          :src="item.coverImgUrl"
-          v-lazy="item.coverImgUrl"
-        />
+        <playlist width="1.5rem" :image="item.coverImgUrl" />
       </div>
       <div class="right">
         <div class="mainTitle">{{ item.name }}</div>
@@ -22,10 +18,12 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
+import Playlist from "../../discover/components/playlist";
 
 export default {
   name: "songlist",
-  props: ["list"]
+  props: ["list"],
+  components: { Playlist }
 };
 </script>
 

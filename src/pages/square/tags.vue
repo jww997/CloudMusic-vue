@@ -14,7 +14,9 @@
       </span>
     </div>
     <!-- 编辑标签 -->
-    <van-icon class="edit" name="edit" />
+    <router-link :to="{name: 'squaretags'}">
+      <van-icon class="edit" name="edit" />
+    </router-link>
   </div>
 </template>
 

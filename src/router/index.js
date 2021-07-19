@@ -51,6 +51,15 @@ const routers = {
     },
   },
   {
+    // alias: "歌单广场标签列表",
+    path: "/squaretags",
+    name: "squaretags",
+    component: () => import("@/pages/squaretags"),
+    meta: {
+      keepAlive: true
+    },
+  },
+  {
     // alias: "排行榜",
     path: "/toplist",
     name: "toplist",
